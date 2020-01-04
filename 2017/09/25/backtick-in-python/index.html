@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://codingnote.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="目录  反引号` repr函数 关于单例的思考   反引号`今天在看一本基于python2.2的Design Pattern书，其中有一段关于单例的代码我很不解，因为用到了反引号`，也就是reverse quotes。书中代码如下 1234567891011121314151617181920212223242526class OnlyOne:  class __OnlyOne:    def _">
+<meta name="keywords" content="python,reverse quotes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python中的反引号reverse quotes">
+<meta property="og:url" content="http://codingnote.com/2017/09/25/backtick-in-python/index.html">
+<meta property="og:site_name" content="Coding Note">
+<meta property="og:description" content="目录  反引号` repr函数 关于单例的思考   反引号`今天在看一本基于python2.2的Design Pattern书，其中有一段关于单例的代码我很不解，因为用到了反引号`，也就是reverse quotes。书中代码如下 1234567891011121314151617181920212223242526class OnlyOne:  class __OnlyOne:    def _">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-01-04T16:25:40.598Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python中的反引号reverse quotes">
+<meta name="twitter:description" content="目录  反引号` repr函数 关于单例的思考   反引号`今天在看一本基于python2.2的Design Pattern书，其中有一段关于单例的代码我很不解，因为用到了反引号`，也就是reverse quotes。书中代码如下 1234567891011121314151617181920212223242526class OnlyOne:  class __OnlyOne:    def _">
+
+<link rel="canonical" href="http://codingnote.com/2017/09/25/backtick-in-python/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>python中的反引号reverse quotes | Coding Note</title>
+  
+    <script>
+      function sendPageView() {
+        if (CONFIG.hostname !== location.hostname) return;
+        var uid = localStorage.getItem('uid') || (Math.random() + '.' + Math.random());
+        localStorage.setItem('uid', uid);
+        navigator.sendBeacon('https://www.google-analytics.com/collect', new URLSearchParams({
+          v  : 1,
+          tid: 'UA-98330531-1true',
+          cid: uid,
+          t  : 'pageview',
+          dp : encodeURIComponent(location.pathname)
+        }));
+      }
+      document.addEventListener('pjax:complete', sendPageView);
+      sendPageView();
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Coding Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">分享有关Coding的一切</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">20</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">24</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2017/09/25/backtick-in-python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/codingnote_logo_cbg.png">
+      <meta itemprop="name" content="Shuwei Zhang & Jinhai ZHOU">
+      <meta itemprop="description" content="coding-note">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python中的反引号reverse quotes
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-25 16:34:16" itemprop="dateCreated datePublished" datetime="2017-09-25T16:34:16Z">2017-09-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2><span id="目录">目录</span></h2><!-- toc -->
+<ul>
+<li><a href="#反引号">反引号`</a></li>
+<li><a href="#repr函数">repr函数</a></li>
+<li><a href="#关于单例的思考">关于单例的思考</a></li>
+</ul>
+<!-- tocstop -->
+<h3><span id="反引号">反引号`</span></h3><p>今天在看一本基于python2.2的Design Pattern书，其中有一段关于单例的代码我很不解，因为用到了反引号`，也就是reverse quotes。书中代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OnlyOne</span>:</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">__OnlyOne</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">      self.val = arg</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">      <span class="keyword">return</span> `self` + self.val</span><br><span class="line">  instance = <span class="literal">None</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> OnlyOne.instance:</span><br><span class="line">      OnlyOne.instance = OnlyOne.__OnlyOne(arg)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      OnlyOne.instance.val = arg</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> getattr(self.instance, name)</span><br><span class="line"></span><br><span class="line">x = OnlyOne(<span class="string">'sausage'</span>)</span><br><span class="line"><span class="keyword">print</span> x</span><br><span class="line">y = OnlyOne(<span class="string">'eggs'</span>)</span><br><span class="line"><span class="keyword">print</span> y</span><br><span class="line">z = OnlyOne(<span class="string">'spam'</span>)</span><br><span class="line"><span class="keyword">print</span> z</span><br><span class="line"><span class="keyword">print</span> x</span><br><span class="line"><span class="keyword">print</span> y</span><br><span class="line"><span class="keyword">print</span> `x`</span><br><span class="line"><span class="keyword">print</span> `y`</span><br><span class="line"><span class="keyword">print</span> `z`</span><br></pre></td></tr></table></figure>
+<p>console输出结果是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;sausage</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;eggs</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;spam</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;spam</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;spam</span><br><span class="line">&lt;__builtin__.OnlyOne instance at 0x7ff4670b01b8&gt;</span><br><span class="line">&lt;__builtin__.OnlyOne instance at 0x7ff4670b0290&gt;</span><br><span class="line">&lt;__builtin__.OnlyOne instance at 0x7ff4670b02d8&gt;</span><br></pre></td></tr></table></figure>
+<p>反引号`到底有什么用呢？经过查询,反引号在python2中是repr()函数的别名(alias)，但是反引号别名表示已经在pyhton3.0中取消了。至于为何取消，Guido van Rossum他本人的解释是反引号`和正常引号‘的相似性实在是太令人误解了，此外反引号在印刷字体以及输入方面都有不少问题。</p>
+<h3><span id="repr函数">repr函数</span></h3><p>知道了python中反引号`其实是repr()函数的别名，那么python中repr函数本身又是干什么的呢？</p>
+<blockquote>
+<p><strong>repr(object)</strong><br>Return a string containing a printable representation of an object. This is the same value yielded by conversions (reverse quotes). It is sometimes useful to be able to access this operation as an ordinary function. For many types, this function makes an attempt to return a string that would yield an object with the same value when passed to eval(), otherwise the representation is a string enclosed in angle brackets that contains the name of the type of the object together with additional information often including the name and address of the object. A class can control what this function returns for its instances by defining a <strong>repr</strong>() method.</p>
+</blockquote>
+<p>根据上述节选自python官方文档的解释，可以知道repr函数主要功能是返回object的一种可打印字符串表示。一般来说，repr函数被设计成其输出可以被eval函数生成值相同的object，或者，被设计成返一个包含在尖头括号中的字符串，其中包含对象类型名称和一些附加信息。而附加信息通常包括这个对象的名字和物理地址。</p>
+<p>在Desgin Patter作者给出的单例代码中，repr函数便输出了对象的名字和物理地址。</p>
+<h3><span id="关于单例的思考">关于单例的思考</span></h3><p>一般讲Desgin Pattern的书几乎一开始都会讲单例，毕竟单例是最容易理解的Desgin Pattern。作者在实现单例时用了nested class方法，内部class是一个私有class，这样外部无法直接访问。那么print函数又是如何访问到私有class的<code>__str__</code>函数的呢？这就要靠wrapper class的<code>__getattr__</code>函数了，在这里作者巧妙实现了一个delegation。这也是为什么print OnlyOne class的instance时，console输出都是私有class的<code>__str__</code>函数定义的结果。</p>
+<p>参考</p>
+<ol>
+<li><a href="https://stackoverflow.com/questions/1673071/what-do-backticks-mean-to-the-python-interpreter-num" rel="external nofollow noopener noreferrer" target="_blank">What do backticks mean to the python interpreter: num
+</a></li>
+<li><a href="https://mail.python.org/pipermail/python-ideas/2007-January/000054.html" rel="external nofollow noopener noreferrer" target="_blank">[Python-ideas] new operators via backquoting</a></li>
+<li><a href="https://docs.python.org/2/library/functions.html#repr" rel="external nofollow noopener noreferrer" target="_blank">docs.python repr(object)</a></li>
+<li><a href="http://www.mindview.net/Books/Python/ThinkingInPython.html" rel="external nofollow noopener noreferrer" target="_blank">Bruce Eckel Thinking in Python</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/reverse-quotes/" rel="tag"># reverse quotes</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/25/generator-in-python/" rel="prev" title="python中的生成器">
+      <i class="fa fa-chevron-left"></i> python中的生成器
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/10/19/machine-learning-review1/" rel="next" title="Machine Learning 学习笔记 1">
+      Machine Learning 学习笔记 1 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.1.</span> <span class="nav-text">反引号`</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.2.</span> <span class="nav-text">repr函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.3.</span> <span class="nav-text">关于单例的思考</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shuwei Zhang & Jinhai ZHOU" src="/images/codingnote_logo_cbg.png">
+  <p class="site-author-name" itemprop="name">Shuwei Zhang & Jinhai ZHOU</p>
+  <div class="site-description" itemprop="description">coding-note</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/C0dingNote" title="GitHub → https://github.com/C0dingNote" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shuwei Zhang & Jinhai ZHOU</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Muse</a> v7.7.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

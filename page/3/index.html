@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://codingnote.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="coding-note">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Coding Note">
+<meta property="og:url" content="http://codingnote.com/page/3/index.html">
+<meta property="og:site_name" content="Coding Note">
+<meta property="og:description" content="coding-note">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Coding Note">
+<meta name="twitter:description" content="coding-note">
+
+<link rel="canonical" href="http://codingnote.com/page/3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false
+  };
+</script>
+
+  <title>Coding Note</title>
+  
+    <script>
+      function sendPageView() {
+        if (CONFIG.hostname !== location.hostname) return;
+        var uid = localStorage.getItem('uid') || (Math.random() + '.' + Math.random());
+        localStorage.setItem('uid', uid);
+        navigator.sendBeacon('https://www.google-analytics.com/collect', new URLSearchParams({
+          v  : 1,
+          tid: 'UA-98330531-1true',
+          cid: uid,
+          t  : 'pageview',
+          dp : encodeURIComponent(location.pathname)
+        }));
+      }
+      document.addEventListener('pjax:complete', sendPageView);
+      sendPageView();
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Coding Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">分享有关Coding的一切</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">20</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">24</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2017/05/08/git-branch-and-deployment-architectures/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/codingnote_logo_cbg.png">
+      <meta itemprop="name" content="Shuwei Zhang & Jinhai ZHOU">
+      <meta itemprop="description" content="coding-note">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/05/08/git-branch-and-deployment-architectures/" class="post-title-link" itemprop="url">Git分支与部署架构</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-05-08 16:54:52" itemprop="dateCreated datePublished" datetime="2017-05-08T16:54:52Z">2017-05-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/Git-Basics/" itemprop="url" rel="index">
+                    <span itemprop="name">Git Basics</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2><span id="目录">目录</span></h2><!-- toc -->
+<ul>
+<li><a href="#开发分支-dev">开发分支 DEV</a></li>
+<li><a href="#测试分支-test">测试分支 TEST</a></li>
+<li><a href="#缓冲分支-staging">缓冲分支 STAGING</a></li>
+<li><a href="#生产分支-prod">生产分支 PROD</a></li>
+</ul>
+<!-- tocstop -->
+<p>一般来说，利用git进行多人协作的网站开发项目都有不止一个分支，其中每一个分支对应于网站部署的一个架构。虽然网站部署架构千差万别，但几乎都是从开发环境（DEV）开始并以生产环境（PROD）结束，所以对应到git分支上就是 开发分支，测试分支，缓存分支和生产分支。</p>
+<h3><span id="开发分支-dev">开发分支 DEV</span></h3><p>开发分支是本地开发环境上用于开发新功能的分支，开发人员可以方便的在本地进行单元测试</p>
+<h3><span id="测试分支-test">测试分支 TEST</span></h3><p>测试分支对应于测试环境，新功能开发完毕并在本地环境通过单元测试后，开发分支才可以合并到测试分支中，之后将测试分支部署到测试环境中进行集成测试</p>
+<h3><span id="缓冲分支-staging">缓冲分支 STAGING</span></h3><p>缓冲分支对应于缓冲环境，它是是生产环境的镜像，拥有和生产环境一样的硬件，软件环境，所以在这里可以进行和生产环境一样的测试（性能测试，负载测试等）。当新功能在测试环境通过集成测试后，开发分支才可以合并到缓冲分支中，之后将缓存分支部署到缓冲环境里进行和生产环境一样的测试</p>
+<h3><span id="生产分支-prod">生产分支 PROD</span></h3><p>生产分支对应于生产环境，生产环境也就是用户可以直接交互的环境。我们访问的网站，其实都是部署在生产环境里的。新功能在缓存分支通过测试后，含有新功能的开发分支最后并入生产分支中，生产分支被部署到生产环境里，新功能此时也最终被交付到了用户手中。</p>
+<p>一般来说，含有新功能的分支按顺序合并到测试分支，缓存分支和生产分支中，包含新功能的测试分支，缓存分支和生产分支也按顺序被部署到测试环境，缓存环境和生产环境中。一个网站的新功能就是这样经历重重测试，最终交付到用户手中哒。</p>
+<p>想要知道更多有关部署架构知识，请参考<a href="https://en.wikipedia.org/wiki/Deployment_environment" rel="external nofollow noopener noreferrer" target="_blank">Wiki部署环境</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2017/05/07/git-cherry-pick/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/codingnote_logo_cbg.png">
+      <meta itemprop="name" content="Shuwei Zhang & Jinhai ZHOU">
+      <meta itemprop="description" content="coding-note">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/05/07/git-cherry-pick/" class="post-title-link" itemprop="url">Git cherry-pick</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-05-07 19:24:51" itemprop="dateCreated datePublished" datetime="2017-05-07T19:24:51Z">2017-05-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/Git-Advances/" itemprop="url" rel="index">
+                    <span itemprop="name">Git Advances</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2><span id="目录">目录</span></h2><!-- toc -->
+<ul>
+<li><a href="#什么时候使用cherry-pick">什么时候使用Cherry-pick</a></li>
+<li><a href="#一个例子">一个例子</a></li>
+</ul>
+<!-- tocstop -->
+<p>一般来说，掌握了git的commit，branch，merge几个命令就足以应付90%的工作场景了，但是有时候我们也需要处理稍微复杂一点的工作场景，比如整理提交记录。</p>
+<h2><span id="什么时候使用cherry-pick">什么时候使用Cherry-pick</span></h2><p>Cherry pick 直译成中文就是采樱桃，樱桃有好有坏，挑选樱桃的过程就形象的类比了我们应用该命令挑选提交（Commit）的过程。<br>一般来说，利用git进行多人协作的网站开发项目都有不止一个分支，其中每一个分支对应于网站部署的一个架构。在多分支环境下，如果我们想要将一个或者一些在其他分支下提交（Commit）复制到当前分支所在的位置（HEAD）的话，<code>cherry-pick</code> 是最直接，最方便的办法了。</p>
+<h2><span id="一个例子">一个例子</span></h2><p><img src="https://cloud.githubusercontent.com/assets/15102793/25820068/4d99fcec-3430-11e7-8c66-3138cad6182f.png" alt="git cherry-pick命令图示，图片来源：http://learngitbranching.js.org"></p>
+<p>如上图所示，如果我们想要将side分支上C2与C4分支复制到当前分支master所在位置的话，<code>git cherry-pick C2 C4</code> 能帮助我们吧side分支上的C2与C4提交以此应用到当前分支中，产生C2’与C4’提交，其中，这两个提交的内容分别和C2与C4对应，不过hash值会重新计算，不再与原hash值一样。</p>
+<p>在这里我也要推荐一个学习git操作的好网站 <a href="http://learngitbranching.js.org/" rel="external nofollow noopener noreferrer" target="_blank">learngitbranching.js.org</a>，也就是上面截图的来源。虽然网站名字叫做learn git branching，但是教学内容几乎涵盖git的方方面面。最重要的是，与看教程不同的是，该网站有交互式的git log graph，是git入门的不二之选。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2017/05/07/git-alias/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/codingnote_logo_cbg.png">
+      <meta itemprop="name" content="Shuwei Zhang & Jinhai ZHOU">
+      <meta itemprop="description" content="coding-note">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/05/07/git-alias/" class="post-title-link" itemprop="url">设置Git别名</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-05-07 14:03:36" itemprop="dateCreated datePublished" datetime="2017-05-07T14:03:36Z">2017-05-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/Git-Basics/" itemprop="url" rel="index">
+                    <span itemprop="name">Git Basics</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2><span id="目录">目录</span></h2><!-- toc -->
+<ul>
+<li><a href="#通过conig命令设置git别名">通过conig命令设置Git别名</a></li>
+<li><a href="#通过config文件设置git别名">通过config文件设置Git别名</a></li>
+</ul>
+<!-- tocstop -->
+<p>刚刚进公司时，发现同事在使用Git时都是输入一些我从来没见过的命令，比如<code>git st</code>, <code>git ci</code>什么的，但是这些命令在自己的电脑上却不存在。更有甚者，有同事优雅的在终端上输入<code>git fuck</code>命令，git竟把远端的branch fetch回本地了，我的天，难道自己用的是假git吗？<br>我弱弱问身边的同事，这才知道git别名的存在，借助于git别名我们就可以为git已有的命令取个上口好记的别名了。</p>
+<h2><span id="通过conig命令设置git别名">通过conig命令设置Git别名</span></h2><p>通常情况下，git最常用的几个命令是 <code>git branch</code>, <code>git checkout</code>, <code>git commit</code> 和<code>git status</code>。如果只是为这几个命令设置git别名，最简单的方法是在终端中输入以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.br branch</span><br><span class="line">git config --global alias.co checkout</span><br><span class="line">git config --global alias.ci commit</span><br><span class="line">git config --global alias.st status</span><br></pre></td></tr></table></figure>
+<h2><span id="通过config文件设置git别名">通过config文件设置Git别名</span></h2><p>不过，如果我们一次想设置的别名比较多，那么我们可以通过修改<code>~/.gitconfig</code>文件来实现。<br>这时我们可以通过添加以下字段来完成和上述一样的设置.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[alias]</span><br><span class="line">        br = branch</span><br><span class="line">        co = checkout</span><br><span class="line">        ci = commit</span><br><span class="line">        st = status</span><br></pre></td></tr></table></figure>
+<p>同时，如果我们想修改或者取消自己设置的git别名，那么我们也可以通过修改或者删除<code>~/.gitconfig</code>文件中相应的设置来达到目的。</p>
+<p>熟练的程序员和小白程序员的一个重大区别是前者会不断的优化自己的工作流程，能少花一秒钟解决的事情绝对不会用上两秒钟去做。也许这么说有些夸张，但是时间积少成多，git别名就是优化Git工作流程的利器。</p>
+<p>有关更多git别名的使用方法，请参考Git官方文档 <a href="https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-Git-%E5%88%AB%E5%90%8D" rel="external nofollow noopener noreferrer" target="_blank">Git 基础 - Git 别名</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2017/04/16/dev-env-for-full-stack-dev/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/codingnote_logo_cbg.png">
+      <meta itemprop="name" content="Shuwei Zhang & Jinhai ZHOU">
+      <meta itemprop="description" content="coding-note">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/04/16/dev-env-for-full-stack-dev/" class="post-title-link" itemprop="url">全栈开发小白的环境配置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-04-16 11:40:39" itemprop="dateCreated datePublished" datetime="2017-04-16T11:40:39Z">2017-04-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/环境配置/" itemprop="url" rel="index">
+                    <span itemprop="name">环境配置</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2><span id="目录">目录</span></h2><!-- toc -->
+<ul>
+<li><a href="#放弃bash使用zsh">放弃Bash，使用Zsh</a><ul>
+<li><a href="#zsh的使用">Zsh的使用</a><ul>
+<li><a href="#安装zsh">安装Zsh</a></li>
+<li><a href="#安装zsh的配置插件oh-my-zsh">安装Zsh的配置插件，oh-my-zsh</a></li>
+<li><a href="#更换oh-my-zsh默认主题">更换oh-my-zsh默认主题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#放弃terminal使用terminator">放弃Terminal，使用Terminator</a><ul>
+<li><a href="#安装terminator">安装Terminator</a></li>
+<li><a href="#使用terminator">使用Terminator</a></li>
+</ul>
+</li>
+<li><a href="#进阶配置">进阶配置</a></li>
+</ul>
+<!-- tocstop -->
+<p>作为一个小白全栈开发程序员，有一个顺手的开发环境能很好的节约自己的时间。这篇文章就简单的介绍一下，最近自己在Ubuntu系统上使用的全站开发环境以及相应的配置流程。</p>
+<h2><span id="放弃bash使用zsh">放弃Bash，使用Zsh</span></h2>
+<p>就笔者所使用的Ubuntu 16.04而言，Termianl默认的Shell是大名鼎鼎的Bash，虽然Bash几乎是所有Linux发行版的默认Shell，但对于我这个小白程序员而言却不一定是最优的选择。比如说我想知道Linux下常用的压缩解压缩命令tar后面可以用什么参数，怎么使用， 或者想要使用的某个命令我只记得其中的一部分，需要自动补全。这时候Zsh就能满足我这个小白的需求了。</p>
+<h3><span id="zsh的使用">Zsh的使用</span></h3><h4><span id="安装zsh">安装Zsh</span></h4><ol>
+<li><p>用Ubuntu系统自带的软件包管理工具 <code>apt-get</code></p>
+<p><code>sudo apt-get update &amp;&amp; sudo apt-get install zsh</code></p>
+</li>
+<li><p>接着将Zsh设置为系统默认Shell</p>
+<p><code>chsh -s /bin/zsh</code></p>
+</li>
+<li><p>重启系统</p>
+<p><code>sudo reboot</code></p>
+</li>
+<li><p>重启系统，再次启动Terminal后，在Shell提示中选择 0 (生成一个空的Zsh配置文件.zshrc)， 接下来我们再详细说明如何配置Zsh</p>
+<img src="/2017/04/16/dev-env-for-full-stack-dev/14_28_14.png" title="重启系统在Shell提示中选择 0 (生成一个空的Zsh配置文件.zshrc)">
+</li>
+<li><p>验证安装，输入下面的命令，Terminal将会输出zsh</p>
+<p><code>echo $0</code></p>
+</li>
+</ol>
+<p>虽然按照以上步骤，我们在Ubuntu上安装好了Zsh，但是现在Zsh却并不好用。比如没有高亮显示，在git目录下也没有分支提示等。配置Zsh我们可以对用户根目录下的Zsh配置文件.zshrc<br>进行改动，也可以克隆Github上oh-my-zsh这个项目，使用预定义好的主题，来加快我们对Zsh的配置。</p>
+<h4><span id="安装zsh的配置插件oh-my-zsh">安装Zsh的配置插件，oh-my-zsh</span></h4><ul>
+<li><p>使用curl命令下载并执行oh-my-zsh的安装脚本</p>
+<p><code>sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;</code></p>
+<img src="/2017/04/16/dev-env-for-full-stack-dev/14_52_22.png" title="安装脚本执行完毕后，Zsh自动配置完毕">
+</li>
+</ul>
+<p>接下来我们就可以享受Zsh带给我们的便利了</p>
+<h4><span id="更换oh-my-zsh默认主题">更换oh-my-zsh默认主题</span></h4><p>oh-my-zsh 的主题是robbyrussell，效果图如上所示。同时，可以通过用户根目录下的Zsh配置文件.zshrc来更换oh-my-zsh 的主题，比如我很喜欢的agnoster。修改过程如下</p>
+<ul>
+<li><p>将默认字段 <code>ZSH_THEME=&quot;robbyrussell&quot;</code> 改为<code>ZSH_THEME=&quot;agnoster&quot;</code></p>
+</li>
+<li><p>由于agnoster主题使用了powerline中的字体，很有可能在没有相应字体的环境下，terminal会有如下字体显示问题</p>
+<img src="/2017/04/16/dev-env-for-full-stack-dev/agnoster_font_problem.png" title="agnoster 主题的zsh遇到了字体显示问题">
+</li>
+</ul>
+<ul>
+<li><p>如果遇到字体显示问题，可以安装该<a href="https://github.com/powerline/fonts" rel="external nofollow noopener noreferrer" target="_blank">repo</a>中的字体或使用以下脚本安装缺失的字体</p>
+<p><code>sudo apt-get install fonts-powerline</code></p>
+<img src="/2017/04/16/dev-env-for-full-stack-dev/agnoster_font_correct.png" title="agnoster 主题的zsh">
+</li>
+</ul>
+<h2><span id="放弃terminal使用terminator">放弃Terminal，使用Terminator</span></h2><p>Ubuntu系统自带的Terminal固然好用，但是也有局限性。比如我想要同时查看两个Web App运行状态在Terminal上的输出，就得打开两个Terminal的窗口来监视，有没有可能在一个窗口下打开多个Terminal，并来回切换呢？Terminator便是为解决这个需求而存在的。</p>
+<h3><span id="安装terminator">安装Terminator</span></h3><ol>
+<li><p>用Ubuntu系统自带的软件包管理工具 <code>apt-get</code></p>
+<p><code>sudo apt-get update &amp;&amp; sudo apt-get install terminator</code></p>
+</li>
+<li><p>后台运行Terminator</p>
+<p><code>terminator &amp;</code></p>
+</li>
+</ol>
+<p>打开Terminator，系统自带的Terminal就可以关掉了。右键Terminator图标，选择固定到启动栏，这样以后可以直接点击图标启动Terminator，不用再通过系统自带的Terminal来启动了。</p>
+<h3><span id="使用terminator">使用Terminator</span></h3><img src="/2017/04/16/dev-env-for-full-stack-dev/16_02_44.png" title="同时打开了四个Terminal窗口的Terminator">
+<p>借助快捷键，Terminator有着强大的多窗口Terminal管理功能，下面我选取最常用的几个功能进行介绍。</p>
+<ul>
+<li><kbd>shift</kbd> + <kbd>ctrl</kbd> + <kbd>o</kbd> 向下分裂与当前窗口等宽的新窗口</li>
+<li><kbd>shift</kbd> + <kbd>ctrl</kbd> + <kbd>e</kbd> 向右分裂与当前窗口等宽的新窗口</li>
+<li><kbd>shift</kbd> + <kbd>ctrl</kbd> + <kbd>w</kbd> 关闭当前窗口</li>
+<li><kbd>shift</kbd> + <kbd>+</kbd> 增加当前窗口字体大小</li>
+<li><kbd>shift</kbd> + <kbd>-</kbd> 减小当前窗口字体大小</li>
+</ul>
+<h2><span id="进阶配置">进阶配置</span></h2><ul>
+<li><a href="http://codingnote.com/2017/05/21/use-vim/">超强文本编辑器Vi/Vim的配置与使用</a></li>
+<li><a href="http://codingnote.com/2017/04/16/dev-env-for-full-stack-dev/">终端下的多窗口与分屏神器Tmux…占坑用</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shuwei Zhang & Jinhai ZHOU" src="/images/codingnote_logo_cbg.png">
+  <p class="site-author-name" itemprop="name">Shuwei Zhang & Jinhai ZHOU</p>
+  <div class="site-description" itemprop="description">coding-note</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/C0dingNote" title="GitHub → https://github.com/C0dingNote" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shuwei Zhang & Jinhai ZHOU</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Muse</a> v7.7.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

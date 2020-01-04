@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://codingnote.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="目录  简短的介绍 Git request-pull 使用目的 使用方法 一个例子   Github Pull Request 使用目的 使用方法 使用Github web界面 使用Command line     参考   简短的介绍request-pull 和 Pull Request的名称如此相似，但是他们的功能是完全不同的。 request-pull是git的命令，它用于生成发送到邮件列表">
+<meta name="keywords" content="Git,Github">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git request-pull　和 Github pull request">
+<meta property="og:url" content="http://codingnote.com/2018/01/04/git-request-pull/index.html">
+<meta property="og:site_name" content="Coding Note">
+<meta property="og:description" content="目录  简短的介绍 Git request-pull 使用目的 使用方法 一个例子   Github Pull Request 使用目的 使用方法 使用Github web界面 使用Command line     参考   简短的介绍request-pull 和 Pull Request的名称如此相似，但是他们的功能是完全不同的。 request-pull是git的命令，它用于生成发送到邮件列表">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-01-04T16:25:40.629Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git request-pull　和 Github pull request">
+<meta name="twitter:description" content="目录  简短的介绍 Git request-pull 使用目的 使用方法 一个例子   Github Pull Request 使用目的 使用方法 使用Github web界面 使用Command line     参考   简短的介绍request-pull 和 Pull Request的名称如此相似，但是他们的功能是完全不同的。 request-pull是git的命令，它用于生成发送到邮件列表">
+
+<link rel="canonical" href="http://codingnote.com/2018/01/04/git-request-pull/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Git request-pull　和 Github pull request | Coding Note</title>
+  
+    <script>
+      function sendPageView() {
+        if (CONFIG.hostname !== location.hostname) return;
+        var uid = localStorage.getItem('uid') || (Math.random() + '.' + Math.random());
+        localStorage.setItem('uid', uid);
+        navigator.sendBeacon('https://www.google-analytics.com/collect', new URLSearchParams({
+          v  : 1,
+          tid: 'UA-98330531-1true',
+          cid: uid,
+          t  : 'pageview',
+          dp : encodeURIComponent(location.pathname)
+        }));
+      }
+      document.addEventListener('pjax:complete', sendPageView);
+      sendPageView();
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Coding Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">分享有关Coding的一切</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">20</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">24</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2018/01/04/git-request-pull/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/codingnote_logo_cbg.png">
+      <meta itemprop="name" content="Shuwei Zhang & Jinhai ZHOU">
+      <meta itemprop="description" content="coding-note">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Git request-pull　和 Github pull request
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-04 14:26:05" itemprop="dateCreated datePublished" datetime="2018-01-04T14:26:05Z">2018-01-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2><span id="目录">目录</span></h2><!-- toc -->
+<ul>
+<li><a href="#简短的介绍">简短的介绍</a></li>
+<li><a href="#git-request-pull">Git request-pull</a><ul>
+<li><a href="#使用目的">使用目的</a></li>
+<li><a href="#使用方法">使用方法</a></li>
+<li><a href="#一个例子">一个例子</a></li>
+</ul>
+</li>
+<li><a href="#github-pull-request">Github Pull Request</a><ul>
+<li><a href="#使用目的-1">使用目的</a></li>
+<li><a href="#使用方法-1">使用方法</a><ul>
+<li><a href="#使用github-web界面">使用Github web界面</a></li>
+<li><a href="#使用command-line">使用Command line</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#参考">参考</a></li>
+</ul>
+<!-- tocstop -->
+<h2><span id="简短的介绍">简短的介绍</span></h2><p><code>request-pull</code> 和 <code>Pull Request</code>的名称如此相似，但是他们的功能是完全不同的。</p>
+<p><code>request-pull</code>是git的命令，它用于生成发送到邮件列表的待处理的更改的摘要。默认情况下，GitHub没有集成这个功能。</p>
+<p><code>Pull Request</code>是GitHub特有的一项功能(简称PR)。它用于向Github托管的某一项目中的某一分支提出合并请求。项目管理者则可以在github的web界面上合并来自不同分支的代码，解决合并冲突，做代码审查或对代码进行评论。</p>
+<h2><span id="git-request-pull">Git request-pull</span></h2><h3><span id="使用目的">使用目的</span></h3><blockquote>
+<p><a href="https://git-scm.com/docs/git-request-pull" rel="external nofollow noopener noreferrer" target="_blank">Generates a summary of pending changes</a></p>
+</blockquote>
+<p>生成待处理的更改的摘要</p>
+<h3><span id="使用方法">使用方法</span></h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git request-pull [-p] &lt;start&gt; &lt;url&gt; [&lt;end&gt;]</span><br></pre></td></tr></table></figure>
+<h3><span id="一个例子">一个例子</span></h3><p>新增修改是基于从远端<code>pull</code>下来的<code>master</code>分支上的，为此建立了一个分支叫<code>add-android-cours</code>, 首先把自己的分支<code>push</code>到自己的仓库里</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push https://github.com/JinhaiZ/TB-F2B-205.git</span><br></pre></td></tr></table></figure>
+<p>运行<code>git request-pull</code>命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git request-pull master https://github.com/JinhaiZ/TB-F2B-205.git add-android-cours</span><br></pre></td></tr></table></figure>
+<p>它会根据远端master分支和刚刚push到仓库里的<code>add-android-cours</code>分支的不同做一个摘要。你可以选择把这份摘要email给远端仓库的管理者，这样，管理者可以从这份摘要中快速看出你想对master分支做出什么更改</p>
+<p>生成摘要如下所示</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">The following changes since commit 5a992617e38665e73ca5ec5e5c10b78373c88938:</span><br><span class="line"></span><br><span class="line">  deleted TD andorid (2017-12-10 22:31:55 +0100)</span><br><span class="line"></span><br><span class="line">are available <span class="keyword">in</span> the git repository at:</span><br><span class="line"></span><br><span class="line">  https://github.com/JinhaiZ/TB-F2B-205.git add-android-cours</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> you to fetch changes up to 658e472da4b7f08378a5452b72c244039c621dac:</span><br><span class="line"></span><br><span class="line">  add andorid cours (2018-01-04 11:36:15 +0100)</span><br><span class="line"></span><br><span class="line">----------------------------------------------------------------</span><br><span class="line">JinhaiZ (1):</span><br><span class="line">      add andorid cours</span><br><span class="line"></span><br><span class="line"> android/cours.md | 13 +++++++++++++</span><br><span class="line"> 1 file changed, 13 insertions(+)</span><br><span class="line"> create mode 100644 android/cours.md</span><br></pre></td></tr></table></figure>
+<h2><span id="github-pull-request">Github Pull Request</span></h2><h3><span id="使用目的">使用目的</span></h3><blockquote>
+<p><a href="http://www.ruanyifeng.com/blog/2017/07/pull_request.html" rel="external nofollow noopener noreferrer" target="_blank">“Pull Request 是一种通知机制。你修改了他人的代码，将你的修改通知原来的作者，希望他合并你的修改，这就是 Pull Request。”</a></p>
+</blockquote>
+<h3><span id="使用方法">使用方法</span></h3><h4><span id="使用github-web界面">使用Github web界面</span></h4><p>以下借用阮一峰老师的讲解</p>
+<ol>
+<li>第一步，你需要把别人在Github上的项目，fork到你自己的仓库</li>
+<li>第二步，在你仓库的修改后的分支上，按下”New pull request”按钮。<br>这时，会进入一个新页面，有Base 和 Head 两个选项。Base 是你希望提交变更的目标，Head 是目前包含你的变更的那个分支或仓库。</li>
+<li>第三步，填写说明，帮助别人理解你的提交，然后按下”create pull request”按钮即可。PR 创建后，管理者就要决定是否接受该 PR。</li>
+</ol>
+<h4><span id="使用command-line">使用Command line</span></h4><p>首先安装<a href="https://hub.github.com/" rel="external nofollow noopener noreferrer" target="_blank">Hub</a>，以下步骤参考<a href="https://hub.github.com/" rel="external nofollow noopener noreferrer" target="_blank">Hub官方指南</a></p>
+<ol>
+<li><p>第一步，把别人在Github上的项目克隆到本地</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`hub <span class="built_in">clone</span> https://github.com/SOME_ONE/xxx.git`</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二步，创建分支，并在分支上进行修改</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b my-feature-branch</span><br><span class="line">git commit -m <span class="string">"add new feature X"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第三步，把本地项目fork到Github上</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hub fork</span><br><span class="line">→ (forking repo on GitHub...)</span><br><span class="line">→ git remote add YOUR_USER git://github.com/YOUR_USER/xxx.git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第四步，把分支<code>push</code>到新远端(自己fork的远端)</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push YOUR_USER feature</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第五步，为自己的分支创建一个PR</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git pull-request</span><br><span class="line">→ (opens a text editor <span class="keyword">for</span> your pull request message)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2><span id="参考">参考</span></h2><ol>
+<li><a href="https://git-scm.com/docs/git-request-pull" rel="external nofollow noopener noreferrer" target="_blank">git docs: git-request-pull</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2017/07/pull_request.html" rel="external nofollow noopener noreferrer" target="_blank">Pull Request 的命令行管理</a></li>
+<li><a href="https://stackoverflow.com/questions/34945947/git-request-pull-how-to-create-a-github-pull-request-on-the-command-line" rel="external nofollow noopener noreferrer" target="_blank">git request-pull: how to create a (github) pull request on the command line?
+</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Git/" rel="tag"># Git</a>
+              <a href="/tags/Github/" rel="tag"># Github</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/10/30/Latency-Numbers-Every-Programmer-Should-Know/" rel="prev" title="每个程序员都应该知道的延迟时间表">
+      <i class="fa fa-chevron-left"></i> 每个程序员都应该知道的延迟时间表
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">简短的介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">Git request-pull</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.1.</span> <span class="nav-text">使用目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.2.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.3.</span> <span class="nav-text">一个例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">Github Pull Request</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">4.1.</span> <span class="nav-text">使用目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">4.2.</span> <span class="nav-text">使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">4.2.1.</span> <span class="nav-text">使用Github web界面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">4.2.2.</span> <span class="nav-text">使用Command line</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shuwei Zhang & Jinhai ZHOU" src="/images/codingnote_logo_cbg.png">
+  <p class="site-author-name" itemprop="name">Shuwei Zhang & Jinhai ZHOU</p>
+  <div class="site-description" itemprop="description">coding-note</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/C0dingNote" title="GitHub → https://github.com/C0dingNote" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shuwei Zhang & Jinhai ZHOU</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Muse</a> v7.7.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

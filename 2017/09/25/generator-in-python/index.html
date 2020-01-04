@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://codingnote.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="目录  可迭代对象 迭代器 生成器 关键词Yield 什么时候使用生成器 从Design Pattern角度看生成器   可迭代对象要想理解python中的生成器，得先从可迭代对象Iterable说起。什么是可迭代对象呢？  定义了可以返回一个迭代器的iter方法的对象，或者定义了可以支持下标索引的getitem方法的对象，就是一个可迭代对象  所以我们可以用如下方法来判断一个实例是否为可迭代对象">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python中的生成器">
+<meta property="og:url" content="http://codingnote.com/2017/09/25/generator-in-python/index.html">
+<meta property="og:site_name" content="Coding Note">
+<meta property="og:description" content="目录  可迭代对象 迭代器 生成器 关键词Yield 什么时候使用生成器 从Design Pattern角度看生成器   可迭代对象要想理解python中的生成器，得先从可迭代对象Iterable说起。什么是可迭代对象呢？  定义了可以返回一个迭代器的iter方法的对象，或者定义了可以支持下标索引的getitem方法的对象，就是一个可迭代对象  所以我们可以用如下方法来判断一个实例是否为可迭代对象">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-01-04T16:25:40.620Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python中的生成器">
+<meta name="twitter:description" content="目录  可迭代对象 迭代器 生成器 关键词Yield 什么时候使用生成器 从Design Pattern角度看生成器   可迭代对象要想理解python中的生成器，得先从可迭代对象Iterable说起。什么是可迭代对象呢？  定义了可以返回一个迭代器的iter方法的对象，或者定义了可以支持下标索引的getitem方法的对象，就是一个可迭代对象  所以我们可以用如下方法来判断一个实例是否为可迭代对象">
+
+<link rel="canonical" href="http://codingnote.com/2017/09/25/generator-in-python/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>python中的生成器 | Coding Note</title>
+  
+    <script>
+      function sendPageView() {
+        if (CONFIG.hostname !== location.hostname) return;
+        var uid = localStorage.getItem('uid') || (Math.random() + '.' + Math.random());
+        localStorage.setItem('uid', uid);
+        navigator.sendBeacon('https://www.google-analytics.com/collect', new URLSearchParams({
+          v  : 1,
+          tid: 'UA-98330531-1true',
+          cid: uid,
+          t  : 'pageview',
+          dp : encodeURIComponent(location.pathname)
+        }));
+      }
+      document.addEventListener('pjax:complete', sendPageView);
+      sendPageView();
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Coding Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">分享有关Coding的一切</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">20</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">24</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2017/09/25/generator-in-python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/codingnote_logo_cbg.png">
+      <meta itemprop="name" content="Shuwei Zhang & Jinhai ZHOU">
+      <meta itemprop="description" content="coding-note">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python中的生成器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-25 10:27:12" itemprop="dateCreated datePublished" datetime="2017-09-25T10:27:12Z">2017-09-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Design-Pattern/" itemprop="url" rel="index">
+                    <span itemprop="name">Design Pattern</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2><span id="目录">目录</span></h2><!-- toc -->
+<ul>
+<li><a href="#可迭代对象">可迭代对象</a></li>
+<li><a href="#迭代器">迭代器</a></li>
+<li><a href="#生成器">生成器</a></li>
+<li><a href="#关键词yield">关键词Yield</a></li>
+<li><a href="#什么时候使用生成器">什么时候使用生成器</a></li>
+<li><a href="#从design-pattern角度看生成器">从Design Pattern角度看生成器</a></li>
+</ul>
+<!-- tocstop -->
+<h3><span id="可迭代对象">可迭代对象</span></h3><p>要想理解python中的生成器，得先从可迭代对象Iterable说起。什么是可迭代对象呢？</p>
+<blockquote>
+<p>定义了可以返回一个迭代器的<strong>iter</strong>方法的对象，或者定义了可以支持下标索引的<strong>getitem</strong>方法的对象，就是一个可迭代对象</p>
+</blockquote>
+<p>所以我们可以用如下方法来判断一个实例是否为可迭代对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hasattr((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>), <span class="string">'__iter__'</span>) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">hasattr([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], <span class="string">'__iter__'</span>) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">hasattr(&#123;&#125;, <span class="string">'__iter__'</span>) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">hasattr(<span class="string">'abc'</span>, <span class="string">'__getitem__'</span>) <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+<p>知道了可迭代对象的定义，那么可迭代对象又有什么用呢，如下列所示，我们经常在python中使用for…in循环，那么for…in循环能在所有对象上使用吗？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">my_list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> my_list:</span><br><span class="line">  print(i) </span><br><span class="line"><span class="comment"># 1 </span></span><br><span class="line"><span class="comment"># 2 </span></span><br><span class="line"><span class="comment"># 3</span></span><br></pre></td></tr></table></figure>
+<p>其实不然，只有在可迭代对象上，for…in循环才能使用，比如列表，元组，字典以及字符串。这就是可迭代对象的最大用途。然而问题有来了，这些可迭代对象虽然好用，但是它们却又一大弊端。可迭代对象在使用时，比如<code>my_list</code>，它会把列表<code>[1, 2, 3]</code>中所有元素都存贮在内存中，当列表长度非常可观时，python会遇到性能方面的问题(python2.7中range函数返回可迭代对象，xrange函数返回生成器，所以可以通过比较这两个函数的执行相同任务时间来直观的了解性能方面的问题，stackoverflow上便有回答来比较这两个函数的执行时间，问题链接<a href="https://stackoverflow.com/questions/94935/what-is-the-difference-between-range-and-xrange-functions-in-python-2-x" rel="external nofollow noopener noreferrer" target="_blank">点此</a>)。</p>
+<h3><span id="迭代器">迭代器</span></h3><p>对于上述列表对象遇到的性能问题，我们自然会问到有没有方法来解决这样的问题。比如，有没有一种类似列表的对象，但是它不会一下子把它所有的元素都放到内存里的对象？<br>有，它就是迭代器，还是先说迭代器Iterator的定义</p>
+<blockquote>
+<p>定义了返回迭代器对象本身<strong>iter()</strong>(Python2)方法的对象，或者定义了方法返回容器的下一个元素<strong>next</strong>方法的对象，就是一个迭代器。</p>
+</blockquote>
+<p>同时我们也说，实现了上述两个方法的对象是遵守了迭代器协议（iterator protocol）的对象。</p>
+<p>判断一个对象我们除了可以检查它有没有<code>__iter()__</code>和<code>__next__</code>方法外，我们也可以用isinstance()方法。如下所示</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Iterator</span><br><span class="line"></span><br><span class="line">isinstance((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>), Iterator) <span class="comment"># False</span></span><br><span class="line"></span><br><span class="line">isinstance([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], Iterator) <span class="comment"># False</span></span><br><span class="line"></span><br><span class="line">isinstance(&#123;&#125;, Iterator) <span class="comment"># False</span></span><br><span class="line"></span><br><span class="line">isinstance(<span class="string">'abc'</span>, Iterator) <span class="comment"># False</span></span><br><span class="line"></span><br><span class="line">isinstance((x <span class="keyword">for</span> x <span class="keyword">in</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]), Iterator) <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+<p>这下我们发现，元组，列表，字典，字符串都是可迭代对象，但同时它们也都不是迭代器。谁是迭代器呢？从上面例子可看到<code>(x for x in [1,2,3])</code>是迭代器对象的实例。</p>
+<p>首先，为什么元组，列表，字典，字符串都不是迭代器Iterator呢？</p>
+<blockquote>
+<p>这是因为Python的Iterator对象表示的是一个数据流，Iterator对象可以被next()函数调用并不断返回下一个数据，直到没有数据时抛出StopIteration错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算是惰性的，只有在需要返回下一个数据时它才会计算。</p>
+</blockquote>
+<p>从以上摘自<a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143178254193589df9c612d2449618ea460e7a672a366000" rel="external nofollow noopener noreferrer" target="_blank">廖雪峰</a>官网上的解答中我们可以看出，迭代器表示一个数据流，它不会把这个数据流中每一个元素都存贮在内存中，而列表则不同，它会把列表中所有元素都存贮在内存中。</p>
+<p>对于第二个问题，为什么<code>(x for x in [1,2,3])</code>是迭代器对象的实例呢？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Iterator</span><br><span class="line"></span><br><span class="line">isinstance(iter((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)), Iterator) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">isinstance(iter([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]), Iterator) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">isinstance(iter(&#123;&#125;), Iterator) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">isinstance(iter(<span class="string">'abc'</span>), Iterator) <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+<p>从以上例子可以看出，虽然元组，列表，字典，字符串都不是迭代器，但是通过iter()函数，可以获得一个Iterator对象。</p>
+<p>所以Python的for循环本质上可以看做先通过iter()函数，获得一个迭代器Iterator对象，再在这个迭代器对象上通过不断调用next()函数实现的。</p>
+<h3><span id="生成器">生成器</span></h3><p>在了解了可迭代对象Iterable和迭代器Iterator的概念后，我们终于可以开始探讨生成器的概念了。</p>
+<p>先放概念</p>
+<blockquote>
+<p>生成器是一种迭代器，但是只能对其迭代一次。因为它们并没有把所有的值存在内存中，而是在运行时生成值。生成器可通过遍历来使用它们，要么用一个“for”循环，要么将它传递给任意可以进行迭代的函数和结构。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">my_generator = (x <span class="keyword">for</span> x <span class="keyword">in</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> my_generator:</span><br><span class="line">  print(i)</span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> my_generator:</span><br><span class="line">  print(i)</span><br><span class="line"><span class="comment"># nothing happens</span></span><br></pre></td></tr></table></figure>
+<p>上面是生成器的一个简单的例子，这个例子有点像for…in循环输出<code>my_list</code>的例子，除了这里用了一个迭代器<code>(x for x in [1,2,3])</code>替换了可迭代对象<code>[1,2,3]</code>。它们有什么不同吗？仔细观察上例，当我们再次使用for…in循环输出my_generator时，什么都没有发生，这也就是定义中说的</p>
+<blockquote>
+<p>生成器是一种迭代器，但是只能对其迭代一次。</p>
+</blockquote>
+<p>因为生成器首先生成1，接着从内存中清空1，接下来生成2，接着从内存中清空2，最后生成3，接着从内存中清空3。</p>
+<h3><span id="关键词yield">关键词Yield</span></h3><p>我们知道了一种由迭代器来获得生成器的方式，那么还有其他的方式来获得生成器吗？用Python关键词yield就可以。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createGenerator</span><span class="params">()</span>:</span></span><br><span class="line">  my_list = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> my_list:</span><br><span class="line">    <span class="keyword">yield</span> i</span><br><span class="line"></span><br><span class="line">my_generator = createGenerator()</span><br><span class="line">print(my_generator) <span class="comment"># &lt;generator object createGenerator at 0x7ff6a5c785c8&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> my_generator:</span><br><span class="line">  print(i)</span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line"><span class="comment"># 3</span></span><br></pre></td></tr></table></figure>
+<p>虽然上面的例子没有人在实际中会使用，但是用它来了解yield的用法还是很通俗易懂的。关于yield的难点，首先我们可以看到，通过<code>createGenerator()</code>函数来获得生成器<code>my_generator</code>时，函数<code>createGenerator()</code>并没有被执行，它只是返回了一个位于内存中处于某个位置上的该生成器对象。直到我们用for…in循环作用于这个对象上时，函数<code>createGenerator()</code>才被真正的执行，我们可以把它当做是一种惰性求值。</p>
+<p>那么生成器<code>my_generator</code>是如何求值的呢？当for…in循环第一次调用生成器时，<code>createGenerator()</code>被执行，直到被执行到yield关键词这里，返回循环的第一个值。余下的循环在调用生成器时，会继续上次的循环，再次遇到yield关键词时返回这一次循环的值，直到循环结束，再也遇不到yield关键词为止。</p>
+<h3><span id="什么时候使用生成器">什么时候使用生成器</span></h3><p>生成器的一个典型应用场景是：你不想把同一时间将所有计算出来的大量结果贮存到内存中，因为这样做会消耗大量资源，所以使用生成器来进行惰性求值，只有在需要某个结果时，再计算该结果。</p>
+<p>举一个生成斐波那契数列的例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">listFibonacci</span><span class="params">(n)</span>:</span></span><br><span class="line">  a = b = <span class="number">1</span></span><br><span class="line">  fib_list = []</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    fib_list.append(a)</span><br><span class="line">    a, b = b, a + b</span><br><span class="line">  <span class="keyword">return</span> fib_list</span><br></pre></td></tr></table></figure>
+<p>当输入参数很大时，内存资源会被严重消耗。</p>
+<p>下面是该函数的生成器版本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">genFibonacci</span><span class="params">(n)</span>:</span></span><br><span class="line">  a = b = <span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    <span class="keyword">yield</span> a</span><br><span class="line">    a, b = b, a + b</span><br></pre></td></tr></table></figure>
+<p>由于惰性求值的缘故，即便参数很大时，我们也不用担心内存资源的消耗。</p>
+<p>我们刚刚谈到了内存消耗情况，有什么工具能帮助我们直观的感受到内存的消耗呢？ python有个叫<code>memory_profiler</code>的工具可以来帮我们进行内存消耗情况的测试。为了对比上述两个方法的内存消耗，我们让这两个方法同时生100000个斐波那契数列，并观察内存消耗情况。</p>
+<p>测试<code>listFibonacci()</code>代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> memory_profiler <span class="keyword">import</span> profile</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">listFibonacci</span><span class="params">(n)</span>:</span></span><br><span class="line">  a = b = <span class="number">1</span></span><br><span class="line">  fib_list = []</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    fib_list.append(a)</span><br><span class="line">    a, b = b, a + b</span><br><span class="line">  <span class="keyword">return</span> fib_list</span><br><span class="line"></span><br><span class="line"><span class="meta">@profile</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">testListFib</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> listFibonacci(<span class="number">100000</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    testListFib()</span><br></pre></td></tr></table></figure>
+<p>测试<code>genFibonacci()</code>代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> memory_profiler <span class="keyword">import</span> profile</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">genFibonacci</span><span class="params">(n)</span>:</span></span><br><span class="line">  a = b = <span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    <span class="keyword">yield</span> a</span><br><span class="line">    a, b = b, a + b</span><br><span class="line"></span><br><span class="line"><span class="meta">@profile</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">testGenFib</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> genFibonacci(<span class="number">100000</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">  testGenFib()</span><br></pre></td></tr></table></figure>
+<p>使用<code>listFibonacci()</code>测试结果如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Filename: listFib.py</span><br><span class="line"></span><br><span class="line">Line #    Mem usage    Increment   Line Contents</span><br><span class="line">================================================</span><br><span class="line">    11     14.2 MiB      0.0 MiB   @profile</span><br><span class="line">    12                             def testListFib():</span><br><span class="line">    13    460.5 MiB    446.2 MiB     for i in listFibonacci(100000):</span><br><span class="line">    14    460.5 MiB      0.0 MiB       pass</span><br></pre></td></tr></table></figure>
+<p>使用<code>genFibonacci()</code>测试结果如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Filename: genFib.py</span><br><span class="line"></span><br><span class="line">Line #    Mem usage    Increment   Line Contents</span><br><span class="line">================================================</span><br><span class="line">     9     14.4 MiB      0.0 MiB   @profile</span><br><span class="line">    10                             def testGenFib():</span><br><span class="line">    11     14.4 MiB      0.0 MiB     for i in genFibonacci(100000):</span><br><span class="line">    12     14.4 MiB      0.0 MiB       pass</span><br></pre></td></tr></table></figure>
+<p>从上面的测试结果可以看出，在生成大于100000个斐波那契数列的任务中，<code>listFibonacci()</code>消耗了460.5 MiB内存，而<code>genFibonacci()</code>只消耗了14.4 MiB内存。其实，如果我们绘制一个内存消耗随生成斐波那契数列长度变化的折线图，我们可以发现，随着生成斐波那契数列长度的增加，<code>listFibonacci()</code>的内存消耗情况是指数递增的，而<code>genFibonacci()</code>的内存消耗情况则是不变的，总是维持在消耗14.4 MiB 左右。通过这个测试，我们可以直观的感受到，在计算大量不需要被保存结果且只需计算一次的任务下，我们为什么不用担心生成器对内存资源的消耗。</p>
+<h3><span id="从design-pattern角度看生成器">从Design Pattern角度看生成器</span></h3><p>如果从Design Pattern的角度来看生成器，生成器就是一个无参数版本的工厂模式。通常工厂模式需要通过参数来确定生成什么对象以及如何生成该对象，但是生成器则不需要参数，它通过内部算法来确定生成什么对象以及如何生成该对象。</p>
+<p>参考</p>
+<ol>
+<li><a href="https://stackoverflow.com/questions/231767/what-does-the-yield-keyword-do/231855#231855" rel="external nofollow noopener noreferrer" target="_blank">Stackoverflow, What does the “yield” keyword do?
+</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143178254193589df9c612d2449618ea460e7a672a366000" rel="external nofollow noopener noreferrer" target="_blank">廖雪峰的官方网站, 迭代器</a></li>
+<li><a href="http://wiki.jikexueyuan.com/project/explore-python/Advanced-Features/iterator.html" rel="external nofollow noopener noreferrer" target="_blank">极客学院, 迭代器</a></li>
+<li><a href="http://www.mindview.net/Books/Python/ThinkingInPython.html" rel="external nofollow noopener noreferrer" target="_blank">Bruce Eckel, Thinking in Python</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/25/polymorphism-in-python/" rel="prev" title="用python来探讨多态">
+      <i class="fa fa-chevron-left"></i> 用python来探讨多态
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/09/25/backtick-in-python/" rel="next" title="python中的反引号reverse quotes">
+      python中的反引号reverse quotes <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.1.</span> <span class="nav-text">可迭代对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.2.</span> <span class="nav-text">迭代器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.3.</span> <span class="nav-text">生成器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.4.</span> <span class="nav-text">关键词Yield</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.5.</span> <span class="nav-text">什么时候使用生成器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.6.</span> <span class="nav-text">从Design Pattern角度看生成器</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shuwei Zhang & Jinhai ZHOU" src="/images/codingnote_logo_cbg.png">
+  <p class="site-author-name" itemprop="name">Shuwei Zhang & Jinhai ZHOU</p>
+  <div class="site-description" itemprop="description">coding-note</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/C0dingNote" title="GitHub → https://github.com/C0dingNote" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shuwei Zhang & Jinhai ZHOU</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Muse</a> v7.7.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
