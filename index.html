@@ -161,17 +161,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">20</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">23</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">14</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">16</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">24</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">25</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -219,6 +219,100 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2020/02/23/design-review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/codingnote_logo_cbg.png">
+      <meta itemprop="name" content="Shuwei Zhang & Jinhai ZHOU">
+      <meta itemprop="description" content="coding-note">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/23/design-review/" class="post-title-link" itemprop="url">Design review 设计评审</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-23 19:44:37 / 修改时间：20:52:50" itemprop="dateCreated datePublished" datetime="2020-02-23T19:44:37Z">2020-02-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/软件开发实践/" itemprop="url" rel="index">
+                    <span itemprop="name">软件开发实践</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/软件开发实践/设计评审/" itemprop="url" rel="index">
+                    <span itemprop="name">设计评审</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>软件开发设计文档（以下简称设计文档），是在软件开发之前，一种把软件设计思路结构化记录下来的资料。我们在实践过程中，尤其是在一些重要的工作上 （比如时间跨度长，需要几个Sprint周期才能完成的工作，或者涉及多个团队，需要跨团队分工协作时），需要先把思路写下来，通过设计评审分享出来，得到相关人员的批准或者承诺后，再进行实现。</p>
+<p>一个好的设计文档至少包括如下几项：</p>
+<ul>
+<li>Problem statement。陈述待解决的问题，以及为什么要解决这个问题，或者说，不解决这个问题的后果是什么。</li>
+<li>Recommended proposal。详细阐明推荐的解决方案，以及Pros/Cons的比较。</li>
+<li>Alternatives。其他可行的解决方案，一般来说解决方案不止一种，也需要有Pros/Cons 对比。能让评审人知道trade-off是什么。</li>
+</ul>
+<p>更加详细的设计文档除了上面几项外还会有：</p>
+<ul>
+<li>Background。交代问题的背景，比如总项目的进程，该问题所属项目与总项目之间的关系。</li>
+<li>Term。术语表。通常在抽象度高的讨论中，会用到很多术语以及缩略语。它们应该在术语表里进行定义，以避免歧义。</li>
+<li>Plan。项目的计划。实现过程复杂是，需要分解实现过程，定义每个阶段的需要交付的模块。或者是每个阶段性成果Milestone是什么。</li>
+</ul>
+<p>一个成功的设计评审需要以下要素。</p>
+<ul>
+<li>精简的评审团。只让必要的人参与进来。比如项目负责人，项目的主要贡献者或者受到最大影响的人。他们对设计思路的方向最有发言权，能提出有建设性的意见，而且能最后拍板。邀请不必要的人，会增加讨论中的噪音，以致评审流程变慢。</li>
+<li>提前制定好的议案。有效率的讨论需要高质量的议案。设计评审的发起人需要准备好评审大会的议案流程，先讨论重要的点，比如一旦敲定就可以让部分项目先开展实现的点。这样接下来的点可以在不阻塞项目进展的情况下讨论。</li>
+<li>Meeting Minutes。及时分享会议记录，其中包括参与的人，何时做出了什么决定或者得到了什么共识。当评审大会需要分几次召开时，会议记录作为之前会议的备忘能让我们避免重复讨论。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1409,116 +1503,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2017/06/02/codility-perm-check/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/codingnote_logo_cbg.png">
-      <meta itemprop="name" content="Shuwei Zhang & Jinhai ZHOU">
-      <meta itemprop="description" content="coding-note">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding Note">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/06/02/codility-perm-check/" class="post-title-link" itemprop="url">Codility PermCheck in Python</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-06-02 21:25:05" itemprop="dateCreated datePublished" datetime="2017-06-02T21:25:05Z">2017-06-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">Notes</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Notes/Codility/" itemprop="url" rel="index">
-                    <span itemprop="name">Codility</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table>
-<thead>
-<tr>
-<th>情况</th>
-<th>时间复杂度</th>
-<th>空间复杂度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>最优</td>
-<td>O(N)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>平均</td>
-<td>O(N)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>最差</td>
-<td>O(N)</td>
-<td>O(1)</td>
-</tr>
-</tbody>
-</table>
-<p>设输入数组长度为N，最优情况在输入数组的最大值不等于N时达成</p>
-<h3><span id="算法分析">算法分析</span></h3><p><strong>permutation</strong> 被定义为长为N的数组，包含整数1到N，且每个整数包含有且仅有一次。根据定义，我们必须遍历完输入数组才能知道是否1到N的每个整数包含有且仅有一次，所以算法复杂度为O(N)且无法继续优化。如何检测输入数组中1到N的每个整数出现有且仅有一次呢？一个比较直观的方法是用一个长度为N的数组作标记，遍历输入数组并在标记数组的对应项作标记，一旦该标记数组所有项均被标记，则说明输入数组满足permutation定义。但是该方法有一个缺点，就是需要成比例于输入数组长度N的存储空间。有没有不需要额外存储空间的算法呢？答案当然是有的，技巧在于利用输入数组，在遍历输入数组的同时，利用输入数组做标记。由于输入数组各项均为正整数，我们可以将某一项置为负值来标记该项索引+1对应的正整数出现过一次。</p>
-<h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(len(A)):</span><br><span class="line">        index = A[i] <span class="keyword">if</span> A[i] &gt; <span class="number">0</span> <span class="keyword">else</span> -A[i]</span><br><span class="line">        <span class="keyword">if</span> index &gt; len(A) <span class="keyword">or</span> A[index - <span class="number">1</span>] &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            A[index - <span class="number">1</span>] = -A[index - <span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1590,20 +1574,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
