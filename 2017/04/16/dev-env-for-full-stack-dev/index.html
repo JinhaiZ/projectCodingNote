@@ -86,7 +86,7 @@
         localStorage.setItem('uid', uid);
         navigator.sendBeacon('https://www.google-analytics.com/collect', new URLSearchParams({
           v  : 1,
-          tid: 'UA-98330531-1true',
+          tid: 'UA-98330531-1',
           cid: uid,
           t  : 'pageview',
           dp : encodeURIComponent(location.pathname)
