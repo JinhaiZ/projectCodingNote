@@ -161,17 +161,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">23</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">26</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">16</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">19</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">25</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">26</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -219,6 +219,136 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2017/09/15/install-pinyin-in-Ubuntu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/codingnote_logo_cbg.png">
+      <meta itemprop="name" content="Shuwei Zhang & Jinhai ZHOU">
+      <meta itemprop="description" content="coding-note">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/15/install-pinyin-in-Ubuntu/" class="post-title-link" itemprop="url">Ubuntu上安装拼音输入法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-15 10:24:56" itemprop="dateCreated datePublished" datetime="2017-09-15T10:24:56Z">2017-09-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/拼音输入法/" itemprop="url" rel="index">
+                    <span itemprop="name">拼音输入法</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>目录</p>
+<!-- toc -->
+<ul>
+<li><a href="#安装ibus中文输入法">安装IBus中文输入法</a></li>
+<li><a href="#安装搜狗中文输入法">安装搜狗中文输入法</a></li>
+</ul>
+<!-- tocstop -->
+<h3><span id="安装ibus中文输入法">安装IBus中文输入法</span></h3>  <img src="/2017/09/15/install-pinyin-in-Ubuntu/successfully_installed_pinyin.png" title="Ubuntu上的拼音输入法">
+<p>最近又重新安装了Ubuntu系统。因为要写中文博客，没有中文输入法实在是麻烦。在Ubuntu上安装中文输入法确实没有Windows上显而易见，所以写下步骤方便自己将来参考。</p>
+<ol>
+<li><p>首先进入系统设置选择language support，如果没有完整安装该功能，先根据系统提示完成安装</p>
+</li>
+<li><p>点击install/remove language 来安装中文支持</p>
+</li>
+<li><p>接下来在Terminal中手动安装下面任何一个输入法</p>
+<p> <code>sudo apt-get install ibus-pinyin</code></p>
+<p> <code>sudo apt-get install ibus-sunpinyin</code></p>
+</li>
+<li><p>重启IBus daemon</p>
+<p> <code>ibus restart</code></p>
+</li>
+<li><p>再进入系统设置选择Text Entry，点击左下角的小加号并在add input source界面中搜索Chinese，选择一款拼音输入法</p>
+<img src="/2017/09/15/install-pinyin-in-Ubuntu/ubuntu_add_input_method.png" title="选择Pinyin输入法">
+</li>
+<li><p>使用吧</p>
+</li>
+</ol>
+<h3><span id="安装搜狗中文输入法">安装搜狗中文输入法</span></h3><p>使用了几天IBus的中文输入发，使用体验简直弱爆了。首先4k屏适配有问题，待选框时刻游离在屏幕之外，然而最致命的是，IBus拼音输入法竟然有切换到双拼就无法再切换回来的bug。早年间我在ubuntu 14上使用过搜狗输入法，用户体验良好，于是试着在ubuntu 16.04上安装。虽然安装步骤比在ubuntu 14上稍稍复杂一些，但是搜狗输入法完美适配4k屏幕而且一如既往的好用。安装步骤如下：</p>
+<ol>
+<li><p>搜狗舒服法依赖Fcitx键盘输入法系统而不是IBus，所以安装搜狗输入法前需要确认Fcitx已经安装，若没有安装Fcitx，可以通过terminal</p>
+<p> <code>sudo apt-get install fcitx</code></p>
+<p> 如果安装过程中需要额外依赖，可以通过以下命令安装</p>
+<p> <code>apt-get install -f</code></p>
+</li>
+<li><p>点击<a href="http://pinyin.sogou.com/linux/" rel="external nofollow noopener noreferrer" target="_blank">这里</a>下载搜狗中文输入法，有32bit和64bit安装包可选，ubuntu用户可以选择deb格式安装包用Ubuntu Software Center来安装，当然可以到下载路径下通过以下命令安装</p>
+<p> <code>sudo dpkg -i sogoupinyin_2.1.0.0086_amd64.deb</code></p>
+</li>
+<li><p>安装完毕后，在从当前系统设置/语言支持里选择Fcitx做为键盘输入法系统</p>
+</li>
+<li>退出登录，再重新登录</li>
+<li>现在在系统右上角应该能看到键盘图标，选择设置，添加搜狗中文书法</li>
+<li>开心的使用吧</li>
+</ol>
+<p>参考资料</p>
+<ol>
+<li><a href="https://askubuntu.com/questions/59356/how-do-i-get-chinese-input-to-work" rel="external nofollow noopener noreferrer" target="_blank">How do I get Chinese input to work?</a></li>
+<li><a href="https://askubuntu.com/questions/455682/14-04-chinese-ibus-input-no-options" rel="external nofollow noopener noreferrer" target="_blank">14.04 Chinese Ibus Input - No Options</a></li>
+<li><a href="https://askubuntu.com/questions/450255/installing-sogou-%E6%90%9C%E7%8B%97%E6%8B%BC%E9%9F%B3" rel="external nofollow noopener noreferrer" target="_blank">Installing SOGOU 搜狗拼音</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1230,115 +1360,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2017/05/22/codility-binary-gap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/codingnote_logo_cbg.png">
-      <meta itemprop="name" content="Shuwei Zhang & Jinhai ZHOU">
-      <meta itemprop="description" content="coding-note">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding Note">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/05/22/codility-binary-gap/" class="post-title-link" itemprop="url">Codility BinaryGap in Python</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-05-22 21:34:50" itemprop="dateCreated datePublished" datetime="2017-05-22T21:34:50Z">2017-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">Notes</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Notes/Codility/" itemprop="url" rel="index">
-                    <span itemprop="name">Codility</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table>
-<thead>
-<tr>
-<th>情况</th>
-<th>时间复杂度</th>
-<th>空间复杂度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>最优</td>
-<td>O(N)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>平均</td>
-<td>O(N)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>最差</td>
-<td>O(N)</td>
-<td>O(1)</td>
-</tr>
-</tbody>
-</table>
-<h3><span id="算法分析">算法分析</span></h3><p>利用python built-in函数<code>bin()</code>将十进制输入转换为二进制字符串，遇到字符‘0’，计数器<code>count += 1</code>，遇到字符‘1’，计数器清空。变量<code>max</code>记录<code>count</code>最大值，函数最后返回<code>max</code>。但是有一个问题，转换为二进制表示的N没有前导0，但需要注意处理后缀0，以免错误计数。否则，若二进制表示为1001000时，函数返回3而不是2。</p>
-<h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(N)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="keyword">if</span> (N &gt; <span class="number">2147483647</span> <span class="keyword">or</span> N &lt; <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    s = bin(N)[<span class="number">2</span>:]</span><br><span class="line">    last = s.__len__()<span class="number">-1</span></span><br><span class="line">    <span class="keyword">while</span> (s[last] == <span class="string">'0'</span>):</span><br><span class="line">        last -= <span class="number">1</span></span><br><span class="line">    s = s[<span class="number">0</span>:last+<span class="number">1</span>]</span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    max = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="string">'0'</span>):</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> (count &gt; max):</span><br><span class="line">                max = count</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> max</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1410,20 +1431,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

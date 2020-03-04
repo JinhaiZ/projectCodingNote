@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://codingnote.com/2020/03/03/unbounded-wildcards/</loc>
+    
+    <lastmod>2020-03-04T22:50:41.319Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://codingnote.com/2020/02/23/design-review/</loc>
     
     <lastmod>2020-02-29T22:19:27.319Z</lastmod>
@@ -156,14 +163,14 @@
   </url>
   
   <url>
-    <loc>http://codingnote.com/2017/06/02/codility-missing-integer/</loc>
+    <loc>http://codingnote.com/2017/06/02/codility-perm-check/</loc>
     
     <lastmod>2020-01-04T16:25:40.604Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://codingnote.com/2017/06/02/codility-perm-check/</loc>
+    <loc>http://codingnote.com/2017/06/02/codility-missing-integer/</loc>
     
     <lastmod>2020-01-04T16:25:40.604Z</lastmod>
     

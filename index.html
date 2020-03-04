@@ -161,17 +161,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">23</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">26</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">16</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">19</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">25</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">26</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -219,6 +219,153 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2020/03/03/unbounded-wildcards/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/codingnote_logo_cbg.png">
+      <meta itemprop="name" content="Shuwei Zhang & Jinhai ZHOU">
+      <meta itemprop="description" content="coding-note">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/03/unbounded-wildcards/" class="post-title-link" itemprop="url">Java 泛型</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-02 23:28:00" itemprop="dateCreated datePublished" datetime="2020-03-02T23:28:00Z">2020-03-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-04 22:50:41" itemprop="dateModified" datetime="2020-03-04T22:50:41Z">2020-03-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-通配符/" itemprop="url" rel="index">
+                    <span itemprop="name">Java 通配符</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-通配符/Java-泛型/" itemprop="url" rel="index">
+                    <span itemprop="name">Java 泛型</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-通配符/Java-泛型/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2><span id="目录">目录</span></h2><!-- toc -->
+<ul>
+<li><a href="#java-泛型">Java 泛型</a><ul>
+<li><a href="#我们为什么需要泛型">我们为什么需要泛型</a></li>
+</ul>
+</li>
+<li><a href="#有限通配符">有限通配符</a><ul>
+<li><a href="#下限通配符">下限通配符</a></li>
+<li><a href="#上限通配符">上限通配符</a></li>
+</ul>
+</li>
+<li><a href="#无限通配符">无限通配符</a></li>
+</ul>
+<!-- tocstop -->
+<h1><span id="java-泛型">Java 泛型</span></h1><h2><span id="我们为什么需要泛型">我们为什么需要泛型</span></h2><p>自从Java SE 1.5引入<strong>泛型（Generics）</strong> 之前，Java程序员想要写出通用的代码有点难度。比如想要得到Java某个集合（<code>Collection</code>）的最大值，在没有泛型的情况下，我们需要针对每个特定类型去写特定的求最大值方法。</p>
+<p>比如针对<code>Number</code>集合我们需要实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Number <span class="title">max</span><span class="params">(NumberCollection coll, NumberComparator comp)</span></span></span><br></pre></td></tr></table></figure>
+<p>针对<code>Integer</code>集合我们需要实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Integer <span class="title">max</span><span class="params">(IntegerCollection coll, IntegerComparator comp)</span></span></span><br></pre></td></tr></table></figure>
+<p>显而易见，这样实现起来是非常没有效率的。我们需要为每个不同的类型实现重复的逻辑，重复在编程中是非常罪恶的。当然，为了减少重复，我们也可以有这样的实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">max</span><span class="params">(ObjectCollection coll, ObjectComparator comp)</span></span></span><br></pre></td></tr></table></figure>
+<p>因为Java所有的类都是<code>Object</code>的子类。当然这样实现的坏处就是需要做<strong>对象转型(Casting)</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Integer maxInterger = (Integer) max(coll, comp)</span><br></pre></td></tr></table></figure>
+<p>然而对象转型也是非常罪恶的，因为一旦错误地使用了对象转型，代码只有到<strong>运行阶段（run time）</strong> 才会报错。所以我们要尽可能的避免对象转型。</p>
+<p>而有了泛型以后，我们只需要实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">max</span><span class="params">(Collection&lt;T&gt; coll, Comparator&lt;T&gt; comp)</span></span></span><br></pre></td></tr></table></figure>
+<p>其中<code>T</code>叫做<strong>类型参数（Type paramter）</strong>，如果一个<strong>类（Class）</strong>，一个<strong>接口（Interface）</strong> 或者一个<strong>方法（Method）</strong> 在<strong>定义时（declaration）</strong>有一个或者多个类型参数，那么我们就叫他们<strong>泛型类（Generic class）</strong>，<strong>泛型接口（Generic interface）</strong> 和<strong>泛型方法（Generic method）</strong>。而泛型类，泛型接口和泛型方法就被统称为<strong>泛型（Generic types， Generics）</strong>。</p>
+<p>定义时，泛型是由类，接口和方法名跟着一个由尖括号包围的<strong>参数化类型（Parameterized types）</strong> 组成的。例如</p>
+<ul>
+<li><code>ArrayList&lt;E&gt;</code> ArrayList类有一个类型参数，E，它表示元素类型。读作元素E的ArrayList。</li>
+<li><code>Map&lt;K, V&gt;</code> Map接口有两个类型参数，K，V，分别表示键和值的类型，读作K到V的映射。</li>
+<li><code>T max(Collection&lt;T&gt; coll)</code> max方法有一个类型参数，T，表示对象类型，这个不太好读。</li>
+</ul>
+<p>使用时，我们用<strong>实际类型参数（Actual typeparamter）</strong> 替换类型参数，比如<code>ArrayList&lt;String&gt;</code> 就代表一个元素为<code>String</code>的<code>ArrayList</code>。其中类型参数<code>E</code>被实际类型参数<code>String</code>替代了。</p>
+<p><em>在英语里Generic有通用的含义，这也揭示了Java泛型的本质：<strong>让类，接口和方法变得更加通用</strong></em></p>
+<h1><span id="有限通配符">有限通配符</span></h1><p><strong>有限通配符（Bounded Wildcards）</strong> 是Java<strong>泛型（Java Generics）</strong> 里的概念，这里的有限不是和无限对应的，而是有上限和下限的意思。</p>
+<h2><span id="下限通配符">下限通配符</span></h2><p>上面说到有了泛型以后，我们只需要实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">max</span><span class="params">(Collection&lt;T&gt; coll, Comparator&lt;T&gt; comp)</span></span></span><br></pre></td></tr></table></figure>
+<p>便可以对任意类型的数据求最大值，但是上面的<strong>方法签名（method signature）</strong> 也有一些限制。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Collection&lt;Integer&gt; intergerColl = ...;</span><br><span class="line">Comparator&lt;Number&gt; numberComp = ...;</span><br><span class="line">Collections.max(intergerColl, numberComp); <span class="comment">// 编译出错</span></span><br></pre></td></tr></table></figure>
+<p>我们知道<code>Number</code>是<code>Integer</code>是的<strong>父类（Super type）</strong>，每一个<code>Intger</code>类也是<code>Number</code>类，所以<code>Number</code>类的比较器应该可以用于比较<code>Integer</code>类。</p>
+<p>然而上面的代码会在<strong>编译阶段（Compile time）出错</strong>，这是因为类型参数<code>T</code>限制了我们只能使用<code>Integer</code>类的比较器。在这里，限制比较器的类型和集合类型完全一样是没有必要的。其实我们可以放宽限制，只要比较器类型是集合类型T的父类型就可以了。这样，我们可以让求最大值方法变得更通用。修改后的函数签名如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">max</span><span class="params">(Collection&lt;T&gt; coll, Comparator&lt;? <span class="keyword">super</span> T&gt; comp)</span></span></span><br></pre></td></tr></table></figure>
+<p>这里<code>?</code>就是通配符（Wildcard），<code>? super T</code>就是<strong>下限通配符（Lower Bounded Wildcards）</strong>。它表示某个类<code>?</code>是<code>T</code>的父类。</p>
+<p>这样我们在这里使用Number类的比较器来比较Integer集合了。</p>
+<p>下限通配符<code>? super T</code>中，<code>T</code>是表示下，它既可以是一个类型参数，也可以是一个实际的类型参数。</p>
+<p>至于为什么叫做下限，我们可以这么类比。族谱里爸爸在上面，儿子在下面。下限通配符以某个类型的子类型为下限，它匹配包括这个子类型的所有父类型。</p>
+<h2><span id="上限通配符">上限通配符</span></h2><p>通过上限通配符，我们把求最大值方法变得通用了。试想限制我们想要实现一个Number集合累加，可以有如下的函数签名</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Number <span class="title">sum</span><span class="params">(Collection&lt;Number&gt; inputs)</span></span></span><br></pre></td></tr></table></figure>
+<p>但是它只能用于累加Number，如果我们也想累加Number的子类Double，Integer呢，可以使用具有实际类型的上限通配符</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Number <span class="title">sum</span><span class="params">(Collection&lt;? extends Number&gt; inputs)</span></span></span><br></pre></td></tr></table></figure>
+<p>这样我们就可以累加Double，Intger类型的集合了。</p>
+<p>这里<code>? extends T</code>就是<strong>上限通配符（Upper Bounded Wildcards）</strong>。它表示某个类<code>?</code>是<code>T</code>的子类。</p>
+<h1><span id="无限通配符">无限通配符</span></h1><p>无限通配符（Unbounded Wildcards）里的无限不是和有限对应的无限，而没有上下限的意思。有时，无限通配符（Unbounded Wildcards）也会被翻译为无界通配符。他们指代的都是同一个概念。</p>
+<p>无限通配符记作<code>?</code>, 表示<strong>未知类型（unknown type）</strong>。 比如<code>List&lt;?&gt;</code>, 表示类型未知的List。</p>
+<p>试想我们实现了如下在List中交换元素的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;E&gt; <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(List&lt;E&gt; list, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> List l = list;</span><br><span class="line">    l.set(i, l.set(j, l.get(i)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于使用了泛型，上面的方法可以应用于不同类型的List。但是我们也可以看到，在实现这个方法的过程中，我们没有使用基于类型参数E的任何信息。在这种情况下，我们可以用无限通配符代替类型参数E</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(List&lt;?&gt; list, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> List l = list;</span><br><span class="line">    l.set(i, l.set(j, l.get(i)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以总结出这样的经验法则，如何类型参数只在方法声明中出现，我们就可以用通配符来代替。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1391,136 +1538,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2017/09/15/install-pinyin-in-Ubuntu/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/codingnote_logo_cbg.png">
-      <meta itemprop="name" content="Shuwei Zhang & Jinhai ZHOU">
-      <meta itemprop="description" content="coding-note">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding Note">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/15/install-pinyin-in-Ubuntu/" class="post-title-link" itemprop="url">Ubuntu上安装拼音输入法</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-15 10:24:56" itemprop="dateCreated datePublished" datetime="2017-09-15T10:24:56Z">2017-09-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/拼音输入法/" itemprop="url" rel="index">
-                    <span itemprop="name">拼音输入法</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>目录</p>
-<!-- toc -->
-<ul>
-<li><a href="#安装ibus中文输入法">安装IBus中文输入法</a></li>
-<li><a href="#安装搜狗中文输入法">安装搜狗中文输入法</a></li>
-</ul>
-<!-- tocstop -->
-<h3><span id="安装ibus中文输入法">安装IBus中文输入法</span></h3>  <img src="/2017/09/15/install-pinyin-in-Ubuntu/successfully_installed_pinyin.png" title="Ubuntu上的拼音输入法">
-<p>最近又重新安装了Ubuntu系统。因为要写中文博客，没有中文输入法实在是麻烦。在Ubuntu上安装中文输入法确实没有Windows上显而易见，所以写下步骤方便自己将来参考。</p>
-<ol>
-<li><p>首先进入系统设置选择language support，如果没有完整安装该功能，先根据系统提示完成安装</p>
-</li>
-<li><p>点击install/remove language 来安装中文支持</p>
-</li>
-<li><p>接下来在Terminal中手动安装下面任何一个输入法</p>
-<p> <code>sudo apt-get install ibus-pinyin</code></p>
-<p> <code>sudo apt-get install ibus-sunpinyin</code></p>
-</li>
-<li><p>重启IBus daemon</p>
-<p> <code>ibus restart</code></p>
-</li>
-<li><p>再进入系统设置选择Text Entry，点击左下角的小加号并在add input source界面中搜索Chinese，选择一款拼音输入法</p>
-<img src="/2017/09/15/install-pinyin-in-Ubuntu/ubuntu_add_input_method.png" title="选择Pinyin输入法">
-</li>
-<li><p>使用吧</p>
-</li>
-</ol>
-<h3><span id="安装搜狗中文输入法">安装搜狗中文输入法</span></h3><p>使用了几天IBus的中文输入发，使用体验简直弱爆了。首先4k屏适配有问题，待选框时刻游离在屏幕之外，然而最致命的是，IBus拼音输入法竟然有切换到双拼就无法再切换回来的bug。早年间我在ubuntu 14上使用过搜狗输入法，用户体验良好，于是试着在ubuntu 16.04上安装。虽然安装步骤比在ubuntu 14上稍稍复杂一些，但是搜狗输入法完美适配4k屏幕而且一如既往的好用。安装步骤如下：</p>
-<ol>
-<li><p>搜狗舒服法依赖Fcitx键盘输入法系统而不是IBus，所以安装搜狗输入法前需要确认Fcitx已经安装，若没有安装Fcitx，可以通过terminal</p>
-<p> <code>sudo apt-get install fcitx</code></p>
-<p> 如果安装过程中需要额外依赖，可以通过以下命令安装</p>
-<p> <code>apt-get install -f</code></p>
-</li>
-<li><p>点击<a href="http://pinyin.sogou.com/linux/" rel="external nofollow noopener noreferrer" target="_blank">这里</a>下载搜狗中文输入法，有32bit和64bit安装包可选，ubuntu用户可以选择deb格式安装包用Ubuntu Software Center来安装，当然可以到下载路径下通过以下命令安装</p>
-<p> <code>sudo dpkg -i sogoupinyin_2.1.0.0086_amd64.deb</code></p>
-</li>
-<li><p>安装完毕后，在从当前系统设置/语言支持里选择Fcitx做为键盘输入法系统</p>
-</li>
-<li>退出登录，再重新登录</li>
-<li>现在在系统右上角应该能看到键盘图标，选择设置，添加搜狗中文书法</li>
-<li>开心的使用吧</li>
-</ol>
-<p>参考资料</p>
-<ol>
-<li><a href="https://askubuntu.com/questions/59356/how-do-i-get-chinese-input-to-work" rel="external nofollow noopener noreferrer" target="_blank">How do I get Chinese input to work?</a></li>
-<li><a href="https://askubuntu.com/questions/455682/14-04-chinese-ibus-input-no-options" rel="external nofollow noopener noreferrer" target="_blank">14.04 Chinese Ibus Input - No Options</a></li>
-<li><a href="https://askubuntu.com/questions/450255/installing-sogou-%E6%90%9C%E7%8B%97%E6%8B%BC%E9%9F%B3" rel="external nofollow noopener noreferrer" target="_blank">Installing SOGOU 搜狗拼音</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1592,20 +1609,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
