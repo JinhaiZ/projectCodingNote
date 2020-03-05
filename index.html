@@ -223,7 +223,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2020/03/03/unbounded-wildcards/">
+    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2020/03/03/java-generics/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/codingnote_logo_cbg.png">
@@ -237,7 +237,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/03/unbounded-wildcards/" class="post-title-link" itemprop="url">Java 泛型</a>
+            <a href="/2020/03/03/java-generics/" class="post-title-link" itemprop="url">Java 泛型</a>
         </h1>
 
         <div class="post-meta">
@@ -254,7 +254,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-04 22:50:41" itemprop="dateModified" datetime="2020-03-04T22:50:41Z">2020-03-04</time>
+                <time title="修改时间：2020-03-05 23:02:35" itemprop="dateModified" datetime="2020-03-05T23:02:35Z">2020-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -324,7 +324,7 @@
 <li><code>Map&lt;K, V&gt;</code> Map接口有两个类型参数，K，V，分别表示键和值的类型，读作K到V的映射。</li>
 <li><code>T max(Collection&lt;T&gt; coll)</code> max方法有一个类型参数，T，表示对象类型，这个不太好读。</li>
 </ul>
-<p>使用时，我们用<strong>实际类型参数（Actual typeparamter）</strong> 替换类型参数，比如<code>ArrayList&lt;String&gt;</code> 就代表一个元素为<code>String</code>的<code>ArrayList</code>。其中类型参数<code>E</code>被实际类型参数<code>String</code>替代了。</p>
+<p>使用时，我们用<strong>实际类型参数（Actual type paramter）</strong> 替换类型参数，比如<code>ArrayList&lt;String&gt;</code> 就代表一个元素为<code>String</code>的<code>ArrayList</code>。其中类型参数<code>E</code>被实际类型参数<code>String</code>替代了。</p>
 <p><em>在英语里Generic有通用的含义，这也揭示了Java泛型的本质：<strong>让类，接口和方法变得更加通用</strong></em></p>
 <h1><span id="有限通配符">有限通配符</span></h1><p><strong>有限通配符（Bounded Wildcards）</strong> 是Java<strong>泛型（Java Generics）</strong> 里的概念，这里的有限不是和无限对应的，而是有上限和下限的意思。</p>
 <h2><span id="下限通配符">下限通配符</span></h2><p>上面说到有了泛型以后，我们只需要实现</p>
@@ -336,7 +336,11 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">max</span><span class="params">(Collection&lt;T&gt; coll, Comparator&lt;? <span class="keyword">super</span> T&gt; comp)</span></span></span><br></pre></td></tr></table></figure>
 <p>这里<code>?</code>就是通配符（Wildcard），<code>? super T</code>就是<strong>下限通配符（Lower Bounded Wildcards）</strong>。它表示某个类<code>?</code>是<code>T</code>的父类。</p>
 <p>这样我们在这里使用Number类的比较器来比较Integer集合了。</p>
-<p>下限通配符<code>? super T</code>中，<code>T</code>是表示下，它既可以是一个类型参数，也可以是一个实际的类型参数。</p>
+<p>下限通配符<code>? super T</code>中，<code>T</code>是表示下限类型，它既可以是一个类型参数，也可以是一个实际类型参数。</p>
+<ul>
+<li><code>Comparator&lt;? super T&gt;</code> 类型参数</li>
+<li><code>Comparator&lt;? super Integer&gt;</code> 实际类型参数</li>
+</ul>
 <p>至于为什么叫做下限，我们可以这么类比。族谱里爸爸在上面，儿子在下面。下限通配符以某个类型的子类型为下限，它匹配包括这个子类型的所有父类型。</p>
 <h2><span id="上限通配符">上限通配符</span></h2><p>通过上限通配符，我们把求最大值方法变得通用了。试想限制我们想要实现一个Number集合累加，可以有如下的函数签名</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Number <span class="title">sum</span><span class="params">(Collection&lt;Number&gt; inputs)</span></span></span><br></pre></td></tr></table></figure>
