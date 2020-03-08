@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://codingnote.com/2020/03/08/java-covariant-contravariant-invariant/</loc>
+    
+    <lastmod>2020-03-08T19:26:14.281Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://codingnote.com/2020/03/03/java-generics/</loc>
     
-    <lastmod>2020-03-06T20:17:48.935Z</lastmod>
+    <lastmod>2020-03-08T17:33:31.445Z</lastmod>
     
   </url>
   

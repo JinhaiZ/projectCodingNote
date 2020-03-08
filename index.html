@@ -166,12 +166,12 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">19</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">21</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">26</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">27</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -223,6 +223,186 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2020/03/08/java-covariant-contravariant-invariant/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/codingnote_logo_cbg.png">
+      <meta itemprop="name" content="Shuwei Zhang & Jinhai ZHOU">
+      <meta itemprop="description" content="coding-note">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/08/java-covariant-contravariant-invariant/" class="post-title-link" itemprop="url">Java的协变，逆变与不变</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-08 11:35:01 / 修改时间：19:26:14" itemprop="dateCreated datePublished" datetime="2020-03-08T11:35:01Z">2020-03-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-泛型/" itemprop="url" rel="index">
+                    <span itemprop="name">Java 泛型</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-泛型/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+<ul>
+<li><a href="#协变逆变与不变的定义">协变，逆变与不变的定义</a></li>
+<li><a href="#java上限通配符实现协变">Java上限通配符实现协变</a></li>
+<li><a href="#java下限通配符实现逆变">Java下限通配符实现逆变</a></li>
+<li><a href="#总结">总结</a></li>
+</ul>
+<!-- tocstop -->
+<p>在Java里，如果我们创建了<code>Integer</code>类和<code>Number</code>类，并且<code>Integer</code>是<code>Number</code>的子类。那么<code>List&lt;Integer&gt;</code>类也是<code>List&lt;Number&gt;</code>类的子类吗？</p>
+<p>我们可以写一段代码来找到这个问题的答案。现在我们有一个求<code>List&lt;Number&gt;</code>类最大值的方法，它的输入是<code>List&lt;Number&gt;</code>类的实例。若<code>List&lt;Integer&gt;</code>类也是<code>List&lt;Number&gt;</code>类的子类，那么下面的代码应该是合法的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InvariantExample</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Number</span> </span>&#123; &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Integer</span> <span class="keyword">extends</span> <span class="title">Number</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Number <span class="title">max</span><span class="params">(List&lt;Number&gt; list)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 省略实现细节</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> List&lt;Integer&gt; integerList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">final</span> Number max = max(integerList); <span class="comment">// 编译错误 incompatible types</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是编译器告诉我们<code>incompatible types</code>错误，这里<code>max</code>方法期待一个<code>List&lt;Number&gt;</code>类作为输入，但是实际上获得的是<code>List&lt;Integer&gt;</code>类。这就告诉我们，即便<code>Integer</code>是<code>Number</code>的子类，编译器也认为<code>List&lt;Integer&gt;</code>类和<code>List&lt;Number&gt;</code>类是没有关系的。</p>
+<p><strong>结论</strong>：<em>对于任意两个不同的类型<code>Type1</code> 和 <code>Type2</code>，不论它们之间具有什么关系，<code>List&lt;Type1&gt;</code> 和 <code>List&lt;Type2&gt;</code>都是没有关系的。</em></p>
+<p>如果我们把上述结论推广，可以得到更一般性的结论</p>
+<p><em>对于任意两个不同的类型<code>Type1</code> 和 <code>Type2</code>，不论它们之间具有什么关系，给定泛型类 <code>G&lt;T&gt;</code>， <code>G&lt;Type1&gt;</code> 和 <code>G&lt;Type2&gt;</code>都是没有关系的。</em></p>
+<p>上面的结论可以用一句话概括：</p>
+<blockquote>
+<p>Java的泛型是<strong>不可变的（Invariant）</strong></p>
+</blockquote>
+<h1><span id="协变逆变与不变的定义">协变，逆变与不变的定义</span></h1><p>在一门程序设计语言的类型系统中，给定</p>
+<ul>
+<li><code>&lt;=</code> 和<code>&gt;=</code>， 表示<strong>类型排序关系</strong><ul>
+<li><code>Type1&lt;=Type2</code>表示<code>Type1</code>是 <code>Type2</code>的子类型</li>
+<li><code>Type1&gt;=Type2</code>表示<code>Type1</code>是 <code>Type2</code>的超类型</li>
+</ul>
+</li>
+<li><code>f()</code> 表示一个<strong>类型的构造函数</strong><ul>
+<li>注意它可以是一元函数（接受一个参数），如<code>NewType = f(Type)</code></li>
+<li>也可以是多元函数（接受多个参数），如<code>NewType = f(Type1, Type2)</code></li>
+</ul>
+</li>
+</ul>
+<p>那么，对于任意两个不同的类型<code>Type1</code> 和 <code>Type2</code>, 这个类型的构造函数<code>f()</code>可以是</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">变型（Variance）</th>
+<th style="text-align:left">定义</th>
+<th style="text-align:left">例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">协变的（covariant）</td>
+<td style="text-align:left">当且仅当它保持了类型排序关系</td>
+<td style="text-align:left">如果<code>Type1&lt;=Type2</code>，那么<code>f(Type1)&lt;=f(Type2)</code></td>
+</tr>
+<tr>
+<td style="text-align:left">逆变的（contravariant）</td>
+<td style="text-align:left">当且仅当它逆转了类型排序关系</td>
+<td style="text-align:left">如果<code>Type1&lt;=Type2</code>，那么<code>f(Type1)&gt;=f(Type2)</code></td>
+</tr>
+<tr>
+<td style="text-align:left">不变的（invariant or nonvariant）</td>
+<td style="text-align:left">既不保持也不逆转类型排序关系</td>
+<td style="text-align:left">不论<code>Type1</code> 和 <code>Type2</code>的关系，<code>f(Type1)</code> 和<code>f(Type2)</code> 没有关系</td>
+</tr>
+</tbody>
+</table>
+<p><em>以上定义来自<a href="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science" rel="external nofollow noopener noreferrer" target="_blank">Covariance and contravariance, Wikipedia</a>)，其中还有双变的（bivariant），但是不在本文的讨论范围，顾略去</em></p>
+<p><em>在C#中，子类型也称为派生类（Derived class），超类型也称为基类（Base class）</em></p>
+<p>不同的程序设计语言，需要在类型推断的安全性和语法的易用性上做出权衡，对不同的类型构造函数进行规约，以使其符合某一种<strong>变型（Variance）</strong>。<br>不同的程序设计语言，在支持变型时，也有不同的处理方式。例如C#只允许在接口类型上标记变型,，而Java则在通过<a href="./2020/03/03/java-generics/#有限通配符">通配符</a>来支持变型。</p>
+<h1><span id="java上限通配符实现协变">Java上限通配符实现协变</span></h1><p>继续最初的例子，<code>Integer</code>是<code>Number</code>的子类，怎么样才能让<code>Number max(List&lt;Number&gt; list)max</code>方法也接受<code>List&lt;Integer&gt;</code>呢？（这里<code>List&lt;T&gt;</code>是类型构造函数，<code>List&lt;Integer&gt;</code> 和 <code>List&lt;Number&gt;</code> 两个新的类型）虽然在Java中，泛型是不可变的（<code>List&lt;Integer&gt;</code> 和 <code>List&lt;Number&gt;</code>没有关系），但是Java可以通过使用<a href="./2020/03/03/java-generics/#上限通配符">上限通配符</a>来实现协变。</p>
+<p>修改后的<code>max</code>方法签名如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Number <span class="title">max</span><span class="params">(List&lt;? extends Number&gt; list)</span></span></span><br></pre></td></tr></table></figure>
+<p><code>? extends Number</code> 表示接受<code>Number</code>类型和<code>Number</code>类型的子类型。这样<code>max</code>方法能够接受比原始指定的类型（这里是<code>Number</code>类型）更具体的类型。</p>
+<h1><span id="java下限通配符实现逆变">Java下限通配符实现逆变</span></h1><p>思考下面的例子，<code>Integer</code>是<code>Number</code>的子类，方法<code>generateIntegers</code>生成<code>List&lt;Integer&gt;</code> 并放入到输入参数<code>output</code>中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ContravariantExample</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Number</span> </span>&#123; &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Integer</span> <span class="keyword">extends</span> <span class="title">Number</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">generateIntegers</span><span class="params">(List&lt;? <span class="keyword">super</span> Integer&gt; output)</span> </span>&#123;</span><br><span class="line">         <span class="comment">// 省略实现细节</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> List&lt;Number&gt; numberList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        generateIntegers(numberList); <span class="comment">// 编译错误 incompatible types</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于Java泛型的不可变性，<code>generateIntegers()</code> 生成的<code>List&lt;Integer&gt;</code>不能放到输入参数<code>output</code>指定的<code>List&lt;Number&gt;</code>中。那么有没有办法把 <code>List&lt;Integer&gt;</code> 放到<code>List&lt;Number&gt;</code>中呢？</p>
+<p>这里使用<a href="./2020/03/03/java-generics/#下限通配符">下限通配符</a>来实现逆变。</p>
+<p>修改后的<code>generateIntegers</code>函数签名如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">generateIntegers</span><span class="params">(List&lt;? <span class="keyword">super</span> Integer&gt; output)</span></span></span><br></pre></td></tr></table></figure>
+<p><code>&lt;? super Integer</code> 表示接受<code>Integer</code>类型和<code>Integer</code>类型的超类型。这样<code>generateIntegers</code>方法就能接受比原始指定类型（这里是<code>Integer</code>类型）更泛化（更不具体）的类型。</p>
+<h1><span id="总结">总结</span></h1><p>如果<code>Integer</code>类是<code>Number</code>类的子类型</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">变型（Variance）</th>
+<th style="text-align:left">通配符</th>
+<th style="text-align:left">例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">协变的（covariant）</td>
+<td style="text-align:left">上限通配符 <code>? extends T</code></td>
+<td style="text-align:left"><code>List&lt;? extends Number&gt; input</code> 接受比原始指定类型<code>Number</code>更具体的类型</td>
+</tr>
+<tr>
+<td style="text-align:left">逆变的（contravariant）</td>
+<td style="text-align:left">下限通配符 <code>? super T</code></td>
+<td style="text-align:left"><code>List&lt;? super Integer&gt;</code> 接受比原始指定类型<code>Integer</code>更泛化的类型</td>
+</tr>
+<tr>
+<td style="text-align:left">不变的（invariant or nonvariant）</td>
+<td style="text-align:left">泛型默认不可变</td>
+<td style="text-align:left"><code>List&lt;Integer&gt;</code> 和<code>List&lt;Number&gt;</code> 没关系</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science" rel="external nofollow noopener noreferrer" target="_blank">Covariance and contravariance, Wikipedia</a>)</li>
+<li><a href="https://docs.microsoft.com/zh-cn/dotnet/standard/generics/covariance-and-contravariance" rel="external nofollow noopener noreferrer" target="_blank">泛型中的协变和逆变, Microsoft .NET指南</a></li>
+<li><a href="https://www.amazon.com/Effective-Java-Joshua-Bloch/dp/0134685997" rel="external nofollow noopener noreferrer" target="_blank">Effective Java 3rd Edition，Joshua Bloch</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://codingnote.com/2020/03/03/java-generics/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -254,7 +434,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-06 20:17:48" itemprop="dateModified" datetime="2020-03-06T20:17:48Z">2020-03-06</time>
+                <time title="修改时间：2020-03-08 17:33:31" itemprop="dateModified" datetime="2020-03-08T17:33:31Z">2020-03-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -291,7 +471,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2><span id="目录">目录</span></h2><!-- toc -->
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
 <ul>
 <li><a href="#java-泛型">Java 泛型</a><ul>
 <li><a href="#我们为什么需要泛型">我们为什么需要泛型</a></li>
@@ -303,6 +483,8 @@
 </ul>
 </li>
 <li><a href="#无限通配符">无限通配符</a></li>
+<li><a href="#总结">总结</a></li>
+<li><a href="#参考">参考</a></li>
 </ul>
 <!-- tocstop -->
 <h1><span id="java-泛型">Java 泛型</span></h1><h2><span id="我们为什么需要泛型">我们为什么需要泛型</span></h2><p>自从Java SE 1.5引入<strong>泛型（Generics）</strong> 之前，Java程序员想要写出通用的代码有点难度。比如想要得到Java某个集合（<code>Collection</code>）的最大值，在没有泛型的情况下，我们需要针对每个特定类型去写特定的求最大值方法。</p>
@@ -314,7 +496,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">max</span><span class="params">(ObjectCollection coll, ObjectComparator comp)</span></span></span><br></pre></td></tr></table></figure>
 <p>因为Java所有的类都是<code>Object</code>的子类。当然这样实现的坏处就是需要做<strong>对象转型(Casting)</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Integer maxInterger = (Integer) max(coll, comp)</span><br></pre></td></tr></table></figure>
-<p>然而对象转型也是非常罪恶的，因为一旦错误地使用了对象转型，代码只有到<strong>运行阶段（run time）</strong> 才会报错。所以我们要尽可能的避免对象转型。</p>
+<p>然而对象转型也是非常罪恶的，因为一旦错误地使用了对象转型，代码只有到<strong>运行阶段（runtime）</strong> 才会报错。所以我们要尽可能的避免对象转型。</p>
 <p>而有了泛型以后，我们只需要实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">max</span><span class="params">(Collection&lt;T&gt; coll, Comparator&lt;T&gt; comp)</span></span></span><br></pre></td></tr></table></figure>
 <p>其中<code>T</code>叫做<strong>类型参数（Type paramter）</strong>，如果一个<strong>类（Class）</strong>，一个<strong>接口（Interface）</strong> 或者一个<strong>方法（Method）</strong> 在<strong>定义时（declaration）</strong>有一个或者多个类型参数，那么我们就叫他们<strong>泛型类（Generic class）</strong>，<strong>泛型接口（Generic interface）</strong> 和<strong>泛型方法（Generic method）</strong>。而泛型类，泛型接口和泛型方法就被统称为<strong>泛型（Generic types， Generics）</strong>。</p>
@@ -326,22 +508,22 @@
 </ul>
 <p>使用时，我们用<strong>实际类型参数（Actual type paramter）</strong> 替换类型参数，比如<code>ArrayList&lt;String&gt;</code> 就代表一个元素为<code>String</code>的<code>ArrayList</code>。其中类型参数<code>E</code>被实际类型参数<code>String</code>替代了。</p>
 <p><em>在英语里Generic有通用的含义，这也揭示了Java泛型的本质：<strong>让类，接口和方法变得更加通用</strong></em></p>
-<h1><span id="有限通配符">有限通配符</span></h1><p><strong>有限通配符（Bounded Wildcards）</strong> 是Java<strong>泛型（Java Generics）</strong> 里的概念，这里的有限不是和无限对应的，而是有上限和下限的意思。</p>
+<h1><span id="有限通配符">有限通配符</span></h1><p><strong>有限通配符（Bounded Wildcards）</strong> 是Java<strong>泛型（Java Generics）</strong> 里的概念，这里的有限不是和无限对应的，而是有上限和下限的意思。所以有限通配符又分为<code>下限通配符</code>和<code>上限通配符</code>。在一些翻译中，Bounded Wildcards也被翻译为有界通配符，相应的，有界通配符又分为<code>下界通配符</code>和<code>上界通配符</code>。</p>
 <h2><span id="下限通配符">下限通配符</span></h2><p>上面说到有了泛型以后，我们只需要实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">max</span><span class="params">(Collection&lt;T&gt; coll, Comparator&lt;T&gt; comp)</span></span></span><br></pre></td></tr></table></figure>
 <p>便可以对任意类型的数据求最大值，但是上面的<strong>方法签名（method signature）</strong> 也有一些限制。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Collection&lt;Integer&gt; intergerColl = ...;</span><br><span class="line">Comparator&lt;Number&gt; numberComp = ...;</span><br><span class="line">Collections.max(intergerColl, numberComp); <span class="comment">// 编译出错</span></span><br></pre></td></tr></table></figure>
-<p>我们知道<code>Number</code>是<code>Integer</code>是的<strong>父类（Super type）</strong>，每一个<code>Intger</code>类也是<code>Number</code>类，所以<code>Number</code>类的比较器应该可以用于比较<code>Integer</code>类。</p>
-<p>然而上面的代码会在<strong>编译阶段（Compile time）出错</strong>，这是因为类型参数<code>T</code>限制了我们只能使用<code>Integer</code>类的比较器。在这里，限制比较器的类型和集合类型完全一样是没有必要的。其实我们可以放宽限制，只要比较器类型是集合类型T的父类型就可以了。这样，我们可以让求最大值方法变得更通用。修改后的函数签名如下</p>
+<p>我们知道<code>Number</code>是<code>Integer</code>是的<strong>超类（Super type）</strong>，每一个<code>Intger</code>类也是<code>Number</code>类，所以<code>Number</code>类的比较器应该可以用于比较<code>Integer</code>类。</p>
+<p>然而上面的代码会在<strong>编译阶段（Compile time）出错</strong>，这是因为类型参数<code>T</code>限制了我们只能使用<code>Integer</code>类的比较器。在这里，限制比较器的类型和集合类型完全一样是没有必要的。其实我们可以放宽限制，只要比较器类型是集合类型T的超类型就可以了。这样，我们可以让求最大值方法变得更通用。修改后的函数签名如下</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">max</span><span class="params">(Collection&lt;T&gt; coll, Comparator&lt;? <span class="keyword">super</span> T&gt; comp)</span></span></span><br></pre></td></tr></table></figure>
-<p>这里<code>?</code>就是通配符（Wildcard），<code>? super T</code>就是<strong>下限通配符（Lower Bounded Wildcards）</strong>。它表示某个类<code>?</code>是<code>T</code>的父类。</p>
+<p>这里<code>?</code>就是通配符（Wildcard），<code>? super T</code>就是<strong>下限通配符（Lower Bounded Wildcards）</strong>。它表示某个类<code>?</code>是<code>T</code>的超类。</p>
 <p>这样我们在这里使用Number类的比较器来比较Integer集合了。</p>
 <p>下限通配符<code>? super T</code>中，<code>T</code>是表示下限类型，它既可以是一个类型参数，也可以是一个实际类型参数。</p>
 <ul>
 <li><code>Comparator&lt;? super T&gt;</code> 类型参数</li>
 <li><code>Comparator&lt;? super Integer&gt;</code> 实际类型参数</li>
 </ul>
-<p>至于为什么叫做下限，我们可以这么类比。族谱里爸爸在上面，儿子在下面。下限通配符以某个类型的子类型为下限，它匹配包括这个子类型的所有父类型。</p>
+<p>至于为什么叫做下限，我们可以这么类比。族谱里爸爸在上面，儿子在下面。下限通配符以某个类型的子类型为下限，它匹配包括这个子类型的所有超类型。</p>
 <h2><span id="上限通配符">上限通配符</span></h2><p>通过上限通配符，我们把求最大值方法变得通用了。试想限制我们想要实现一个Number集合累加，可以有如下的函数签名</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Number <span class="title">sum</span><span class="params">(Collection&lt;Number&gt; inputs)</span></span></span><br></pre></td></tr></table></figure>
 <p>但是它只能用于累加Number，如果我们也想累加Number的子类Double，Integer呢，可以使用具有实际类型的上限通配符</p>
@@ -355,6 +537,24 @@
 <p>由于使用了泛型，上面的方法可以应用于不同类型的List。但是我们也可以看到，在实现这个方法的过程中，我们没有使用基于类型参数E的任何信息。在这种情况下，我们可以用无限通配符代替类型参数E</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(List&lt;?&gt; list, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> List l = list;</span><br><span class="line">    l.set(i, l.set(j, l.get(i)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们可以总结出这样的经验法则，如何类型参数只在方法声明中出现，我们就可以用通配符来代替。</p>
+<h1><span id="总结">总结</span></h1><p>Java通过让类，接口和方法在定义时有一个类型参数的形式让代码变得更加通用（泛化），这个就叫做泛型。由于Java泛型也有一些限制，这里没有阐明技术原因（技术原因请参考<a href="./2020/03/08/java-covariant-contravariant-invariant/">Java的协变，逆变与不变</a>），仅从几个把代码变得更通用得需求出发，引入通配符<code>?</code>的概念。</p>
+<p>通配符在Java里三种形式，分别是</p>
+<ul>
+<li>下限通配符，<code>&lt;? super LowerBoundedClass&gt;</code>，通配<code>LowerBoundedClass</code>和它的超类。也可以用类型参数代替实际类型，<code>&lt;? super T&gt;</code></li>
+<li>上限通配符， <code>&lt;? extends UpperBoundedClass&gt;</code> 统配<code>UpperBoundedClass</code>和它的子类。也可以用类型参数代替实际类型，<code>&lt;? extends T&gt;</code></li>
+<li>无限通配符， <code>?</code> 通配任意类型</li>
+</ul>
+<p>关于通配符上下限的说法，来自于<a href="https://docs.oracle.com/javase/tutorial/java/generics/index.html" rel="external nofollow noopener noreferrer" target="_blank">ORACLE关于泛型的官方文档</a>，以及<a href="https://docs.oracle.com/javase/tutorial/extra/generics/index.html" rel="external nofollow noopener noreferrer" target="_blank">Gilad Bracha关于泛型的教程</a>。如果觉得难以理解，可以参考在<a href="http://www.OnJava8.com" rel="external nofollow noopener noreferrer" target="_blank">《On Java 8》</a>里，Bruce Eckel的<code>超类通配符</code>和<code>子类通配符</code>的说法。</p>
+<ul>
+<li>超类通配符，<code>&lt;? super LowerBoundedClass&gt;</code>，通配<code>LowerBoundedClass</code>和它的超类。也可以用类型参数代替实际类型，<code>&lt;? super T&gt;</code></li>
+<li>子类通配符 <code>&lt;? extends UpperBoundedClass&gt;</code> 统配<code>UpperBoundedClass</code>和它的子类。也可以用类型参数代替实际类型，<code>&lt;? extends T&gt;</code></li>
+</ul>
+<h1><span id="参考">参考</span></h1><ol>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/generics/index.html" rel="external nofollow noopener noreferrer" target="_blank">Java泛型官方文档， ORACLE</a></li>
+<li><a href="https://docs.oracle.com/javase/tutorial/extra/generics/index.html" rel="external nofollow noopener noreferrer" target="_blank">Java泛型教程， Gilad Bracha</a></li>
+<li><a href="https://www.amazon.com/Effective-Java-Joshua-Bloch/dp/0134685997" rel="external nofollow noopener noreferrer" target="_blank">Effective Java 3rd Edition，Joshua Bloch</a></li>
+<li><a href="http://www.OnJava8.com" rel="external nofollow noopener noreferrer" target="_blank">On Java 8，Bruce Eckel</a></li>
+</ol>
 
       
     </div>
@@ -1412,136 +1612,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2017/09/15/install-ubuntu-on-alienware/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/codingnote_logo_cbg.png">
-      <meta itemprop="name" content="Shuwei Zhang & Jinhai ZHOU">
-      <meta itemprop="description" content="coding-note">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding Note">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/15/install-ubuntu-on-alienware/" class="post-title-link" itemprop="url">在Alienware上安装Ubuntu</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-15 11:20:28" itemprop="dateCreated datePublished" datetime="2017-09-15T11:20:28Z">2017-09-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/折腾/" itemprop="url" rel="index">
-                    <span itemprop="name">折腾</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2><span id="目录">目录</span></h2><!-- toc -->
-<ul>
-<li><a href="#制作ubuntu启动u盘">制作Ubuntu启动U盘</a></li>
-<li><a href="#安装ubuntu">安装Ubuntu</a></li>
-<li><a href="#解决驱动问题">解决驱动问题</a><ul>
-<li><a href="#安装killer网卡驱动">安装killer网卡驱动</a></li>
-<li><a href="#安装蓝牙驱动">安装蓝牙驱动</a></li>
-</ul>
-</li>
-<li><a href="#进阶配置alienfx">进阶配置AlienFx</a></li>
-</ul>
-<!-- tocstop -->
-<p>作为一个游戏发烧友，同时也是小白全栈开发程序员我买了Alienware却只用来打游戏是在是太可惜了。为了搞搞开发，昨天配置了一天WSL (Windows Subsystems for Linxu)，用了Hyper+zsh的终端组合。其中在zsh中输入atom能启动windows的Atom也着实把我惊艳了一把，但其实也就算仅限于打开而已。事实是Windows中的文本编辑器并不能直接编辑其子系统中的文件。所以这个子系统在某些方便我觉得还没有Vagrant方便，没有图形界面，意味着不能使用Atom，Visual Studio Code这样代表先进生产力的工具，于是配置WSL搞搞开发的想法就此作罢。</p>
-<p>子系统搞不成，于是有了直接在Ubuntu上工作的想法。其实Alienware上安装Ubuntu不是很难，除了一些蓝牙和Wi-Fi方面的兼容问题，安装过程非常顺利。接下来step by step记录安装过程。</p>
-<h2><span id="制作ubuntu启动u盘">制作Ubuntu启动U盘</span></h2><p>在Ubuntu官方网站下载16.04 LTS系统镜像，并将其制作成启动U盘。<br>制作启动U盘的工具有很多，<a href="https://rufus.akeo.ie/" rel="external nofollow noopener noreferrer" target="_blank">Rufus</a> 是我用的一款，界面简单清爽无广告不收费。</p>
-<p>Rufus界面如下，制作启动U盘时，注意Partition schemem and target system type选择同时支持UEFI和BIOS的格式。</p>
-<img src="/2017/09/15/install-ubuntu-on-alienware/rufus_en_2x.png" title="用Rufus制作Ubuntu启动U盘 (图片来源rufus.akeo.ie)">
-<h2><span id="安装ubuntu">安装Ubuntu</span></h2><p>重新启动Windows，启动黑屏时按F11进入UEFI界面，有两个配置需要更改</p>
-<ul>
-<li>关闭secure boot</li>
-<li>打开legecy boot mode</li>
-</ul>
-<p>插入Ubuntu启动U盘符，再次重新启动，按下F11，选择从U盘启动，接下来的步骤和在普通电脑上安装双系统无异。</p>
-<p>安装完成后，再次启动，boot loader已经从windows boot manager变成了GRUB(<strong>GR</strong>and <strong>U</strong>nified <strong>B</strong>ootloader)。以后在便可以在GRUB界面中选择进入的系统是Ubuntu还是Windows。</p>
-<h2><span id="解决驱动问题">解决驱动问题</span></h2><p>进入安装完毕的Ubuntu，我遇到的第一个问题就是无法连接Wi-Fi。安装驱动程序有一个一般性的方法，先通过下面的命令查看自己使用的设备是什么型号，然后在网上搜索该型号设备的驱动程序。</p>
-<ul>
-<li><p><code>lsusb</code> 查看usb接口的设备</p>
-</li>
-<li><p><code>lspci</code> 查看pci接口的设备</p>
-</li>
-</ul>
-<h3><span id="安装killer网卡驱动">安装killer网卡驱动</span></h3><p>如下图所示，<code>lspci | grep -i net</code>命令显示我使用的网卡型号是Qualcomm Atheros Killer E2400，通过搜索，发现Alienware使用的killer网卡的<a href="https://www.killernetworking.com/driver-downloads/knowledge-base?view=topic&amp;id=2" rel="external nofollow noopener noreferrer" target="_blank">官方网站</a>提供了相关驱动的下载。</p>
-<img src="/2017/09/15/install-ubuntu-on-alienware/alienware_wifi_driver.png" title="安装killer网卡驱动">
-<p>如上图所示，可通过如下命令安装killer网卡驱动</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://mirrors.kernel.org/ubuntu/pool/main/l/linux-firmware/linux-firmware_1.164_all.deb</span><br><span class="line">sudo dpkg -i linux-firmware*.deb</span><br><span class="line">sudo modprobe -r ath10k_pci &amp;&amp; sudo modprobe ath10k_pci</span><br></pre></td></tr></table></figure>
-<h3><span id="安装蓝牙驱动">安装蓝牙驱动</span></h3><p>首先通过下面的命令卸载已安装的蓝牙驱动并且安装新的蓝牙驱动</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge blueman bluez-utils bluez bluetooth</span><br><span class="line">sudo apt-get install blueman bluez-utils bluez bluetooth</span><br></pre></td></tr></table></figure>
-<p>然后再启动蓝牙服务</p>
-<p><code>sudo /etc/init.d/bluetooth start</code></p>
-<p>如下图所示，接下来就可以通过Blueman管理系统蓝牙连接了<br><img src="/2017/09/15/install-ubuntu-on-alienware/ubuntu_blueman_interface.png" title="Ubuntu上蓝牙连接管理软件Blueman界面"></p>
-<h2><span id="进阶配置alienfx">进阶配置AlienFx</span></h2><p>Alienware的一大特色就是它有狂野炫酷的灯，更换Ubuntu平台后，一个大问题就是戴尔官方没有Ubuntu平台的AlienFx。</p>
-<p>通过查询，发现有人写了开源版本的AlienFx，只可惜项目已经有好几年无人维护。下载最新版本试用后，不出以外的，该软件并不支持最新的Alienware，该软件支持的Alienware系列可以从<a href="https://doc.ubuntu-fr.org/alienfx" rel="external nofollow noopener noreferrer" target="_blank">该网站</a>中找到。</p>
-<p>参考资料</p>
-<ol>
-<li><a href="https://rufus.akeo.ie/" rel="external nofollow noopener noreferrer" target="_blank">Rufus Offical Site</a></li>
-<li><a href="https://www.killernetworking.com/driver-downloads/knowledge-base?view=topic&amp;id=2" rel="external nofollow noopener noreferrer" target="_blank">Killer Networking</a></li>
-<li><a href="https://askubuntu.com/questions/776806/bluetooth-on-ubuntu-16-04" rel="external nofollow noopener noreferrer" target="_blank">Bluetooth on Ubuntu 16.04</a></li>
-<li><a href="https://doc.ubuntu-fr.org/alienfx" rel="external nofollow noopener noreferrer" target="_blank">AlienFx on Ubuntu</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1613,14 +1683,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
