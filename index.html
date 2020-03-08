@@ -248,7 +248,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-03-08 11:35:01 / 修改时间：19:59:02" itemprop="dateCreated datePublished" datetime="2020-03-08T11:35:01Z">2020-03-08</time>
+              <time title="创建时间：2020-03-08 11:35:01 / 修改时间：20:29:08" itemprop="dateCreated datePublished" datetime="2020-03-08T11:35:01Z">2020-03-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -338,7 +338,7 @@
 </tr>
 </tbody>
 </table>
-<p><em>以上定义来自 <a href="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science" rel="external nofollow noopener noreferrer" target="_blank">Covariance and contravariance, Wikipedia</a> )，其中还有双变的（bivariant），但是不在本文的讨论范围，顾略去</em></p>
+<p><em>以上定义来自 <a href="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)" title="[Wikipedia]" rel="external nofollow noopener noreferrer" target="_blank">Covariance and contravariance, Wikipedia</a>，其中还有双变的（bivariant），但是不在本文的讨论范围，顾略去</em></p>
 <p><em>在 C#中，子类型也称为派生类（Derived class），超类型也称为基类（Base class）</em></p>
 <p>不同的程序设计语言，需要在类型推断的安全性和语法的易用性上做出权衡，对不同的类型构造函数进行规约，以使其符合某一种<strong>变型（Variance）</strong>。<br>不同的程序设计语言，在支持变型时，也有不同的处理方式。例如C#只允许在接口类型上标记变型,，而Java则在通过<a href="./2020/03/03/java-generics/#有限通配符">通配符</a>来支持变型。</p>
 <h1><span id="java上限通配符实现协变">Java上限通配符实现协变</span></h1><p>继续最初的例子，<code>Integer</code>是<code>Number</code>的子类，怎么样才能让<code>Number max(List&lt;Number&gt; list)max</code>方法也接受<code>List&lt;Integer&gt;</code>呢？（这里<code>List&lt;T&gt;</code>是类型构造函数，<code>List&lt;Integer&gt;</code> 和 <code>List&lt;Number&gt;</code> 两个新的类型）虽然在Java中，泛型是不可变的（<code>List&lt;Integer&gt;</code> 和 <code>List&lt;Number&gt;</code>没有关系），但是Java可以通过使用<a href="./2020/03/03/java-generics/#上限通配符">上限通配符</a>来实现协变。</p>
