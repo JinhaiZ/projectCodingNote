@@ -1330,8 +1330,8 @@
 </ul>
 <h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(A, K)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="comment"># N number of array A</span></span><br><span class="line">    N = len(A)</span><br><span class="line">    <span class="keyword">if</span> (N == <span class="number">0</span>):</span><br><span class="line">        <span class="keyword">return</span> A</span><br><span class="line">    K = K%N</span><br><span class="line">    first = A[N-K:]</span><br><span class="line">    last = A[:N-K]</span><br><span class="line">    <span class="keyword">return</span> first+last</span><br></pre></td></tr></table></figure>
 <h3><span id="参考">参考</span></h3><ul>
-<li><a href="https://wiki.python.org/moin/TimeComplexity" rel="external nofollow noopener noreferrer" target="_blank">Python数组切片算法复杂度分析</a></li>
-<li><a href="https://stackoverflow.com/questions/509211/explain-pythons-slice-notation" rel="external nofollow noopener noreferrer" target="_blank">Python数组切片操作解释</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93aWtpLnB5dGhvbi5vcmcvbW9pbi9UaW1lQ29tcGxleGl0eQ==" title="https://wiki.python.org/moin/TimeComplexity">Python数组切片算法复杂度分析<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNTA5MjExL2V4cGxhaW4tcHl0aG9ucy1zbGljZS1ub3RhdGlvbg==" title="https://stackoverflow.com/questions/509211/explain-pythons-slice-notation">Python数组切片操作解释<i class="fa fa-external-link"></i></span></li>
 </ul>
 ]]></content>
       <categories>
