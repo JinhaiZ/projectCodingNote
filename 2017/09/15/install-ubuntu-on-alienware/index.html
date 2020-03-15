@@ -15,36 +15,10 @@
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
-
 <script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('http://codingnote.com').hostname,
-    root: '/',
-    scheme: 'Muse',
-    version: '7.7.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":true,"show_result":true,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"codingnote.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
   <meta name="description" content="目录  制作Ubuntu启动U盘 安装Ubuntu 解决驱动问题 安装killer网卡驱动 安装蓝牙驱动   进阶配置AlienFx   作为一个游戏发烧友，同时也是小白全栈开发程序员我买了Alienware却只用来打游戏是在是太可惜了。为了搞搞开发，昨天配置了一天WSL (Windows Subsystems for Linxu)，用了Hyper+zsh的终端组合。其中在zsh中输入atom能启">
 <meta name="keywords" content="Ubuntu,Alienware">
@@ -54,14 +28,10 @@
 <meta property="og:site_name" content="Coding Note">
 <meta property="og:description" content="目录  制作Ubuntu启动U盘 安装Ubuntu 解决驱动问题 安装killer网卡驱动 安装蓝牙驱动   进阶配置AlienFx   作为一个游戏发烧友，同时也是小白全栈开发程序员我买了Alienware却只用来打游戏是在是太可惜了。为了搞搞开发，昨天配置了一天WSL (Windows Subsystems for Linxu)，用了Hyper+zsh的终端组合。其中在zsh中输入atom能启">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://codingnote.com/2017/09/15/install-ubuntu-on-alienware/rufus_en_2x.png">
-<meta property="og:image" content="http://codingnote.com/2017/09/15/install-ubuntu-on-alienware/alienware_wifi_driver.png">
-<meta property="og:image" content="http://codingnote.com/2017/09/15/install-ubuntu-on-alienware/ubuntu_blueman_interface.png">
-<meta property="og:updated_time" content="2020-01-04T16:25:40.634Z">
+<meta property="og:updated_time" content="2020-03-15T10:36:54.799Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Alienware上安装Ubuntu">
 <meta name="twitter:description" content="目录  制作Ubuntu启动U盘 安装Ubuntu 解决驱动问题 安装killer网卡驱动 安装蓝牙驱动   进阶配置AlienFx   作为一个游戏发烧友，同时也是小白全栈开发程序员我买了Alienware却只用来打游戏是在是太可惜了。为了搞搞开发，昨天配置了一天WSL (Windows Subsystems for Linxu)，用了Hyper+zsh的终端组合。其中在zsh中输入atom能启">
-<meta name="twitter:image" content="http://codingnote.com/2017/09/15/install-ubuntu-on-alienware/rufus_en_2x.png">
 
 <link rel="canonical" href="http://codingnote.com/2017/09/15/install-ubuntu-on-alienware/">
 
@@ -70,28 +40,21 @@
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: false,
-    isPost: true
+    isHome : false,
+    isPost : true
   };
 </script>
 
   <title>在Alienware上安装Ubuntu | Coding Note</title>
   
-    <script>
-      function sendPageView() {
-        if (CONFIG.hostname !== location.hostname) return;
-        var uid = localStorage.getItem('uid') || (Math.random() + '.' + Math.random());
-        localStorage.setItem('uid', uid);
-        navigator.sendBeacon('https://www.google-analytics.com/collect', new URLSearchParams({
-          v  : 1,
-          tid: 'UA-98330531-1',
-          cid: uid,
-          t  : 'pageview',
-          dp : encodeURIComponent(location.pathname)
-        }));
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-98330531-1"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-98330531-1');
       }
-      document.addEventListener('pjax:complete', sendPageView);
-      sendPageView();
     </script>
 
 
@@ -130,6 +93,14 @@
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
   <div class="site-meta">
 
     <div>
@@ -139,14 +110,13 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">分享有关Coding的一切</p>
+        <h1 class="site-subtitle" itemprop="description">分享有关Coding的一切</h1>
+      
   </div>
 
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -180,6 +150,11 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">28</span></a>
 
   </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -188,32 +163,34 @@
 
 </nav>
   <div class="site-search">
-    <div class="popup search-popup">
-    <div class="search-header">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
   </div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result"></div>
-
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
 </div>
-<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
 
   </div>
 </div>
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  <div class="reading-progress-bar"></div>
 
 
     <main class="main">
@@ -241,9 +218,9 @@
       <meta itemprop="name" content="Coding Note">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           在Alienware上安装Ubuntu
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -259,7 +236,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
+                <time title="修改时间：2020-03-15 10:36:54" itemprop="dateModified" datetime="2020-03-15T10:36:54Z">2020-03-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -267,15 +244,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/折腾/" itemprop="url" rel="index">
-                    <span itemprop="name">折腾</span>
-                  </a>
+                  <a href="/categories/Linux/折腾/" itemprop="url" rel="index"><span itemprop="name">折腾</span></a>
                 </span>
             </span>
 
@@ -310,10 +283,10 @@
 </ul>
 <!-- tocstop -->
 <p>作为一个游戏发烧友，同时也是小白全栈开发程序员我买了Alienware却只用来打游戏是在是太可惜了。为了搞搞开发，昨天配置了一天WSL (Windows Subsystems for Linxu)，用了Hyper+zsh的终端组合。其中在zsh中输入atom能启动windows的Atom也着实把我惊艳了一把，但其实也就算仅限于打开而已。事实是Windows中的文本编辑器并不能直接编辑其子系统中的文件。所以这个子系统在某些方便我觉得还没有Vagrant方便，没有图形界面，意味着不能使用Atom，Visual Studio Code这样代表先进生产力的工具，于是配置WSL搞搞开发的想法就此作罢。</p>
-<p>子系统搞不成，于是有了直接在Ubuntu上工作的想法。其实Alienware上安装Ubuntu不是很难，除了一些蓝牙和Wi-Fi方面的兼容问题，安装过程非常顺利。接下来step by step记录安装过程。</p>
-<h2><span id="制作ubuntu启动u盘">制作Ubuntu启动U盘</span></h2><p>在Ubuntu官方网站下载16.04 LTS系统镜像，并将其制作成启动U盘。<br>制作启动U盘的工具有很多，<a href="https://rufus.akeo.ie/" rel="external nofollow noopener noreferrer" target="_blank">Rufus</a> 是我用的一款，界面简单清爽无广告不收费。</p>
+<p>子系统搞不成，于是有了直接在Ubuntu上工作的想法。其实Alienware上安装Ubuntu不是很难，除了一些蓝牙和Wi-Fi方面的兼容问题，安装过程非常顺利。接下来step by step记录安装过程。<br><a id="more"></a></p>
+<h2><span id="制作ubuntu启动u盘">制作Ubuntu启动U盘</span></h2><p>在Ubuntu官方网站下载16.04 LTS系统镜像，并将其制作成启动U盘。<br>制作启动U盘的工具有很多，<span class="exturl" data-url="aHR0cHM6Ly9ydWZ1cy5ha2VvLmllLw==" title="https://rufus.akeo.ie/">Rufus<i class="fa fa-external-link"></i></span> 是我用的一款，界面简单清爽无广告不收费。</p>
 <p>Rufus界面如下，制作启动U盘时，注意Partition schemem and target system type选择同时支持UEFI和BIOS的格式。</p>
-<img src="/2017/09/15/install-ubuntu-on-alienware/rufus_en_2x.png" title="用Rufus制作Ubuntu启动U盘 (图片来源rufus.akeo.ie)">
+<img data-src="/2017/09/15/install-ubuntu-on-alienware/rufus_en_2x.png" title="用Rufus制作Ubuntu启动U盘 (图片来源rufus.akeo.ie)">
 <h2><span id="安装ubuntu">安装Ubuntu</span></h2><p>重新启动Windows，启动黑屏时按F11进入UEFI界面，有两个配置需要更改</p>
 <ul>
 <li>关闭secure boot</li>
@@ -328,23 +301,23 @@
 <li><p><code>lspci</code> 查看pci接口的设备</p>
 </li>
 </ul>
-<h3><span id="安装killer网卡驱动">安装killer网卡驱动</span></h3><p>如下图所示，<code>lspci | grep -i net</code>命令显示我使用的网卡型号是Qualcomm Atheros Killer E2400，通过搜索，发现Alienware使用的killer网卡的<a href="https://www.killernetworking.com/driver-downloads/knowledge-base?view=topic&amp;id=2" rel="external nofollow noopener noreferrer" target="_blank">官方网站</a>提供了相关驱动的下载。</p>
-<img src="/2017/09/15/install-ubuntu-on-alienware/alienware_wifi_driver.png" title="安装killer网卡驱动">
+<h3><span id="安装killer网卡驱动">安装killer网卡驱动</span></h3><p>如下图所示，<code>lspci | grep -i net</code>命令显示我使用的网卡型号是Qualcomm Atheros Killer E2400，通过搜索，发现Alienware使用的killer网卡的<span class="exturl" data-url="aHR0cHM6Ly93d3cua2lsbGVybmV0d29ya2luZy5jb20vZHJpdmVyLWRvd25sb2Fkcy9rbm93bGVkZ2UtYmFzZT92aWV3PXRvcGljJmFtcDtpZD0y" title="https://www.killernetworking.com/driver-downloads/knowledge-base?view=topic&amp;id=2">官方网站<i class="fa fa-external-link"></i></span>提供了相关驱动的下载。</p>
+<img data-src="/2017/09/15/install-ubuntu-on-alienware/alienware_wifi_driver.png" title="安装killer网卡驱动">
 <p>如上图所示，可通过如下命令安装killer网卡驱动</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://mirrors.kernel.org/ubuntu/pool/main/l/linux-firmware/linux-firmware_1.164_all.deb</span><br><span class="line">sudo dpkg -i linux-firmware*.deb</span><br><span class="line">sudo modprobe -r ath10k_pci &amp;&amp; sudo modprobe ath10k_pci</span><br></pre></td></tr></table></figure>
 <h3><span id="安装蓝牙驱动">安装蓝牙驱动</span></h3><p>首先通过下面的命令卸载已安装的蓝牙驱动并且安装新的蓝牙驱动</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge blueman bluez-utils bluez bluetooth</span><br><span class="line">sudo apt-get install blueman bluez-utils bluez bluetooth</span><br></pre></td></tr></table></figure>
 <p>然后再启动蓝牙服务</p>
 <p><code>sudo /etc/init.d/bluetooth start</code></p>
-<p>如下图所示，接下来就可以通过Blueman管理系统蓝牙连接了<br><img src="/2017/09/15/install-ubuntu-on-alienware/ubuntu_blueman_interface.png" title="Ubuntu上蓝牙连接管理软件Blueman界面"></p>
+<p>如下图所示，接下来就可以通过Blueman管理系统蓝牙连接了<br><img data-src="/2017/09/15/install-ubuntu-on-alienware/ubuntu_blueman_interface.png" title="Ubuntu上蓝牙连接管理软件Blueman界面"></p>
 <h2><span id="进阶配置alienfx">进阶配置AlienFx</span></h2><p>Alienware的一大特色就是它有狂野炫酷的灯，更换Ubuntu平台后，一个大问题就是戴尔官方没有Ubuntu平台的AlienFx。</p>
-<p>通过查询，发现有人写了开源版本的AlienFx，只可惜项目已经有好几年无人维护。下载最新版本试用后，不出以外的，该软件并不支持最新的Alienware，该软件支持的Alienware系列可以从<a href="https://doc.ubuntu-fr.org/alienfx" rel="external nofollow noopener noreferrer" target="_blank">该网站</a>中找到。</p>
+<p>通过查询，发现有人写了开源版本的AlienFx，只可惜项目已经有好几年无人维护。下载最新版本试用后，不出以外的，该软件并不支持最新的Alienware，该软件支持的Alienware系列可以从<span class="exturl" data-url="aHR0cHM6Ly9kb2MudWJ1bnR1LWZyLm9yZy9hbGllbmZ4" title="https://doc.ubuntu-fr.org/alienfx">该网站<i class="fa fa-external-link"></i></span>中找到。</p>
 <p>参考资料</p>
 <ol>
-<li><a href="https://rufus.akeo.ie/" rel="external nofollow noopener noreferrer" target="_blank">Rufus Offical Site</a></li>
-<li><a href="https://www.killernetworking.com/driver-downloads/knowledge-base?view=topic&amp;id=2" rel="external nofollow noopener noreferrer" target="_blank">Killer Networking</a></li>
-<li><a href="https://askubuntu.com/questions/776806/bluetooth-on-ubuntu-16-04" rel="external nofollow noopener noreferrer" target="_blank">Bluetooth on Ubuntu 16.04</a></li>
-<li><a href="https://doc.ubuntu-fr.org/alienfx" rel="external nofollow noopener noreferrer" target="_blank">AlienFx on Ubuntu</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ydWZ1cy5ha2VvLmllLw==" title="https://rufus.akeo.ie/">Rufus Offical Site<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cua2lsbGVybmV0d29ya2luZy5jb20vZHJpdmVyLWRvd25sb2Fkcy9rbm93bGVkZ2UtYmFzZT92aWV3PXRvcGljJmFtcDtpZD0y" title="https://www.killernetworking.com/driver-downloads/knowledge-base?view=topic&amp;id=2">Killer Networking<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy83NzY4MDYvYmx1ZXRvb3RoLW9uLXVidW50dS0xNi0wNA==" title="https://askubuntu.com/questions/776806/bluetooth-on-ubuntu-16-04">Bluetooth on Ubuntu 16.04<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kb2MudWJ1bnR1LWZyLm9yZy9hbGllbmZ4" title="https://doc.ubuntu-fr.org/alienfx">AlienFx on Ubuntu<i class="fa fa-external-link"></i></span></li>
 </ol>
 
     </div>
@@ -352,6 +325,23 @@
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Shuwei Zhang & Jinhai ZHOU
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://codingnote.com/2017/09/15/install-ubuntu-on-alienware/" title="在Alienware上安装Ubuntu">http://codingnote.com/2017/09/15/install-ubuntu-on-alienware/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
 
       <footer class="post-footer">
           <div class="post-tags">
@@ -388,7 +378,7 @@
 
 <script>
   window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
+    let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
@@ -466,16 +456,20 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/C0dingNote" title="GitHub → https://github.com/C0dingNote" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0MwZGluZ05vdGU=" title="GitHub → https://github.com/C0dingNote"><i class="fa fa-fw fa-github"></i>GitHub</span>
       </span>
-      <span class="links-of-author-item">
-        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
-      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
   </div>
 
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
@@ -491,22 +485,22 @@
 
 <div class="copyright">
   
-  &copy; 2017 – 
+  &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Shuwei Zhang & Jinhai ZHOU</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> v7.7.2
   </div>
 
         
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
@@ -539,11 +533,71 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 <script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      script.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
 
 
 
@@ -561,13 +615,35 @@
 
 
 
+<script pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
 
 
 
 
+    <div id="pjax">
   
 
   
 
+    </div>
 </body>
 </html>

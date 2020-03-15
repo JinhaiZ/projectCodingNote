@@ -15,36 +15,10 @@
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
-
 <script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('http://codingnote.com').hostname,
-    root: '/',
-    scheme: 'Muse',
-    version: '7.7.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":true,"show_result":true,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"codingnote.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
   <meta name="description" content="目录  第一印象 远程连接 通过ssh 通过VNC Viewer   树莓派的缺点 总结   第一印象大约在20天前，我在亚马逊上冲动的购买了这个东西  树莓派3的官方Desktop Starter Kit，其实也就是树莓派3开发板+16GB miroSD装机卡+壳子+充电器套装。不过这样一套买下来，上手把玩树莓派要方便许多，机子到手第一天我就按照说明书安装了树莓派定制Debian的发型版Rasp">
 <meta name="keywords" content="RaspberryPi">
@@ -54,12 +28,10 @@
 <meta property="og:site_name" content="Coding Note">
 <meta property="og:description" content="目录  第一印象 远程连接 通过ssh 通过VNC Viewer   树莓派的缺点 总结   第一印象大约在20天前，我在亚马逊上冲动的购买了这个东西  树莓派3的官方Desktop Starter Kit，其实也就是树莓派3开发板+16GB miroSD装机卡+壳子+充电器套装。不过这样一套买下来，上手把玩树莓派要方便许多，机子到手第一天我就按照说明书安装了树莓派定制Debian的发型版Rasp">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://codingnote.com/2017/10/25/first-glance-at-RaspberryPi/Raspberry-Pi-3-Official-Desktop-Starter-Kit.png">
-<meta property="og:updated_time" content="2020-01-04T16:25:40.617Z">
+<meta property="og:updated_time" content="2020-03-15T10:35:29.146Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初试树莓派RaspberryPi">
 <meta name="twitter:description" content="目录  第一印象 远程连接 通过ssh 通过VNC Viewer   树莓派的缺点 总结   第一印象大约在20天前，我在亚马逊上冲动的购买了这个东西  树莓派3的官方Desktop Starter Kit，其实也就是树莓派3开发板+16GB miroSD装机卡+壳子+充电器套装。不过这样一套买下来，上手把玩树莓派要方便许多，机子到手第一天我就按照说明书安装了树莓派定制Debian的发型版Rasp">
-<meta name="twitter:image" content="http://codingnote.com/2017/10/25/first-glance-at-RaspberryPi/Raspberry-Pi-3-Official-Desktop-Starter-Kit.png">
 
 <link rel="canonical" href="http://codingnote.com/2017/10/25/first-glance-at-RaspberryPi/">
 
@@ -68,28 +40,21 @@
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: false,
-    isPost: true
+    isHome : false,
+    isPost : true
   };
 </script>
 
   <title>初试树莓派RaspberryPi | Coding Note</title>
   
-    <script>
-      function sendPageView() {
-        if (CONFIG.hostname !== location.hostname) return;
-        var uid = localStorage.getItem('uid') || (Math.random() + '.' + Math.random());
-        localStorage.setItem('uid', uid);
-        navigator.sendBeacon('https://www.google-analytics.com/collect', new URLSearchParams({
-          v  : 1,
-          tid: 'UA-98330531-1',
-          cid: uid,
-          t  : 'pageview',
-          dp : encodeURIComponent(location.pathname)
-        }));
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-98330531-1"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-98330531-1');
       }
-      document.addEventListener('pjax:complete', sendPageView);
-      sendPageView();
     </script>
 
 
@@ -128,6 +93,14 @@
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
   <div class="site-meta">
 
     <div>
@@ -137,14 +110,13 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">分享有关Coding的一切</p>
+        <h1 class="site-subtitle" itemprop="description">分享有关Coding的一切</h1>
+      
   </div>
 
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -178,6 +150,11 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">28</span></a>
 
   </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -186,32 +163,34 @@
 
 </nav>
   <div class="site-search">
-    <div class="popup search-popup">
-    <div class="search-header">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
   </div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result"></div>
-
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
 </div>
-<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
 
   </div>
 </div>
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  <div class="reading-progress-bar"></div>
 
 
     <main class="main">
@@ -239,9 +218,9 @@
       <meta itemprop="name" content="Coding Note">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           初试树莓派RaspberryPi
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -257,7 +236,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
+                <time title="修改时间：2020-03-15 10:35:29" itemprop="dateModified" datetime="2020-03-15T10:35:29Z">2020-03-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,15 +244,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/折腾/" itemprop="url" rel="index">
-                    <span itemprop="name">折腾</span>
-                  </a>
+                  <a href="/categories/Linux/折腾/" itemprop="url" rel="index"><span itemprop="name">折腾</span></a>
                 </span>
             </span>
 
@@ -308,10 +283,9 @@
 </ul>
 <!-- tocstop -->
 <h2><span id="第一印象">第一印象</span></h2><p>大约在20天前，我在亚马逊上冲动的购买了这个东西</p>
-<img src="/2017/10/25/first-glance-at-RaspberryPi/Raspberry-Pi-3-Official-Desktop-Starter-Kit.png" title="Raspberry Pi 3 Official Desktop Starter Kit">
+<img data-src="/2017/10/25/first-glance-at-RaspberryPi/Raspberry-Pi-3-Official-Desktop-Starter-Kit.png" title="Raspberry Pi 3 Official Desktop Starter Kit">
 <p>树莓派3的官方Desktop Starter Kit，其实也就是树莓派3开发板+16GB miroSD装机卡+壳子+充电器套装。不过这样一套买下来，上手把玩树莓派要方便许多，机子到手第一天我就按照说明书安装了树莓派定制Debian的发型版Raspbian系统。第一感觉还挺好用，通过HDMI连接上显示器，再用4个USB接口中的两个连接键盘和鼠标就可以当做桌面电脑使用了。如果要通过个人电脑远程连接树莓派的话，ssh和VNC Viewer都很好用。</p>
-<h2><span id="远程连接">远程连接</span></h2><h3><span id="通过ssh">通过ssh</span></h3><p><em>注意，以下步骤均在个人电脑上完成，不是在树莓派上</em></p>
-<p>首先通过Vim 修改本地hosts文件<code>vim /etc/hosts</code> 加入raspberrypi的ip地址，以后就可以通过<code>ssh pi@raspberrypi</code>的方式ssh到树莓派中，如果嫌每次连接都要输入密码麻烦，可以把公钥导入到树莓派中，具体方法如下</p>
+<h2><span id="远程连接">远程连接</span></h2><h3><span id="通过ssh">通过ssh</span></h3><p><em>注意，以下步骤均在个人电脑上完成，不是在树莓派上</em><br><a id="more"></a><br>首先通过Vim 修改本地hosts文件<code>vim /etc/hosts</code> 加入raspberrypi的ip地址，以后就可以通过<code>ssh pi@raspberrypi</code>的方式ssh到树莓派中，如果嫌每次连接都要输入密码麻烦，可以把公钥导入到树莓派中，具体方法如下</p>
 <ol>
 <li><p>生成公钥私钥对</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
@@ -338,8 +312,8 @@
 <h2><span id="树莓派的缺点">树莓派的缺点</span></h2><p>在树莓派3上做全栈开发并不是很理想，因为部分软件对32bit ARM架构处理器的兼容性不是很好，查看树莓派3的CPU架构可以使用如下命令，结果如下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ lscpu</span><br><span class="line">Architecture:          armv7l</span><br><span class="line">Byte Order:            Little Endian</span><br><span class="line">CPU(s):                4</span><br><span class="line">On-line CPU(s) list:   0-3</span><br><span class="line">Thread(s) per core:    1</span><br><span class="line">Core(s) per socket:    4</span><br><span class="line">Socket(s):             1</span><br><span class="line">Model:                 4</span><br><span class="line">Model name:            ARMv7 Processor rev 4 (v7l)</span><br><span class="line">CPU max MHz:           1200.0000</span><br><span class="line">CPU min MHz:           600.0000</span><br><span class="line">BogoMIPS:              38.40</span><br><span class="line">Flags:                 half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm crc32</span><br></pre></td></tr></table></figure>
 <p>可以看到树莓派3采用一块ARMv7架构的CPU，通过查阅维基百科，得知ARMv1到ARMv7架构都是32 bits寻址，直到ARMv8架构才出现64 bits寻址。</p>
-<p>故事起源于我想在树莓派上安装<a href="https://github.com/wekan/wekan" rel="external nofollow noopener noreferrer" target="_blank">wekan</a>，wekan是类似于<a href="https://trello.com/" rel="external nofollow noopener noreferrer" target="_blank">Trello</a>的Kanban类项目管理软件，奈何wekan是基于Meteor建立的，而Meteor对安装环境有x86_64的假设，即使修改源代码去掉该假设也不能顺利安装，参见<a href="https://github.com/meteor/meteor/issues/442" rel="external nofollow noopener noreferrer" target="_blank">meteor/issues/442</a>。好消息是2017年6月份，Meteor团队开始着手与增加Meteor对ARM架构CPU的支持，参见<a href="https://github.com/meteor/meteor-feature-requests/issues/130" rel="external nofollow noopener noreferrer" target="_blank">meteor-feature-requests/issues/130</a>。</p>
-<p>不能在树莓派上安装wekan，让我有点小小的伤心，但是接下来发生的事情就让我对在树莓派上搞全栈开发暂时失去了兴趣。故事是这样的，为了学习网爬虫，我做了一个每天计算出Stackoverflow最火热问题的项目来练手，该项目的的爬虫部分基于Scapy框架，数据库我选用了最新版本的MongoDB (v3.4.9)　来存储爬取的网页内容。开发完成后我利用crontab在自己的电脑上让它每天晚上10点5分定时在<a href="https://github.com/JinhaiZ/stackoverflow-trending" rel="external nofollow noopener noreferrer" target="_blank">这里</a>update最火热问题排行。</p>
+<p>故事起源于我想在树莓派上安装<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dla2FuL3dla2Fu" title="https://github.com/wekan/wekan">wekan<i class="fa fa-external-link"></i></span>，wekan是类似于<span class="exturl" data-url="aHR0cHM6Ly90cmVsbG8uY29tLw==" title="https://trello.com/">Trello<i class="fa fa-external-link"></i></span>的Kanban类项目管理软件，奈何wekan是基于Meteor建立的，而Meteor对安装环境有x86_64的假设，即使修改源代码去掉该假设也不能顺利安装，参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21ldGVvci9tZXRlb3IvaXNzdWVzLzQ0Mg==" title="https://github.com/meteor/meteor/issues/442">meteor/issues/442<i class="fa fa-external-link"></i></span>。好消息是2017年6月份，Meteor团队开始着手与增加Meteor对ARM架构CPU的支持，参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21ldGVvci9tZXRlb3ItZmVhdHVyZS1yZXF1ZXN0cy9pc3N1ZXMvMTMw" title="https://github.com/meteor/meteor-feature-requests/issues/130">meteor-feature-requests/issues/130<i class="fa fa-external-link"></i></span>。</p>
+<p>不能在树莓派上安装wekan，让我有点小小的伤心，但是接下来发生的事情就让我对在树莓派上搞全栈开发暂时失去了兴趣。故事是这样的，为了学习网爬虫，我做了一个每天计算出Stackoverflow最火热问题的项目来练手，该项目的的爬虫部分基于Scapy框架，数据库我选用了最新版本的MongoDB (v3.4.9)　来存储爬取的网页内容。开发完成后我利用crontab在自己的电脑上让它每天晚上10点5分定时在<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ppbmhhaVovc3RhY2tvdmVyZmxvdy10cmVuZGluZw==" title="https://github.com/JinhaiZ/stackoverflow-trending">这里<i class="fa fa-external-link"></i></span>update最火热问题排行。</p>
 <p>问题是我的电脑并不是每天晚上10点5分都处于运行状态，有好几次因为我没有开机导致当天我写的程序没有update。于是乎我有了把MongoDB和网页爬取程序部署在树莓派上的想法。说干就干，在树莓派上陆续安装了相应的开发环境，主要是python的开发环境，比如安装Scapy框架可以通过下面的命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># install Scrapy</span><br><span class="line">sudo apt-get install libffi-dev</span><br><span class="line">sudo apt-get install libxml2-dev</span><br><span class="line">sudo apt-get install libxslt1-dev</span><br><span class="line">sudo apt-get install python-dev</span><br><span class="line">sudo pip install scrapy</span><br></pre></td></tr></table></figure>
 <p>然而在安装最新版的MongoDB时我遇到了无法解决的问题，实际上，通过下面命令可以安装MongoDB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># install MongoDB</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install mongodb-server</span><br></pre></td></tr></table></figure></p>
@@ -347,8 +321,8 @@
 <h2><span id="总结">总结</span></h2><p>第一次接触”单板电脑”(SBC, Single Board Computer)还是很有新鲜感的，低廉的售价，和正常PC几乎一样的功能以及丰富的DIY选项让人很难拒绝。不过作为一个全栈开发人员，想要在树莓派上部署应用，不能安装最新的MongoDB意味着几年前比较流行的MEAN框架在树莓派上可能会行不通，部分框架，例如于ARM处理器有兼容问题的Meteor，会导致部分软件例如wekan在树莓派上无法应用，这些问题在购买前还是要考虑的。</p>
 <p>参考</p>
 <ol>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2" rel="external nofollow noopener noreferrer" target="_blank">How To Set Up SSH Keys</a></li>
-<li><a href="https://www.raspberrypi.org/documentation/remote-access/vnc/" rel="external nofollow noopener noreferrer" target="_blank">VNC (VIRTUAL NETWORK COMPUTING)</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZGlnaXRhbG9jZWFuLmNvbS9jb21tdW5pdHkvdHV0b3JpYWxzL2hvdy10by1zZXQtdXAtc3NoLWtleXMtLTI=" title="https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2">How To Set Up SSH Keys<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmFzcGJlcnJ5cGkub3JnL2RvY3VtZW50YXRpb24vcmVtb3RlLWFjY2Vzcy92bmMv" title="https://www.raspberrypi.org/documentation/remote-access/vnc/">VNC (VIRTUAL NETWORK COMPUTING)<i class="fa fa-external-link"></i></span></li>
 </ol>
 
     </div>
@@ -356,6 +330,23 @@
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Shuwei Zhang & Jinhai ZHOU
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://codingnote.com/2017/10/25/first-glance-at-RaspberryPi/" title="初试树莓派RaspberryPi">http://codingnote.com/2017/10/25/first-glance-at-RaspberryPi/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
 
       <footer class="post-footer">
           <div class="post-tags">
@@ -391,7 +382,7 @@
 
 <script>
   window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
+    let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
@@ -469,16 +460,20 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/C0dingNote" title="GitHub → https://github.com/C0dingNote" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0MwZGluZ05vdGU=" title="GitHub → https://github.com/C0dingNote"><i class="fa fa-fw fa-github"></i>GitHub</span>
       </span>
-      <span class="links-of-author-item">
-        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
-      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
   </div>
 
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
@@ -494,22 +489,22 @@
 
 <div class="copyright">
   
-  &copy; 2017 – 
+  &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Shuwei Zhang & Jinhai ZHOU</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> v7.7.2
   </div>
 
         
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
@@ -542,11 +537,71 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 <script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      script.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
 
 
 
@@ -564,13 +619,35 @@
 
 
 
+<script pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
 
 
 
 
+    <div id="pjax">
   
 
   
 
+    </div>
 </body>
 </html>

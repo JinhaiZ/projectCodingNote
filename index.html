@@ -15,36 +15,10 @@
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
-
 <script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('http://codingnote.com').hostname,
-    root: '/',
-    scheme: 'Muse',
-    version: '7.7.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":true,"show_result":true,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"codingnote.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
   <meta name="description" content="coding-note">
 <meta property="og:type" content="website">
@@ -64,28 +38,21 @@
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false
+    isHome : true,
+    isPost : false
   };
 </script>
 
-  <title>Coding Note</title>
+  <title>Coding Note - 分享有关Coding的一切</title>
   
-    <script>
-      function sendPageView() {
-        if (CONFIG.hostname !== location.hostname) return;
-        var uid = localStorage.getItem('uid') || (Math.random() + '.' + Math.random());
-        localStorage.setItem('uid', uid);
-        navigator.sendBeacon('https://www.google-analytics.com/collect', new URLSearchParams({
-          v  : 1,
-          tid: 'UA-98330531-1',
-          cid: uid,
-          t  : 'pageview',
-          dp : encodeURIComponent(location.pathname)
-        }));
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-98330531-1"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-98330531-1');
       }
-      document.addEventListener('pjax:complete', sendPageView);
-      sendPageView();
     </script>
 
 
@@ -124,6 +91,14 @@
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
   <div class="site-meta">
 
     <div>
@@ -133,14 +108,13 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">分享有关Coding的一切</p>
+        <h1 class="site-subtitle" itemprop="description">分享有关Coding的一切</h1>
+      
   </div>
 
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -174,6 +148,11 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">28</span></a>
 
   </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -182,32 +161,34 @@
 
 </nav>
   <div class="site-search">
-    <div class="popup search-popup">
-    <div class="search-header">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
   </div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result"></div>
-
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
 </div>
-<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
 
   </div>
 </div>
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  <div class="reading-progress-bar"></div>
 
 
     <main class="main">
@@ -235,10 +216,10 @@
       <meta itemprop="name" content="Coding Note">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/2020/03/10/revisit-open-closed-principle/" class="post-title-link" itemprop="url">2020年 再看开闭原则</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -254,7 +235,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-11 22:40:37" itemprop="dateModified" datetime="2020-03-11T22:40:37Z">2020-03-11</time>
+                <time title="修改时间：2020-03-15 10:55:47" itemprop="dateModified" datetime="2020-03-15T10:55:47Z">2020-03-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,15 +243,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开闭原则/" itemprop="url" rel="index">
-                    <span itemprop="name">开闭原则</span>
-                  </a>
+                  <a href="/categories/开闭原则/" itemprop="url" rel="index"><span itemprop="name">开闭原则</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开闭原则/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
+                  <a href="/categories/开闭原则/设计模式/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
                 </span>
             </span>
 
@@ -285,7 +262,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
 <ul>
 <li><a href="#午餐时的争吵">午餐时的争吵</a></li>
 <li><a href="#经验法则与惯例">经验法则与惯例</a></li>
@@ -293,61 +270,20 @@
 <li><a href="#拓展阅读">拓展阅读</a></li>
 </ul>
 <!-- tocstop -->
-<h1><span id="午餐时的争吵">午餐时的争吵</span></h1><p>今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。</p>
+<h1 id="午餐时的争吵"><a href="#午餐时的争吵" class="headerlink" title="午餐时的争吵"></a>午餐时的争吵</h1><p>今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。</p>
 <p>第一个同事说这个代码虽然能满足现在的需求，但是却不易于向某个他描述的方向拓展，他言之凿凿，认为我们的软件不久就会有他描述的需求。与其等到新需求到来时在对软件进行改动，不如开始实现时就考虑到可能的拓展，让这个模块变得灵活以适应将来的需求。</p>
 <p>而另一位同事则不为所动，觉得YAGNI（You aren’t gonna need it）。就算我们真的要满足第一个同事所描述的需求，但是根据他的判断那也是很长时间（一年）之后的事了。如果现在就把模块变得易于拓展，那么无疑会增加代码的抽象层次，本来一个类就可以实现的功能，现在要多实现几个类。</p>
 <p>第三位同事也加入了讨论。把软件设计的灵活以适应将来的变化是一件好事，但是这么做也是有代价的。灵活意味着这个模块需要更高的抽象层次，在新的需求到来前，这个模块都需要保持它本不需要的抽象层次。况且现在我们假设对于需求的预测是正确的，假如需求根本不是我们想象的那样变化，那么现在的努力不就白费了吗？</p>
 <p>第一位同事似乎没有被说服，另外两位同事也各执已见。午饭结束，大家各自回到工位上继续搬砖了。</p>
 <p>虽然这次争论还没有结果，也还不知道谁对谁错。那么我们在实现某个模块时，究竟是只实现现有需求还是要考虑到将来的需求而将模块实现的灵活一点呢？</p>
-<h1><span id="经验法则与惯例">经验法则与惯例</span></h1><p>面向对象程序设计至今已至少经存在了50年了（如果我们从1970年的Smalltalk语言开始算起，如果从1960年的Simula 67语言开始算起，那么时间会更长），我们现在遇到的各种问题，前人也几乎都遇到过了。这也是为什么面向对象程序设计会有如此多的模式（Pattern），甚至是名言警句（Maxim）。</p>
-<p>如果问一位极限编程（extreme programming，XP）的专家，他会说</p>
-<blockquote>
-<p>YAGNI（You aren’t gonna need it），一个程序员不应该为软件增加不必要的功能</p>
-</blockquote>
-<p>SOLID主义者会说</p>
-<blockquote>
-<p>我们应该遵守开闭原则（The Open-Closed Principle），软件中的对象（类，模块，函数等等）应该对于扩展是开放的，但是对于修改是封闭的</p>
-</blockquote>
-<p>而不久前Java大师Bruce Eckel恰巧在他的<a href="https://www.bruceeckel.com/blog/2019-12-24-unspoken-assumptions-underlying-oo-design-maxims/#disqus_thread" rel="external nofollow noopener noreferrer" target="_blank">博客</a>中写道</p>
-<blockquote>
-<p>质疑抽象的合理性，在不使用教条的情况下如果不能解释抽象的合理性，就不要抽象</p>
-</blockquote>
-<p><em>原文是</em></p>
-<blockquote>
-<p><em>Question your abstractions. If you can’t justify it (without quoting a maxim), take it out.</em></p>
-</blockquote>
-<p>但是不论是YAGNI还是SOLID，这些经验法则都是有适用条件的。在不同情况下，急切地套用这些法则还不如不去了解他们。在1988年Bertrand Meyer提出开闭法则32年后的今天，我们真的了解什么是开闭法则吗（The Open-Closed Principal）？</p>
-<h1><span id="重温开闭原则">重温开闭原则</span></h1><blockquote><p>软件中的对象（类，模块，函数等等）应该对于扩展是开放的，但是对于修改是封闭的。</p>
-<footer><strong>Bertrand Meyer</strong><cite>Object-Oriented Software Construction. Prentice Hall. 1988</cite></footer></blockquote>
-<p>开闭原则说了两件事</p>
-<ul>
-<li><p>软件中的对象应该对于扩展是开放的</p>
-<p>对象的行为可以被拓展，也就是说新的需求来临时，我们可以改变对象的行为以满足新的需求</p>
-</li>
-<li><p>软件中的对象应该对于修改是封闭的</p>
-<p>实现原有需求的的源代码不应该被修改</p>
-</li>
-</ul>
-<p>难道这两句话不矛盾吗？如果我们不修改源代码怎么拓展对象原有的行为？难道有不写代码就满足需求的魔法吗？当然，不写代码时不肯能的。但是不修改原先的代码，而在软件的某一处增加代码来拓展对象的行为确实有可能的。</p>
-<blockquote><p>抽象是解决问题的关键</p>
-<footer><strong>Robert C. Martin</strong><cite>The Open-Close Principal</cite></footer></blockquote>
-<p>Robert C. Martin 拿了C++写了一个关于在GUI打印形状的例子。比如我们现在有在GUI上打印方块和圆的需求，熟悉过程式编程人会实现类似于下面的程序。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OpenClosedPrincipal</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Circle</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> radius;</span><br><span class="line">        Point center;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Square</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> side;</span><br><span class="line">        Point topLeft;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">DrawCircle</span><span class="params">(<span class="keyword">final</span> Circle circle)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 实现略去</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">DrawSquare</span><span class="params">(<span class="keyword">final</span> Square square)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 实现略去</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">drawAllShapes</span><span class="params">(<span class="keyword">final</span> List&lt;Object&gt; shapes)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">final</span> Object shape : shapes) &#123;</span><br><span class="line">            <span class="keyword">if</span> (shape <span class="keyword">instanceof</span> Circle) &#123;</span><br><span class="line">                DrawCircle((Circle) shape);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (shape <span class="keyword">instanceof</span> Square) &#123;</span><br><span class="line">                DrawSquare((Square) shape);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由于我拿了Java重写了Robert C. Martin 当年拿C++语言写的例子。所以上面有很多地方看起来都很奇怪，但是暴露的问题是一样的。假如不久之后我们有了新的需求，需要打印菱形，那么我们不可避免的需要修改<code>DrawAllShapes</code>方法。但是假如我们利用接口进行抽象</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OpenClosedPrincipal</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">interface</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span></span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Circle</span> <span class="keyword">implements</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> radius;</span><br><span class="line">        Point center;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          <span class="comment">// 实现略去</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Square</span> <span class="keyword">implements</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> side;</span><br><span class="line">        Point topLeft;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          <span class="comment">// 实现略去</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">drawAllShapes</span><span class="params">(<span class="keyword">final</span> List&lt;Shape&gt; shapes)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">final</span> Shape shape : shapes) &#123;</span><br><span class="line">            shape.draw();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里抽象出<code>Shape</code>接口并定义<code>draw()</code>方法，让不同的具体类去实现<code>draw()</code>方法。这样当打印新的形状的需求出现时我们就不需要修改 <code>DrawAllShapes</code>方法了。这样就符合了开闭原则</p>
-<ul>
-<li>若需要打印新的形状只需要实现新的类，新的类的实现与原先的各种实现是解耦的，并不需要修改原先的实现</li>
-<li><code>drawAllShapes()</code> 没有改变</li>
-</ul>
-<p>但是就好像老鼠团队开大会，谁去给猫挂铃铛的故事一样。开闭法则听起来诱人，可是又有谁知道一个软件里哪个模块，类应该关闭，哪个模块，类应该开放呢？假如新的需求不是打印新的形状而是先打印圆形再打印方形呢？那么上面的例子就不再试用了。可能会有人说，那么我在实现 <code>drawAllShapes()</code>就考虑到打印顺序的需求，再去要求每个形状实现 <code>Comparable&lt;Shape&gt;</code>接口就好了。哈哈，，今天有打印顺序的需求，明天又你想象不到的需求呢？只可惜软件开放工程师并不是预言家，要是软件开放工程师能准确语言客户的需求，那么现在软件开放领域也不会有那么多问题了。</p>
-<p>这就是开闭原则的陷阱，它要求使用者有非比寻常的见解。但是没有个十年软件开放经验，又怎么能获得寻常的见解呢？</p>
-<h1><span id="拓展阅读">拓展阅读</span></h1><ol>
-<li><a href="https://martinfowler.com/bliki/Yagni.html" rel="external nofollow noopener noreferrer" target="_blank">Yagni, Martin Fowler</a></li>
-<li><a href="https://web.archive.org/web/20150905081105/http://www.objectmentor.com/resources/articles/ocp.pdf" rel="external nofollow noopener noreferrer" target="_blank">The Open-Closed Principle, Robert C. Martin</a></li>
-<li><a href="https://www.bruceeckel.com/blog/2019-12-24-unspoken-assumptions-underlying-oo-design-maxims/#disqus_thread" rel="external nofollow noopener noreferrer" target="_blank">Unspoken Assumptions Underlying OO Design Maxims</a></li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/10/revisit-open-closed-principle/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -378,10 +314,10 @@
       <meta itemprop="name" content="Coding Note">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/2020/03/08/java-covariant-contravariant-invariant/" class="post-title-link" itemprop="url">Java的协变，逆变与不变</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -389,25 +325,27 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-03-08 11:35:01 / 修改时间：20:29:08" itemprop="dateCreated datePublished" datetime="2020-03-08T11:35:01Z">2020-03-08</time>
+              <time title="创建时间：2020-03-08 11:35:01" itemprop="dateCreated datePublished" datetime="2020-03-08T11:35:01Z">2020-03-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-15 10:32:05" itemprop="dateModified" datetime="2020-03-15T10:32:05Z">2020-03-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java-泛型/" itemprop="url" rel="index">
-                    <span itemprop="name">Java 泛型</span>
-                  </a>
+                  <a href="/categories/Java-泛型/" itemprop="url" rel="index"><span itemprop="name">Java 泛型</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java-泛型/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
+                  <a href="/categories/Java-泛型/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
                 </span>
             </span>
 
@@ -422,7 +360,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
 <ul>
 <li><a href="#协变逆变与不变的定义">协变，逆变与不变的定义</a></li>
 <li><a href="#java上限通配符实现协变">Java上限通配符实现协变</a></li>
@@ -432,102 +370,14 @@
 <!-- tocstop -->
 <p>在Java里，如果我们创建了<code>Integer</code>类和<code>Number</code>类，并且<code>Integer</code>是<code>Number</code>的子类。那么<code>List&lt;Integer&gt;</code>类也是<code>List&lt;Number&gt;</code>类的子类吗？</p>
 <p>我们可以写一段代码来找到这个问题的答案。现在我们有一个求<code>List&lt;Number&gt;</code>类最大值的方法，它的输入是<code>List&lt;Number&gt;</code>类的实例。若<code>List&lt;Integer&gt;</code>类也是<code>List&lt;Number&gt;</code>类的子类，那么下面的代码应该是合法的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InvariantExample</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Number</span> </span>&#123; &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Integer</span> <span class="keyword">extends</span> <span class="title">Number</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Number <span class="title">max</span><span class="params">(List&lt;Number&gt; list)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 省略实现细节</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> List&lt;Integer&gt; integerList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">final</span> Number max = max(integerList); <span class="comment">// 编译错误 incompatible types</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>但是编译器告诉我们<code>incompatible types</code>错误，这里<code>max</code>方法期待一个<code>List&lt;Number&gt;</code>类作为输入，但是实际上获得的是<code>List&lt;Integer&gt;</code>类。这就告诉我们，即便<code>Integer</code>是<code>Number</code>的子类，编译器也认为<code>List&lt;Integer&gt;</code>类和<code>List&lt;Number&gt;</code>类是没有关系的。</p>
-<p><strong>结论</strong>：<em>对于任意两个不同的类型<code>Type1</code> 和 <code>Type2</code>，不论它们之间具有什么关系，<code>List&lt;Type1&gt;</code> 和 <code>List&lt;Type2&gt;</code>都是没有关系的。</em></p>
-<p>如果我们把上述结论推广，可以得到更一般性的结论</p>
-<p><em>对于任意两个不同的类型<code>Type1</code> 和 <code>Type2</code>，不论它们之间具有什么关系，给定泛型类 <code>G&lt;T&gt;</code>， <code>G&lt;Type1&gt;</code> 和 <code>G&lt;Type2&gt;</code>都是没有关系的。</em></p>
-<p>上面的结论可以用一句话概括：</p>
-<blockquote>
-<p>Java的泛型是<strong>不可变的（Invariant）</strong></p>
-</blockquote>
-<h1><span id="协变逆变与不变的定义">协变，逆变与不变的定义</span></h1><p>在一门程序设计语言的类型系统中，给定</p>
-<ul>
-<li><code>&lt;=</code> 和<code>&gt;=</code>， 表示<strong>类型排序关系</strong><ul>
-<li><code>Type1&lt;=Type2</code>表示<code>Type1</code>是 <code>Type2</code>的子类型</li>
-<li><code>Type1&gt;=Type2</code>表示<code>Type1</code>是 <code>Type2</code>的超类型</li>
-</ul>
-</li>
-<li><code>f()</code> 表示一个<strong>类型的构造函数</strong><ul>
-<li>注意它可以是一元函数（接受一个参数），如<code>NewType = f(Type)</code></li>
-<li>也可以是多元函数（接受多个参数），如<code>NewType = f(Type1, Type2)</code></li>
-</ul>
-</li>
-</ul>
-<p>那么，对于任意两个不同的类型<code>Type1</code> 和 <code>Type2</code>, 这个类型的构造函数<code>f()</code>可以是</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">变型（Variance）</th>
-<th style="text-align:left">定义</th>
-<th style="text-align:left">例子</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">协变的（covariant）</td>
-<td style="text-align:left">当且仅当它保持了类型排序关系</td>
-<td style="text-align:left">如果<code>Type1&lt;=Type2</code>，那么<code>f(Type1)&lt;=f(Type2)</code></td>
-</tr>
-<tr>
-<td style="text-align:left">逆变的（contravariant）</td>
-<td style="text-align:left">当且仅当它逆转了类型排序关系</td>
-<td style="text-align:left">如果<code>Type1&lt;=Type2</code>，那么<code>f(Type1)&gt;=f(Type2)</code></td>
-</tr>
-<tr>
-<td style="text-align:left">不变的（invariant or nonvariant）</td>
-<td style="text-align:left">既不保持也不逆转类型排序关系</td>
-<td style="text-align:left">不论<code>Type1</code> 和 <code>Type2</code>的关系，<code>f(Type1)</code> 和<code>f(Type2)</code> 没有关系</td>
-</tr>
-</tbody>
-</table>
-<p><em>以上定义来自 <a href="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)" title="[Wikipedia]" rel="external nofollow noopener noreferrer" target="_blank">Covariance and contravariance, Wikipedia</a>，其中还有双变的（bivariant），但是不在本文的讨论范围，顾略去</em></p>
-<p><em>在 C#中，子类型也称为派生类（Derived class），超类型也称为基类（Base class）</em></p>
-<p>不同的程序设计语言，需要在类型推断的安全性和语法的易用性上做出权衡，对不同的类型构造函数进行规约，以使其符合某一种<strong>变型（Variance）</strong>。<br>不同的程序设计语言，在支持变型时，也有不同的处理方式。例如C#只允许在接口类型上标记变型,，而Java则在通过<a href="./2020/03/03/java-generics/#有限通配符">通配符</a>来支持变型。</p>
-<h1><span id="java上限通配符实现协变">Java上限通配符实现协变</span></h1><p>继续最初的例子，<code>Integer</code>是<code>Number</code>的子类，怎么样才能让<code>Number max(List&lt;Number&gt; list)max</code>方法也接受<code>List&lt;Integer&gt;</code>呢？（这里<code>List&lt;T&gt;</code>是类型构造函数，<code>List&lt;Integer&gt;</code> 和 <code>List&lt;Number&gt;</code> 两个新的类型）虽然在Java中，泛型是不可变的（<code>List&lt;Integer&gt;</code> 和 <code>List&lt;Number&gt;</code>没有关系），但是Java可以通过使用<a href="./2020/03/03/java-generics/#上限通配符">上限通配符</a>来实现协变。</p>
-<p>修改后的<code>max</code>方法签名如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Number <span class="title">max</span><span class="params">(List&lt;? extends Number&gt; list)</span></span></span><br></pre></td></tr></table></figure>
-<p><code>? extends Number</code> 表示接受<code>Number</code>类型和<code>Number</code>类型的子类型。这样<code>max</code>方法能够接受比原始指定的类型（这里是<code>Number</code>类型）更具体的类型。</p>
-<h1><span id="java下限通配符实现逆变">Java下限通配符实现逆变</span></h1><p>思考下面的例子，<code>Integer</code>是<code>Number</code>的子类，方法<code>generateIntegers</code>生成<code>List&lt;Integer&gt;</code> 并放入到输入参数<code>output</code>中</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ContravariantExample</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Number</span> </span>&#123; &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Integer</span> <span class="keyword">extends</span> <span class="title">Number</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">generateIntegers</span><span class="params">(List&lt;? <span class="keyword">super</span> Integer&gt; output)</span> </span>&#123;</span><br><span class="line">         <span class="comment">// 省略实现细节</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> List&lt;Number&gt; numberList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        generateIntegers(numberList); <span class="comment">// 编译错误 incompatible types</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由于Java泛型的不可变性，<code>generateIntegers()</code> 生成的<code>List&lt;Integer&gt;</code>不能放到输入参数<code>output</code>指定的<code>List&lt;Number&gt;</code>中。那么有没有办法把 <code>List&lt;Integer&gt;</code> 放到<code>List&lt;Number&gt;</code>中呢？</p>
-<p>这里使用<a href="./2020/03/03/java-generics/#下限通配符">下限通配符</a>来实现逆变。</p>
-<p>修改后的<code>generateIntegers</code>函数签名如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">generateIntegers</span><span class="params">(List&lt;? <span class="keyword">super</span> Integer&gt; output)</span></span></span><br></pre></td></tr></table></figure>
-<p><code>&lt;? super Integer</code> 表示接受<code>Integer</code>类型和<code>Integer</code>类型的超类型。这样<code>generateIntegers</code>方法就能接受比原始指定类型（这里是<code>Integer</code>类型）更泛化（更不具体）的类型。</p>
-<h1><span id="总结">总结</span></h1><p>如果<code>Integer</code>类是<code>Number</code>类的子类型</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">变型（Variance）</th>
-<th style="text-align:left">通配符</th>
-<th style="text-align:left">例子</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">协变的（covariant）</td>
-<td style="text-align:left">上限通配符 <code>? extends T</code></td>
-<td style="text-align:left"><code>List&lt;? extends Number&gt;</code> 接受比原始指定类型<code>Number</code>更具体的类型</td>
-</tr>
-<tr>
-<td style="text-align:left">逆变的（contravariant）</td>
-<td style="text-align:left">下限通配符 <code>? super T</code></td>
-<td style="text-align:left"><code>List&lt;? super Integer&gt;</code> 接受比原始指定类型<code>Integer</code>更泛化的类型</td>
-</tr>
-<tr>
-<td style="text-align:left">不变的（invariant or nonvariant）</td>
-<td style="text-align:left">泛型默认不可变</td>
-<td style="text-align:left"><code>List&lt;Integer&gt;</code> 和<code>List&lt;Number&gt;</code> 没关系</td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li><a href="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science" rel="external nofollow noopener noreferrer" target="_blank">Covariance and contravariance, Wikipedia</a>)</li>
-<li><a href="https://docs.microsoft.com/zh-cn/dotnet/standard/generics/covariance-and-contravariance" rel="external nofollow noopener noreferrer" target="_blank">泛型中的协变和逆变, Microsoft .NET指南</a></li>
-<li><a href="https://www.amazon.com/Effective-Java-Joshua-Bloch/dp/0134685997" rel="external nofollow noopener noreferrer" target="_blank">Effective Java 3rd Edition，Joshua Bloch</a></li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/08/java-covariant-contravariant-invariant/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -558,10 +408,10 @@
       <meta itemprop="name" content="Coding Note">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/2020/03/03/java-generics/" class="post-title-link" itemprop="url">Java 泛型</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -577,7 +427,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-08 17:33:31" itemprop="dateModified" datetime="2020-03-08T17:33:31Z">2020-03-08</time>
+                <time title="修改时间：2020-03-15 10:32:38" itemprop="dateModified" datetime="2020-03-15T10:32:38Z">2020-03-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -585,21 +435,15 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java-通配符/" itemprop="url" rel="index">
-                    <span itemprop="name">Java 通配符</span>
-                  </a>
+                  <a href="/categories/Java-通配符/" itemprop="url" rel="index"><span itemprop="name">Java 通配符</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java-通配符/Java-泛型/" itemprop="url" rel="index">
-                    <span itemprop="name">Java 泛型</span>
-                  </a>
+                  <a href="/categories/Java-通配符/Java-泛型/" itemprop="url" rel="index"><span itemprop="name">Java 泛型</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java-通配符/Java-泛型/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
+                  <a href="/categories/Java-通配符/Java-泛型/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
                 </span>
             </span>
 
@@ -614,7 +458,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
 <ul>
 <li><a href="#java-泛型">Java 泛型</a><ul>
 <li><a href="#我们为什么需要泛型">我们为什么需要泛型</a></li>
@@ -630,7 +474,7 @@
 <li><a href="#参考">参考</a></li>
 </ul>
 <!-- tocstop -->
-<h1><span id="java-泛型">Java 泛型</span></h1><h2><span id="我们为什么需要泛型">我们为什么需要泛型</span></h2><p>自从Java SE 1.5引入<strong>泛型（Generics）</strong> 之前，Java程序员想要写出通用的代码有点难度。比如想要得到Java某个集合（<code>Collection</code>）的最大值，在没有泛型的情况下，我们需要针对每个特定类型去写特定的求最大值方法。</p>
+<h1 id="Java-泛型"><a href="#Java-泛型" class="headerlink" title="Java 泛型"></a>Java 泛型</h1><h2 id="我们为什么需要泛型"><a href="#我们为什么需要泛型" class="headerlink" title="我们为什么需要泛型"></a>我们为什么需要泛型</h2><p>自从Java SE 1.5引入<strong>泛型（Generics）</strong> 之前，Java程序员想要写出通用的代码有点难度。比如想要得到Java某个集合（<code>Collection</code>）的最大值，在没有泛型的情况下，我们需要针对每个特定类型去写特定的求最大值方法。</p>
 <p>比如针对<code>Number</code>集合我们需要实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Number <span class="title">max</span><span class="params">(NumberCollection coll, NumberComparator comp)</span></span></span><br></pre></td></tr></table></figure>
 <p>针对<code>Integer</code>集合我们需要实现</p>
@@ -640,67 +484,17 @@
 <p>因为Java所有的类都是<code>Object</code>的子类。当然这样实现的坏处就是需要做<strong>对象转型(Casting)</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Integer maxInterger = (Integer) max(coll, comp)</span><br></pre></td></tr></table></figure>
 <p>然而对象转型也是非常罪恶的，因为一旦错误地使用了对象转型，代码只有到<strong>运行阶段（runtime）</strong> 才会报错。所以我们要尽可能的避免对象转型。</p>
-<p>而有了泛型以后，我们只需要实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">max</span><span class="params">(Collection&lt;T&gt; coll, Comparator&lt;T&gt; comp)</span></span></span><br></pre></td></tr></table></figure>
-<p>其中<code>T</code>叫做<strong>类型参数（Type paramter）</strong>，如果一个<strong>类（Class）</strong>，一个<strong>接口（Interface）</strong> 或者一个<strong>方法（Method）</strong> 在<strong>定义时（declaration）</strong>有一个或者多个类型参数，那么我们就叫他们<strong>泛型类（Generic class）</strong>，<strong>泛型接口（Generic interface）</strong> 和<strong>泛型方法（Generic method）</strong>。而泛型类，泛型接口和泛型方法就被统称为<strong>泛型（Generic types， Generics）</strong>。</p>
-<p>定义时，泛型是由类，接口和方法名跟着一个由尖括号包围的<strong>参数化类型（Parameterized types）</strong> 组成的。例如</p>
-<ul>
-<li><code>ArrayList&lt;E&gt;</code> ArrayList类有一个类型参数，E，它表示元素类型。读作元素E的ArrayList。</li>
-<li><code>Map&lt;K, V&gt;</code> Map接口有两个类型参数，K，V，分别表示键和值的类型，读作K到V的映射。</li>
-<li><code>T max(Collection&lt;T&gt; coll)</code> max方法有一个类型参数，T，表示对象类型，这个不太好读。</li>
-</ul>
-<p>使用时，我们用<strong>实际类型参数（Actual type paramter）</strong> 替换类型参数，比如<code>ArrayList&lt;String&gt;</code> 就代表一个元素为<code>String</code>的<code>ArrayList</code>。其中类型参数<code>E</code>被实际类型参数<code>String</code>替代了。</p>
-<p><em>在英语里Generic有通用的含义，这也揭示了Java泛型的本质：<strong>让类，接口和方法变得更加通用</strong></em></p>
-<h1><span id="有限通配符">有限通配符</span></h1><p><strong>有限通配符（Bounded Wildcards）</strong> 是Java<strong>泛型（Java Generics）</strong> 里的概念，这里的有限不是和无限对应的，而是有上限和下限的意思。所以有限通配符又分为<code>下限通配符</code>和<code>上限通配符</code>。在一些翻译中，Bounded Wildcards也被翻译为有界通配符，相应的，有界通配符又分为<code>下界通配符</code>和<code>上界通配符</code>。</p>
-<h2><span id="下限通配符">下限通配符</span></h2><p>上面说到有了泛型以后，我们只需要实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">max</span><span class="params">(Collection&lt;T&gt; coll, Comparator&lt;T&gt; comp)</span></span></span><br></pre></td></tr></table></figure>
-<p>便可以对任意类型的数据求最大值，但是上面的<strong>方法签名（method signature）</strong> 也有一些限制。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Collection&lt;Integer&gt; intergerColl = ...;</span><br><span class="line">Comparator&lt;Number&gt; numberComp = ...;</span><br><span class="line">Collections.max(intergerColl, numberComp); <span class="comment">// 编译出错</span></span><br></pre></td></tr></table></figure>
-<p>我们知道<code>Number</code>是<code>Integer</code>是的<strong>超类（Super type）</strong>，每一个<code>Intger</code>类也是<code>Number</code>类，所以<code>Number</code>类的比较器应该可以用于比较<code>Integer</code>类。</p>
-<p>然而上面的代码会在<strong>编译阶段（Compile time）出错</strong>，这是因为类型参数<code>T</code>限制了我们只能使用<code>Integer</code>类的比较器。在这里，限制比较器的类型和集合类型完全一样是没有必要的。其实我们可以放宽限制，只要比较器类型是集合类型T的超类型就可以了。这样，我们可以让求最大值方法变得更通用。修改后的函数签名如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">max</span><span class="params">(Collection&lt;T&gt; coll, Comparator&lt;? <span class="keyword">super</span> T&gt; comp)</span></span></span><br></pre></td></tr></table></figure>
-<p>这里<code>?</code>就是通配符（Wildcard），<code>? super T</code>就是<strong>下限通配符（Lower Bounded Wildcards）</strong>。它表示某个类<code>?</code>是<code>T</code>的超类。</p>
-<p>这样我们在这里使用Number类的比较器来比较Integer集合了。</p>
-<p>下限通配符<code>? super T</code>中，<code>T</code>是表示下限类型，它既可以是一个类型参数，也可以是一个实际类型参数。</p>
-<ul>
-<li><code>Comparator&lt;? super T&gt;</code> 类型参数</li>
-<li><code>Comparator&lt;? super Integer&gt;</code> 实际类型参数</li>
-</ul>
-<p>至于为什么叫做下限，我们可以这么类比。族谱里爸爸在上面，儿子在下面。下限通配符以某个类型的子类型为下限，它匹配包括这个子类型的所有超类型。</p>
-<h2><span id="上限通配符">上限通配符</span></h2><p>通过上限通配符，我们把求最大值方法变得通用了。试想限制我们想要实现一个Number集合累加，可以有如下的函数签名</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Number <span class="title">sum</span><span class="params">(Collection&lt;Number&gt; inputs)</span></span></span><br></pre></td></tr></table></figure>
-<p>但是它只能用于累加Number，如果我们也想累加Number的子类Double，Integer呢，可以使用具有实际类型的上限通配符</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Number <span class="title">sum</span><span class="params">(Collection&lt;? extends Number&gt; inputs)</span></span></span><br></pre></td></tr></table></figure>
-<p>这样我们就可以累加Double，Intger类型的集合了。</p>
-<p>这里<code>? extends T</code>就是<strong>上限通配符（Upper Bounded Wildcards）</strong>。它表示某个类<code>?</code>是<code>T</code>的子类。</p>
-<h1><span id="无限通配符">无限通配符</span></h1><p>无限通配符（Unbounded Wildcards）里的无限不是和有限对应的无限，而没有上下限的意思。有时，无限通配符（Unbounded Wildcards）也会被翻译为无界通配符。他们指代的都是同一个概念。</p>
-<p>无限通配符记作<code>?</code>, 表示<strong>未知类型（unknown type）</strong>。 比如<code>List&lt;?&gt;</code>, 表示类型未知的List。</p>
-<p>试想我们实现了如下在List中交换元素的方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;E&gt; <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(List&lt;E&gt; list, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> List l = list;</span><br><span class="line">    l.set(i, l.set(j, l.get(i)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由于使用了泛型，上面的方法可以应用于不同类型的List。但是我们也可以看到，在实现这个方法的过程中，我们没有使用基于类型参数E的任何信息。在这种情况下，我们可以用无限通配符代替类型参数E</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(List&lt;?&gt; list, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> List l = list;</span><br><span class="line">    l.set(i, l.set(j, l.get(i)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们可以总结出这样的经验法则，如何类型参数只在方法声明中出现，我们就可以用通配符来代替。</p>
-<h1><span id="总结">总结</span></h1><p>Java通过让类，接口和方法在定义时有一个类型参数的形式让代码变得更加通用（泛化），这个就叫做泛型。由于Java泛型也有一些限制，这里没有阐明技术原因（技术原因请参考<a href="./2020/03/08/java-covariant-contravariant-invariant/">Java的协变，逆变与不变</a>），仅从几个把代码变得更通用得需求出发，引入通配符<code>?</code>的概念。</p>
-<p>通配符在Java里三种形式，分别是</p>
-<ul>
-<li>下限通配符，<code>&lt;? super LowerBoundedClass&gt;</code>，通配<code>LowerBoundedClass</code>和它的超类。也可以用类型参数代替实际类型，<code>&lt;? super T&gt;</code></li>
-<li>上限通配符， <code>&lt;? extends UpperBoundedClass&gt;</code> 统配<code>UpperBoundedClass</code>和它的子类。也可以用类型参数代替实际类型，<code>&lt;? extends T&gt;</code></li>
-<li>无限通配符， <code>?</code> 通配任意类型</li>
-</ul>
-<p>关于通配符上下限的说法，来自于<a href="https://docs.oracle.com/javase/tutorial/java/generics/index.html" rel="external nofollow noopener noreferrer" target="_blank">ORACLE关于泛型的官方文档</a>，以及<a href="https://docs.oracle.com/javase/tutorial/extra/generics/index.html" rel="external nofollow noopener noreferrer" target="_blank">Gilad Bracha关于泛型的教程</a>。如果觉得难以理解，可以参考在<a href="http://www.OnJava8.com" rel="external nofollow noopener noreferrer" target="_blank">《On Java 8》</a>里，Bruce Eckel的<code>超类通配符</code>和<code>子类通配符</code>的说法。</p>
-<ul>
-<li>超类通配符，<code>&lt;? super LowerBoundedClass&gt;</code>，通配<code>LowerBoundedClass</code>和它的超类。也可以用类型参数代替实际类型，<code>&lt;? super T&gt;</code></li>
-<li>子类通配符 <code>&lt;? extends UpperBoundedClass&gt;</code> 统配<code>UpperBoundedClass</code>和它的子类。也可以用类型参数代替实际类型，<code>&lt;? extends T&gt;</code></li>
-</ul>
-<h1><span id="参考">参考</span></h1><ol>
-<li><a href="https://docs.oracle.com/javase/tutorial/java/generics/index.html" rel="external nofollow noopener noreferrer" target="_blank">Java泛型官方文档， ORACLE</a></li>
-<li><a href="https://docs.oracle.com/javase/tutorial/extra/generics/index.html" rel="external nofollow noopener noreferrer" target="_blank">Java泛型教程， Gilad Bracha</a></li>
-<li><a href="https://www.amazon.com/Effective-Java-Joshua-Bloch/dp/0134685997" rel="external nofollow noopener noreferrer" target="_blank">Effective Java 3rd Edition，Joshua Bloch</a></li>
-<li><a href="http://www.OnJava8.com" rel="external nofollow noopener noreferrer" target="_blank">On Java 8，Bruce Eckel</a></li>
-</ol>
-
+<p>而有了泛型以后，我们只需要实现<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/03/java-generics/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
-    </div>
+    </p></div>
 
     
     
@@ -729,10 +523,10 @@
       <meta itemprop="name" content="Coding Note">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/2020/02/23/design-review/" class="post-title-link" itemprop="url">Design review 设计评审</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -748,7 +542,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-29 22:19:27" itemprop="dateModified" datetime="2020-02-29T22:19:27Z">2020-02-29</time>
+                <time title="修改时间：2020-03-15 10:33:14" itemprop="dateModified" datetime="2020-03-15T10:33:14Z">2020-03-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -756,15 +550,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/软件开发实践/" itemprop="url" rel="index">
-                    <span itemprop="name">软件开发实践</span>
-                  </a>
+                  <a href="/categories/软件开发实践/" itemprop="url" rel="index"><span itemprop="name">软件开发实践</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/软件开发实践/设计评审/" itemprop="url" rel="index">
-                    <span itemprop="name">设计评审</span>
-                  </a>
+                  <a href="/categories/软件开发实践/设计评审/" itemprop="url" rel="index"><span itemprop="name">设计评审</span></a>
                 </span>
             </span>
 
@@ -779,38 +569,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
 <ul>
 <li><a href="#背景">背景</a></li>
 <li><a href="#设计文档">设计文档</a></li>
 <li><a href="#评审">评审</a></li>
 </ul>
 <!-- tocstop -->
-<h1><span id="背景">背景</span></h1><p>几年前在实习时，我完全没有接触过设计评审。当时的团队采用Scrum开发过程。开发团队采取一个架构师（Architect）和三到四个开发者（Developers）的配置。为了保证开发速度，冲刺订单（Spring backlog）里的大多数任务（Ticket）都有架构师写的详细开发步骤。架构师在团队里负责了大多数的软件设计任务，开发者则专注于将架构师的想法实现。</p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>几年前在实习时，我完全没有接触过设计评审。当时的团队采用Scrum开发过程。开发团队采取一个架构师（Architect）和三到四个开发者（Developers）的配置。为了保证开发速度，冲刺订单（Spring backlog）里的大多数任务（Ticket）都有架构师写的详细开发步骤。架构师在团队里负责了大多数的软件设计任务，开发者则专注于将架构师的想法实现。</p>
 <p>参加工作后，由于开发领域，开发过程，甚至是公司文化都与我实习过的公司有很多不同。再次几件，我也接触到了相当多的设计文档和设计评审。</p>
 <p>2019年，我在开发团队里承担的设计任务也越来越多，写过的设计文档有二三十个。参加的设计评审则是更多。一年下来，我对设计评审，这个软件开发中的一个流程，有了自己的一些看法，下面则是我对设计评审的一个小总结。</p>
-<h1><span id="设计文档">设计文档</span></h1><p>设计评审，需要首先有设计。这里说的设计就是设计文档（全称软件开发设计文档）。这是在软件开发之前，一种把软件设计思路结构化记录下来的资料。我第一次接触设计文档是在大学的软件工程课上。当时我也在课程项目中写过设计文档，但是却对为什么需要设计文档体会不深。毕竟当时的项目都很小，难度也不大。写设计文档无非是根据模板填充文字的游戏罢了。</p>
-<p>但是当项目参与人员众多，开发难度大时，软件设计，作为软件开发的一个流程，被重视起来。我们在实践过程中，尤其是在一些重要的工作上 （比如时间跨度长，需要几个Sprint周期才能完成的工作，或者涉及多个团队，需要跨团队分工协作时），需要先把思路写下来，通过设计评审分享出来，得到相关人员的批准或者承诺后，再进行实现。</p>
-<p>也许短期看，写设计文档，走完设计评审流程比直接蒙头实现软件要慢的多。但是一个好的设计可以在长期为产品的开发节省大量的时间。试想一下在有其他团队对你的软件库（Library）或者Web Service产生依赖时你才发现你的代码需要重新设计的情况，这时不仅是自己负责的项目会受到影响，使用你的代码的其他团队的项目也都会受到影响。</p>
-<p>设计评审是软件开发的一个重要环节，写好设计文档则是让设计评审成功的第一步。在我看来，一个好的设计文档应至少包括如下几项：</p>
-<ul>
-<li>Problem statement。陈述待解决的问题，以及为什么要解决这个问题，或者说，不解决这个问题的后果是什么。</li>
-<li>Recommended proposal。详细阐明推荐的解决方案，以及Pros/Cons的比较。</li>
-<li>Alternatives。其他可行的解决方案，一般来说解决方案不止一种，也需要有Pros/Cons 对比。能让评审人知道trade-off是什么。</li>
-</ul>
-<p>更加详细的设计文档除了上面几项外还会有：</p>
-<ul>
-<li>Background。交代问题的背景，比如总项目的进程，该问题所属项目与总项目之间的关系。</li>
-<li>Term。术语表。通常在抽象度高的讨论中，会用到很多术语以及缩略语。它们应该在术语表里进行定义，以避免歧义。</li>
-<li>Plan。项目的计划。实现过程复杂时，需要分解实现过程，定义每个阶段的需要交付的模块。或者是每个阶段性成果Milestone是什么。</li>
-</ul>
-<h1><span id="评审">评审</span></h1><p>一个成功的设计评审需要以下要素。</p>
-<ul>
-<li>精简的评审团。只让必要的人参与进来。比如项目负责人，项目的主要贡献者或者受到最大影响的人。他们对设计思路的方向最有发言权，能提出有建设性的意见，而且能最后拍板。邀请不必要的人，会增加讨论中的噪音，以致评审流程变慢。</li>
-<li>提前制定好的议案。有效率的讨论需要高质量的议案。设计评审的发起人需要准备好评审大会的议案流程，先讨论重要的点，比如一旦敲定就可以让部分项目先开展实现的点。这样接下来的点可以在不阻塞项目进展的情况下讨论。</li>
-<li>Meeting Minutes。及时分享会议记录，其中包括参与的人，何时做出了什么决定或者得到了什么共识。当评审大会需要分几次召开时，会议记录作为之前会议的备忘能让我们避免重复讨论。</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/23/design-review/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -841,10 +617,10 @@
       <meta itemprop="name" content="Coding Note">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/2018/01/04/git-request-pull/" class="post-title-link" itemprop="url">Git request-pull　和 Github pull request</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -860,7 +636,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
+                <time title="修改时间：2020-03-15 10:36:37" itemprop="dateModified" datetime="2020-03-15T10:36:37Z">2020-03-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -868,9 +644,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
-                  </a>
+                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
                 </span>
             </span>
 
@@ -885,7 +659,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
 <ul>
 <li><a href="#简短的介绍">简短的介绍</a></li>
 <li><a href="#git-request-pull">Git request-pull</a><ul>
@@ -906,57 +680,23 @@
 <li><a href="#参考">参考</a></li>
 </ul>
 <!-- tocstop -->
-<h2><span id="简短的介绍">简短的介绍</span></h2><p><code>request-pull</code> 和 <code>Pull Request</code>的名称如此相似，但是他们的功能是完全不同的。</p>
+<h2 id="简短的介绍"><a href="#简短的介绍" class="headerlink" title="简短的介绍"></a>简短的介绍</h2><p><code>request-pull</code> 和 <code>Pull Request</code>的名称如此相似，但是他们的功能是完全不同的。</p>
 <p><code>request-pull</code>是git的命令，它用于生成发送到邮件列表的待处理的更改的摘要。默认情况下，GitHub没有集成这个功能。</p>
 <p><code>Pull Request</code>是GitHub特有的一项功能(简称PR)。它用于向Github托管的某一项目中的某一分支提出合并请求。项目管理者则可以在github的web界面上合并来自不同分支的代码，解决合并冲突，做代码审查或对代码进行评论。</p>
-<h2><span id="git-request-pull">Git request-pull</span></h2><h3><span id="使用目的">使用目的</span></h3><blockquote>
-<p><a href="https://git-scm.com/docs/git-request-pull" rel="external nofollow noopener noreferrer" target="_blank">Generates a summary of pending changes</a></p>
+<h2 id="Git-request-pull"><a href="#Git-request-pull" class="headerlink" title="Git request-pull"></a>Git request-pull</h2><h3 id="使用目的"><a href="#使用目的" class="headerlink" title="使用目的"></a>使用目的</h3><blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1yZXF1ZXN0LXB1bGw=" title="https://git-scm.com/docs/git-request-pull">Generates a summary of pending changes<i class="fa fa-external-link"></i></span></p>
 </blockquote>
-<p>生成待处理的更改的摘要</p>
-<h3><span id="使用方法">使用方法</span></h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git request-pull [-p] &lt;start&gt; &lt;url&gt; [&lt;end&gt;]</span><br></pre></td></tr></table></figure>
-<h3><span id="一个例子">一个例子</span></h3><p>新增修改是基于从远端<code>pull</code>下来的<code>master</code>分支上的，为此建立了一个分支叫<code>add-android-cours</code>, 首先把自己的分支<code>push</code>到自己的仓库里</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push https://github.com/JinhaiZ/TB-F2B-205.git</span><br></pre></td></tr></table></figure>
-<p>运行<code>git request-pull</code>命令</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git request-pull master https://github.com/JinhaiZ/TB-F2B-205.git add-android-cours</span><br></pre></td></tr></table></figure>
-<p>它会根据远端master分支和刚刚push到仓库里的<code>add-android-cours</code>分支的不同做一个摘要。你可以选择把这份摘要email给远端仓库的管理者，这样，管理者可以从这份摘要中快速看出你想对master分支做出什么更改</p>
-<p>生成摘要如下所示</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">The following changes since commit 5a992617e38665e73ca5ec5e5c10b78373c88938:</span><br><span class="line"></span><br><span class="line">  deleted TD andorid (2017-12-10 22:31:55 +0100)</span><br><span class="line"></span><br><span class="line">are available <span class="keyword">in</span> the git repository at:</span><br><span class="line"></span><br><span class="line">  https://github.com/JinhaiZ/TB-F2B-205.git add-android-cours</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> you to fetch changes up to 658e472da4b7f08378a5452b72c244039c621dac:</span><br><span class="line"></span><br><span class="line">  add andorid cours (2018-01-04 11:36:15 +0100)</span><br><span class="line"></span><br><span class="line">----------------------------------------------------------------</span><br><span class="line">JinhaiZ (1):</span><br><span class="line">      add andorid cours</span><br><span class="line"></span><br><span class="line"> android/cours.md | 13 +++++++++++++</span><br><span class="line"> 1 file changed, 13 insertions(+)</span><br><span class="line"> create mode 100644 android/cours.md</span><br></pre></td></tr></table></figure>
-<h2><span id="github-pull-request">Github Pull Request</span></h2><h3><span id="使用目的">使用目的</span></h3><blockquote>
-<p><a href="http://www.ruanyifeng.com/blog/2017/07/pull_request.html" rel="external nofollow noopener noreferrer" target="_blank">“Pull Request 是一种通知机制。你修改了他人的代码，将你的修改通知原来的作者，希望他合并你的修改，这就是 Pull Request。”</a></p>
-</blockquote>
-<h3><span id="使用方法">使用方法</span></h3><h4><span id="使用github-web界面">使用Github web界面</span></h4><p>以下借用阮一峰老师的讲解</p>
-<ol>
-<li>第一步，你需要把别人在Github上的项目，fork到你自己的仓库</li>
-<li>第二步，在你仓库的修改后的分支上，按下”New pull request”按钮。<br>这时，会进入一个新页面，有Base 和 Head 两个选项。Base 是你希望提交变更的目标，Head 是目前包含你的变更的那个分支或仓库。</li>
-<li>第三步，填写说明，帮助别人理解你的提交，然后按下”create pull request”按钮即可。PR 创建后，管理者就要决定是否接受该 PR。</li>
-</ol>
-<h4><span id="使用command-line">使用Command line</span></h4><p>首先安装<a href="https://hub.github.com/" rel="external nofollow noopener noreferrer" target="_blank">Hub</a>，以下步骤参考<a href="https://hub.github.com/" rel="external nofollow noopener noreferrer" target="_blank">Hub官方指南</a></p>
-<ol>
-<li><p>第一步，把别人在Github上的项目克隆到本地</p>
- <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`hub <span class="built_in">clone</span> https://github.com/SOME_ONE/xxx.git`</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>第二步，创建分支，并在分支上进行修改</p>
- <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b my-feature-branch</span><br><span class="line">git commit -m <span class="string">"add new feature X"</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>第三步，把本地项目fork到Github上</p>
- <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hub fork</span><br><span class="line">→ (forking repo on GitHub...)</span><br><span class="line">→ git remote add YOUR_USER git://github.com/YOUR_USER/xxx.git</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>第四步，把分支<code>push</code>到新远端(自己fork的远端)</p>
- <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push YOUR_USER feature</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>第五步，为自己的分支创建一个PR</p>
- <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git pull-request</span><br><span class="line">→ (opens a text editor <span class="keyword">for</span> your pull request message)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2><span id="参考">参考</span></h2><ol>
-<li><a href="https://git-scm.com/docs/git-request-pull" rel="external nofollow noopener noreferrer" target="_blank">git docs: git-request-pull</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2017/07/pull_request.html" rel="external nofollow noopener noreferrer" target="_blank">Pull Request 的命令行管理</a></li>
-<li><a href="https://stackoverflow.com/questions/34945947/git-request-pull-how-to-create-a-github-pull-request-on-the-command-line" rel="external nofollow noopener noreferrer" target="_blank">git request-pull: how to create a (github) pull request on the command line?
-</a></li>
-</ol>
-
+<p>生成待处理的更改的摘要<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/01/04/git-request-pull/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
-    </div>
+    </p></div>
 
     
     
@@ -985,10 +725,10 @@
       <meta itemprop="name" content="Coding Note">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/2017/10/30/Latency-Numbers-Every-Programmer-Should-Know/" class="post-title-link" itemprop="url">每个程序员都应该知道的延迟时间表</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1004,7 +744,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
+                <time title="修改时间：2020-03-15 10:37:04" itemprop="dateModified" datetime="2020-03-15T10:37:04Z">2020-03-15</time>
               </span>
 
           
@@ -1018,9 +758,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
 <!-- tocstop -->
-<p>翻译自:<a href="https://gist.github.com/jboner/2841832" rel="external nofollow noopener noreferrer" target="_blank">Latency Numbers Every Programmer Should Know</a></p>
+<p>翻译自:<span class="exturl" data-url="aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vamJvbmVyLzI4NDE4MzI=" title="https://gist.github.com/jboner/2841832">Latency Numbers Every Programmer Should Know<i class="fa fa-external-link"></i></span></p>
 <hr>
 <table>
 <thead>
@@ -1133,22 +873,14 @@
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>分支预测错误(Branch misprediction): 在包含了分支指令（if-then-else)的程序的执行过程中，其执行流程根据判定条件的真/假的不同，有可能会产生跳转，而这会打断流水线中指令的处理，因为CPU无法确定该指令的下一条指令，直到分支指令执行完毕。流水线越长，CPU等待的时间便越长，因为它必须等待分支指令处理完毕，才能确定下一条进入流水线的指令。为了解决这一问题，分支预测器（Branch predictor）在分支指令执行结束之前猜测哪一路分支将会被运行，以提高处理器的指令流水线的性能在分支执行完毕前先进行分支预测，分支预测器有很多种实现。其中最简单的是静态分支预测，方法是任选一条分支进入流水线，但是有50%的概率会预测错误，这时候就会出现分支预测错误</p>
-</blockquote>
-<blockquote>
-<p>来回通讯延迟（Round-trip delay time），在通讯（Communication）、电脑网络（Computer network）领域中，意指：在双方通讯中，发讯方的讯号（Signal）传播（Propagation）到收讯方的时间（意即：传播延迟（Propagation delay）），加上收讯方回传讯息到发讯方的时间（如果没有造成双向传播速率差异的因素，此时间与发讯方将讯号传播到收讯方的时间一样久）</p>
-</blockquote>
-<p>最后附上一张形象的图片<br><img src="http://i.imgur.com/k0t1e.png" alt="Latency Numbers Every Programmer Should Know "><br>Credit: <a href="https://imgur.com/k0t1e" rel="external nofollow noopener noreferrer" target="_blank">https://imgur.com/k0t1e</a></p>
-<p>参考：</p>
-<ol>
-<li><a href="https://gist.github.com/jboner/2841832" rel="external nofollow noopener noreferrer" target="_blank">Latency Numbers Every Programmer Should Know</a></li>
-<li><a href="https://zh.wikipedia.org/zh-cn/CPU%E7%BC%93%E5%AD%98" rel="external nofollow noopener noreferrer" target="_blank">CPU缓存</a></li>
-<li><a href="https://zh.wikipedia.org/zh-cn/%E5%88%86%E6%94%AF%E9%A0%90%E6%B8%AC%E5%99%A8" rel="external nofollow noopener noreferrer" target="_blank">分支预测器</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Branch_misprediction" rel="external nofollow noopener noreferrer" target="_blank">Branch misprediction</a></li>
-<li><a href="https://zh.wikipedia.org/zh-cn/%E4%BE%86%E5%9B%9E%E9%80%9A%E8%A8%8A%E5%BB%B6%E9%81%B2" rel="external nofollow noopener noreferrer" target="_blank">来回通讯延迟</a></li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/10/30/Latency-Numbers-Every-Programmer-Should-Know/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1179,10 +911,10 @@
       <meta itemprop="name" content="Coding Note">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/2017/10/25/first-glance-at-RaspberryPi/" class="post-title-link" itemprop="url">初试树莓派RaspberryPi</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1198,7 +930,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
+                <time title="修改时间：2020-03-15 10:35:29" itemprop="dateModified" datetime="2020-03-15T10:35:29Z">2020-03-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1206,15 +938,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/折腾/" itemprop="url" rel="index">
-                    <span itemprop="name">折腾</span>
-                  </a>
+                  <a href="/categories/Linux/折腾/" itemprop="url" rel="index"><span itemprop="name">折腾</span></a>
                 </span>
             </span>
 
@@ -1229,7 +957,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
 <ul>
 <li><a href="#第一印象">第一印象</a></li>
 <li><a href="#远程连接">远程连接</a><ul>
@@ -1241,52 +969,20 @@
 <li><a href="#总结">总结</a></li>
 </ul>
 <!-- tocstop -->
-<h2><span id="第一印象">第一印象</span></h2><p>大约在20天前，我在亚马逊上冲动的购买了这个东西</p>
-<img src="/2017/10/25/first-glance-at-RaspberryPi/Raspberry-Pi-3-Official-Desktop-Starter-Kit.png" title="Raspberry Pi 3 Official Desktop Starter Kit">
+<h2 id="第一印象"><a href="#第一印象" class="headerlink" title="第一印象"></a>第一印象</h2><p>大约在20天前，我在亚马逊上冲动的购买了这个东西</p>
+<img data-src="/2017/10/25/first-glance-at-RaspberryPi/Raspberry-Pi-3-Official-Desktop-Starter-Kit.png" title="Raspberry Pi 3 Official Desktop Starter Kit">
 <p>树莓派3的官方Desktop Starter Kit，其实也就是树莓派3开发板+16GB miroSD装机卡+壳子+充电器套装。不过这样一套买下来，上手把玩树莓派要方便许多，机子到手第一天我就按照说明书安装了树莓派定制Debian的发型版Raspbian系统。第一感觉还挺好用，通过HDMI连接上显示器，再用4个USB接口中的两个连接键盘和鼠标就可以当做桌面电脑使用了。如果要通过个人电脑远程连接树莓派的话，ssh和VNC Viewer都很好用。</p>
-<h2><span id="远程连接">远程连接</span></h2><h3><span id="通过ssh">通过ssh</span></h3><p><em>注意，以下步骤均在个人电脑上完成，不是在树莓派上</em></p>
-<p>首先通过Vim 修改本地hosts文件<code>vim /etc/hosts</code> 加入raspberrypi的ip地址，以后就可以通过<code>ssh pi@raspberrypi</code>的方式ssh到树莓派中，如果嫌每次连接都要输入密码麻烦，可以把公钥导入到树莓派中，具体方法如下</p>
-<ol>
-<li><p>生成公钥私钥对</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将公钥传输到raspberrypi上</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id pi@raspberrypi</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>测试一下，现在用<code>ssh pi@raspberrypi</code>远程登录树莓派就不需要输入密码了</p>
-</li>
-<li><p>(可选步骤)为了安全性考虑，关闭树莓派上远程ssh密码登录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-<p>找到<code>PermitRootLogin</code>这一行，并将它改成<code>PermitRootLogin without-password</code>，如果这一行是被注释的，记得取消注释以此覆盖默认配置。修改并保存，最后运行下面命令使修改生效</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service ssh restart</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3><span id="通过vnc-viewer">通过VNC Viewer</span></h3><ol>
-<li><p>首先，在树莓派上通过下列命令开启VNC Viewer</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install realvnc-vnc-server realvnc-vnc-viewer</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接着，在个人电脑上，或者手机上下载VNC Viewer客户端</p>
-</li>
-<li>最后，在远程连接设备端(个人电脑或者手机)输入树莓派的用户名，密码，ip地址即可远程连接树莓派了</li>
-</ol>
-<h2><span id="树莓派的缺点">树莓派的缺点</span></h2><p>在树莓派3上做全栈开发并不是很理想，因为部分软件对32bit ARM架构处理器的兼容性不是很好，查看树莓派3的CPU架构可以使用如下命令，结果如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ lscpu</span><br><span class="line">Architecture:          armv7l</span><br><span class="line">Byte Order:            Little Endian</span><br><span class="line">CPU(s):                4</span><br><span class="line">On-line CPU(s) list:   0-3</span><br><span class="line">Thread(s) per core:    1</span><br><span class="line">Core(s) per socket:    4</span><br><span class="line">Socket(s):             1</span><br><span class="line">Model:                 4</span><br><span class="line">Model name:            ARMv7 Processor rev 4 (v7l)</span><br><span class="line">CPU max MHz:           1200.0000</span><br><span class="line">CPU min MHz:           600.0000</span><br><span class="line">BogoMIPS:              38.40</span><br><span class="line">Flags:                 half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm crc32</span><br></pre></td></tr></table></figure>
-<p>可以看到树莓派3采用一块ARMv7架构的CPU，通过查阅维基百科，得知ARMv1到ARMv7架构都是32 bits寻址，直到ARMv8架构才出现64 bits寻址。</p>
-<p>故事起源于我想在树莓派上安装<a href="https://github.com/wekan/wekan" rel="external nofollow noopener noreferrer" target="_blank">wekan</a>，wekan是类似于<a href="https://trello.com/" rel="external nofollow noopener noreferrer" target="_blank">Trello</a>的Kanban类项目管理软件，奈何wekan是基于Meteor建立的，而Meteor对安装环境有x86_64的假设，即使修改源代码去掉该假设也不能顺利安装，参见<a href="https://github.com/meteor/meteor/issues/442" rel="external nofollow noopener noreferrer" target="_blank">meteor/issues/442</a>。好消息是2017年6月份，Meteor团队开始着手与增加Meteor对ARM架构CPU的支持，参见<a href="https://github.com/meteor/meteor-feature-requests/issues/130" rel="external nofollow noopener noreferrer" target="_blank">meteor-feature-requests/issues/130</a>。</p>
-<p>不能在树莓派上安装wekan，让我有点小小的伤心，但是接下来发生的事情就让我对在树莓派上搞全栈开发暂时失去了兴趣。故事是这样的，为了学习网爬虫，我做了一个每天计算出Stackoverflow最火热问题的项目来练手，该项目的的爬虫部分基于Scapy框架，数据库我选用了最新版本的MongoDB (v3.4.9)　来存储爬取的网页内容。开发完成后我利用crontab在自己的电脑上让它每天晚上10点5分定时在<a href="https://github.com/JinhaiZ/stackoverflow-trending" rel="external nofollow noopener noreferrer" target="_blank">这里</a>update最火热问题排行。</p>
-<p>问题是我的电脑并不是每天晚上10点5分都处于运行状态，有好几次因为我没有开机导致当天我写的程序没有update。于是乎我有了把MongoDB和网页爬取程序部署在树莓派上的想法。说干就干，在树莓派上陆续安装了相应的开发环境，主要是python的开发环境，比如安装Scapy框架可以通过下面的命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># install Scrapy</span><br><span class="line">sudo apt-get install libffi-dev</span><br><span class="line">sudo apt-get install libxml2-dev</span><br><span class="line">sudo apt-get install libxslt1-dev</span><br><span class="line">sudo apt-get install python-dev</span><br><span class="line">sudo pip install scrapy</span><br></pre></td></tr></table></figure>
-<p>然而在安装最新版的MongoDB时我遇到了无法解决的问题，实际上，通过下面命令可以安装MongoDB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># install MongoDB</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install mongodb-server</span><br></pre></td></tr></table></figure></p>
-<p>但是版本号停留在了v2.4.14，经过查询得知v2.4.14版本后MongoDB就放弃了对32 bit ARM架构CPU的支持，导致树莓派3无法安装最新的MongoDB。奈何我的程序用了大量新版本的特性，比如<code>$slice</code>选择符等，最后在树莓派上部署爬虫的想法只好作罢。</p>
-<h2><span id="总结">总结</span></h2><p>第一次接触”单板电脑”(SBC, Single Board Computer)还是很有新鲜感的，低廉的售价，和正常PC几乎一样的功能以及丰富的DIY选项让人很难拒绝。不过作为一个全栈开发人员，想要在树莓派上部署应用，不能安装最新的MongoDB意味着几年前比较流行的MEAN框架在树莓派上可能会行不通，部分框架，例如于ARM处理器有兼容问题的Meteor，会导致部分软件例如wekan在树莓派上无法应用，这些问题在购买前还是要考虑的。</p>
-<p>参考</p>
-<ol>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2" rel="external nofollow noopener noreferrer" target="_blank">How To Set Up SSH Keys</a></li>
-<li><a href="https://www.raspberrypi.org/documentation/remote-access/vnc/" rel="external nofollow noopener noreferrer" target="_blank">VNC (VIRTUAL NETWORK COMPUTING)</a></li>
-</ol>
-
+<h2 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h2><h3 id="通过ssh"><a href="#通过ssh" class="headerlink" title="通过ssh"></a>通过ssh</h3><p><em>注意，以下步骤均在个人电脑上完成，不是在树莓派上</em><br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/10/25/first-glance-at-RaspberryPi/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
-    </div>
+    </p></div>
 
     
     
@@ -1315,10 +1011,10 @@
       <meta itemprop="name" content="Coding Note">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/2017/10/19/machine-learning-review1/" class="post-title-link" itemprop="url">Machine Learning 学习笔记 1</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1334,7 +1030,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
+                <time title="修改时间：2020-03-15 10:37:11" itemprop="dateModified" datetime="2020-03-15T10:37:11Z">2020-03-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1342,15 +1038,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">Notes</span>
-                  </a>
+                  <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Notes/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
-                  </a>
+                  <a href="/categories/Notes/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a>
                 </span>
             </span>
 
@@ -1365,7 +1057,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
 <ul>
 <li><a href="#机器学习第一周笔记">机器学习第一周笔记</a><ul>
 <li><a href="#概述">概述</a><ul>
@@ -1382,26 +1074,18 @@
 </li>
 </ul>
 <!-- tocstop -->
-<h1><span id="机器学习第一周笔记">机器学习第一周笔记</span></h1><h2><span id="概述">概述</span></h2><h3><span id="什么是机器学习">什么是机器学习？</span></h3><p>从字面上来说，机器学习就是让机器通过模仿人学习的过程学习。也就是说让机器有能力学习，而不是通过准确的程序而实现。我们生活中无处不在存在着机器学习的应用，例如垃圾邮件分类系统，通过图片识别物体等。</p>
-<h3><span id="机器学习的分类">机器学习的分类</span></h3><p>机器学习分为两大类：</p>
-<ul>
-<li><p><strong>有监督学习(supervised learning)</strong>：给定输入数据和正确的输出结果，通过一系列“训练模型”使得输出结果和正确输出结果无限接近的过程。其中又可以分为两大类 <strong>回归(regression)</strong> 和 <strong>分类(classification)</strong> 问题。例如：给定某地区房屋的情况（房间个数，地理位置，周围环境…）及价格，来预测这个地区某个房子的价格。这就是一个回归问题。再比如通过一个人的照片来预测这个人的年龄。 而分类问题则是输出结果只有两种情况的问题。比如：预测一个病人的肿瘤是良性还是恶性；预测一封邮件是否是垃圾邮件等等。这种问题的结果只有两种情况。</p>
-</li>
-<li><p><strong>无监督学习(unsupervised learning)</strong>：没有给出正确的输出结果，让机器自己发现输入数据的结构。无监督学习最常见的应用就是分类。比如：给定用户数据，自动划分用户类比从而划分市场；给定一些文章报道，分类文章的类别，政治新闻，经济新闻，或文化新闻等等。</p>
-<h2><span id="线性回归">线性回归</span></h2><h3><span id="回归模型">回归模型</span></h3><p>通过训练数据集(training set)学习得到一个函数h(x)，使得输入数据X通过h函数映射的预测结果Y最接近正确值。线性回归的目标就是寻找到h函数使得其完美拟合输入X和输出Y的关系。</p>
-</li>
-</ul>
-<img src="/2017/10/19/machine-learning-review1/linear-regression-model.png" title="learning regression model">
-<p>(Figure 1 <a href="https://www.coursera.org/learn/machine-learning/supplement/cRa2m/model-representation" rel="external nofollow noopener noreferrer" target="_blank">https://www.coursera.org/learn/machine-learning/supplement/cRa2m/model-representation</a>)</p>
-<p>既然已经有了这个模型我们下一个问题就是如何才能找到这样的一个h函数？<br>在线性回归里用来判断拟合函数h好坏的一个标准就是代价函数(Cost funtion)。这个函数的数学表示如下，其中用均方误差来表示预测结果与真实结果的误差。</p>
-<img src="/2017/10/19/machine-learning-review1/cost-function.png" title="Cost function">
-<p>这时，机器学习过程的目标就是要找到一个h函数使得误差J最小。</p>
-<h3><span id="梯度下降gradient-descent">梯度下降(Gradient descent)</span></h3><p>求解最小代价函数的方法之一就是用梯度下降(Gradient descent)的方法。<br>数学上，<strong>梯度方向</strong>是<strong>函数值下降最为剧烈</strong>的方向。那么，沿着梯度方向走，我们就能接近其最小值，或者极小值，从而接近更高的预测精度。其数学表达如下：</p>
-<img src="/2017/10/19/machine-learning-review1/gradient-descent.png" title="Gradient descent">
-<p>其中<strong>学习率ɑ</strong>表示的是下降的速率，当这个值过大时会导致错过最小值（步子跨的太大）；当这个值过小时会导致下降的速度很慢（步子跨的太小）。<br>用梯度下降的方法就是不断的沿着梯度方向更新值，直到找到<strong>最小值</strong>。</p>
-
+<h1 id="机器学习第一周笔记"><a href="#机器学习第一周笔记" class="headerlink" title="机器学习第一周笔记"></a>机器学习第一周笔记</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="什么是机器学习？"><a href="#什么是机器学习？" class="headerlink" title="什么是机器学习？"></a>什么是机器学习？</h3><p>从字面上来说，机器学习就是让机器通过模仿人学习的过程学习。也就是说让机器有能力学习，而不是通过准确的程序而实现。我们生活中无处不在存在着机器学习的应用，例如垃圾邮件分类系统，通过图片识别物体等。</p>
+<h3 id="机器学习的分类"><a href="#机器学习的分类" class="headerlink" title="机器学习的分类"></a>机器学习的分类</h3><p>机器学习分为两大类：<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/10/19/machine-learning-review1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
-    </div>
+    </p></div>
 
     
     
@@ -1430,10 +1114,10 @@
       <meta itemprop="name" content="Coding Note">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/2017/09/25/backtick-in-python/" class="post-title-link" itemprop="url">python中的反引号reverse quotes</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1449,7 +1133,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
+                <time title="修改时间：2020-03-15 10:34:36" itemprop="dateModified" datetime="2020-03-15T10:34:36Z">2020-03-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1457,9 +1141,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
                 </span>
             </span>
 
@@ -1474,34 +1156,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
 <ul>
 <li><a href="#反引号">反引号`</a></li>
 <li><a href="#repr函数">repr函数</a></li>
 <li><a href="#关于单例的思考">关于单例的思考</a></li>
 </ul>
 <!-- tocstop -->
-<h3><span id="反引号">反引号`</span></h3><p>今天在看一本基于python2.2的Design Pattern书，其中有一段关于单例的代码我很不解，因为用到了反引号`，也就是reverse quotes。书中代码如下</p>
+<h3 id="反引号"><a href="#反引号" class="headerlink" title="反引号`"></a>反引号`</h3><p>今天在看一本基于python2.2的Design Pattern书，其中有一段关于单例的代码我很不解，因为用到了反引号`，也就是reverse quotes。书中代码如下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OnlyOne</span>:</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">__OnlyOne</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">      self.val = arg</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">      <span class="keyword">return</span> `self` + self.val</span><br><span class="line">  instance = <span class="literal">None</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> OnlyOne.instance:</span><br><span class="line">      OnlyOne.instance = OnlyOne.__OnlyOne(arg)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      OnlyOne.instance.val = arg</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> getattr(self.instance, name)</span><br><span class="line"></span><br><span class="line">x = OnlyOne(<span class="string">'sausage'</span>)</span><br><span class="line"><span class="keyword">print</span> x</span><br><span class="line">y = OnlyOne(<span class="string">'eggs'</span>)</span><br><span class="line"><span class="keyword">print</span> y</span><br><span class="line">z = OnlyOne(<span class="string">'spam'</span>)</span><br><span class="line"><span class="keyword">print</span> z</span><br><span class="line"><span class="keyword">print</span> x</span><br><span class="line"><span class="keyword">print</span> y</span><br><span class="line"><span class="keyword">print</span> `x`</span><br><span class="line"><span class="keyword">print</span> `y`</span><br><span class="line"><span class="keyword">print</span> `z`</span><br></pre></td></tr></table></figure>
-<p>console输出结果是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;sausage</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;eggs</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;spam</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;spam</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;spam</span><br><span class="line">&lt;__builtin__.OnlyOne instance at 0x7ff4670b01b8&gt;</span><br><span class="line">&lt;__builtin__.OnlyOne instance at 0x7ff4670b0290&gt;</span><br><span class="line">&lt;__builtin__.OnlyOne instance at 0x7ff4670b02d8&gt;</span><br></pre></td></tr></table></figure>
-<p>反引号`到底有什么用呢？经过查询,反引号在python2中是repr()函数的别名(alias)，但是反引号别名表示已经在pyhton3.0中取消了。至于为何取消，Guido van Rossum他本人的解释是反引号`和正常引号‘的相似性实在是太令人误解了，此外反引号在印刷字体以及输入方面都有不少问题。</p>
-<h3><span id="repr函数">repr函数</span></h3><p>知道了python中反引号`其实是repr()函数的别名，那么python中repr函数本身又是干什么的呢？</p>
-<blockquote>
-<p><strong>repr(object)</strong><br>Return a string containing a printable representation of an object. This is the same value yielded by conversions (reverse quotes). It is sometimes useful to be able to access this operation as an ordinary function. For many types, this function makes an attempt to return a string that would yield an object with the same value when passed to eval(), otherwise the representation is a string enclosed in angle brackets that contains the name of the type of the object together with additional information often including the name and address of the object. A class can control what this function returns for its instances by defining a <strong>repr</strong>() method.</p>
-</blockquote>
-<p>根据上述节选自python官方文档的解释，可以知道repr函数主要功能是返回object的一种可打印字符串表示。一般来说，repr函数被设计成其输出可以被eval函数生成值相同的object，或者，被设计成返一个包含在尖头括号中的字符串，其中包含对象类型名称和一些附加信息。而附加信息通常包括这个对象的名字和物理地址。</p>
-<p>在Desgin Patter作者给出的单例代码中，repr函数便输出了对象的名字和物理地址。</p>
-<h3><span id="关于单例的思考">关于单例的思考</span></h3><p>一般讲Desgin Pattern的书几乎一开始都会讲单例，毕竟单例是最容易理解的Desgin Pattern。作者在实现单例时用了nested class方法，内部class是一个私有class，这样外部无法直接访问。那么print函数又是如何访问到私有class的<code>__str__</code>函数的呢？这就要靠wrapper class的<code>__getattr__</code>函数了，在这里作者巧妙实现了一个delegation。这也是为什么print OnlyOne class的instance时，console输出都是私有class的<code>__str__</code>函数定义的结果。</p>
-<p>参考</p>
-<ol>
-<li><a href="https://stackoverflow.com/questions/1673071/what-do-backticks-mean-to-the-python-interpreter-num" rel="external nofollow noopener noreferrer" target="_blank">What do backticks mean to the python interpreter: num
-</a></li>
-<li><a href="https://mail.python.org/pipermail/python-ideas/2007-January/000054.html" rel="external nofollow noopener noreferrer" target="_blank">[Python-ideas] new operators via backquoting</a></li>
-<li><a href="https://docs.python.org/2/library/functions.html#repr" rel="external nofollow noopener noreferrer" target="_blank">docs.python repr(object)</a></li>
-<li><a href="http://www.mindview.net/Books/Python/ThinkingInPython.html" rel="external nofollow noopener noreferrer" target="_blank">Bruce Eckel Thinking in Python</a></li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/09/25/backtick-in-python/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1532,10 +1203,10 @@
       <meta itemprop="name" content="Coding Note">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
             <a href="/2017/09/25/generator-in-python/" class="post-title-link" itemprop="url">python中的生成器</a>
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -1551,7 +1222,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-04 16:25:40" itemprop="dateModified" datetime="2020-01-04T16:25:40Z">2020-01-04</time>
+                <time title="修改时间：2020-03-15 10:35:43" itemprop="dateModified" datetime="2020-03-15T10:35:43Z">2020-03-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1559,9 +1230,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design-Pattern/" itemprop="url" rel="index">
-                    <span itemprop="name">Design Pattern</span>
-                  </a>
+                  <a href="/categories/Design-Pattern/" itemprop="url" rel="index"><span itemprop="name">Design Pattern</span></a>
                 </span>
             </span>
 
@@ -1576,7 +1245,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
 <ul>
 <li><a href="#可迭代对象">可迭代对象</a></li>
 <li><a href="#迭代器">迭代器</a></li>
@@ -1586,76 +1255,23 @@
 <li><a href="#从design-pattern角度看生成器">从Design Pattern角度看生成器</a></li>
 </ul>
 <!-- tocstop -->
-<h3><span id="可迭代对象">可迭代对象</span></h3><p>要想理解python中的生成器，得先从可迭代对象Iterable说起。什么是可迭代对象呢？</p>
+<h3 id="可迭代对象"><a href="#可迭代对象" class="headerlink" title="可迭代对象"></a>可迭代对象</h3><p>要想理解python中的生成器，得先从可迭代对象Iterable说起。什么是可迭代对象呢？</p>
 <blockquote>
 <p>定义了可以返回一个迭代器的<strong>iter</strong>方法的对象，或者定义了可以支持下标索引的<strong>getitem</strong>方法的对象，就是一个可迭代对象</p>
 </blockquote>
 <p>所以我们可以用如下方法来判断一个实例是否为可迭代对象</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hasattr((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>), <span class="string">'__iter__'</span>) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">hasattr([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], <span class="string">'__iter__'</span>) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">hasattr(&#123;&#125;, <span class="string">'__iter__'</span>) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">hasattr(<span class="string">'abc'</span>, <span class="string">'__getitem__'</span>) <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
-<p>知道了可迭代对象的定义，那么可迭代对象又有什么用呢，如下列所示，我们经常在python中使用for…in循环，那么for…in循环能在所有对象上使用吗？</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">my_list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> my_list:</span><br><span class="line">  print(i) </span><br><span class="line"><span class="comment"># 1 </span></span><br><span class="line"><span class="comment"># 2 </span></span><br><span class="line"><span class="comment"># 3</span></span><br></pre></td></tr></table></figure>
-<p>其实不然，只有在可迭代对象上，for…in循环才能使用，比如列表，元组，字典以及字符串。这就是可迭代对象的最大用途。然而问题有来了，这些可迭代对象虽然好用，但是它们却又一大弊端。可迭代对象在使用时，比如<code>my_list</code>，它会把列表<code>[1, 2, 3]</code>中所有元素都存贮在内存中，当列表长度非常可观时，python会遇到性能方面的问题(python2.7中range函数返回可迭代对象，xrange函数返回生成器，所以可以通过比较这两个函数的执行相同任务时间来直观的了解性能方面的问题，stackoverflow上便有回答来比较这两个函数的执行时间，问题链接<a href="https://stackoverflow.com/questions/94935/what-is-the-difference-between-range-and-xrange-functions-in-python-2-x" rel="external nofollow noopener noreferrer" target="_blank">点此</a>)。</p>
-<h3><span id="迭代器">迭代器</span></h3><p>对于上述列表对象遇到的性能问题，我们自然会问到有没有方法来解决这样的问题。比如，有没有一种类似列表的对象，但是它不会一下子把它所有的元素都放到内存里的对象？<br>有，它就是迭代器，还是先说迭代器Iterator的定义</p>
-<blockquote>
-<p>定义了返回迭代器对象本身<strong>iter()</strong>(Python2)方法的对象，或者定义了方法返回容器的下一个元素<strong>next</strong>方法的对象，就是一个迭代器。</p>
-</blockquote>
-<p>同时我们也说，实现了上述两个方法的对象是遵守了迭代器协议（iterator protocol）的对象。</p>
-<p>判断一个对象我们除了可以检查它有没有<code>__iter()__</code>和<code>__next__</code>方法外，我们也可以用isinstance()方法。如下所示</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Iterator</span><br><span class="line"></span><br><span class="line">isinstance((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>), Iterator) <span class="comment"># False</span></span><br><span class="line"></span><br><span class="line">isinstance([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], Iterator) <span class="comment"># False</span></span><br><span class="line"></span><br><span class="line">isinstance(&#123;&#125;, Iterator) <span class="comment"># False</span></span><br><span class="line"></span><br><span class="line">isinstance(<span class="string">'abc'</span>, Iterator) <span class="comment"># False</span></span><br><span class="line"></span><br><span class="line">isinstance((x <span class="keyword">for</span> x <span class="keyword">in</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]), Iterator) <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
-<p>这下我们发现，元组，列表，字典，字符串都是可迭代对象，但同时它们也都不是迭代器。谁是迭代器呢？从上面例子可看到<code>(x for x in [1,2,3])</code>是迭代器对象的实例。</p>
-<p>首先，为什么元组，列表，字典，字符串都不是迭代器Iterator呢？</p>
-<blockquote>
-<p>这是因为Python的Iterator对象表示的是一个数据流，Iterator对象可以被next()函数调用并不断返回下一个数据，直到没有数据时抛出StopIteration错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算是惰性的，只有在需要返回下一个数据时它才会计算。</p>
-</blockquote>
-<p>从以上摘自<a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143178254193589df9c612d2449618ea460e7a672a366000" rel="external nofollow noopener noreferrer" target="_blank">廖雪峰</a>官网上的解答中我们可以看出，迭代器表示一个数据流，它不会把这个数据流中每一个元素都存贮在内存中，而列表则不同，它会把列表中所有元素都存贮在内存中。</p>
-<p>对于第二个问题，为什么<code>(x for x in [1,2,3])</code>是迭代器对象的实例呢？</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Iterator</span><br><span class="line"></span><br><span class="line">isinstance(iter((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)), Iterator) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">isinstance(iter([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]), Iterator) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">isinstance(iter(&#123;&#125;), Iterator) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">isinstance(iter(<span class="string">'abc'</span>), Iterator) <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
-<p>从以上例子可以看出，虽然元组，列表，字典，字符串都不是迭代器，但是通过iter()函数，可以获得一个Iterator对象。</p>
-<p>所以Python的for循环本质上可以看做先通过iter()函数，获得一个迭代器Iterator对象，再在这个迭代器对象上通过不断调用next()函数实现的。</p>
-<h3><span id="生成器">生成器</span></h3><p>在了解了可迭代对象Iterable和迭代器Iterator的概念后，我们终于可以开始探讨生成器的概念了。</p>
-<p>先放概念</p>
-<blockquote>
-<p>生成器是一种迭代器，但是只能对其迭代一次。因为它们并没有把所有的值存在内存中，而是在运行时生成值。生成器可通过遍历来使用它们，要么用一个“for”循环，要么将它传递给任意可以进行迭代的函数和结构。</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">my_generator = (x <span class="keyword">for</span> x <span class="keyword">in</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> my_generator:</span><br><span class="line">  print(i)</span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> my_generator:</span><br><span class="line">  print(i)</span><br><span class="line"><span class="comment"># nothing happens</span></span><br></pre></td></tr></table></figure>
-<p>上面是生成器的一个简单的例子，这个例子有点像for…in循环输出<code>my_list</code>的例子，除了这里用了一个迭代器<code>(x for x in [1,2,3])</code>替换了可迭代对象<code>[1,2,3]</code>。它们有什么不同吗？仔细观察上例，当我们再次使用for…in循环输出my_generator时，什么都没有发生，这也就是定义中说的</p>
-<blockquote>
-<p>生成器是一种迭代器，但是只能对其迭代一次。</p>
-</blockquote>
-<p>因为生成器首先生成1，接着从内存中清空1，接下来生成2，接着从内存中清空2，最后生成3，接着从内存中清空3。</p>
-<h3><span id="关键词yield">关键词Yield</span></h3><p>我们知道了一种由迭代器来获得生成器的方式，那么还有其他的方式来获得生成器吗？用Python关键词yield就可以。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createGenerator</span><span class="params">()</span>:</span></span><br><span class="line">  my_list = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> my_list:</span><br><span class="line">    <span class="keyword">yield</span> i</span><br><span class="line"></span><br><span class="line">my_generator = createGenerator()</span><br><span class="line">print(my_generator) <span class="comment"># &lt;generator object createGenerator at 0x7ff6a5c785c8&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> my_generator:</span><br><span class="line">  print(i)</span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line"><span class="comment"># 3</span></span><br></pre></td></tr></table></figure>
-<p>虽然上面的例子没有人在实际中会使用，但是用它来了解yield的用法还是很通俗易懂的。关于yield的难点，首先我们可以看到，通过<code>createGenerator()</code>函数来获得生成器<code>my_generator</code>时，函数<code>createGenerator()</code>并没有被执行，它只是返回了一个位于内存中处于某个位置上的该生成器对象。直到我们用for…in循环作用于这个对象上时，函数<code>createGenerator()</code>才被真正的执行，我们可以把它当做是一种惰性求值。</p>
-<p>那么生成器<code>my_generator</code>是如何求值的呢？当for…in循环第一次调用生成器时，<code>createGenerator()</code>被执行，直到被执行到yield关键词这里，返回循环的第一个值。余下的循环在调用生成器时，会继续上次的循环，再次遇到yield关键词时返回这一次循环的值，直到循环结束，再也遇不到yield关键词为止。</p>
-<h3><span id="什么时候使用生成器">什么时候使用生成器</span></h3><p>生成器的一个典型应用场景是：你不想把同一时间将所有计算出来的大量结果贮存到内存中，因为这样做会消耗大量资源，所以使用生成器来进行惰性求值，只有在需要某个结果时，再计算该结果。</p>
-<p>举一个生成斐波那契数列的例子</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">listFibonacci</span><span class="params">(n)</span>:</span></span><br><span class="line">  a = b = <span class="number">1</span></span><br><span class="line">  fib_list = []</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    fib_list.append(a)</span><br><span class="line">    a, b = b, a + b</span><br><span class="line">  <span class="keyword">return</span> fib_list</span><br></pre></td></tr></table></figure>
-<p>当输入参数很大时，内存资源会被严重消耗。</p>
-<p>下面是该函数的生成器版本</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">genFibonacci</span><span class="params">(n)</span>:</span></span><br><span class="line">  a = b = <span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    <span class="keyword">yield</span> a</span><br><span class="line">    a, b = b, a + b</span><br></pre></td></tr></table></figure>
-<p>由于惰性求值的缘故，即便参数很大时，我们也不用担心内存资源的消耗。</p>
-<p>我们刚刚谈到了内存消耗情况，有什么工具能帮助我们直观的感受到内存的消耗呢？ python有个叫<code>memory_profiler</code>的工具可以来帮我们进行内存消耗情况的测试。为了对比上述两个方法的内存消耗，我们让这两个方法同时生100000个斐波那契数列，并观察内存消耗情况。</p>
-<p>测试<code>listFibonacci()</code>代码如下</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> memory_profiler <span class="keyword">import</span> profile</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">listFibonacci</span><span class="params">(n)</span>:</span></span><br><span class="line">  a = b = <span class="number">1</span></span><br><span class="line">  fib_list = []</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    fib_list.append(a)</span><br><span class="line">    a, b = b, a + b</span><br><span class="line">  <span class="keyword">return</span> fib_list</span><br><span class="line"></span><br><span class="line"><span class="meta">@profile</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">testListFib</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> listFibonacci(<span class="number">100000</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    testListFib()</span><br></pre></td></tr></table></figure>
-<p>测试<code>genFibonacci()</code>代码如下</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> memory_profiler <span class="keyword">import</span> profile</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">genFibonacci</span><span class="params">(n)</span>:</span></span><br><span class="line">  a = b = <span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    <span class="keyword">yield</span> a</span><br><span class="line">    a, b = b, a + b</span><br><span class="line"></span><br><span class="line"><span class="meta">@profile</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">testGenFib</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> genFibonacci(<span class="number">100000</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">  testGenFib()</span><br></pre></td></tr></table></figure>
-<p>使用<code>listFibonacci()</code>测试结果如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Filename: listFib.py</span><br><span class="line"></span><br><span class="line">Line #    Mem usage    Increment   Line Contents</span><br><span class="line">================================================</span><br><span class="line">    11     14.2 MiB      0.0 MiB   @profile</span><br><span class="line">    12                             def testListFib():</span><br><span class="line">    13    460.5 MiB    446.2 MiB     for i in listFibonacci(100000):</span><br><span class="line">    14    460.5 MiB      0.0 MiB       pass</span><br></pre></td></tr></table></figure>
-<p>使用<code>genFibonacci()</code>测试结果如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Filename: genFib.py</span><br><span class="line"></span><br><span class="line">Line #    Mem usage    Increment   Line Contents</span><br><span class="line">================================================</span><br><span class="line">     9     14.4 MiB      0.0 MiB   @profile</span><br><span class="line">    10                             def testGenFib():</span><br><span class="line">    11     14.4 MiB      0.0 MiB     for i in genFibonacci(100000):</span><br><span class="line">    12     14.4 MiB      0.0 MiB       pass</span><br></pre></td></tr></table></figure>
-<p>从上面的测试结果可以看出，在生成大于100000个斐波那契数列的任务中，<code>listFibonacci()</code>消耗了460.5 MiB内存，而<code>genFibonacci()</code>只消耗了14.4 MiB内存。其实，如果我们绘制一个内存消耗随生成斐波那契数列长度变化的折线图，我们可以发现，随着生成斐波那契数列长度的增加，<code>listFibonacci()</code>的内存消耗情况是指数递增的，而<code>genFibonacci()</code>的内存消耗情况则是不变的，总是维持在消耗14.4 MiB 左右。通过这个测试，我们可以直观的感受到，在计算大量不需要被保存结果且只需计算一次的任务下，我们为什么不用担心生成器对内存资源的消耗。</p>
-<h3><span id="从design-pattern角度看生成器">从Design Pattern角度看生成器</span></h3><p>如果从Design Pattern的角度来看生成器，生成器就是一个无参数版本的工厂模式。通常工厂模式需要通过参数来确定生成什么对象以及如何生成该对象，但是生成器则不需要参数，它通过内部算法来确定生成什么对象以及如何生成该对象。</p>
-<p>参考</p>
-<ol>
-<li><a href="https://stackoverflow.com/questions/231767/what-does-the-yield-keyword-do/231855#231855" rel="external nofollow noopener noreferrer" target="_blank">Stackoverflow, What does the “yield” keyword do?
-</a></li>
-<li><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143178254193589df9c612d2449618ea460e7a672a366000" rel="external nofollow noopener noreferrer" target="_blank">廖雪峰的官方网站, 迭代器</a></li>
-<li><a href="http://wiki.jikexueyuan.com/project/explore-python/Advanced-Features/iterator.html" rel="external nofollow noopener noreferrer" target="_blank">极客学院, 迭代器</a></li>
-<li><a href="http://www.mindview.net/Books/Python/ThinkingInPython.html" rel="external nofollow noopener noreferrer" target="_blank">Bruce Eckel, Thinking in Python</a></li>
-</ol>
-
+<p>知道了可迭代对象的定义，那么可迭代对象又有什么用呢，如下列所示，我们经常在python中使用for…in循环，那么for…in循环能在所有对象上使用吗？<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/09/25/generator-in-python/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
-    </div>
+    </p></div>
 
     
     
@@ -1682,7 +1298,7 @@
 
 <script>
   window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
+    let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
@@ -1759,16 +1375,20 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/C0dingNote" title="GitHub → https://github.com/C0dingNote" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0MwZGluZ05vdGU=" title="GitHub → https://github.com/C0dingNote"><i class="fa fa-fw fa-github"></i>GitHub</span>
       </span>
-      <span class="links-of-author-item">
-        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
-      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
   </div>
 
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
@@ -1784,22 +1404,22 @@
 
 <div class="copyright">
   
-  &copy; 2017 – 
+  &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Shuwei Zhang & Jinhai ZHOU</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> v7.7.2
   </div>
 
         
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
@@ -1832,11 +1452,71 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 <script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      script.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
 
 
 
@@ -1854,13 +1534,35 @@
 
 
 
+<script pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
 
 
 
 
+    <div id="pjax">
   
 
   
 
+    </div>
 </body>
 </html>

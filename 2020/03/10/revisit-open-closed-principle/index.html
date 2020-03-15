@@ -15,36 +15,10 @@
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
-
 <script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('http://codingnote.com').hostname,
-    root: '/',
-    scheme: 'Muse',
-    version: '7.7.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":true,"show_result":true,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"codingnote.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
   <meta name="description" content="目录  午餐时的争吵 经验法则与惯例 重温开闭原则 拓展阅读   午餐时的争吵今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。 第一个同事说这个代码虽然能满足现在的需求，但是却不易于向某个他描述的方向拓展，他言之凿凿，认为我们的软件不久就会有他描述的需求。与其等到新需求到来时在对软件进行改动，不如开始实现时就考虑到可能的拓展，让这个模块变">
 <meta name="keywords" content="设计模式,经验法则">
@@ -54,7 +28,7 @@
 <meta property="og:site_name" content="Coding Note">
 <meta property="og:description" content="目录  午餐时的争吵 经验法则与惯例 重温开闭原则 拓展阅读   午餐时的争吵今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。 第一个同事说这个代码虽然能满足现在的需求，但是却不易于向某个他描述的方向拓展，他言之凿凿，认为我们的软件不久就会有他描述的需求。与其等到新需求到来时在对软件进行改动，不如开始实现时就考虑到可能的拓展，让这个模块变">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-11T22:40:37.826Z">
+<meta property="og:updated_time" content="2020-03-15T10:55:47.344Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2020年 再看开闭原则">
 <meta name="twitter:description" content="目录  午餐时的争吵 经验法则与惯例 重温开闭原则 拓展阅读   午餐时的争吵今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。 第一个同事说这个代码虽然能满足现在的需求，但是却不易于向某个他描述的方向拓展，他言之凿凿，认为我们的软件不久就会有他描述的需求。与其等到新需求到来时在对软件进行改动，不如开始实现时就考虑到可能的拓展，让这个模块变">
@@ -66,28 +40,21 @@
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: false,
-    isPost: true
+    isHome : false,
+    isPost : true
   };
 </script>
 
   <title>2020年 再看开闭原则 | Coding Note</title>
   
-    <script>
-      function sendPageView() {
-        if (CONFIG.hostname !== location.hostname) return;
-        var uid = localStorage.getItem('uid') || (Math.random() + '.' + Math.random());
-        localStorage.setItem('uid', uid);
-        navigator.sendBeacon('https://www.google-analytics.com/collect', new URLSearchParams({
-          v  : 1,
-          tid: 'UA-98330531-1',
-          cid: uid,
-          t  : 'pageview',
-          dp : encodeURIComponent(location.pathname)
-        }));
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-98330531-1"></script>
+    <script pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-98330531-1');
       }
-      document.addEventListener('pjax:complete', sendPageView);
-      sendPageView();
     </script>
 
 
@@ -126,6 +93,14 @@
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
   <div class="site-meta">
 
     <div>
@@ -135,14 +110,13 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">分享有关Coding的一切</p>
+        <h1 class="site-subtitle" itemprop="description">分享有关Coding的一切</h1>
+      
   </div>
 
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -176,6 +150,11 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">28</span></a>
 
   </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -184,32 +163,34 @@
 
 </nav>
   <div class="site-search">
-    <div class="popup search-popup">
-    <div class="search-header">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
   </div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result"></div>
-
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
 </div>
-<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
 
   </div>
 </div>
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  <div class="reading-progress-bar"></div>
 
 
     <main class="main">
@@ -237,9 +218,9 @@
       <meta itemprop="name" content="Coding Note">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           2020年 再看开闭原则
-        </h1>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -255,7 +236,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-11 22:40:37" itemprop="dateModified" datetime="2020-03-11T22:40:37Z">2020-03-11</time>
+                <time title="修改时间：2020-03-15 10:55:47" itemprop="dateModified" datetime="2020-03-15T10:55:47Z">2020-03-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,15 +244,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开闭原则/" itemprop="url" rel="index">
-                    <span itemprop="name">开闭原则</span>
-                  </a>
+                  <a href="/categories/开闭原则/" itemprop="url" rel="index"><span itemprop="name">开闭原则</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开闭原则/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
+                  <a href="/categories/开闭原则/设计模式/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
                 </span>
             </span>
 
@@ -307,6 +284,7 @@
 <p>第三位同事也加入了讨论。把软件设计的灵活以适应将来的变化是一件好事，但是这么做也是有代价的。灵活意味着这个模块需要更高的抽象层次，在新的需求到来前，这个模块都需要保持它本不需要的抽象层次。况且现在我们假设对于需求的预测是正确的，假如需求根本不是我们想象的那样变化，那么现在的努力不就白费了吗？</p>
 <p>第一位同事似乎没有被说服，另外两位同事也各执已见。午饭结束，大家各自回到工位上继续搬砖了。</p>
 <p>虽然这次争论还没有结果，也还不知道谁对谁错。那么我们在实现某个模块时，究竟是只实现现有需求还是要考虑到将来的需求而将模块实现的灵活一点呢？</p>
+<a id="more"></a>
 <h1><span id="经验法则与惯例">经验法则与惯例</span></h1><p>面向对象程序设计至今已至少经存在了50年了（如果我们从1970年的Smalltalk语言开始算起，如果从1960年的Simula 67语言开始算起，那么时间会更长），我们现在遇到的各种问题，前人也几乎都遇到过了。这也是为什么面向对象程序设计会有如此多的模式（Pattern），甚至是名言警句（Maxim）。</p>
 <p>如果问一位极限编程（extreme programming，XP）的专家，他会说</p>
 <blockquote>
@@ -316,7 +294,7 @@
 <blockquote>
 <p>我们应该遵守开闭原则（The Open-Closed Principle），软件中的对象（类，模块，函数等等）应该对于扩展是开放的，但是对于修改是封闭的</p>
 </blockquote>
-<p>而不久前Java大师Bruce Eckel恰巧在他的<a href="https://www.bruceeckel.com/blog/2019-12-24-unspoken-assumptions-underlying-oo-design-maxims/#disqus_thread" rel="external nofollow noopener noreferrer" target="_blank">博客</a>中写道</p>
+<p>而不久前Java大师Bruce Eckel恰巧在他的<span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJ1Y2VlY2tlbC5jb20vYmxvZy8yMDE5LTEyLTI0LXVuc3Bva2VuLWFzc3VtcHRpb25zLXVuZGVybHlpbmctb28tZGVzaWduLW1heGltcy8jZGlzcXVzX3RocmVhZA==" title="https://www.bruceeckel.com/blog/2019-12-24-unspoken-assumptions-underlying-oo-design-maxims/#disqus_thread">博客<i class="fa fa-external-link"></i></span>中写道</p>
 <blockquote>
 <p>质疑抽象的合理性，在不使用教条的情况下如果不能解释抽象的合理性，就不要抽象</p>
 </blockquote>
@@ -351,9 +329,9 @@
 <p>但是就好像老鼠团队开大会，谁去给猫挂铃铛的故事一样。开闭法则听起来诱人，可是又有谁知道一个软件里哪个模块，类应该关闭，哪个模块，类应该开放呢？假如新的需求不是打印新的形状而是先打印圆形再打印方形呢？那么上面的例子就不再试用了。可能会有人说，那么我在实现 <code>drawAllShapes()</code>就考虑到打印顺序的需求，再去要求每个形状实现 <code>Comparable&lt;Shape&gt;</code>接口就好了。哈哈，，今天有打印顺序的需求，明天又你想象不到的需求呢？只可惜软件开放工程师并不是预言家，要是软件开放工程师能准确语言客户的需求，那么现在软件开放领域也不会有那么多问题了。</p>
 <p>这就是开闭原则的陷阱，它要求使用者有非比寻常的见解。但是没有个十年软件开放经验，又怎么能获得寻常的见解呢？</p>
 <h1><span id="拓展阅读">拓展阅读</span></h1><ol>
-<li><a href="https://martinfowler.com/bliki/Yagni.html" rel="external nofollow noopener noreferrer" target="_blank">Yagni, Martin Fowler</a></li>
-<li><a href="https://web.archive.org/web/20150905081105/http://www.objectmentor.com/resources/articles/ocp.pdf" rel="external nofollow noopener noreferrer" target="_blank">The Open-Closed Principle, Robert C. Martin</a></li>
-<li><a href="https://www.bruceeckel.com/blog/2019-12-24-unspoken-assumptions-underlying-oo-design-maxims/#disqus_thread" rel="external nofollow noopener noreferrer" target="_blank">Unspoken Assumptions Underlying OO Design Maxims</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYXJ0aW5mb3dsZXIuY29tL2JsaWtpL1lhZ25pLmh0bWw=" title="https://martinfowler.com/bliki/Yagni.html">Yagni, Martin Fowler<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93ZWIuYXJjaGl2ZS5vcmcvd2ViLzIwMTUwOTA1MDgxMTA1L2h0dHA6Ly93d3cub2JqZWN0bWVudG9yLmNvbS9yZXNvdXJjZXMvYXJ0aWNsZXMvb2NwLnBkZg==" title="https://web.archive.org/web/20150905081105/http://www.objectmentor.com/resources/articles/ocp.pdf">The Open-Closed Principle, Robert C. Martin<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJ1Y2VlY2tlbC5jb20vYmxvZy8yMDE5LTEyLTI0LXVuc3Bva2VuLWFzc3VtcHRpb25zLXVuZGVybHlpbmctb28tZGVzaWduLW1heGltcy8jZGlzcXVzX3RocmVhZA==" title="https://www.bruceeckel.com/blog/2019-12-24-unspoken-assumptions-underlying-oo-design-maxims/#disqus_thread">Unspoken Assumptions Underlying OO Design Maxims<i class="fa fa-external-link"></i></span></li>
 </ol>
 
     </div>
@@ -361,6 +339,23 @@
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Shuwei Zhang & Jinhai ZHOU
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://codingnote.com/2020/03/10/revisit-open-closed-principle/" title="2020年 再看开闭原则">http://codingnote.com/2020/03/10/revisit-open-closed-principle/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
 
       <footer class="post-footer">
           <div class="post-tags">
@@ -394,7 +389,7 @@
 
 <script>
   window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
+    let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
@@ -472,16 +467,20 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/C0dingNote" title="GitHub → https://github.com/C0dingNote" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0MwZGluZ05vdGU=" title="GitHub → https://github.com/C0dingNote"><i class="fa fa-fw fa-github"></i>GitHub</span>
       </span>
-      <span class="links-of-author-item">
-        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
-      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
   </div>
 
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
@@ -497,22 +496,22 @@
 
 <div class="copyright">
   
-  &copy; 2017 – 
+  &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Shuwei Zhang & Jinhai ZHOU</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> v7.7.2
   </div>
 
         
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
@@ -545,11 +544,71 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 <script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      script.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
 
 
 
@@ -567,13 +626,35 @@
 
 
 
+<script pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
 
 
 
 
+    <div id="pjax">
   
 
   
 
+    </div>
 </body>
 </html>

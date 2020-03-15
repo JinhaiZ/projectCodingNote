@@ -17,6 +17,7 @@
 <p>第三位同事也加入了讨论。把软件设计的灵活以适应将来的变化是一件好事，但是这么做也是有代价的。灵活意味着这个模块需要更高的抽象层次，在新的需求到来前，这个模块都需要保持它本不需要的抽象层次。况且现在我们假设对于需求的预测是正确的，假如需求根本不是我们想象的那样变化，那么现在的努力不就白费了吗？</p>
 <p>第一位同事似乎没有被说服，另外两位同事也各执已见。午饭结束，大家各自回到工位上继续搬砖了。</p>
 <p>虽然这次争论还没有结果，也还不知道谁对谁错。那么我们在实现某个模块时，究竟是只实现现有需求还是要考虑到将来的需求而将模块实现的灵活一点呢？</p>
+<a id="more"></a>
 <h1><span id="经验法则与惯例">经验法则与惯例</span></h1><p>面向对象程序设计至今已至少经存在了50年了（如果我们从1970年的Smalltalk语言开始算起，如果从1960年的Simula 67语言开始算起，那么时间会更长），我们现在遇到的各种问题，前人也几乎都遇到过了。这也是为什么面向对象程序设计会有如此多的模式（Pattern），甚至是名言警句（Maxim）。</p>
 <p>如果问一位极限编程（extreme programming，XP）的专家，他会说</p>
 <blockquote>
@@ -26,7 +27,7 @@
 <blockquote>
 <p>我们应该遵守开闭原则（The Open-Closed Principle），软件中的对象（类，模块，函数等等）应该对于扩展是开放的，但是对于修改是封闭的</p>
 </blockquote>
-<p>而不久前Java大师Bruce Eckel恰巧在他的<a href="https://www.bruceeckel.com/blog/2019-12-24-unspoken-assumptions-underlying-oo-design-maxims/#disqus_thread" rel="external nofollow noopener noreferrer" target="_blank">博客</a>中写道</p>
+<p>而不久前Java大师Bruce Eckel恰巧在他的<span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJ1Y2VlY2tlbC5jb20vYmxvZy8yMDE5LTEyLTI0LXVuc3Bva2VuLWFzc3VtcHRpb25zLXVuZGVybHlpbmctb28tZGVzaWduLW1heGltcy8jZGlzcXVzX3RocmVhZA==" title="https://www.bruceeckel.com/blog/2019-12-24-unspoken-assumptions-underlying-oo-design-maxims/#disqus_thread">博客<i class="fa fa-external-link"></i></span>中写道</p>
 <blockquote>
 <p>质疑抽象的合理性，在不使用教条的情况下如果不能解释抽象的合理性，就不要抽象</p>
 </blockquote>
@@ -61,9 +62,9 @@
 <p>但是就好像老鼠团队开大会，谁去给猫挂铃铛的故事一样。开闭法则听起来诱人，可是又有谁知道一个软件里哪个模块，类应该关闭，哪个模块，类应该开放呢？假如新的需求不是打印新的形状而是先打印圆形再打印方形呢？那么上面的例子就不再试用了。可能会有人说，那么我在实现 <code>drawAllShapes()</code>就考虑到打印顺序的需求，再去要求每个形状实现 <code>Comparable&lt;Shape&gt;</code>接口就好了。哈哈，，今天有打印顺序的需求，明天又你想象不到的需求呢？只可惜软件开放工程师并不是预言家，要是软件开放工程师能准确语言客户的需求，那么现在软件开放领域也不会有那么多问题了。</p>
 <p>这就是开闭原则的陷阱，它要求使用者有非比寻常的见解。但是没有个十年软件开放经验，又怎么能获得寻常的见解呢？</p>
 <h1><span id="拓展阅读">拓展阅读</span></h1><ol>
-<li><a href="https://martinfowler.com/bliki/Yagni.html" rel="external nofollow noopener noreferrer" target="_blank">Yagni, Martin Fowler</a></li>
-<li><a href="https://web.archive.org/web/20150905081105/http://www.objectmentor.com/resources/articles/ocp.pdf" rel="external nofollow noopener noreferrer" target="_blank">The Open-Closed Principle, Robert C. Martin</a></li>
-<li><a href="https://www.bruceeckel.com/blog/2019-12-24-unspoken-assumptions-underlying-oo-design-maxims/#disqus_thread" rel="external nofollow noopener noreferrer" target="_blank">Unspoken Assumptions Underlying OO Design Maxims</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYXJ0aW5mb3dsZXIuY29tL2JsaWtpL1lhZ25pLmh0bWw=" title="https://martinfowler.com/bliki/Yagni.html">Yagni, Martin Fowler<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93ZWIuYXJjaGl2ZS5vcmcvd2ViLzIwMTUwOTA1MDgxMTA1L2h0dHA6Ly93d3cub2JqZWN0bWVudG9yLmNvbS9yZXNvdXJjZXMvYXJ0aWNsZXMvb2NwLnBkZg==" title="https://web.archive.org/web/20150905081105/http://www.objectmentor.com/resources/articles/ocp.pdf">The Open-Closed Principle, Robert C. Martin<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJ1Y2VlY2tlbC5jb20vYmxvZy8yMDE5LTEyLTI0LXVuc3Bva2VuLWFzc3VtcHRpb25zLXVuZGVybHlpbmctb28tZGVzaWduLW1heGltcy8jZGlzcXVzX3RocmVhZA==" title="https://www.bruceeckel.com/blog/2019-12-24-unspoken-assumptions-underlying-oo-design-maxims/#disqus_thread">Unspoken Assumptions Underlying OO Design Maxims<i class="fa fa-external-link"></i></span></li>
 </ol>
 ]]></content>
       <categories>
@@ -88,6 +89,7 @@
 <!-- tocstop -->
 <p>在Java里，如果我们创建了<code>Integer</code>类和<code>Number</code>类，并且<code>Integer</code>是<code>Number</code>的子类。那么<code>List&lt;Integer&gt;</code>类也是<code>List&lt;Number&gt;</code>类的子类吗？</p>
 <p>我们可以写一段代码来找到这个问题的答案。现在我们有一个求<code>List&lt;Number&gt;</code>类最大值的方法，它的输入是<code>List&lt;Number&gt;</code>类的实例。若<code>List&lt;Integer&gt;</code>类也是<code>List&lt;Number&gt;</code>类的子类，那么下面的代码应该是合法的。</p>
+<a id="more"></a>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InvariantExample</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Number</span> </span>&#123; &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Integer</span> <span class="keyword">extends</span> <span class="title">Number</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Number <span class="title">max</span><span class="params">(List&lt;Number&gt; list)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 省略实现细节</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> List&lt;Integer&gt; integerList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">final</span> Number max = max(integerList); <span class="comment">// 编译错误 incompatible types</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>但是编译器告诉我们<code>incompatible types</code>错误，这里<code>max</code>方法期待一个<code>List&lt;Number&gt;</code>类作为输入，但是实际上获得的是<code>List&lt;Integer&gt;</code>类。这就告诉我们，即便<code>Integer</code>是<code>Number</code>的子类，编译器也认为<code>List&lt;Integer&gt;</code>类和<code>List&lt;Number&gt;</code>类是没有关系的。</p>
 <p><strong>结论</strong>：<em>对于任意两个不同的类型<code>Type1</code> 和 <code>Type2</code>，不论它们之间具有什么关系，<code>List&lt;Type1&gt;</code> 和 <code>List&lt;Type2&gt;</code>都是没有关系的。</em></p>
@@ -137,7 +139,7 @@
 </tr>
 </tbody>
 </table>
-<p><em>以上定义来自 <a href="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)" title="[Wikipedia]" rel="external nofollow noopener noreferrer" target="_blank">Covariance and contravariance, Wikipedia</a>，其中还有双变的（bivariant），但是不在本文的讨论范围，顾略去</em></p>
+<p><em>以上定义来自 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvQ292YXJpYW5jZV9hbmRfY29udHJhdmFyaWFuY2VfKGNvbXB1dGVyX3NjaWVuY2Up" title="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)">Covariance and contravariance, Wikipedia<i class="fa fa-external-link"></i></span>，其中还有双变的（bivariant），但是不在本文的讨论范围，顾略去</em></p>
 <p><em>在 C#中，子类型也称为派生类（Derived class），超类型也称为基类（Base class）</em></p>
 <p>不同的程序设计语言，需要在类型推断的安全性和语法的易用性上做出权衡，对不同的类型构造函数进行规约，以使其符合某一种<strong>变型（Variance）</strong>。<br>不同的程序设计语言，在支持变型时，也有不同的处理方式。例如C#只允许在接口类型上标记变型,，而Java则在通过<a href="./2020/03/03/java-generics/#有限通配符">通配符</a>来支持变型。</p>
 <h1><span id="java上限通配符实现协变">Java上限通配符实现协变</span></h1><p>继续最初的例子，<code>Integer</code>是<code>Number</code>的子类，怎么样才能让<code>Number max(List&lt;Number&gt; list)max</code>方法也接受<code>List&lt;Integer&gt;</code>呢？（这里<code>List&lt;T&gt;</code>是类型构造函数，<code>List&lt;Integer&gt;</code> 和 <code>List&lt;Number&gt;</code> 两个新的类型）虽然在Java中，泛型是不可变的（<code>List&lt;Integer&gt;</code> 和 <code>List&lt;Number&gt;</code>没有关系），但是Java可以通过使用<a href="./2020/03/03/java-generics/#上限通配符">上限通配符</a>来实现协变。</p>
@@ -179,9 +181,9 @@
 </tbody>
 </table>
 <ol>
-<li><a href="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science" rel="external nofollow noopener noreferrer" target="_blank">Covariance and contravariance, Wikipedia</a>)</li>
-<li><a href="https://docs.microsoft.com/zh-cn/dotnet/standard/generics/covariance-and-contravariance" rel="external nofollow noopener noreferrer" target="_blank">泛型中的协变和逆变, Microsoft .NET指南</a></li>
-<li><a href="https://www.amazon.com/Effective-Java-Joshua-Bloch/dp/0134685997" rel="external nofollow noopener noreferrer" target="_blank">Effective Java 3rd Edition，Joshua Bloch</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvQ292YXJpYW5jZV9hbmRfY29udHJhdmFyaWFuY2VfKGNvbXB1dGVyX3NjaWVuY2U=" title="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science">Covariance and contravariance, Wikipedia<i class="fa fa-external-link"></i></span>)</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1pY3Jvc29mdC5jb20vemgtY24vZG90bmV0L3N0YW5kYXJkL2dlbmVyaWNzL2NvdmFyaWFuY2UtYW5kLWNvbnRyYXZhcmlhbmNl" title="https://docs.microsoft.com/zh-cn/dotnet/standard/generics/covariance-and-contravariance">泛型中的协变和逆变, Microsoft .NET指南<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYW1hem9uLmNvbS9FZmZlY3RpdmUtSmF2YS1Kb3NodWEtQmxvY2gvZHAvMDEzNDY4NTk5Nw==" title="https://www.amazon.com/Effective-Java-Joshua-Bloch/dp/0134685997">Effective Java 3rd Edition，Joshua Bloch<i class="fa fa-external-link"></i></span></li>
 </ol>
 ]]></content>
       <categories>
@@ -221,7 +223,7 @@
 <p>因为Java所有的类都是<code>Object</code>的子类。当然这样实现的坏处就是需要做<strong>对象转型(Casting)</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Integer maxInterger = (Integer) max(coll, comp)</span><br></pre></td></tr></table></figure>
 <p>然而对象转型也是非常罪恶的，因为一旦错误地使用了对象转型，代码只有到<strong>运行阶段（runtime）</strong> 才会报错。所以我们要尽可能的避免对象转型。</p>
-<p>而有了泛型以后，我们只需要实现</p>
+<p>而有了泛型以后，我们只需要实现<br><a id="more"></a></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">max</span><span class="params">(Collection&lt;T&gt; coll, Comparator&lt;T&gt; comp)</span></span></span><br></pre></td></tr></table></figure>
 <p>其中<code>T</code>叫做<strong>类型参数（Type paramter）</strong>，如果一个<strong>类（Class）</strong>，一个<strong>接口（Interface）</strong> 或者一个<strong>方法（Method）</strong> 在<strong>定义时（declaration）</strong>有一个或者多个类型参数，那么我们就叫他们<strong>泛型类（Generic class）</strong>，<strong>泛型接口（Generic interface）</strong> 和<strong>泛型方法（Generic method）</strong>。而泛型类，泛型接口和泛型方法就被统称为<strong>泛型（Generic types， Generics）</strong>。</p>
 <p>定义时，泛型是由类，接口和方法名跟着一个由尖括号包围的<strong>参数化类型（Parameterized types）</strong> 组成的。例如</p>
@@ -268,16 +270,16 @@
 <li>上限通配符， <code>&lt;? extends UpperBoundedClass&gt;</code> 统配<code>UpperBoundedClass</code>和它的子类。也可以用类型参数代替实际类型，<code>&lt;? extends T&gt;</code></li>
 <li>无限通配符， <code>?</code> 通配任意类型</li>
 </ul>
-<p>关于通配符上下限的说法，来自于<a href="https://docs.oracle.com/javase/tutorial/java/generics/index.html" rel="external nofollow noopener noreferrer" target="_blank">ORACLE关于泛型的官方文档</a>，以及<a href="https://docs.oracle.com/javase/tutorial/extra/generics/index.html" rel="external nofollow noopener noreferrer" target="_blank">Gilad Bracha关于泛型的教程</a>。如果觉得难以理解，可以参考在<a href="http://www.OnJava8.com" rel="external nofollow noopener noreferrer" target="_blank">《On Java 8》</a>里，Bruce Eckel的<code>超类通配符</code>和<code>子类通配符</code>的说法。</p>
+<p>关于通配符上下限的说法，来自于<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vamF2YXNlL3R1dG9yaWFsL2phdmEvZ2VuZXJpY3MvaW5kZXguaHRtbA==" title="https://docs.oracle.com/javase/tutorial/java/generics/index.html">ORACLE关于泛型的官方文档<i class="fa fa-external-link"></i></span>，以及<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vamF2YXNlL3R1dG9yaWFsL2V4dHJhL2dlbmVyaWNzL2luZGV4Lmh0bWw=" title="https://docs.oracle.com/javase/tutorial/extra/generics/index.html">Gilad Bracha关于泛型的教程<i class="fa fa-external-link"></i></span>。如果觉得难以理解，可以参考在<span class="exturl" data-url="aHR0cDovL3d3dy5PbkphdmE4LmNvbQ==" title="http://www.OnJava8.com">《On Java 8》<i class="fa fa-external-link"></i></span>里，Bruce Eckel的<code>超类通配符</code>和<code>子类通配符</code>的说法。</p>
 <ul>
 <li>超类通配符，<code>&lt;? super LowerBoundedClass&gt;</code>，通配<code>LowerBoundedClass</code>和它的超类。也可以用类型参数代替实际类型，<code>&lt;? super T&gt;</code></li>
 <li>子类通配符 <code>&lt;? extends UpperBoundedClass&gt;</code> 统配<code>UpperBoundedClass</code>和它的子类。也可以用类型参数代替实际类型，<code>&lt;? extends T&gt;</code></li>
 </ul>
 <h1><span id="参考">参考</span></h1><ol>
-<li><a href="https://docs.oracle.com/javase/tutorial/java/generics/index.html" rel="external nofollow noopener noreferrer" target="_blank">Java泛型官方文档， ORACLE</a></li>
-<li><a href="https://docs.oracle.com/javase/tutorial/extra/generics/index.html" rel="external nofollow noopener noreferrer" target="_blank">Java泛型教程， Gilad Bracha</a></li>
-<li><a href="https://www.amazon.com/Effective-Java-Joshua-Bloch/dp/0134685997" rel="external nofollow noopener noreferrer" target="_blank">Effective Java 3rd Edition，Joshua Bloch</a></li>
-<li><a href="http://www.OnJava8.com" rel="external nofollow noopener noreferrer" target="_blank">On Java 8，Bruce Eckel</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vamF2YXNlL3R1dG9yaWFsL2phdmEvZ2VuZXJpY3MvaW5kZXguaHRtbA==" title="https://docs.oracle.com/javase/tutorial/java/generics/index.html">Java泛型官方文档， ORACLE<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vamF2YXNlL3R1dG9yaWFsL2V4dHJhL2dlbmVyaWNzL2luZGV4Lmh0bWw=" title="https://docs.oracle.com/javase/tutorial/extra/generics/index.html">Java泛型教程， Gilad Bracha<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYW1hem9uLmNvbS9FZmZlY3RpdmUtSmF2YS1Kb3NodWEtQmxvY2gvZHAvMDEzNDY4NTk5Nw==" title="https://www.amazon.com/Effective-Java-Joshua-Bloch/dp/0134685997">Effective Java 3rd Edition，Joshua Bloch<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy5PbkphdmE4LmNvbQ==" title="http://www.OnJava8.com">On Java 8，Bruce Eckel<i class="fa fa-external-link"></i></span></li>
 </ol>
 ]]></content>
       <categories>
@@ -304,6 +306,7 @@
 <h1><span id="背景">背景</span></h1><p>几年前在实习时，我完全没有接触过设计评审。当时的团队采用Scrum开发过程。开发团队采取一个架构师（Architect）和三到四个开发者（Developers）的配置。为了保证开发速度，冲刺订单（Spring backlog）里的大多数任务（Ticket）都有架构师写的详细开发步骤。架构师在团队里负责了大多数的软件设计任务，开发者则专注于将架构师的想法实现。</p>
 <p>参加工作后，由于开发领域，开发过程，甚至是公司文化都与我实习过的公司有很多不同。再次几件，我也接触到了相当多的设计文档和设计评审。</p>
 <p>2019年，我在开发团队里承担的设计任务也越来越多，写过的设计文档有二三十个。参加的设计评审则是更多。一年下来，我对设计评审，这个软件开发中的一个流程，有了自己的一些看法，下面则是我对设计评审的一个小总结。</p>
+<a id="more"></a>
 <h1><span id="设计文档">设计文档</span></h1><p>设计评审，需要首先有设计。这里说的设计就是设计文档（全称软件开发设计文档）。这是在软件开发之前，一种把软件设计思路结构化记录下来的资料。我第一次接触设计文档是在大学的软件工程课上。当时我也在课程项目中写过设计文档，但是却对为什么需要设计文档体会不深。毕竟当时的项目都很小，难度也不大。写设计文档无非是根据模板填充文字的游戏罢了。</p>
 <p>但是当项目参与人员众多，开发难度大时，软件设计，作为软件开发的一个流程，被重视起来。我们在实践过程中，尤其是在一些重要的工作上 （比如时间跨度长，需要几个Sprint周期才能完成的工作，或者涉及多个团队，需要跨团队分工协作时），需要先把思路写下来，通过设计评审分享出来，得到相关人员的批准或者承诺后，再进行实现。</p>
 <p>也许短期看，写设计文档，走完设计评审流程比直接蒙头实现软件要慢的多。但是一个好的设计可以在长期为产品的开发节省大量的时间。试想一下在有其他团队对你的软件库（Library）或者Web Service产生依赖时你才发现你的代码需要重新设计的情况，这时不仅是自己负责的项目会受到影响，使用你的代码的其他团队的项目也都会受到影响。</p>
@@ -364,9 +367,9 @@
 <p><code>request-pull</code>是git的命令，它用于生成发送到邮件列表的待处理的更改的摘要。默认情况下，GitHub没有集成这个功能。</p>
 <p><code>Pull Request</code>是GitHub特有的一项功能(简称PR)。它用于向Github托管的某一项目中的某一分支提出合并请求。项目管理者则可以在github的web界面上合并来自不同分支的代码，解决合并冲突，做代码审查或对代码进行评论。</p>
 <h2><span id="git-request-pull">Git request-pull</span></h2><h3><span id="使用目的">使用目的</span></h3><blockquote>
-<p><a href="https://git-scm.com/docs/git-request-pull" rel="external nofollow noopener noreferrer" target="_blank">Generates a summary of pending changes</a></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1yZXF1ZXN0LXB1bGw=" title="https://git-scm.com/docs/git-request-pull">Generates a summary of pending changes<i class="fa fa-external-link"></i></span></p>
 </blockquote>
-<p>生成待处理的更改的摘要</p>
+<p>生成待处理的更改的摘要<br><a id="more"></a></p>
 <h3><span id="使用方法">使用方法</span></h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git request-pull [-p] &lt;start&gt; &lt;url&gt; [&lt;end&gt;]</span><br></pre></td></tr></table></figure>
 <h3><span id="一个例子">一个例子</span></h3><p>新增修改是基于从远端<code>pull</code>下来的<code>master</code>分支上的，为此建立了一个分支叫<code>add-android-cours</code>, 首先把自己的分支<code>push</code>到自己的仓库里</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git push https://github.com/JinhaiZ/TB-F2B-205.git</span><br></pre></td></tr></table></figure>
@@ -376,7 +379,7 @@
 <p>生成摘要如下所示</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">The following changes since commit 5a992617e38665e73ca5ec5e5c10b78373c88938:</span><br><span class="line"></span><br><span class="line">  deleted TD andorid (2017-12-10 22:31:55 +0100)</span><br><span class="line"></span><br><span class="line">are available <span class="keyword">in</span> the git repository at:</span><br><span class="line"></span><br><span class="line">  https://github.com/JinhaiZ/TB-F2B-205.git add-android-cours</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> you to fetch changes up to 658e472da4b7f08378a5452b72c244039c621dac:</span><br><span class="line"></span><br><span class="line">  add andorid cours (2018-01-04 11:36:15 +0100)</span><br><span class="line"></span><br><span class="line">----------------------------------------------------------------</span><br><span class="line">JinhaiZ (1):</span><br><span class="line">      add andorid cours</span><br><span class="line"></span><br><span class="line"> android/cours.md | 13 +++++++++++++</span><br><span class="line"> 1 file changed, 13 insertions(+)</span><br><span class="line"> create mode 100644 android/cours.md</span><br></pre></td></tr></table></figure>
 <h2><span id="github-pull-request">Github Pull Request</span></h2><h3><span id="使用目的">使用目的</span></h3><blockquote>
-<p><a href="http://www.ruanyifeng.com/blog/2017/07/pull_request.html" rel="external nofollow noopener noreferrer" target="_blank">“Pull Request 是一种通知机制。你修改了他人的代码，将你的修改通知原来的作者，希望他合并你的修改，这就是 Pull Request。”</a></p>
+<p><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMTcvMDcvcHVsbF9yZXF1ZXN0Lmh0bWw=" title="http://www.ruanyifeng.com/blog/2017/07/pull_request.html">“Pull Request 是一种通知机制。你修改了他人的代码，将你的修改通知原来的作者，希望他合并你的修改，这就是 Pull Request。”<i class="fa fa-external-link"></i></span></p>
 </blockquote>
 <h3><span id="使用方法">使用方法</span></h3><h4><span id="使用github-web界面">使用Github web界面</span></h4><p>以下借用阮一峰老师的讲解</p>
 <ol>
@@ -384,7 +387,7 @@
 <li>第二步，在你仓库的修改后的分支上，按下”New pull request”按钮。<br>这时，会进入一个新页面，有Base 和 Head 两个选项。Base 是你希望提交变更的目标，Head 是目前包含你的变更的那个分支或仓库。</li>
 <li>第三步，填写说明，帮助别人理解你的提交，然后按下”create pull request”按钮即可。PR 创建后，管理者就要决定是否接受该 PR。</li>
 </ol>
-<h4><span id="使用command-line">使用Command line</span></h4><p>首先安装<a href="https://hub.github.com/" rel="external nofollow noopener noreferrer" target="_blank">Hub</a>，以下步骤参考<a href="https://hub.github.com/" rel="external nofollow noopener noreferrer" target="_blank">Hub官方指南</a></p>
+<h4><span id="使用command-line">使用Command line</span></h4><p>首先安装<span class="exturl" data-url="aHR0cHM6Ly9odWIuZ2l0aHViLmNvbS8=" title="https://hub.github.com/">Hub<i class="fa fa-external-link"></i></span>，以下步骤参考<span class="exturl" data-url="aHR0cHM6Ly9odWIuZ2l0aHViLmNvbS8=" title="https://hub.github.com/">Hub官方指南<i class="fa fa-external-link"></i></span></p>
 <ol>
 <li><p>第一步，把别人在Github上的项目克隆到本地</p>
  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">`hub <span class="built_in">clone</span> https://github.com/SOME_ONE/xxx.git`</span><br></pre></td></tr></table></figure>
@@ -403,10 +406,10 @@
 </li>
 </ol>
 <h2><span id="参考">参考</span></h2><ol>
-<li><a href="https://git-scm.com/docs/git-request-pull" rel="external nofollow noopener noreferrer" target="_blank">git docs: git-request-pull</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2017/07/pull_request.html" rel="external nofollow noopener noreferrer" target="_blank">Pull Request 的命令行管理</a></li>
-<li><a href="https://stackoverflow.com/questions/34945947/git-request-pull-how-to-create-a-github-pull-request-on-the-command-line" rel="external nofollow noopener noreferrer" target="_blank">git request-pull: how to create a (github) pull request on the command line?
-</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1yZXF1ZXN0LXB1bGw=" title="https://git-scm.com/docs/git-request-pull">git docs: git-request-pull<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMTcvMDcvcHVsbF9yZXF1ZXN0Lmh0bWw=" title="http://www.ruanyifeng.com/blog/2017/07/pull_request.html">Pull Request 的命令行管理<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMzQ5NDU5NDcvZ2l0LXJlcXVlc3QtcHVsbC1ob3ctdG8tY3JlYXRlLWEtZ2l0aHViLXB1bGwtcmVxdWVzdC1vbi10aGUtY29tbWFuZC1saW5l" title="https://stackoverflow.com/questions/34945947/git-request-pull-how-to-create-a-github-pull-request-on-the-command-line">git request-pull: how to create a (github) pull request on the command line?
+<i class="fa fa-external-link"></i></span></li>
 </ol>
 ]]></content>
       <categories>
@@ -422,7 +425,7 @@
     <url>/2017/10/30/Latency-Numbers-Every-Programmer-Should-Know/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
 <!-- tocstop -->
-<p>翻译自:<a href="https://gist.github.com/jboner/2841832" rel="external nofollow noopener noreferrer" target="_blank">Latency Numbers Every Programmer Should Know</a></p>
+<p>翻译自:<span class="exturl" data-url="aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vamJvbmVyLzI4NDE4MzI=" title="https://gist.github.com/jboner/2841832">Latency Numbers Every Programmer Should Know<i class="fa fa-external-link"></i></span></p>
 <hr>
 <table>
 <thead>
@@ -535,20 +538,21 @@
 </tr>
 </tbody>
 </table>
+<a id="more"></a>
 <blockquote>
 <p>分支预测错误(Branch misprediction): 在包含了分支指令（if-then-else)的程序的执行过程中，其执行流程根据判定条件的真/假的不同，有可能会产生跳转，而这会打断流水线中指令的处理，因为CPU无法确定该指令的下一条指令，直到分支指令执行完毕。流水线越长，CPU等待的时间便越长，因为它必须等待分支指令处理完毕，才能确定下一条进入流水线的指令。为了解决这一问题，分支预测器（Branch predictor）在分支指令执行结束之前猜测哪一路分支将会被运行，以提高处理器的指令流水线的性能在分支执行完毕前先进行分支预测，分支预测器有很多种实现。其中最简单的是静态分支预测，方法是任选一条分支进入流水线，但是有50%的概率会预测错误，这时候就会出现分支预测错误</p>
 </blockquote>
 <blockquote>
 <p>来回通讯延迟（Round-trip delay time），在通讯（Communication）、电脑网络（Computer network）领域中，意指：在双方通讯中，发讯方的讯号（Signal）传播（Propagation）到收讯方的时间（意即：传播延迟（Propagation delay）），加上收讯方回传讯息到发讯方的时间（如果没有造成双向传播速率差异的因素，此时间与发讯方将讯号传播到收讯方的时间一样久）</p>
 </blockquote>
-<p>最后附上一张形象的图片<br><img src="http://i.imgur.com/k0t1e.png" alt="Latency Numbers Every Programmer Should Know "><br>Credit: <a href="https://imgur.com/k0t1e" rel="external nofollow noopener noreferrer" target="_blank">https://imgur.com/k0t1e</a></p>
+<p>最后附上一张形象的图片<br><img data-src="http://i.imgur.com/k0t1e.png" alt="Latency Numbers Every Programmer Should Know "><br>Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=" title="https://imgur.com/k0t1e">https://imgur.com/k0t1e<i class="fa fa-external-link"></i></span></p>
 <p>参考：</p>
 <ol>
-<li><a href="https://gist.github.com/jboner/2841832" rel="external nofollow noopener noreferrer" target="_blank">Latency Numbers Every Programmer Should Know</a></li>
-<li><a href="https://zh.wikipedia.org/zh-cn/CPU%E7%BC%93%E5%AD%98" rel="external nofollow noopener noreferrer" target="_blank">CPU缓存</a></li>
-<li><a href="https://zh.wikipedia.org/zh-cn/%E5%88%86%E6%94%AF%E9%A0%90%E6%B8%AC%E5%99%A8" rel="external nofollow noopener noreferrer" target="_blank">分支预测器</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Branch_misprediction" rel="external nofollow noopener noreferrer" target="_blank">Branch misprediction</a></li>
-<li><a href="https://zh.wikipedia.org/zh-cn/%E4%BE%86%E5%9B%9E%E9%80%9A%E8%A8%8A%E5%BB%B6%E9%81%B2" rel="external nofollow noopener noreferrer" target="_blank">来回通讯延迟</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vamJvbmVyLzI4NDE4MzI=" title="https://gist.github.com/jboner/2841832">Latency Numbers Every Programmer Should Know<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWNuL0NQVSVFNyVCQyU5MyVFNSVBRCU5OA==" title="https://zh.wikipedia.org/zh-cn/CPU%E7%BC%93%E5%AD%98">CPU缓存<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWNuLyVFNSU4OCU4NiVFNiU5NCVBRiVFOSVBMCU5MCVFNiVCOCVBQyVFNSU5OSVBOA==" title="https://zh.wikipedia.org/zh-cn/%E5%88%86%E6%94%AF%E9%A0%90%E6%B8%AC%E5%99%A8">分支预测器<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvQnJhbmNoX21pc3ByZWRpY3Rpb24=" title="https://en.wikipedia.org/wiki/Branch_misprediction">Branch misprediction<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWNuLyVFNCVCRSU4NiVFNSU5QiU5RSVFOSU4MCU5QSVFOCVBOCU4QSVFNSVCQiVCNiVFOSU4MSVCMg==" title="https://zh.wikipedia.org/zh-cn/%E4%BE%86%E5%9B%9E%E9%80%9A%E8%A8%8A%E5%BB%B6%E9%81%B2">来回通讯延迟<i class="fa fa-external-link"></i></span></li>
 </ol>
 ]]></content>
   </entry>
@@ -568,10 +572,9 @@
 </ul>
 <!-- tocstop -->
 <h2><span id="第一印象">第一印象</span></h2><p>大约在20天前，我在亚马逊上冲动的购买了这个东西</p>
-<img src="/2017/10/25/first-glance-at-RaspberryPi/Raspberry-Pi-3-Official-Desktop-Starter-Kit.png" title="Raspberry Pi 3 Official Desktop Starter Kit">
+<img data-src="/2017/10/25/first-glance-at-RaspberryPi/Raspberry-Pi-3-Official-Desktop-Starter-Kit.png" title="Raspberry Pi 3 Official Desktop Starter Kit">
 <p>树莓派3的官方Desktop Starter Kit，其实也就是树莓派3开发板+16GB miroSD装机卡+壳子+充电器套装。不过这样一套买下来，上手把玩树莓派要方便许多，机子到手第一天我就按照说明书安装了树莓派定制Debian的发型版Raspbian系统。第一感觉还挺好用，通过HDMI连接上显示器，再用4个USB接口中的两个连接键盘和鼠标就可以当做桌面电脑使用了。如果要通过个人电脑远程连接树莓派的话，ssh和VNC Viewer都很好用。</p>
-<h2><span id="远程连接">远程连接</span></h2><h3><span id="通过ssh">通过ssh</span></h3><p><em>注意，以下步骤均在个人电脑上完成，不是在树莓派上</em></p>
-<p>首先通过Vim 修改本地hosts文件<code>vim /etc/hosts</code> 加入raspberrypi的ip地址，以后就可以通过<code>ssh pi@raspberrypi</code>的方式ssh到树莓派中，如果嫌每次连接都要输入密码麻烦，可以把公钥导入到树莓派中，具体方法如下</p>
+<h2><span id="远程连接">远程连接</span></h2><h3><span id="通过ssh">通过ssh</span></h3><p><em>注意，以下步骤均在个人电脑上完成，不是在树莓派上</em><br><a id="more"></a><br>首先通过Vim 修改本地hosts文件<code>vim /etc/hosts</code> 加入raspberrypi的ip地址，以后就可以通过<code>ssh pi@raspberrypi</code>的方式ssh到树莓派中，如果嫌每次连接都要输入密码麻烦，可以把公钥导入到树莓派中，具体方法如下</p>
 <ol>
 <li><p>生成公钥私钥对</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
@@ -598,8 +601,8 @@
 <h2><span id="树莓派的缺点">树莓派的缺点</span></h2><p>在树莓派3上做全栈开发并不是很理想，因为部分软件对32bit ARM架构处理器的兼容性不是很好，查看树莓派3的CPU架构可以使用如下命令，结果如下</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ lscpu</span><br><span class="line">Architecture:          armv7l</span><br><span class="line">Byte Order:            Little Endian</span><br><span class="line">CPU(s):                4</span><br><span class="line">On-line CPU(s) list:   0-3</span><br><span class="line">Thread(s) per core:    1</span><br><span class="line">Core(s) per socket:    4</span><br><span class="line">Socket(s):             1</span><br><span class="line">Model:                 4</span><br><span class="line">Model name:            ARMv7 Processor rev 4 (v7l)</span><br><span class="line">CPU max MHz:           1200.0000</span><br><span class="line">CPU min MHz:           600.0000</span><br><span class="line">BogoMIPS:              38.40</span><br><span class="line">Flags:                 half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm crc32</span><br></pre></td></tr></table></figure>
 <p>可以看到树莓派3采用一块ARMv7架构的CPU，通过查阅维基百科，得知ARMv1到ARMv7架构都是32 bits寻址，直到ARMv8架构才出现64 bits寻址。</p>
-<p>故事起源于我想在树莓派上安装<a href="https://github.com/wekan/wekan" rel="external nofollow noopener noreferrer" target="_blank">wekan</a>，wekan是类似于<a href="https://trello.com/" rel="external nofollow noopener noreferrer" target="_blank">Trello</a>的Kanban类项目管理软件，奈何wekan是基于Meteor建立的，而Meteor对安装环境有x86_64的假设，即使修改源代码去掉该假设也不能顺利安装，参见<a href="https://github.com/meteor/meteor/issues/442" rel="external nofollow noopener noreferrer" target="_blank">meteor/issues/442</a>。好消息是2017年6月份，Meteor团队开始着手与增加Meteor对ARM架构CPU的支持，参见<a href="https://github.com/meteor/meteor-feature-requests/issues/130" rel="external nofollow noopener noreferrer" target="_blank">meteor-feature-requests/issues/130</a>。</p>
-<p>不能在树莓派上安装wekan，让我有点小小的伤心，但是接下来发生的事情就让我对在树莓派上搞全栈开发暂时失去了兴趣。故事是这样的，为了学习网爬虫，我做了一个每天计算出Stackoverflow最火热问题的项目来练手，该项目的的爬虫部分基于Scapy框架，数据库我选用了最新版本的MongoDB (v3.4.9)　来存储爬取的网页内容。开发完成后我利用crontab在自己的电脑上让它每天晚上10点5分定时在<a href="https://github.com/JinhaiZ/stackoverflow-trending" rel="external nofollow noopener noreferrer" target="_blank">这里</a>update最火热问题排行。</p>
+<p>故事起源于我想在树莓派上安装<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dla2FuL3dla2Fu" title="https://github.com/wekan/wekan">wekan<i class="fa fa-external-link"></i></span>，wekan是类似于<span class="exturl" data-url="aHR0cHM6Ly90cmVsbG8uY29tLw==" title="https://trello.com/">Trello<i class="fa fa-external-link"></i></span>的Kanban类项目管理软件，奈何wekan是基于Meteor建立的，而Meteor对安装环境有x86_64的假设，即使修改源代码去掉该假设也不能顺利安装，参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21ldGVvci9tZXRlb3IvaXNzdWVzLzQ0Mg==" title="https://github.com/meteor/meteor/issues/442">meteor/issues/442<i class="fa fa-external-link"></i></span>。好消息是2017年6月份，Meteor团队开始着手与增加Meteor对ARM架构CPU的支持，参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21ldGVvci9tZXRlb3ItZmVhdHVyZS1yZXF1ZXN0cy9pc3N1ZXMvMTMw" title="https://github.com/meteor/meteor-feature-requests/issues/130">meteor-feature-requests/issues/130<i class="fa fa-external-link"></i></span>。</p>
+<p>不能在树莓派上安装wekan，让我有点小小的伤心，但是接下来发生的事情就让我对在树莓派上搞全栈开发暂时失去了兴趣。故事是这样的，为了学习网爬虫，我做了一个每天计算出Stackoverflow最火热问题的项目来练手，该项目的的爬虫部分基于Scapy框架，数据库我选用了最新版本的MongoDB (v3.4.9)　来存储爬取的网页内容。开发完成后我利用crontab在自己的电脑上让它每天晚上10点5分定时在<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ppbmhhaVovc3RhY2tvdmVyZmxvdy10cmVuZGluZw==" title="https://github.com/JinhaiZ/stackoverflow-trending">这里<i class="fa fa-external-link"></i></span>update最火热问题排行。</p>
 <p>问题是我的电脑并不是每天晚上10点5分都处于运行状态，有好几次因为我没有开机导致当天我写的程序没有update。于是乎我有了把MongoDB和网页爬取程序部署在树莓派上的想法。说干就干，在树莓派上陆续安装了相应的开发环境，主要是python的开发环境，比如安装Scapy框架可以通过下面的命令</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># install Scrapy</span><br><span class="line">sudo apt-get install libffi-dev</span><br><span class="line">sudo apt-get install libxml2-dev</span><br><span class="line">sudo apt-get install libxslt1-dev</span><br><span class="line">sudo apt-get install python-dev</span><br><span class="line">sudo pip install scrapy</span><br></pre></td></tr></table></figure>
 <p>然而在安装最新版的MongoDB时我遇到了无法解决的问题，实际上，通过下面命令可以安装MongoDB<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># install MongoDB</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install mongodb-server</span><br></pre></td></tr></table></figure></p>
@@ -607,8 +610,8 @@
 <h2><span id="总结">总结</span></h2><p>第一次接触”单板电脑”(SBC, Single Board Computer)还是很有新鲜感的，低廉的售价，和正常PC几乎一样的功能以及丰富的DIY选项让人很难拒绝。不过作为一个全栈开发人员，想要在树莓派上部署应用，不能安装最新的MongoDB意味着几年前比较流行的MEAN框架在树莓派上可能会行不通，部分框架，例如于ARM处理器有兼容问题的Meteor，会导致部分软件例如wekan在树莓派上无法应用，这些问题在购买前还是要考虑的。</p>
 <p>参考</p>
 <ol>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2" rel="external nofollow noopener noreferrer" target="_blank">How To Set Up SSH Keys</a></li>
-<li><a href="https://www.raspberrypi.org/documentation/remote-access/vnc/" rel="external nofollow noopener noreferrer" target="_blank">VNC (VIRTUAL NETWORK COMPUTING)</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZGlnaXRhbG9jZWFuLmNvbS9jb21tdW5pdHkvdHV0b3JpYWxzL2hvdy10by1zZXQtdXAtc3NoLWtleXMtLTI=" title="https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2">How To Set Up SSH Keys<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmFzcGJlcnJ5cGkub3JnL2RvY3VtZW50YXRpb24vcmVtb3RlLWFjY2Vzcy92bmMv" title="https://www.raspberrypi.org/documentation/remote-access/vnc/">VNC (VIRTUAL NETWORK COMPUTING)<i class="fa fa-external-link"></i></span></li>
 </ol>
 ]]></content>
       <categories>
@@ -640,7 +643,7 @@
 </ul>
 <!-- tocstop -->
 <h1><span id="机器学习第一周笔记">机器学习第一周笔记</span></h1><h2><span id="概述">概述</span></h2><h3><span id="什么是机器学习">什么是机器学习？</span></h3><p>从字面上来说，机器学习就是让机器通过模仿人学习的过程学习。也就是说让机器有能力学习，而不是通过准确的程序而实现。我们生活中无处不在存在着机器学习的应用，例如垃圾邮件分类系统，通过图片识别物体等。</p>
-<h3><span id="机器学习的分类">机器学习的分类</span></h3><p>机器学习分为两大类：</p>
+<h3><span id="机器学习的分类">机器学习的分类</span></h3><p>机器学习分为两大类：<br><a id="more"></a></p>
 <ul>
 <li><p><strong>有监督学习(supervised learning)</strong>：给定输入数据和正确的输出结果，通过一系列“训练模型”使得输出结果和正确输出结果无限接近的过程。其中又可以分为两大类 <strong>回归(regression)</strong> 和 <strong>分类(classification)</strong> 问题。例如：给定某地区房屋的情况（房间个数，地理位置，周围环境…）及价格，来预测这个地区某个房子的价格。这就是一个回归问题。再比如通过一个人的照片来预测这个人的年龄。 而分类问题则是输出结果只有两种情况的问题。比如：预测一个病人的肿瘤是良性还是恶性；预测一封邮件是否是垃圾邮件等等。这种问题的结果只有两种情况。</p>
 </li>
@@ -648,13 +651,13 @@
 <h2><span id="线性回归">线性回归</span></h2><h3><span id="回归模型">回归模型</span></h3><p>通过训练数据集(training set)学习得到一个函数h(x)，使得输入数据X通过h函数映射的预测结果Y最接近正确值。线性回归的目标就是寻找到h函数使得其完美拟合输入X和输出Y的关系。</p>
 </li>
 </ul>
-<img src="/2017/10/19/machine-learning-review1/linear-regression-model.png" title="learning regression model">
-<p>(Figure 1 <a href="https://www.coursera.org/learn/machine-learning/supplement/cRa2m/model-representation" rel="external nofollow noopener noreferrer" target="_blank">https://www.coursera.org/learn/machine-learning/supplement/cRa2m/model-representation</a>)</p>
+<img data-src="/2017/10/19/machine-learning-review1/linear-regression-model.png" title="learning regression model">
+<p>(Figure 1 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY291cnNlcmEub3JnL2xlYXJuL21hY2hpbmUtbGVhcm5pbmcvc3VwcGxlbWVudC9jUmEybS9tb2RlbC1yZXByZXNlbnRhdGlvbg==" title="https://www.coursera.org/learn/machine-learning/supplement/cRa2m/model-representation">https://www.coursera.org/learn/machine-learning/supplement/cRa2m/model-representation<i class="fa fa-external-link"></i></span>)</p>
 <p>既然已经有了这个模型我们下一个问题就是如何才能找到这样的一个h函数？<br>在线性回归里用来判断拟合函数h好坏的一个标准就是代价函数(Cost funtion)。这个函数的数学表示如下，其中用均方误差来表示预测结果与真实结果的误差。</p>
-<img src="/2017/10/19/machine-learning-review1/cost-function.png" title="Cost function">
+<img data-src="/2017/10/19/machine-learning-review1/cost-function.png" title="Cost function">
 <p>这时，机器学习过程的目标就是要找到一个h函数使得误差J最小。</p>
 <h3><span id="梯度下降gradient-descent">梯度下降(Gradient descent)</span></h3><p>求解最小代价函数的方法之一就是用梯度下降(Gradient descent)的方法。<br>数学上，<strong>梯度方向</strong>是<strong>函数值下降最为剧烈</strong>的方向。那么，沿着梯度方向走，我们就能接近其最小值，或者极小值，从而接近更高的预测精度。其数学表达如下：</p>
-<img src="/2017/10/19/machine-learning-review1/gradient-descent.png" title="Gradient descent">
+<img data-src="/2017/10/19/machine-learning-review1/gradient-descent.png" title="Gradient descent">
 <p>其中<strong>学习率ɑ</strong>表示的是下降的速率，当这个值过大时会导致错过最小值（步子跨的太大）；当这个值过小时会导致下降的速度很慢（步子跨的太小）。<br>用梯度下降的方法就是不断的沿着梯度方向更新值，直到找到<strong>最小值</strong>。</p>
 ]]></content>
       <categories>
@@ -677,6 +680,7 @@
 <!-- tocstop -->
 <h3><span id="反引号">反引号`</span></h3><p>今天在看一本基于python2.2的Design Pattern书，其中有一段关于单例的代码我很不解，因为用到了反引号`，也就是reverse quotes。书中代码如下</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OnlyOne</span>:</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">__OnlyOne</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">      self.val = arg</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">      <span class="keyword">return</span> `self` + self.val</span><br><span class="line">  instance = <span class="literal">None</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> OnlyOne.instance:</span><br><span class="line">      OnlyOne.instance = OnlyOne.__OnlyOne(arg)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      OnlyOne.instance.val = arg</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> getattr(self.instance, name)</span><br><span class="line"></span><br><span class="line">x = OnlyOne(<span class="string">'sausage'</span>)</span><br><span class="line"><span class="keyword">print</span> x</span><br><span class="line">y = OnlyOne(<span class="string">'eggs'</span>)</span><br><span class="line"><span class="keyword">print</span> y</span><br><span class="line">z = OnlyOne(<span class="string">'spam'</span>)</span><br><span class="line"><span class="keyword">print</span> z</span><br><span class="line"><span class="keyword">print</span> x</span><br><span class="line"><span class="keyword">print</span> y</span><br><span class="line"><span class="keyword">print</span> `x`</span><br><span class="line"><span class="keyword">print</span> `y`</span><br><span class="line"><span class="keyword">print</span> `z`</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>console输出结果是</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;sausage</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;eggs</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;spam</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;spam</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;spam</span><br><span class="line">&lt;__builtin__.OnlyOne instance at 0x7ff4670b01b8&gt;</span><br><span class="line">&lt;__builtin__.OnlyOne instance at 0x7ff4670b0290&gt;</span><br><span class="line">&lt;__builtin__.OnlyOne instance at 0x7ff4670b02d8&gt;</span><br></pre></td></tr></table></figure>
 <p>反引号`到底有什么用呢？经过查询,反引号在python2中是repr()函数的别名(alias)，但是反引号别名表示已经在pyhton3.0中取消了。至于为何取消，Guido van Rossum他本人的解释是反引号`和正常引号‘的相似性实在是太令人误解了，此外反引号在印刷字体以及输入方面都有不少问题。</p>
@@ -689,11 +693,11 @@
 <h3><span id="关于单例的思考">关于单例的思考</span></h3><p>一般讲Desgin Pattern的书几乎一开始都会讲单例，毕竟单例是最容易理解的Desgin Pattern。作者在实现单例时用了nested class方法，内部class是一个私有class，这样外部无法直接访问。那么print函数又是如何访问到私有class的<code>__str__</code>函数的呢？这就要靠wrapper class的<code>__getattr__</code>函数了，在这里作者巧妙实现了一个delegation。这也是为什么print OnlyOne class的instance时，console输出都是私有class的<code>__str__</code>函数定义的结果。</p>
 <p>参考</p>
 <ol>
-<li><a href="https://stackoverflow.com/questions/1673071/what-do-backticks-mean-to-the-python-interpreter-num" rel="external nofollow noopener noreferrer" target="_blank">What do backticks mean to the python interpreter: num
-</a></li>
-<li><a href="https://mail.python.org/pipermail/python-ideas/2007-January/000054.html" rel="external nofollow noopener noreferrer" target="_blank">[Python-ideas] new operators via backquoting</a></li>
-<li><a href="https://docs.python.org/2/library/functions.html#repr" rel="external nofollow noopener noreferrer" target="_blank">docs.python repr(object)</a></li>
-<li><a href="http://www.mindview.net/Books/Python/ThinkingInPython.html" rel="external nofollow noopener noreferrer" target="_blank">Bruce Eckel Thinking in Python</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMTY3MzA3MS93aGF0LWRvLWJhY2t0aWNrcy1tZWFuLXRvLXRoZS1weXRob24taW50ZXJwcmV0ZXItbnVt" title="https://stackoverflow.com/questions/1673071/what-do-backticks-mean-to-the-python-interpreter-num">What do backticks mean to the python interpreter: num
+<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYWlsLnB5dGhvbi5vcmcvcGlwZXJtYWlsL3B5dGhvbi1pZGVhcy8yMDA3LUphbnVhcnkvMDAwMDU0Lmh0bWw=" title="https://mail.python.org/pipermail/python-ideas/2007-January/000054.html">[Python-ideas] new operators via backquoting<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnB5dGhvbi5vcmcvMi9saWJyYXJ5L2Z1bmN0aW9ucy5odG1sI3JlcHI=" title="https://docs.python.org/2/library/functions.html#repr">docs.python repr(object)<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy5taW5kdmlldy5uZXQvQm9va3MvUHl0aG9uL1RoaW5raW5nSW5QeXRob24uaHRtbA==" title="http://www.mindview.net/Books/Python/ThinkingInPython.html">Bruce Eckel Thinking in Python<i class="fa fa-external-link"></i></span></li>
 </ol>
 ]]></content>
       <categories>
@@ -723,9 +727,9 @@
 </blockquote>
 <p>所以我们可以用如下方法来判断一个实例是否为可迭代对象</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">hasattr((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>), <span class="string">'__iter__'</span>) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">hasattr([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], <span class="string">'__iter__'</span>) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">hasattr(&#123;&#125;, <span class="string">'__iter__'</span>) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">hasattr(<span class="string">'abc'</span>, <span class="string">'__getitem__'</span>) <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
-<p>知道了可迭代对象的定义，那么可迭代对象又有什么用呢，如下列所示，我们经常在python中使用for…in循环，那么for…in循环能在所有对象上使用吗？</p>
+<p>知道了可迭代对象的定义，那么可迭代对象又有什么用呢，如下列所示，我们经常在python中使用for…in循环，那么for…in循环能在所有对象上使用吗？<br><a id="more"></a></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">my_list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> my_list:</span><br><span class="line">  print(i) </span><br><span class="line"><span class="comment"># 1 </span></span><br><span class="line"><span class="comment"># 2 </span></span><br><span class="line"><span class="comment"># 3</span></span><br></pre></td></tr></table></figure>
-<p>其实不然，只有在可迭代对象上，for…in循环才能使用，比如列表，元组，字典以及字符串。这就是可迭代对象的最大用途。然而问题有来了，这些可迭代对象虽然好用，但是它们却又一大弊端。可迭代对象在使用时，比如<code>my_list</code>，它会把列表<code>[1, 2, 3]</code>中所有元素都存贮在内存中，当列表长度非常可观时，python会遇到性能方面的问题(python2.7中range函数返回可迭代对象，xrange函数返回生成器，所以可以通过比较这两个函数的执行相同任务时间来直观的了解性能方面的问题，stackoverflow上便有回答来比较这两个函数的执行时间，问题链接<a href="https://stackoverflow.com/questions/94935/what-is-the-difference-between-range-and-xrange-functions-in-python-2-x" rel="external nofollow noopener noreferrer" target="_blank">点此</a>)。</p>
+<p>其实不然，只有在可迭代对象上，for…in循环才能使用，比如列表，元组，字典以及字符串。这就是可迭代对象的最大用途。然而问题有来了，这些可迭代对象虽然好用，但是它们却又一大弊端。可迭代对象在使用时，比如<code>my_list</code>，它会把列表<code>[1, 2, 3]</code>中所有元素都存贮在内存中，当列表长度非常可观时，python会遇到性能方面的问题(python2.7中range函数返回可迭代对象，xrange函数返回生成器，所以可以通过比较这两个函数的执行相同任务时间来直观的了解性能方面的问题，stackoverflow上便有回答来比较这两个函数的执行时间，问题链接<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvOTQ5MzUvd2hhdC1pcy10aGUtZGlmZmVyZW5jZS1iZXR3ZWVuLXJhbmdlLWFuZC14cmFuZ2UtZnVuY3Rpb25zLWluLXB5dGhvbi0yLXg=" title="https://stackoverflow.com/questions/94935/what-is-the-difference-between-range-and-xrange-functions-in-python-2-x">点此<i class="fa fa-external-link"></i></span>)。</p>
 <h3><span id="迭代器">迭代器</span></h3><p>对于上述列表对象遇到的性能问题，我们自然会问到有没有方法来解决这样的问题。比如，有没有一种类似列表的对象，但是它不会一下子把它所有的元素都放到内存里的对象？<br>有，它就是迭代器，还是先说迭代器Iterator的定义</p>
 <blockquote>
 <p>定义了返回迭代器对象本身<strong>iter()</strong>(Python2)方法的对象，或者定义了方法返回容器的下一个元素<strong>next</strong>方法的对象，就是一个迭代器。</p>
@@ -738,7 +742,7 @@
 <blockquote>
 <p>这是因为Python的Iterator对象表示的是一个数据流，Iterator对象可以被next()函数调用并不断返回下一个数据，直到没有数据时抛出StopIteration错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算是惰性的，只有在需要返回下一个数据时它才会计算。</p>
 </blockquote>
-<p>从以上摘自<a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143178254193589df9c612d2449618ea460e7a672a366000" rel="external nofollow noopener noreferrer" target="_blank">廖雪峰</a>官网上的解答中我们可以看出，迭代器表示一个数据流，它不会把这个数据流中每一个元素都存贮在内存中，而列表则不同，它会把列表中所有元素都存贮在内存中。</p>
+<p>从以上摘自<span class="exturl" data-url="aHR0cHM6Ly93d3cubGlhb3h1ZWZlbmcuY29tL3dpa2kvMDAxNDMxNjA4OTU1NzI2NGE2YjM0ODk1OGY0NDk5NDlkZjQyYTZkM2EyZTU0MmMwMDAvMDAxNDMxNzgyNTQxOTM1ODlkZjljNjEyZDI0NDk2MThlYTQ2MGU3YTY3MmEzNjYwMDA=" title="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143178254193589df9c612d2449618ea460e7a672a366000">廖雪峰<i class="fa fa-external-link"></i></span>官网上的解答中我们可以看出，迭代器表示一个数据流，它不会把这个数据流中每一个元素都存贮在内存中，而列表则不同，它会把列表中所有元素都存贮在内存中。</p>
 <p>对于第二个问题，为什么<code>(x for x in [1,2,3])</code>是迭代器对象的实例呢？</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Iterator</span><br><span class="line"></span><br><span class="line">isinstance(iter((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)), Iterator) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">isinstance(iter([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]), Iterator) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">isinstance(iter(&#123;&#125;), Iterator) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">isinstance(iter(<span class="string">'abc'</span>), Iterator) <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
 <p>从以上例子可以看出，虽然元组，列表，字典，字符串都不是迭代器，但是通过iter()函数，可以获得一个Iterator对象。</p>
@@ -778,11 +782,11 @@
 <h3><span id="从design-pattern角度看生成器">从Design Pattern角度看生成器</span></h3><p>如果从Design Pattern的角度来看生成器，生成器就是一个无参数版本的工厂模式。通常工厂模式需要通过参数来确定生成什么对象以及如何生成该对象，但是生成器则不需要参数，它通过内部算法来确定生成什么对象以及如何生成该对象。</p>
 <p>参考</p>
 <ol>
-<li><a href="https://stackoverflow.com/questions/231767/what-does-the-yield-keyword-do/231855#231855" rel="external nofollow noopener noreferrer" target="_blank">Stackoverflow, What does the “yield” keyword do?
-</a></li>
-<li><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143178254193589df9c612d2449618ea460e7a672a366000" rel="external nofollow noopener noreferrer" target="_blank">廖雪峰的官方网站, 迭代器</a></li>
-<li><a href="http://wiki.jikexueyuan.com/project/explore-python/Advanced-Features/iterator.html" rel="external nofollow noopener noreferrer" target="_blank">极客学院, 迭代器</a></li>
-<li><a href="http://www.mindview.net/Books/Python/ThinkingInPython.html" rel="external nofollow noopener noreferrer" target="_blank">Bruce Eckel, Thinking in Python</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMjMxNzY3L3doYXQtZG9lcy10aGUteWllbGQta2V5d29yZC1kby8yMzE4NTUjMjMxODU1" title="https://stackoverflow.com/questions/231767/what-does-the-yield-keyword-do/231855#231855">Stackoverflow, What does the “yield” keyword do?
+<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cubGlhb3h1ZWZlbmcuY29tL3dpa2kvMDAxNDMxNjA4OTU1NzI2NGE2YjM0ODk1OGY0NDk5NDlkZjQyYTZkM2EyZTU0MmMwMDAvMDAxNDMxNzgyNTQxOTM1ODlkZjljNjEyZDI0NDk2MThlYTQ2MGU3YTY3MmEzNjYwMDA=" title="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143178254193589df9c612d2449618ea460e7a672a366000">廖雪峰的官方网站, 迭代器<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL3dpa2kuamlrZXh1ZXl1YW4uY29tL3Byb2plY3QvZXhwbG9yZS1weXRob24vQWR2YW5jZWQtRmVhdHVyZXMvaXRlcmF0b3IuaHRtbA==" title="http://wiki.jikexueyuan.com/project/explore-python/Advanced-Features/iterator.html">极客学院, 迭代器<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy5taW5kdmlldy5uZXQvQm9va3MvUHl0aG9uL1RoaW5raW5nSW5QeXRob24uaHRtbA==" title="http://www.mindview.net/Books/Python/ThinkingInPython.html">Bruce Eckel, Thinking in Python<i class="fa fa-external-link"></i></span></li>
 </ol>
 ]]></content>
       <categories>
@@ -797,15 +801,14 @@
     <url>/2017/09/25/polymorphism-in-python/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
 <!-- tocstop -->
-<p>最近在看一本基于pyhton的Design Pattern方面的书，其中涉及到了python的多态，也就是polymorphism。用python来解释，到底什么是多态(polymorphism)呢？StackOverflow上有一个很好的答案，下面便是答案中举的例子</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span>    <span class="comment"># Constructor of the class</span></span><br><span class="line">        self.name = name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">talk</span><span class="params">(self)</span>:</span>              <span class="comment"># Abstract method, defined by convention only</span></span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError(<span class="string">"Subclass must implement abstract method"</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">talk</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Meow!'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">talk</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Woof! Woof!'</span></span><br><span class="line"></span><br><span class="line">animals = [Cat(<span class="string">'Missy'</span>),</span><br><span class="line">           Cat(<span class="string">'Mr. Mistoffelees'</span>),</span><br><span class="line">           Dog(<span class="string">'Lassie'</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> animal <span class="keyword">in</span> animals:</span><br><span class="line">    <span class="keyword">print</span> animal.name + <span class="string">': '</span> + animal.talk()</span><br></pre></td></tr></table></figure>
+<p>最近在看一本基于pyhton的Design Pattern方面的书，其中涉及到了python的多态，也就是polymorphism。用python来解释，到底什么是多态(polymorphism)呢？StackOverflow上有一个很好的答案，下面便是答案中举的例子<br><a id="more"></a><br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span>    <span class="comment"># Constructor of the class</span></span><br><span class="line">        self.name = name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">talk</span><span class="params">(self)</span>:</span>              <span class="comment"># Abstract method, defined by convention only</span></span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError(<span class="string">"Subclass must implement abstract method"</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">talk</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Meow!'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">talk</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Woof! Woof!'</span></span><br><span class="line"></span><br><span class="line">animals = [Cat(<span class="string">'Missy'</span>),</span><br><span class="line">           Cat(<span class="string">'Mr. Mistoffelees'</span>),</span><br><span class="line">           Dog(<span class="string">'Lassie'</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> animal <span class="keyword">in</span> animals:</span><br><span class="line">    <span class="keyword">print</span> animal.name + <span class="string">': '</span> + animal.talk()</span><br></pre></td></tr></table></figure></p>
 <p>从这个例子我们可以看出，不同的动物都可以“talk”，但它们“talk”的实现方式不同。 因此，“talk”行为是多态的，它根据动物的不同而有所不同。 我们可以看到，抽象的Animal类实际上并不能“talk”，而具体的动物类（如Dog和Cat）则分别实现了“talk”的动作。</p>
 <p>类似地，加法操作符<code>+</code>在许多数学运算中有定义，在特定情况下，多态性允许我们根据具体规则定义加法操作符，比如在实数集下：<code>1 + 1 = 2</code>，但包含复数的情况下<code>(1 + 2i)+(2-9i)=(3-7i)</code>。</p>
 <p>总结来说，多态允许我们在抽象类中指定常用方法，并在特定子类中实现它们。</p>
 <p>参考</p>
 <ol>
-<li><a href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science" rel="external nofollow noopener noreferrer" target="_blank">Wikipedia Polymorphism</a>)</li>
-<li><a href="https://stackoverflow.com/questions/3724110/practical-example-of-polymorphism" rel="external nofollow noopener noreferrer" target="_blank">StackOverflow Polymorphism</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvUG9seW1vcnBoaXNtXyhjb21wdXRlcl9zY2llbmNl" title="https://en.wikipedia.org/wiki/Polymorphism_(computer_science">Wikipedia Polymorphism<i class="fa fa-external-link"></i></span>)</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMzcyNDExMC9wcmFjdGljYWwtZXhhbXBsZS1vZi1wb2x5bW9ycGhpc20=" title="https://stackoverflow.com/questions/3724110/practical-example-of-polymorphism">StackOverflow Polymorphism<i class="fa fa-external-link"></i></span></li>
 </ol>
 ]]></content>
       <categories>
@@ -833,10 +836,10 @@
 </ul>
 <!-- tocstop -->
 <p>作为一个游戏发烧友，同时也是小白全栈开发程序员我买了Alienware却只用来打游戏是在是太可惜了。为了搞搞开发，昨天配置了一天WSL (Windows Subsystems for Linxu)，用了Hyper+zsh的终端组合。其中在zsh中输入atom能启动windows的Atom也着实把我惊艳了一把，但其实也就算仅限于打开而已。事实是Windows中的文本编辑器并不能直接编辑其子系统中的文件。所以这个子系统在某些方便我觉得还没有Vagrant方便，没有图形界面，意味着不能使用Atom，Visual Studio Code这样代表先进生产力的工具，于是配置WSL搞搞开发的想法就此作罢。</p>
-<p>子系统搞不成，于是有了直接在Ubuntu上工作的想法。其实Alienware上安装Ubuntu不是很难，除了一些蓝牙和Wi-Fi方面的兼容问题，安装过程非常顺利。接下来step by step记录安装过程。</p>
-<h2><span id="制作ubuntu启动u盘">制作Ubuntu启动U盘</span></h2><p>在Ubuntu官方网站下载16.04 LTS系统镜像，并将其制作成启动U盘。<br>制作启动U盘的工具有很多，<a href="https://rufus.akeo.ie/" rel="external nofollow noopener noreferrer" target="_blank">Rufus</a> 是我用的一款，界面简单清爽无广告不收费。</p>
+<p>子系统搞不成，于是有了直接在Ubuntu上工作的想法。其实Alienware上安装Ubuntu不是很难，除了一些蓝牙和Wi-Fi方面的兼容问题，安装过程非常顺利。接下来step by step记录安装过程。<br><a id="more"></a></p>
+<h2><span id="制作ubuntu启动u盘">制作Ubuntu启动U盘</span></h2><p>在Ubuntu官方网站下载16.04 LTS系统镜像，并将其制作成启动U盘。<br>制作启动U盘的工具有很多，<span class="exturl" data-url="aHR0cHM6Ly9ydWZ1cy5ha2VvLmllLw==" title="https://rufus.akeo.ie/">Rufus<i class="fa fa-external-link"></i></span> 是我用的一款，界面简单清爽无广告不收费。</p>
 <p>Rufus界面如下，制作启动U盘时，注意Partition schemem and target system type选择同时支持UEFI和BIOS的格式。</p>
-<img src="/2017/09/15/install-ubuntu-on-alienware/rufus_en_2x.png" title="用Rufus制作Ubuntu启动U盘 (图片来源rufus.akeo.ie)">
+<img data-src="/2017/09/15/install-ubuntu-on-alienware/rufus_en_2x.png" title="用Rufus制作Ubuntu启动U盘 (图片来源rufus.akeo.ie)">
 <h2><span id="安装ubuntu">安装Ubuntu</span></h2><p>重新启动Windows，启动黑屏时按F11进入UEFI界面，有两个配置需要更改</p>
 <ul>
 <li>关闭secure boot</li>
@@ -851,23 +854,23 @@
 <li><p><code>lspci</code> 查看pci接口的设备</p>
 </li>
 </ul>
-<h3><span id="安装killer网卡驱动">安装killer网卡驱动</span></h3><p>如下图所示，<code>lspci | grep -i net</code>命令显示我使用的网卡型号是Qualcomm Atheros Killer E2400，通过搜索，发现Alienware使用的killer网卡的<a href="https://www.killernetworking.com/driver-downloads/knowledge-base?view=topic&amp;id=2" rel="external nofollow noopener noreferrer" target="_blank">官方网站</a>提供了相关驱动的下载。</p>
-<img src="/2017/09/15/install-ubuntu-on-alienware/alienware_wifi_driver.png" title="安装killer网卡驱动">
+<h3><span id="安装killer网卡驱动">安装killer网卡驱动</span></h3><p>如下图所示，<code>lspci | grep -i net</code>命令显示我使用的网卡型号是Qualcomm Atheros Killer E2400，通过搜索，发现Alienware使用的killer网卡的<span class="exturl" data-url="aHR0cHM6Ly93d3cua2lsbGVybmV0d29ya2luZy5jb20vZHJpdmVyLWRvd25sb2Fkcy9rbm93bGVkZ2UtYmFzZT92aWV3PXRvcGljJmFtcDtpZD0y" title="https://www.killernetworking.com/driver-downloads/knowledge-base?view=topic&amp;id=2">官方网站<i class="fa fa-external-link"></i></span>提供了相关驱动的下载。</p>
+<img data-src="/2017/09/15/install-ubuntu-on-alienware/alienware_wifi_driver.png" title="安装killer网卡驱动">
 <p>如上图所示，可通过如下命令安装killer网卡驱动</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget http://mirrors.kernel.org/ubuntu/pool/main/l/linux-firmware/linux-firmware_1.164_all.deb</span><br><span class="line">sudo dpkg -i linux-firmware*.deb</span><br><span class="line">sudo modprobe -r ath10k_pci &amp;&amp; sudo modprobe ath10k_pci</span><br></pre></td></tr></table></figure>
 <h3><span id="安装蓝牙驱动">安装蓝牙驱动</span></h3><p>首先通过下面的命令卸载已安装的蓝牙驱动并且安装新的蓝牙驱动</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get purge blueman bluez-utils bluez bluetooth</span><br><span class="line">sudo apt-get install blueman bluez-utils bluez bluetooth</span><br></pre></td></tr></table></figure>
 <p>然后再启动蓝牙服务</p>
 <p><code>sudo /etc/init.d/bluetooth start</code></p>
-<p>如下图所示，接下来就可以通过Blueman管理系统蓝牙连接了<br><img src="/2017/09/15/install-ubuntu-on-alienware/ubuntu_blueman_interface.png" title="Ubuntu上蓝牙连接管理软件Blueman界面"></p>
+<p>如下图所示，接下来就可以通过Blueman管理系统蓝牙连接了<br><img data-src="/2017/09/15/install-ubuntu-on-alienware/ubuntu_blueman_interface.png" title="Ubuntu上蓝牙连接管理软件Blueman界面"></p>
 <h2><span id="进阶配置alienfx">进阶配置AlienFx</span></h2><p>Alienware的一大特色就是它有狂野炫酷的灯，更换Ubuntu平台后，一个大问题就是戴尔官方没有Ubuntu平台的AlienFx。</p>
-<p>通过查询，发现有人写了开源版本的AlienFx，只可惜项目已经有好几年无人维护。下载最新版本试用后，不出以外的，该软件并不支持最新的Alienware，该软件支持的Alienware系列可以从<a href="https://doc.ubuntu-fr.org/alienfx" rel="external nofollow noopener noreferrer" target="_blank">该网站</a>中找到。</p>
+<p>通过查询，发现有人写了开源版本的AlienFx，只可惜项目已经有好几年无人维护。下载最新版本试用后，不出以外的，该软件并不支持最新的Alienware，该软件支持的Alienware系列可以从<span class="exturl" data-url="aHR0cHM6Ly9kb2MudWJ1bnR1LWZyLm9yZy9hbGllbmZ4" title="https://doc.ubuntu-fr.org/alienfx">该网站<i class="fa fa-external-link"></i></span>中找到。</p>
 <p>参考资料</p>
 <ol>
-<li><a href="https://rufus.akeo.ie/" rel="external nofollow noopener noreferrer" target="_blank">Rufus Offical Site</a></li>
-<li><a href="https://www.killernetworking.com/driver-downloads/knowledge-base?view=topic&amp;id=2" rel="external nofollow noopener noreferrer" target="_blank">Killer Networking</a></li>
-<li><a href="https://askubuntu.com/questions/776806/bluetooth-on-ubuntu-16-04" rel="external nofollow noopener noreferrer" target="_blank">Bluetooth on Ubuntu 16.04</a></li>
-<li><a href="https://doc.ubuntu-fr.org/alienfx" rel="external nofollow noopener noreferrer" target="_blank">AlienFx on Ubuntu</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ydWZ1cy5ha2VvLmllLw==" title="https://rufus.akeo.ie/">Rufus Offical Site<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cua2lsbGVybmV0d29ya2luZy5jb20vZHJpdmVyLWRvd25sb2Fkcy9rbm93bGVkZ2UtYmFzZT92aWV3PXRvcGljJmFtcDtpZD0y" title="https://www.killernetworking.com/driver-downloads/knowledge-base?view=topic&amp;id=2">Killer Networking<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy83NzY4MDYvYmx1ZXRvb3RoLW9uLXVidW50dS0xNi0wNA==" title="https://askubuntu.com/questions/776806/bluetooth-on-ubuntu-16-04">Bluetooth on Ubuntu 16.04<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kb2MudWJ1bnR1LWZyLm9yZy9hbGllbmZ4" title="https://doc.ubuntu-fr.org/alienfx">AlienFx on Ubuntu<i class="fa fa-external-link"></i></span></li>
 </ol>
 ]]></content>
       <categories>
@@ -889,7 +892,7 @@
 <li><a href="#安装搜狗中文输入法">安装搜狗中文输入法</a></li>
 </ul>
 <!-- tocstop -->
-<h3><span id="安装ibus中文输入法">安装IBus中文输入法</span></h3>  <img src="/2017/09/15/install-pinyin-in-Ubuntu/successfully_installed_pinyin.png" title="Ubuntu上的拼音输入法">
+<h3><span id="安装ibus中文输入法">安装IBus中文输入法</span></h3>  <img data-src="/2017/09/15/install-pinyin-in-Ubuntu/successfully_installed_pinyin.png" title="Ubuntu上的拼音输入法">
 <p>最近又重新安装了Ubuntu系统。因为要写中文博客，没有中文输入法实在是麻烦。在Ubuntu上安装中文输入法确实没有Windows上显而易见，所以写下步骤方便自己将来参考。</p>
 <ol>
 <li><p>首先进入系统设置选择language support，如果没有完整安装该功能，先根据系统提示完成安装</p>
@@ -904,19 +907,19 @@
 <p> <code>ibus restart</code></p>
 </li>
 <li><p>再进入系统设置选择Text Entry，点击左下角的小加号并在add input source界面中搜索Chinese，选择一款拼音输入法</p>
-<img src="/2017/09/15/install-pinyin-in-Ubuntu/ubuntu_add_input_method.png" title="选择Pinyin输入法">
+<img data-src="/2017/09/15/install-pinyin-in-Ubuntu/ubuntu_add_input_method.png" title="选择Pinyin输入法">
 </li>
 <li><p>使用吧</p>
 </li>
 </ol>
-<h3><span id="安装搜狗中文输入法">安装搜狗中文输入法</span></h3><p>使用了几天IBus的中文输入发，使用体验简直弱爆了。首先4k屏适配有问题，待选框时刻游离在屏幕之外，然而最致命的是，IBus拼音输入法竟然有切换到双拼就无法再切换回来的bug。早年间我在ubuntu 14上使用过搜狗输入法，用户体验良好，于是试着在ubuntu 16.04上安装。虽然安装步骤比在ubuntu 14上稍稍复杂一些，但是搜狗输入法完美适配4k屏幕而且一如既往的好用。安装步骤如下：</p>
+<h3><span id="安装搜狗中文输入法">安装搜狗中文输入法</span></h3><p>使用了几天IBus的中文输入发，使用体验简直弱爆了。首先4k屏适配有问题，待选框时刻游离在屏幕之外，然而最致命的是，IBus拼音输入法竟然有切换到双拼就无法再切换回来的bug。早年间我在ubuntu 14上使用过搜狗输入法，用户体验良好，于是试着在ubuntu 16.04上安装。虽然安装步骤比在ubuntu 14上稍稍复杂一些，但是搜狗输入法完美适配4k屏幕而且一如既往的好用。安装步骤如下：<br><a id="more"></a></p>
 <ol>
 <li><p>搜狗舒服法依赖Fcitx键盘输入法系统而不是IBus，所以安装搜狗输入法前需要确认Fcitx已经安装，若没有安装Fcitx，可以通过terminal</p>
 <p> <code>sudo apt-get install fcitx</code></p>
 <p> 如果安装过程中需要额外依赖，可以通过以下命令安装</p>
 <p> <code>apt-get install -f</code></p>
 </li>
-<li><p>点击<a href="http://pinyin.sogou.com/linux/" rel="external nofollow noopener noreferrer" target="_blank">这里</a>下载搜狗中文输入法，有32bit和64bit安装包可选，ubuntu用户可以选择deb格式安装包用Ubuntu Software Center来安装，当然可以到下载路径下通过以下命令安装</p>
+<li><p>点击<span class="exturl" data-url="aHR0cDovL3Bpbnlpbi5zb2dvdS5jb20vbGludXgv" title="http://pinyin.sogou.com/linux/">这里<i class="fa fa-external-link"></i></span>下载搜狗中文输入法，有32bit和64bit安装包可选，ubuntu用户可以选择deb格式安装包用Ubuntu Software Center来安装，当然可以到下载路径下通过以下命令安装</p>
 <p> <code>sudo dpkg -i sogoupinyin_2.1.0.0086_amd64.deb</code></p>
 </li>
 <li><p>安装完毕后，在从当前系统设置/语言支持里选择Fcitx做为键盘输入法系统</p>
@@ -927,9 +930,9 @@
 </ol>
 <p>参考资料</p>
 <ol>
-<li><a href="https://askubuntu.com/questions/59356/how-do-i-get-chinese-input-to-work" rel="external nofollow noopener noreferrer" target="_blank">How do I get Chinese input to work?</a></li>
-<li><a href="https://askubuntu.com/questions/455682/14-04-chinese-ibus-input-no-options" rel="external nofollow noopener noreferrer" target="_blank">14.04 Chinese Ibus Input - No Options</a></li>
-<li><a href="https://askubuntu.com/questions/450255/installing-sogou-%E6%90%9C%E7%8B%97%E6%8B%BC%E9%9F%B3" rel="external nofollow noopener noreferrer" target="_blank">Installing SOGOU 搜狗拼音</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy81OTM1Ni9ob3ctZG8taS1nZXQtY2hpbmVzZS1pbnB1dC10by13b3Jr" title="https://askubuntu.com/questions/59356/how-do-i-get-chinese-input-to-work">How do I get Chinese input to work?<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy80NTU2ODIvMTQtMDQtY2hpbmVzZS1pYnVzLWlucHV0LW5vLW9wdGlvbnM=" title="https://askubuntu.com/questions/455682/14-04-chinese-ibus-input-no-options">14.04 Chinese Ibus Input - No Options<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy80NTAyNTUvaW5zdGFsbGluZy1zb2dvdS0lRTYlOTAlOUMlRTclOEIlOTclRTYlOEIlQkMlRTklOUYlQjM=" title="https://askubuntu.com/questions/450255/installing-sogou-%E6%90%9C%E7%8B%97%E6%8B%BC%E9%9F%B3">Installing SOGOU 搜狗拼音<i class="fa fa-external-link"></i></span></li>
 </ol>
 ]]></content>
       <categories>
@@ -1392,13 +1395,12 @@
 <li><a href="#vim插件使用">Vim插件使用</a></li>
 </ul>
 <!-- tocstop -->
-<h2><span id="为什么要学习vim">为什么要学习Vim</span></h2><p>Vi或者Vim（Vi加强版）是众多Linux发行版中终端环境自带的文本编辑器，但似乎熟练掌握Vi/Vi不是在Linux上进行软件开发活动的必要条件。因为在Linux上开发软件的过程中，我们总是能找到更便于上手的，学习曲线更平缓的替代工具，比如gedit，sublime或者atom。然而在某些情况下，掌握Vi/Vim却显得十分的必要，比如需要远程链接到一台上个世纪的古董服务器上修改几行配置代码时，使用Vi/Vim进行编辑几乎是你的唯一选择，毕竟Vi诞生于1976年，比Linux的第一个版本发行时还要早17年，此外Vi/Vim可以直接运行在终端环境中，而gedit，sublime或者atom却需要在桌面环境的支持下才能运行。</p>
-<p>在刚进入公司实习时，培训材料中就有如何使用Vim以及如何用Vundle配置Vim的教程。但是其实我发现公司里用的最多的文本编辑器不是Vim，而是Atom。这样的现象，我个人觉得还是由于Vim的学习曲线些陡峭造成的。毕竟Vim不如gedit，sublime或者atom般开箱即用（out of the box），新手并不能指望在半个小时内掌握它，用它进行简单的编辑操作。此外，插件管理也不如sumblim或者atom般显而易见。我记得在实习第一周培训时，我自己就用了一天时间来配置Vim，给Vim安装Airline，NERDTree，Fugitive等等插件，来让Vim看起来更像一个桌面环境下的文本编辑器。实际上，公司里还是有人在使用Vim的，通常他们的编程水平都很高，完全不用鼠标，也很少从终端中切换出来，除非他们在搞全栈开发，需要时不时的在浏览器中测试下代码。</p>
+<h2><span id="为什么要学习vim">为什么要学习Vim</span></h2><p>Vi或者Vim（Vi加强版）是众多Linux发行版中终端环境自带的文本编辑器，但似乎熟练掌握Vi/Vi不是在Linux上进行软件开发活动的必要条件。因为在Linux上开发软件的过程中，我们总是能找到更便于上手的，学习曲线更平缓的替代工具，比如gedit，sublime或者atom。然而在某些情况下，掌握Vi/Vim却显得十分的必要，比如需要远程链接到一台上个世纪的古董服务器上修改几行配置代码时，使用Vi/Vim进行编辑几乎是你的唯一选择，毕竟Vi诞生于1976年，比Linux的第一个版本发行时还要早17年，此外Vi/Vim可以直接运行在终端环境中，而gedit，sublime或者atom却需要在桌面环境的支持下才能运行。<br><a id="more"></a><br>在刚进入公司实习时，培训材料中就有如何使用Vim以及如何用Vundle配置Vim的教程。但是其实我发现公司里用的最多的文本编辑器不是Vim，而是Atom。这样的现象，我个人觉得还是由于Vim的学习曲线些陡峭造成的。毕竟Vim不如gedit，sublime或者atom般开箱即用（out of the box），新手并不能指望在半个小时内掌握它，用它进行简单的编辑操作。此外，插件管理也不如sumblim或者atom般显而易见。我记得在实习第一周培训时，我自己就用了一天时间来配置Vim，给Vim安装Airline，NERDTree，Fugitive等等插件，来让Vim看起来更像一个桌面环境下的文本编辑器。实际上，公司里还是有人在使用Vim的，通常他们的编程水平都很高，完全不用鼠标，也很少从终端中切换出来，除非他们在搞全栈开发，需要时不时的在浏览器中测试下代码。</p>
 <p>有人说Vi/Vim是人类历史上最好用的文本编辑器，虽然我不知道此话的出处是哪里，暂且认同此话，如果能熟练掌握人类历史上最好用的文本编辑器，那自己作为程序员的逼格也会是相当的高，在众多的文本编辑器中，Vi/Vim应该是最符合Geek的。</p>
-<h2><span id="学习vim的正确姿势">学习Vim的正确姿势</span></h2><p>如果你有心，在Google里搜索Vim学习指南，我相信会有不少的学习笔记，或者类似于《X分钟/小时内掌握人类历史上最好用的文本编辑器》的文章。相信我，后面那种类型的文章还是不要看了，除非是vimtutor的翻译，后面我会提到。其实我很同意陈皓在<a href="http://coolshell.cn/articles/5426.html" rel="external nofollow noopener noreferrer" target="_blank">《简明 VIM 练级攻略》</a>中把学习Vim喻为学习钢琴，学习Vim不是30分钟的事情，而是需要几个星期去不断练习的。实际上，大多数Linux发行版除了自带Vi/Vim编辑器外，也内置了Vi/Vim的教程，在终端中输入<code>vimtutor</code>你就可以进入一个交互式的Vim学习教程中，该教程一共有7节，从hjkl光标移动，到编辑vimrc脚本均有涉及。默认的vimtutor是英文版的，网上也有很好的翻译版本，比如<a href="https://raw.githubusercontent.com/wjp2013/the_room_of_exercises/master/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/vimtutor/30%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9Avim%E4%B9%8Bvimtutor(%E5%8F%8C%E8%AF%AD%E7%89%88).txt" rel="external nofollow noopener noreferrer" target="_blank">《30分钟学会vim之vimtutor(双语版)》</a></p>
- <img src="/2017/05/21/use-vim/vimtutor.png" title="Vi/Vim编辑器的内置了的Vi/Vim教程">
-<h2><span id="配置vim的省时办法">配置Vim的省时办法</span></h2><p>之前我有提到在实习第一周培训时，我自己就用了一天时间来配置Vim，给Vim安装Airline，NERDTree，Fugitive等等插件。Vim有一个非常好的插件管理工具<a href="https://github.com/VundleVim/Vundle.vim" rel="external nofollow noopener noreferrer" target="_blank">Vundle</a>，安装完Vundle后，我们可以根据自己的喜好来管理，安装Vim插件来对Vim进行配置。其实直到今天我才发现了配置Vim更简单的方法，那就是用Vim发行版<a href="https://github.com/spf13/spf13-vim" rel="external nofollow noopener noreferrer" target="_blank">spf13</a>。spf13是一个跨平台的Vim发行版，可以在Windows，Linux和Mac平台上运行。简单来说，spf13就是帮你写好了vimrc文件，在Vim中执行PluginInstall命令后，所有在vimrc里设置好的插件就会依次安装。</p>
- <img src="/2017/05/21/use-vim/vimrc.png" title="安装完spf13-vim发行版后的vimrc配置文件">
+<h2><span id="学习vim的正确姿势">学习Vim的正确姿势</span></h2><p>如果你有心，在Google里搜索Vim学习指南，我相信会有不少的学习笔记，或者类似于《X分钟/小时内掌握人类历史上最好用的文本编辑器》的文章。相信我，后面那种类型的文章还是不要看了，除非是vimtutor的翻译，后面我会提到。其实我很同意陈皓在<span class="exturl" data-url="aHR0cDovL2Nvb2xzaGVsbC5jbi9hcnRpY2xlcy81NDI2Lmh0bWw=" title="http://coolshell.cn/articles/5426.html">《简明 VIM 练级攻略》<i class="fa fa-external-link"></i></span>中把学习Vim喻为学习钢琴，学习Vim不是30分钟的事情，而是需要几个星期去不断练习的。实际上，大多数Linux发行版除了自带Vi/Vim编辑器外，也内置了Vi/Vim的教程，在终端中输入<code>vimtutor</code>你就可以进入一个交互式的Vim学习教程中，该教程一共有7节，从hjkl光标移动，到编辑vimrc脚本均有涉及。默认的vimtutor是英文版的，网上也有很好的翻译版本，比如<span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dqcDIwMTMvdGhlX3Jvb21fb2ZfZXhlcmNpc2VzL21hc3Rlci8lRTglQUYlQkIlRTQlQjklQTYlRTclQUMlOTQlRTglQUUlQjAvdmltdHV0b3IvMzAlRTUlODglODYlRTklOTIlOUYlRTUlQUQlQTYlRTQlQkMlOUF2aW0lRTQlQjklOEJ2aW10dXRvciglRTUlOEYlOEMlRTglQUYlQUQlRTclODklODgpLnR4dA==" title="https://raw.githubusercontent.com/wjp2013/the_room_of_exercises/master/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/vimtutor/30%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9Avim%E4%B9%8Bvimtutor(%E5%8F%8C%E8%AF%AD%E7%89%88).txt">《30分钟学会vim之vimtutor(双语版)》<i class="fa fa-external-link"></i></span></p>
+ <img data-src="/2017/05/21/use-vim/vimtutor.png" title="Vi/Vim编辑器的内置了的Vi/Vim教程">
+<h2><span id="配置vim的省时办法">配置Vim的省时办法</span></h2><p>之前我有提到在实习第一周培训时，我自己就用了一天时间来配置Vim，给Vim安装Airline，NERDTree，Fugitive等等插件。Vim有一个非常好的插件管理工具<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1Z1bmRsZVZpbS9WdW5kbGUudmlt" title="https://github.com/VundleVim/Vundle.vim">Vundle<i class="fa fa-external-link"></i></span>，安装完Vundle后，我们可以根据自己的喜好来管理，安装Vim插件来对Vim进行配置。其实直到今天我才发现了配置Vim更简单的方法，那就是用Vim发行版<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NwZjEzL3NwZjEzLXZpbQ==" title="https://github.com/spf13/spf13-vim">spf13<i class="fa fa-external-link"></i></span>。spf13是一个跨平台的Vim发行版，可以在Windows，Linux和Mac平台上运行。简单来说，spf13就是帮你写好了vimrc文件，在Vim中执行PluginInstall命令后，所有在vimrc里设置好的插件就会依次安装。</p>
+ <img data-src="/2017/05/21/use-vim/vimrc.png" title="安装完spf13-vim发行版后的vimrc配置文件">
 <h2><span id="vim插件使用">Vim插件使用</span></h2><p>spf13集成了超多的Vim插件，比如用于显示文件目录结构的NERDTree，方便文件查找的ctrlp，集成语法检查Syntastic，Git集成的Fugitive等等。先在这里占个坑，接下来会写每个插件的使用方法</p>
 <ul>
 <li><a href>Vim最好用的插件管理器Vundle</a></li>
@@ -1435,12 +1437,12 @@
 </ul>
 <!-- tocstop -->
 <p>一般来说，利用git进行多人协作的网站开发项目都有不止一个分支，其中每一个分支对应于网站部署的一个架构。虽然网站部署架构千差万别，但几乎都是从开发环境（DEV）开始并以生产环境（PROD）结束，所以对应到git分支上就是 开发分支，测试分支，缓存分支和生产分支。</p>
-<h3><span id="开发分支-dev">开发分支 DEV</span></h3><p>开发分支是本地开发环境上用于开发新功能的分支，开发人员可以方便的在本地进行单元测试</p>
+<h3><span id="开发分支-dev">开发分支 DEV</span></h3><p>开发分支是本地开发环境上用于开发新功能的分支，开发人员可以方便的在本地进行单元测试<br><a id="more"></a></p>
 <h3><span id="测试分支-test">测试分支 TEST</span></h3><p>测试分支对应于测试环境，新功能开发完毕并在本地环境通过单元测试后，开发分支才可以合并到测试分支中，之后将测试分支部署到测试环境中进行集成测试</p>
 <h3><span id="缓冲分支-staging">缓冲分支 STAGING</span></h3><p>缓冲分支对应于缓冲环境，它是是生产环境的镜像，拥有和生产环境一样的硬件，软件环境，所以在这里可以进行和生产环境一样的测试（性能测试，负载测试等）。当新功能在测试环境通过集成测试后，开发分支才可以合并到缓冲分支中，之后将缓存分支部署到缓冲环境里进行和生产环境一样的测试</p>
 <h3><span id="生产分支-prod">生产分支 PROD</span></h3><p>生产分支对应于生产环境，生产环境也就是用户可以直接交互的环境。我们访问的网站，其实都是部署在生产环境里的。新功能在缓存分支通过测试后，含有新功能的开发分支最后并入生产分支中，生产分支被部署到生产环境里，新功能此时也最终被交付到了用户手中。</p>
 <p>一般来说，含有新功能的分支按顺序合并到测试分支，缓存分支和生产分支中，包含新功能的测试分支，缓存分支和生产分支也按顺序被部署到测试环境，缓存环境和生产环境中。一个网站的新功能就是这样经历重重测试，最终交付到用户手中哒。</p>
-<p>想要知道更多有关部署架构知识，请参考<a href="https://en.wikipedia.org/wiki/Deployment_environment" rel="external nofollow noopener noreferrer" target="_blank">Wiki部署环境</a></p>
+<p>想要知道更多有关部署架构知识，请参考<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRGVwbG95bWVudF9lbnZpcm9ubWVudA==" title="https://en.wikipedia.org/wiki/Deployment_environment">Wiki部署环境<i class="fa fa-external-link"></i></span></p>
 ]]></content>
       <categories>
         <category>Git</category>
@@ -1461,10 +1463,10 @@
 </ul>
 <!-- tocstop -->
 <p>一般来说，掌握了git的commit，branch，merge几个命令就足以应付90%的工作场景了，但是有时候我们也需要处理稍微复杂一点的工作场景，比如整理提交记录。</p>
-<h2><span id="什么时候使用cherry-pick">什么时候使用Cherry-pick</span></h2><p>Cherry pick 直译成中文就是采樱桃，樱桃有好有坏，挑选樱桃的过程就形象的类比了我们应用该命令挑选提交（Commit）的过程。<br>一般来说，利用git进行多人协作的网站开发项目都有不止一个分支，其中每一个分支对应于网站部署的一个架构。在多分支环境下，如果我们想要将一个或者一些在其他分支下提交（Commit）复制到当前分支所在的位置（HEAD）的话，<code>cherry-pick</code> 是最直接，最方便的办法了。</p>
-<h2><span id="一个例子">一个例子</span></h2><p><img src="https://cloud.githubusercontent.com/assets/15102793/25820068/4d99fcec-3430-11e7-8c66-3138cad6182f.png" alt="git cherry-pick命令图示，图片来源：http://learngitbranching.js.org"></p>
+<h2><span id="什么时候使用cherry-pick">什么时候使用Cherry-pick</span></h2><p>Cherry pick 直译成中文就是采樱桃，樱桃有好有坏，挑选樱桃的过程就形象的类比了我们应用该命令挑选提交（Commit）的过程。<br>一般来说，利用git进行多人协作的网站开发项目都有不止一个分支，其中每一个分支对应于网站部署的一个架构。在多分支环境下，如果我们想要将一个或者一些在其他分支下提交（Commit）复制到当前分支所在的位置（HEAD）的话，<code>cherry-pick</code> 是最直接，最方便的办法了。<br><a id="more"></a></p>
+<h2><span id="一个例子">一个例子</span></h2><p><img data-src="https://cloud.githubusercontent.com/assets/15102793/25820068/4d99fcec-3430-11e7-8c66-3138cad6182f.png" alt="git cherry-pick命令图示，图片来源：http://learngitbranching.js.org"></p>
 <p>如上图所示，如果我们想要将side分支上C2与C4分支复制到当前分支master所在位置的话，<code>git cherry-pick C2 C4</code> 能帮助我们吧side分支上的C2与C4提交以此应用到当前分支中，产生C2’与C4’提交，其中，这两个提交的内容分别和C2与C4对应，不过hash值会重新计算，不再与原hash值一样。</p>
-<p>在这里我也要推荐一个学习git操作的好网站 <a href="http://learngitbranching.js.org/" rel="external nofollow noopener noreferrer" target="_blank">learngitbranching.js.org</a>，也就是上面截图的来源。虽然网站名字叫做learn git branching，但是教学内容几乎涵盖git的方方面面。最重要的是，与看教程不同的是，该网站有交互式的git log graph，是git入门的不二之选。</p>
+<p>在这里我也要推荐一个学习git操作的好网站 <span class="exturl" data-url="aHR0cDovL2xlYXJuZ2l0YnJhbmNoaW5nLmpzLm9yZy8=" title="http://learngitbranching.js.org/">learngitbranching.js.org<i class="fa fa-external-link"></i></span>，也就是上面截图的来源。虽然网站名字叫做learn git branching，但是教学内容几乎涵盖git的方方面面。最重要的是，与看教程不同的是，该网站有交互式的git log graph，是git入门的不二之选。</p>
 ]]></content>
       <categories>
         <category>Git</category>
@@ -1486,11 +1488,10 @@
 <p>刚刚进公司时，发现同事在使用Git时都是输入一些我从来没见过的命令，比如<code>git st</code>, <code>git ci</code>什么的，但是这些命令在自己的电脑上却不存在。更有甚者，有同事优雅的在终端上输入<code>git fuck</code>命令，git竟把远端的branch fetch回本地了，我的天，难道自己用的是假git吗？<br>我弱弱问身边的同事，这才知道git别名的存在，借助于git别名我们就可以为git已有的命令取个上口好记的别名了。</p>
 <h2><span id="通过conig命令设置git别名">通过conig命令设置Git别名</span></h2><p>通常情况下，git最常用的几个命令是 <code>git branch</code>, <code>git checkout</code>, <code>git commit</code> 和<code>git status</code>。如果只是为这几个命令设置git别名，最简单的方法是在终端中输入以下命令</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global alias.br branch</span><br><span class="line">git config --global alias.co checkout</span><br><span class="line">git config --global alias.ci commit</span><br><span class="line">git config --global alias.st status</span><br></pre></td></tr></table></figure>
-<h2><span id="通过config文件设置git别名">通过config文件设置Git别名</span></h2><p>不过，如果我们一次想设置的别名比较多，那么我们可以通过修改<code>~/.gitconfig</code>文件来实现。<br>这时我们可以通过添加以下字段来完成和上述一样的设置.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[alias]</span><br><span class="line">        br = branch</span><br><span class="line">        co = checkout</span><br><span class="line">        ci = commit</span><br><span class="line">        st = status</span><br></pre></td></tr></table></figure>
+<h2><span id="通过config文件设置git别名">通过config文件设置Git别名</span></h2><p>不过，如果我们一次想设置的别名比较多，那么我们可以通过修改<code>~/.gitconfig</code>文件来实现。<br>这时我们可以通过添加以下字段来完成和上述一样的设置.<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[alias]</span><br><span class="line">        br = branch</span><br><span class="line">        co = checkout</span><br><span class="line">        ci = commit</span><br><span class="line">        st = status</span><br></pre></td></tr></table></figure></p>
 <p>同时，如果我们想修改或者取消自己设置的git别名，那么我们也可以通过修改或者删除<code>~/.gitconfig</code>文件中相应的设置来达到目的。</p>
 <p>熟练的程序员和小白程序员的一个重大区别是前者会不断的优化自己的工作流程，能少花一秒钟解决的事情绝对不会用上两秒钟去做。也许这么说有些夸张，但是时间积少成多，git别名就是优化Git工作流程的利器。</p>
-<p>有关更多git别名的使用方法，请参考Git官方文档 <a href="https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-Git-%E5%88%AB%E5%90%8D" rel="external nofollow noopener noreferrer" target="_blank">Git 基础 - Git 别名</a></p>
+<p>有关更多git别名的使用方法，请参考Git官方文档 <span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9ib29rL3poL3YyL0dpdC0lRTUlOUYlQkElRTclQTElODAtR2l0LSVFNSU4OCVBQiVFNSU5MCU4RA==" title="https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-Git-%E5%88%AB%E5%90%8D">Git 基础 - Git 别名<i class="fa fa-external-link"></i></span></p>
 ]]></content>
       <categories>
         <category>Git</category>
@@ -1525,6 +1526,7 @@
 <p>作为一个小白全栈开发程序员，有一个顺手的开发环境能很好的节约自己的时间。这篇文章就简单的介绍一下，最近自己在Ubuntu系统上使用的全站开发环境以及相应的配置流程。</p>
 <h2><span id="放弃bash使用zsh">放弃Bash，使用Zsh</span></h2>
 <p>就笔者所使用的Ubuntu 16.04而言，Termianl默认的Shell是大名鼎鼎的Bash，虽然Bash几乎是所有Linux发行版的默认Shell，但对于我这个小白程序员而言却不一定是最优的选择。比如说我想知道Linux下常用的压缩解压缩命令tar后面可以用什么参数，怎么使用， 或者想要使用的某个命令我只记得其中的一部分，需要自动补全。这时候Zsh就能满足我这个小白的需求了。</p>
+<a id="more"></a>
 <h3><span id="zsh的使用">Zsh的使用</span></h3><h4><span id="安装zsh">安装Zsh</span></h4><ol>
 <li><p>用Ubuntu系统自带的软件包管理工具 <code>apt-get</code></p>
 <p><code>sudo apt-get update &amp;&amp; sudo apt-get install zsh</code></p>
@@ -1536,7 +1538,7 @@
 <p><code>sudo reboot</code></p>
 </li>
 <li><p>重启系统，再次启动Terminal后，在Shell提示中选择 0 (生成一个空的Zsh配置文件.zshrc)， 接下来我们再详细说明如何配置Zsh</p>
-<img src="/2017/04/16/dev-env-for-full-stack-dev/14_28_14.png" title="重启系统在Shell提示中选择 0 (生成一个空的Zsh配置文件.zshrc)">
+<img data-src="/2017/04/16/dev-env-for-full-stack-dev/14_28_14.png" title="重启系统在Shell提示中选择 0 (生成一个空的Zsh配置文件.zshrc)">
 </li>
 <li><p>验证安装，输入下面的命令，Terminal将会输出zsh</p>
 <p><code>echo $0</code></p>
@@ -1546,7 +1548,7 @@
 <h4><span id="安装zsh的配置插件oh-my-zsh">安装Zsh的配置插件，oh-my-zsh</span></h4><ul>
 <li><p>使用curl命令下载并执行oh-my-zsh的安装脚本</p>
 <p><code>sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;</code></p>
-<img src="/2017/04/16/dev-env-for-full-stack-dev/14_52_22.png" title="安装脚本执行完毕后，Zsh自动配置完毕">
+<img data-src="/2017/04/16/dev-env-for-full-stack-dev/14_52_22.png" title="安装脚本执行完毕后，Zsh自动配置完毕">
 </li>
 </ul>
 <p>接下来我们就可以享受Zsh带给我们的便利了</p>
@@ -1555,13 +1557,13 @@
 <li><p>将默认字段 <code>ZSH_THEME=&quot;robbyrussell&quot;</code> 改为<code>ZSH_THEME=&quot;agnoster&quot;</code></p>
 </li>
 <li><p>由于agnoster主题使用了powerline中的字体，很有可能在没有相应字体的环境下，terminal会有如下字体显示问题</p>
-<img src="/2017/04/16/dev-env-for-full-stack-dev/agnoster_font_problem.png" title="agnoster 主题的zsh遇到了字体显示问题">
+<img data-src="/2017/04/16/dev-env-for-full-stack-dev/agnoster_font_problem.png" title="agnoster 主题的zsh遇到了字体显示问题">
 </li>
 </ul>
 <ul>
-<li><p>如果遇到字体显示问题，可以安装该<a href="https://github.com/powerline/fonts" rel="external nofollow noopener noreferrer" target="_blank">repo</a>中的字体或使用以下脚本安装缺失的字体</p>
+<li><p>如果遇到字体显示问题，可以安装该<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bvd2VybGluZS9mb250cw==" title="https://github.com/powerline/fonts">repo<i class="fa fa-external-link"></i></span>中的字体或使用以下脚本安装缺失的字体</p>
 <p><code>sudo apt-get install fonts-powerline</code></p>
-<img src="/2017/04/16/dev-env-for-full-stack-dev/agnoster_font_correct.png" title="agnoster 主题的zsh">
+<img data-src="/2017/04/16/dev-env-for-full-stack-dev/agnoster_font_correct.png" title="agnoster 主题的zsh">
 </li>
 </ul>
 <h2><span id="放弃terminal使用terminator">放弃Terminal，使用Terminator</span></h2><p>Ubuntu系统自带的Terminal固然好用，但是也有局限性。比如我想要同时查看两个Web App运行状态在Terminal上的输出，就得打开两个Terminal的窗口来监视，有没有可能在一个窗口下打开多个Terminal，并来回切换呢？Terminator便是为解决这个需求而存在的。</p>
@@ -1574,7 +1576,7 @@
 </li>
 </ol>
 <p>打开Terminator，系统自带的Terminal就可以关掉了。右键Terminator图标，选择固定到启动栏，这样以后可以直接点击图标启动Terminator，不用再通过系统自带的Terminal来启动了。</p>
-<h3><span id="使用terminator">使用Terminator</span></h3><img src="/2017/04/16/dev-env-for-full-stack-dev/16_02_44.png" title="同时打开了四个Terminal窗口的Terminator">
+<h3><span id="使用terminator">使用Terminator</span></h3><img data-src="/2017/04/16/dev-env-for-full-stack-dev/16_02_44.png" title="同时打开了四个Terminal窗口的Terminator">
 <p>借助快捷键，Terminator有着强大的多窗口Terminal管理功能，下面我选取最常用的几个功能进行介绍。</p>
 <ul>
 <li><kbd>shift</kbd> + <kbd>ctrl</kbd> + <kbd>o</kbd> 向下分裂与当前窗口等宽的新窗口</li>
