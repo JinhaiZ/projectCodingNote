@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://codingnote.com/"/>
-  <updated>2020-03-15T10:55:47.344Z</updated>
+  <updated>2020-03-15T21:47:33.947Z</updated>
   <id>http://codingnote.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java实践指南 注疏</title>
+    <link href="http://codingnote.com/2020/03/15/java-for-the-real-word-notes/"/>
+    <id>http://codingnote.com/2020/03/15/java-for-the-real-word-notes/</id>
+    <published>2020-03-15T16:13:11.000Z</published>
+    <updated>2020-03-15T21:47:33.947Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc --><ul><li><a href="#java虚拟机">Java虚拟机</a></li><li><a href="#拓展阅读">拓展阅读</a></li></ul><!-- tocstop --><h2><span id="java虚拟机">Java虚拟机</span></h2><p>JVM(Java Virtual Machine) 既可以指Java虚拟机规范，也可以指具体的某个实现。当JVM指Java虚拟机规范时，我们要注意规范的版本。比如是JVM 1.8 还是 JVM 1.9。Java有很好的向后性，使用高版本JVM的Java编译器也可以顺利编译针对低版本JVM开发的代码。也正是由于Java的向后兼容，很多过时的语言规范成了新的语言规范的包袱，很多过时的标准类库依然遗留在新版本的JDK中。</p><a id="more"></a><ul><li><p>过时的java.util.Date包</p><p>在很大程度上，java.time.*已经取代java.util.Date包。</p></li><li><p>类型擦除</p><p>泛型只在编译时存在，运行时泛型信息会被清除。Java的向后兼容性允许我们初始化类似<code>ArrayList</code>的原始类型（Raw type），但是通常不建议这么做。</p></li><li><p>const和goto两个关键字被保留</p><p>但并未实现。</p></li><li>基本类型的封装类</li></ul><p>比如int和java.lang.Integer，boolean和java.lang.Boolean，等等。</p><ul><li><p>过时的集合实现</p><p>例如Hashtable和Vector诞生于Java 2 plateform时代（Java 1.2）之前，所以Hashtable都没有实现Map接口，Vector也没有实现List接口。在Java 1.2发布时，这些老旧集合都被改进以适应新的集合接口规范。但是使用它们的场景也跟着改变了。如果不需要线程安全，建议使用HashMap和ArrayList，如果需要高并发，建议从ava.util.concurrent包中找到合适的实现。</p></li></ul><p>当JVM指某个实现时，由于JVM的规范是公开的，所以任何人都可以根据JVM的规范来自己实现。然而有名的莫过于Oracle公司的Oracle JDK和开源的<span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0Lw==" title="https://openjdk.java.net/">Open JDK<i class="fa fa-external-link"></i></span>。</p><p><em>JDK是Java Development Kit，其中包括JRE（Java Runtime Environment ）和一些开发工具，其中JRE包括JVM的实现，运行Java程序需要的类（Bootstrap classes和Extension Classes）以及一些配置文件（Property Files）</em></p><p>Open JDK是Sun公司于2006年开始开发，2007年5月8日发布的Java SE标准实现。市面上的各种JVM实现几乎都是从Open JDK演化而来，其中也包括Oracle JDK。这些不同的JVM实现的区别最主要体现在它们的许可限制，以及针对特定平台的优化。</p><p><em>Sun公司于2009年4月20日被Oracle公司以74亿美金收购，所以现在Open JDK和Oracle JDK的开发实际上都是由Oracle公司主导的。当然，Open JDK作为开源项目，Red Hat，Azul Systems，IBM，Apple和SAP以及Java社区也都参与了开发</em></p><p>注意从Oracle JDK11开始，使用它的LTS（Long time support，长期支持版本）需要商业许可。这也是为什么一些企业，比如Amazon也着手实现了自己的JVM，Java Corretto。</p><h2><span id="拓展阅读">拓展阅读</span></h2><ol><li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXR1cmluZy5jb20uY24vYm9vay8yNDM4" title="https://www.ituring.com.cn/book/2438">Java实践指南, Phillip Johnson, 武传海译<i class="fa fa-external-link"></i></span></li><li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFlbGR1bmcuY29tL2p2bS12cy1qcmUtdnMtamRr" title="https://www.baeldung.com/jvm-vs-jre-vs-jdk">Difference Between JVM, JRE, and JDK, Baeldung<i class="fa fa-external-link"></i></span></li><li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMjIzNTgwNzEvZGlmZmVyZW5jZXMtYmV0d2Vlbi1vcmFjbGUtamRrLWFuZC1vcGVuamRr" title="https://stackoverflow.com/questions/22358071/differences-between-oracle-jdk-and-openjdk">Differences between Oracle JDK and Openjdk, Wikipedia<i class="fa fa-external-link"></i></span></li><li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvT3BlbkpESw==" title="https://en.wikipedia.org/wiki/OpenJDK">OpenJDK, Wikipedia<i class="fa fa-external-link"></i></span></li><li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvU3VuX01pY3Jvc3lzdGVtcw==" title="https://en.wikipedia.org/wiki/Sun_Microsystems">Sun Microsystems, Wikipedia<i class="fa fa-external-link"></i></span></li><li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvTGlzdF9vZl9KYXZhX3ZpcnR1YWxfbWFjaGluZXMjUHJvcHJpZXRhcnlfaW1wbGVtZW50YXRpb25z" title="https://en.wikipedia.org/wiki/List_of_Java_virtual_machines#Proprietary_implementations">List of Java virtual machines, Wikipedia<i class="fa fa-external-link"></i></span></li><li><span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS9mci9jb3JyZXR0by8=" title="https://aws.amazon.com/fr/corretto/">Amazon Corretto, AWS<i class="fa fa-external-link"></i></span></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;目录&quot;&gt;&lt;a href=&quot;#目录&quot; class=&quot;headerlink&quot; title=&quot;目录&quot;&gt;&lt;/a&gt;目录&lt;/h2&gt;&lt;!-- toc --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#java虚拟机&quot;&gt;Java虚拟机&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#拓展阅读&quot;&gt;拓展阅读&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- tocstop --&gt;
+&lt;h2 id=&quot;Java虚拟机&quot;&gt;&lt;a href=&quot;#Java虚拟机&quot; class=&quot;headerlink&quot; title=&quot;Java虚拟机&quot;&gt;&lt;/a&gt;Java虚拟机&lt;/h2&gt;&lt;p&gt;JVM(Java Virtual Machine) 既可以指Java虚拟机规范，也可以指具体的某个实现。当JVM指Java虚拟机规范时，我们要注意规范的版本。比如是JVM 1.8 还是 JVM 1.9。Java有很好的向后性，使用高版本JVM的Java编译器也可以顺利编译针对低版本JVM开发的代码。也正是由于Java的向后兼容，很多过时的语言规范成了新的语言规范的包袱，很多过时的标准类库依然遗留在新版本的JDK中。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Java实践指南" scheme="http://codingnote.com/categories/Java%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/"/>
+    
+      <category term="注疏" scheme="http://codingnote.com/categories/Java%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/%E6%B3%A8%E7%96%8F/"/>
+    
+    
+      <category term="Java实践指南" scheme="http://codingnote.com/tags/Java%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
   
   <entry>
     <title>2020年 再看开闭原则</title>
@@ -136,11 +166,11 @@
       <category term="Java" scheme="http://codingnote.com/categories/Java-%E9%80%9A%E9%85%8D%E7%AC%A6/Java-%E6%B3%9B%E5%9E%8B/Java/"/>
     
     
-      <category term="Java" scheme="http://codingnote.com/tags/Java/"/>
-    
       <category term="Java 通配符" scheme="http://codingnote.com/tags/Java-%E9%80%9A%E9%85%8D%E7%AC%A6/"/>
     
       <category term="Java 泛型" scheme="http://codingnote.com/tags/Java-%E6%B3%9B%E5%9E%8B/"/>
+    
+      <category term="Java" scheme="http://codingnote.com/tags/Java/"/>
     
   </entry>
   
@@ -788,35 +818,6 @@
     <updated>2020-01-04T16:25:40.605Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table><thead><tr><th>情况</th><th>时间复杂度</th><th>空间复杂度</th></tr></thead><tbody><tr><td>最优</td><td>O(N)</td><td>O(1)</td></tr><tr><td>平均</td><td>O(N)</td><td>O(1)</td></tr><tr><td>最差</td><td>O(N)</td><td>O(1)</td></tr></tbody></table><h3><span id="算法分析">算法分析</span></h3><p>可以想象有一个数组长度为N+1，数组元素为1,2,…N,N+1，这样便可以用等差求和公式算出该数组的总和。用总和减去输入数组A的和便可以知道数组A缺失了哪个元素。注意python <code>sum()</code>的算法复杂度为O(N)，故该算法的算法复杂度是O(N)。</p><h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    N = len(A)</span><br><span class="line">    start = <span class="number">1</span></span><br><span class="line">    end = len(A)+<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> (N+<span class="number">1</span>)*(start+end)/<span class="number">2</span> - sum(A)</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h3&gt;&lt;span id=&quot;算法复杂度分析&quot;&gt;算法复杂度分析&lt;/span&gt;&lt;/h3
-      
-    
-    </summary>
-    
-      <category term="Notes" scheme="http://codingnote.com/categories/Notes/"/>
-    
-      <category term="Codility" scheme="http://codingnote.com/categories/Notes/Codility/"/>
-    
-    
-      <category term="Codility" scheme="http://codingnote.com/tags/Codility/"/>
-    
-      <category term="Python" scheme="http://codingnote.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Codility FrogJmp in Python</title>
-    <link href="http://codingnote.com/2017/05/31/codility-frog-jmp/"/>
-    <id>http://codingnote.com/2017/05/31/codility-frog-jmp/</id>
-    <published>2017-05-31T19:28:25.000Z</published>
-    <updated>2020-01-04T16:25:40.601Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table><thead><tr><th>情况</th><th>时间复杂度</th><th>空间复杂度</th></tr></thead><tbody><tr><td>最优</td><td>O(1)</td><td>O(1)</td></tr><tr><td>平均</td><td>O(1)</td><td>O(1)</td></tr><tr><td>最差</td><td>O(1)</td><td>O(1)</td></tr></tbody></table><p>算法复杂度不依赖于输入数据的多少，该算法总是在固定时间内完成。</p><h3><span id="算法分析">算法分析</span></h3><p>已知长度Y-X，步长D，求步数。难点在于长度能否整除步长，若能整除，返回步长，若不能整除，对步长向上取整。向上取整可以同python math库里的ceil函数。如果不想加载math库，只用python内建函数可以吗？其实也是可以的。难度在对于求得的步长是否+1上。由于python除法<code>/</code>会截断小数部分，我们可以用取余<code>%</code>操作判断长度能否整除步长，若能整除，返回步长，若不能整除，对步长+1即可。</p><h3><span id="python-数值转换">Python 数值转换</span></h3><p>python 数值转换函数<code>int()</code>把bool型转换为int型整数值，<code>int(True) =&gt; 1</code> <code>int(False) =&gt; 0</code></p><h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(X, Y, D)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="keyword">return</span> (Y-X)/D + int((Y-X)%D &gt; <span class="number">0</span>)</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     

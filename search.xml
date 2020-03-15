@@ -1,6 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Java实践指南 注疏</title>
+    <url>/2020/03/15/java-for-the-real-word-notes/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+<ul>
+<li><a href="#java虚拟机">Java虚拟机</a></li>
+<li><a href="#拓展阅读">拓展阅读</a></li>
+</ul>
+<!-- tocstop -->
+<h2><span id="java虚拟机">Java虚拟机</span></h2><p>JVM(Java Virtual Machine) 既可以指Java虚拟机规范，也可以指具体的某个实现。当JVM指Java虚拟机规范时，我们要注意规范的版本。比如是JVM 1.8 还是 JVM 1.9。Java有很好的向后性，使用高版本JVM的Java编译器也可以顺利编译针对低版本JVM开发的代码。也正是由于Java的向后兼容，很多过时的语言规范成了新的语言规范的包袱，很多过时的标准类库依然遗留在新版本的JDK中。</p>
+<a id="more"></a>
+<ul>
+<li><p>过时的java.util.Date包</p>
+<p>在很大程度上，java.time.*已经取代java.util.Date包。</p>
+</li>
+<li><p>类型擦除</p>
+<p>泛型只在编译时存在，运行时泛型信息会被清除。Java的向后兼容性允许我们初始化类似<code>ArrayList</code>的原始类型（Raw type），但是通常不建议这么做。</p>
+</li>
+<li><p>const和goto两个关键字被保留</p>
+<p>但并未实现。</p>
+</li>
+<li>基本类型的封装类</li>
+</ul>
+<p>比如int和java.lang.Integer，boolean和java.lang.Boolean，等等。</p>
+<ul>
+<li><p>过时的集合实现</p>
+<p>例如Hashtable和Vector诞生于Java 2 plateform时代（Java 1.2）之前，所以Hashtable都没有实现Map接口，Vector也没有实现List接口。在Java 1.2发布时，这些老旧集合都被改进以适应新的集合接口规范。但是使用它们的场景也跟着改变了。如果不需要线程安全，建议使用HashMap和ArrayList，如果需要高并发，建议从ava.util.concurrent包中找到合适的实现。</p>
+</li>
+</ul>
+<p>当JVM指某个实现时，由于JVM的规范是公开的，所以任何人都可以根据JVM的规范来自己实现。然而有名的莫过于Oracle公司的Oracle JDK和开源的<span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0Lw==" title="https://openjdk.java.net/">Open JDK<i class="fa fa-external-link"></i></span>。</p>
+<p><em>JDK是Java Development Kit，其中包括JRE（Java Runtime Environment ）和一些开发工具，其中JRE包括JVM的实现，运行Java程序需要的类（Bootstrap classes和Extension Classes）以及一些配置文件（Property Files）</em></p>
+<p>Open JDK是Sun公司于2006年开始开发，2007年5月8日发布的Java SE标准实现。市面上的各种JVM实现几乎都是从Open JDK演化而来，其中也包括Oracle JDK。这些不同的JVM实现的区别最主要体现在它们的许可限制，以及针对特定平台的优化。</p>
+<p><em>Sun公司于2009年4月20日被Oracle公司以74亿美金收购，所以现在Open JDK和Oracle JDK的开发实际上都是由Oracle公司主导的。当然，Open JDK作为开源项目，Red Hat，Azul Systems，IBM，Apple和SAP以及Java社区也都参与了开发</em></p>
+<p>注意从Oracle JDK11开始，使用它的LTS（Long time support，长期支持版本）需要商业许可。这也是为什么一些企业，比如Amazon也着手实现了自己的JVM，Java Corretto。</p>
+<h2><span id="拓展阅读">拓展阅读</span></h2><ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXR1cmluZy5jb20uY24vYm9vay8yNDM4" title="https://www.ituring.com.cn/book/2438">Java实践指南, Phillip Johnson, 武传海译<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFlbGR1bmcuY29tL2p2bS12cy1qcmUtdnMtamRr" title="https://www.baeldung.com/jvm-vs-jre-vs-jdk">Difference Between JVM, JRE, and JDK, Baeldung<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMjIzNTgwNzEvZGlmZmVyZW5jZXMtYmV0d2Vlbi1vcmFjbGUtamRrLWFuZC1vcGVuamRr" title="https://stackoverflow.com/questions/22358071/differences-between-oracle-jdk-and-openjdk">Differences between Oracle JDK and Openjdk, Wikipedia<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvT3BlbkpESw==" title="https://en.wikipedia.org/wiki/OpenJDK">OpenJDK, Wikipedia<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvU3VuX01pY3Jvc3lzdGVtcw==" title="https://en.wikipedia.org/wiki/Sun_Microsystems">Sun Microsystems, Wikipedia<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvTGlzdF9vZl9KYXZhX3ZpcnR1YWxfbWFjaGluZXMjUHJvcHJpZXRhcnlfaW1wbGVtZW50YXRpb25z" title="https://en.wikipedia.org/wiki/List_of_Java_virtual_machines#Proprietary_implementations">List of Java virtual machines, Wikipedia<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS9mci9jb3JyZXR0by8=" title="https://aws.amazon.com/fr/corretto/">Amazon Corretto, AWS<i class="fa fa-external-link"></i></span></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Java实践指南</category>
+        <category>注疏</category>
+      </categories>
+      <tags>
+        <tag>Java实践指南</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2020年 再看开闭原则</title>
     <url>/2020/03/10/revisit-open-closed-principle/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
@@ -288,9 +340,9 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>Java 通配符</tag>
         <tag>Java 泛型</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
