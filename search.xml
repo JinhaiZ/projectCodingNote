@@ -7,9 +7,10 @@
 <ul>
 <li><a href="#java虚拟机">Java虚拟机</a></li>
 <li><a href="#拓展阅读">拓展阅读</a></li>
+<li><a href="#构建工具">构建工具</a></li>
 </ul>
 <!-- tocstop -->
-<h2><span id="java虚拟机">Java虚拟机</span></h2><p>JVM(Java Virtual Machine) 既可以指Java虚拟机规范，也可以指具体的某个实现。当JVM指Java虚拟机规范时，我们要注意规范的版本。比如是JVM 1.8 还是 JVM 1.9。Java有很好的向后性，使用高版本JVM的Java编译器也可以顺利编译针对低版本JVM开发的代码。也正是由于Java的向后兼容，很多过时的语言规范成了新的语言规范的包袱，很多过时的标准类库依然遗留在新版本的JDK中。</p>
+<h2><span id="java虚拟机">Java虚拟机</span></h2><p>JVM(Java Virtual Machine) 既可以指Java虚拟机规范，也可以指具体的某个实现。当JVM指Java虚拟机规范时，我们要注意虚拟机规范的版本。比如是JVM 1.8 还是 JVM 1.9。Java有很好的向后兼容性，使用高版本的Java编译器也可以顺利编译针对低版本JVM开发的代码。也正是由于Java的向后兼容，很多过时的语言规范成了新的语言规范的包袱，很多过时的标准类库依然遗留在新版本的JDK中。</p>
 <a id="more"></a>
 <ul>
 <li><p>过时的java.util.Date包</p>
@@ -29,13 +30,14 @@
 <p>例如Hashtable和Vector诞生于Java 2 plateform时代（Java 1.2）之前，所以Hashtable都没有实现Map接口，Vector也没有实现List接口。在Java 1.2发布时，这些老旧集合都被改进以适应新的集合接口规范。但是使用它们的场景也跟着改变了。如果不需要线程安全，建议使用HashMap和ArrayList，如果需要高并发，建议从ava.util.concurrent包中找到合适的实现。</p>
 </li>
 </ul>
-<p>当JVM指某个实现时，由于JVM的规范是公开的，所以任何人都可以根据JVM的规范来自己实现。然而有名的莫过于Oracle公司的Oracle JDK和开源的<span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0Lw==" title="https://openjdk.java.net/">Open JDK<i class="fa fa-external-link"></i></span>。</p>
-<p><em>JDK是Java Development Kit，其中包括JRE（Java Runtime Environment ）和一些开发工具，其中JRE包括JVM的实现，运行Java程序需要的类（Bootstrap classes和Extension Classes）以及一些配置文件（Property Files）</em></p>
-<p>Open JDK是Sun公司于2006年开始开发，2007年5月8日发布的Java SE标准实现。市面上的各种JVM实现几乎都是从Open JDK演化而来，其中也包括Oracle JDK。这些不同的JVM实现的区别最主要体现在它们的许可限制，以及针对特定平台的优化。</p>
-<p><em>Sun公司于2009年4月20日被Oracle公司以74亿美金收购，所以现在Open JDK和Oracle JDK的开发实际上都是由Oracle公司主导的。当然，Open JDK作为开源项目，Red Hat，Azul Systems，IBM，Apple和SAP以及Java社区也都参与了开发</em></p>
-<p>注意从Oracle JDK11开始，使用它的LTS（Long time support，长期支持版本）需要商业许可。这也是为什么一些企业，比如Amazon也着手实现了自己的JVM，Java Corretto。</p>
-<h2><span id="拓展阅读">拓展阅读</span></h2><ol>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXR1cmluZy5jb20uY24vYm9vay8yNDM4" title="https://www.ituring.com.cn/book/2438">Java实践指南, Phillip Johnson, 武传海译<i class="fa fa-external-link"></i></span></li>
+<p>当JVM指某个实现时，可不要被它的名字欺骗（Java Virtual Machine）。它并不是指能够运行Java代码的虚拟机，而是指可以运行Java字节码（Java bytecode）的虚拟机。在Java编程语言设计之初，其设计者就考虑到了跨平台特性。所以Java语言不直接编译为在具体操作系统上运行的机器码，而是编译为Java字节码，从而与具体的操作系统解耦。Java字节码则可以在不同操作系统上被某个JVM实现解释运行。</p>
+<p>由于Java语言相比于其他语言，比如C语言多了JVM这一层抽象。Java语言编译器的实现不需要依赖于特定操作系统。这就好比是<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvT1NJJUU2JUE4JUExJUU1JTlFJThC" title="https://zh.wikipedia.org/wiki/OSI%E6%A8%A1%E5%9E%8B">OSI模型<i class="fa fa-external-link"></i></span> 的7层网络协议一样，抽象能帮助我们专注于真正重要的事情。比如网站的开发者不需要考虑用户的家里的的网卡，路由是什么规格的。甚至在一定程度上都不要关系用户使用的是什么操作系统或是浏览器。</p>
+<p>Java语言的这种设计，使其在早期就可以在各种操作系统上运行。这也是为什么Java语言在早期有<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvV3JpdGVfb25jZSxfcnVuX2FueXdoZXJl" title="https://en.wikipedia.org/wiki/Write_once,_run_anywhere">“一次编写，到处运行”（Write once, run everywhere）<i class="fa fa-external-link"></i></span>的口号。由于JVM的规范是免费且公开的，任何人也都可以根据JVM的规范来自己实现自己的语言。只要能编译成Java字节码，这种语言也能依赖JVM到处运行。实际上，这些语言还不少，比如可作为脚本语言的Groovy，整合面向对象和函数式编程的Scala，甚至IDE开发商Jetbrains也推出了Kotlin语言来推动IntelliJ IDEA的销售（当然由于Kotlin本身的优秀也使其获得了Google的大力支持）。</p>
+<p>如果你平时在电脑上运行过Java应用程序（Java Application），那么你需要安装一个叫JRE的东西而不是JVM。JRE（Java Runtime Environment）是一个可以让电脑运行Java应用程序的软件。它的内部包括一个JVM的实现，一些标准的类别函数库（Bootstrap classes和Extension Classes）以及一些配置文件（Property Files）。</p>
+<p>如果要开发Java应用程序，JRE是不够的。需要JDK（Java Development Kit），其中包括JRE和一些开发工具。最有名的JDK莫过于Oracle公司的Oracle JDK和开源的<span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0Lw==" title="https://openjdk.java.net/">Open JDK<i class="fa fa-external-link"></i></span>。</p>
+<p>Open JDK是Sun公司于2006年开始开发，2007年5月发布的。市面上的各种JVM实现几乎都是从Open JDK中的JVM演化而来，其中也包括Oracle JDK。因为Oracle公司在Open JDK发布后的两年，也就是2007年收购了Sun公司。所以现在Open JDK和Oracle JDK的开发实际上都是由Oracle公司主导的（当然，Open JDK作为开源项目，Red Hat，Azul Systems，IBM，Apple和SAP以及Java社区也都参与了开发）。</p>
+<p>虽然JVM的实现很多，但是这些不同的JVM实现在功能上区别不大（几乎都是基于Open JDK的JVM实现）但是有些JVM可以对特定平台进行优化，以实现在特定平台上性能优化。此外，这些JVM实现的许可限制可能有所不同。比如Oracle 从Oracle JDK11开始，使用它的LTS（Long time support，长期支持版本）需要商业许可。这也是为什么一些企业为了避免高昂的Oracle税，自己开发实现JVM，比如Amazon的Java Corretto。</p>
+<h2><span id="拓展阅读">拓展阅读</span></h2><ol start="2">
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFlbGR1bmcuY29tL2p2bS12cy1qcmUtdnMtamRr" title="https://www.baeldung.com/jvm-vs-jre-vs-jdk">Difference Between JVM, JRE, and JDK, Baeldung<i class="fa fa-external-link"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMjIzNTgwNzEvZGlmZmVyZW5jZXMtYmV0d2Vlbi1vcmFjbGUtamRrLWFuZC1vcGVuamRr" title="https://stackoverflow.com/questions/22358071/differences-between-oracle-jdk-and-openjdk">Differences between Oracle JDK and Openjdk, Wikipedia<i class="fa fa-external-link"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvT3BlbkpESw==" title="https://en.wikipedia.org/wiki/OpenJDK">OpenJDK, Wikipedia<i class="fa fa-external-link"></i></span></li>
@@ -43,6 +45,94 @@
 <li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvTGlzdF9vZl9KYXZhX3ZpcnR1YWxfbWFjaGluZXMjUHJvcHJpZXRhcnlfaW1wbGVtZW50YXRpb25z" title="https://en.wikipedia.org/wiki/List_of_Java_virtual_machines#Proprietary_implementations">List of Java virtual machines, Wikipedia<i class="fa fa-external-link"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS9mci9jb3JyZXR0by8=" title="https://aws.amazon.com/fr/corretto/">Amazon Corretto, AWS<i class="fa fa-external-link"></i></span></li>
 </ol>
+<h2><span id="构建工具">构建工具</span></h2><p>理解构建工具需要理解什么是构建周期，一般认为软件的构建周期由以下部分组成</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">#</th>
+<th style="text-align:left">阶段</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">获取依赖</td>
+<td style="text-align:left">现代软件开发一般都不会从零开始写代码，所以通常软件开发中都会由很多依赖，在软件开始编译前，取得所有依赖包</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left">编译代码</td>
+<td style="text-align:left">编译源代码，链接依赖，将计算机源代码编译成二进制码</td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left">测试</td>
+<td style="text-align:left">运行自动化测试，通常是单元测试</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left">打包</td>
+<td style="text-align:left">将源代码按照可发布的格式打包（发布包），例如jar，war或者ear文件</td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left">安装</td>
+<td style="text-align:left">安装本地仓库可用的发布包，可作为本地其他软件项目的依赖</td>
+</tr>
+<tr>
+<td style="text-align:left">6</td>
+<td style="text-align:left">部署文件</td>
+<td style="text-align:left">将发布包上传到远端仓库（公司内部仓库或是Maven Central一样的公有仓库），可作为他人软件项目的依赖</td>
+</tr>
+</tbody>
+</table>
+<p><span class="github-emoji" alias="point_right" style fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f449.png?v8">&#x1f449;</span> 什么是仓库（repositories）</p>
+<p>现实世界的仓库是用来存放商品的，软件开发领域里的仓库是存放代码的。代码被整齐的归置在一个个软件包（Package）里。使用仓库里的软件包，让我们专注于业务逻辑，避免重复造轮子。在软件开发领域有很多仓库，比如有针对不同软件开发语言的</p>
+<ul>
+<li>针对Java软件开发，我们有Maven Central公有软件仓库。我们可以通过Maven下载使用仓库里的软件包</li>
+<li>针对Python软件开发，我们有<span class="exturl" data-url="aHR0cHM6Ly9weXBpLm9yZy8=" title="https://pypi.org/">PyPi（The Python Package Index）<i class="fa fa-external-link"></i></span>公有软件仓库。通过<span class="exturl" data-url="aHR0cHM6Ly9weXBpLm9yZy9wcm9qZWN0L3BpcC8=" title="https://pypi.org/project/pip/">pip<i class="fa fa-external-link"></i></span>下载使用仓库里的软件包</li>
+</ul>
+<p>也有针对不同操作系统的</p>
+<ul>
+<li>针对Ubuntu用户，我们有Canonical软件仓库（也叫软件源）。我们可以通过apt（ Advanced Packaging Tool ）下载使用仓库里的软件包</li>
+<li>针对Mac用户，我们有homebrew/core软件仓库（第三方软件仓库叫Taps）。我们可以通过<span class="exturl" data-url="aHR0cHM6Ly9icmV3LnNoLw==" title="https://brew.sh/">brew<i class="fa fa-external-link"></i></span>下载使用仓库里的软件包</li>
+</ul>
+<p>构建工具横向对比</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">构建工具</th>
+<th style="text-align:left">构建文件</th>
+<th style="text-align:left">插件</th>
+<th style="text-align:left">依赖管理</th>
+<th style="text-align:left">构建速度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Ant</td>
+<td style="text-align:left">build.xml 强制标准不多，不依赖特定项目目录结构</td>
+<td style="text-align:left">不支持</td>
+<td style="text-align:left">不支持，需要第三方工具，比如Apache Ivy</td>
+<td style="text-align:left">慢</td>
+</tr>
+<tr>
+<td style="text-align:left">Maven</td>
+<td style="text-align:left">pom.xml， 标准严格，依赖特定项目目录结构</td>
+<td style="text-align:left">原生支持</td>
+<td style="text-align:left">原生支持</td>
+<td style="text-align:left">慢</td>
+</tr>
+<tr>
+<td style="text-align:left">Gradle</td>
+<td style="text-align:left">build.gradle， Gradle DSL基于Groovy编程语言，有无限可能</td>
+<td style="text-align:left">原生支持</td>
+<td style="text-align:left">依靠现有的Maven和Ivy依赖体系</td>
+<td style="text-align:left">快</td>
+</tr>
+</tbody>
+</table>
 ]]></content>
       <categories>
         <category>Java实践指南</category>
@@ -340,9 +430,9 @@
         <category>Java</category>
       </categories>
       <tags>
+        <tag>Java</tag>
         <tag>Java 通配符</tag>
         <tag>Java 泛型</tag>
-        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
