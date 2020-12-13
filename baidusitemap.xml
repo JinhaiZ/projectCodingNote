@@ -3,89 +3,117 @@
   <url>
     <loc>http://codingnote.com/2020/02/23/design-review/</loc>
     <lastmod>2020-03-24</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2020/03/15/java-for-the-real-word-notes/</loc>
     <lastmod>2020-03-22</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2020/03/10/revisit-open-closed-principle/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/05/21/use-vim/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/09/25/polymorphism-in-python/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/10/19/machine-learning-review1/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/10/30/Latency-Numbers-Every-Programmer-Should-Know/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/09/15/install-ubuntu-on-alienware/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/09/15/install-pinyin-in-Ubuntu/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2018/01/04/git-request-pull/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/05/07/git-cherry-pick/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/05/08/git-branch-and-deployment-architectures/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/05/07/git-alias/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/09/25/generator-in-python/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/10/25/first-glance-at-RaspberryPi/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/04/16/dev-env-for-full-stack-dev/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/09/25/backtick-in-python/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2020/03/03/java-generics/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2020/03/08/java-covariant-contravariant-invariant/</loc>
     <lastmod>2020-03-15</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/05/29/odd-occurrences-in-array/</loc>
     <lastmod>2020-01-04</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/05/31/codility-tape-equilibrium/</loc>
     <lastmod>2020-01-04</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/05/31/codility-perm-missing-elem/</loc>
     <lastmod>2020-01-04</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/06/02/codility-missing-integer/</loc>
     <lastmod>2020-01-04</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/06/02/codility-perm-check/</loc>
     <lastmod>2020-01-04</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/06/02/codility-max-counters/</loc>
     <lastmod>2020-01-04</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/06/02/codility-frog-river-one/</loc>
     <lastmod>2020-01-04</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/05/31/codility-frog-jmp/</loc>
     <lastmod>2020-01-04</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/05/29/codility-cyclic-rotation/</loc>
     <lastmod>2020-01-04</lastmod>
-  </url>  <url>
+  </url>
+  <url>
     <loc>http://codingnote.com/2017/05/22/codility-binary-gap/</loc>
     <lastmod>2020-01-04</lastmod>
   </url>
-</urlset>
+</urlset> 
