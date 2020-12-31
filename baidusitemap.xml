@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://codingnote.com/2020/12/29/coe/</loc>
+    <lastmod>2020-12-31</lastmod>
+  </url>
+  <url>
     <loc>http://codingnote.com/2020/02/23/design-review/</loc>
-    <lastmod>2020-03-24</lastmod>
+    <lastmod>2020-12-30</lastmod>
+  </url>
+  <url>
+    <loc>http://codingnote.com/2020/03/08/java-covariant-contravariant-invariant/</loc>
+    <lastmod>2020-12-30</lastmod>
+  </url>
+  <url>
+    <loc>http://codingnote.com/2017/10/19/machine-learning-review1/</loc>
+    <lastmod>2020-12-30</lastmod>
   </url>
   <url>
     <loc>http://codingnote.com/2020/03/15/java-for-the-real-word-notes/</loc>
@@ -18,10 +30,6 @@
   </url>
   <url>
     <loc>http://codingnote.com/2017/09/25/polymorphism-in-python/</loc>
-    <lastmod>2020-03-15</lastmod>
-  </url>
-  <url>
-    <loc>http://codingnote.com/2017/10/19/machine-learning-review1/</loc>
     <lastmod>2020-03-15</lastmod>
   </url>
   <url>
@@ -70,10 +78,6 @@
   </url>
   <url>
     <loc>http://codingnote.com/2020/03/03/java-generics/</loc>
-    <lastmod>2020-03-15</lastmod>
-  </url>
-  <url>
-    <loc>http://codingnote.com/2020/03/08/java-covariant-contravariant-invariant/</loc>
     <lastmod>2020-03-15</lastmod>
   </url>
   <url>

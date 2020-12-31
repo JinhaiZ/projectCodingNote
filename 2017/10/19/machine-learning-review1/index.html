@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.2.0">
-
-
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -15,36 +13,34 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
-
-<script class="hexo-configurations">
+<script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"codingnote.com","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"codingnote.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
-<meta name="description" content="目录  机器学习第一周笔记 概述 什么是机器学习？ 机器学习的分类   线性回归 回归模型 梯度下降(Gradient descent)       机器学习第一周笔记概述什么是机器学习？从字面上来说，机器学习就是让机器通过模仿人学习的过程学习。也就是说让机器有能力学习，而不是通过准确的程序而实现。我们生活中无处不在存在着机器学习的应用，例如垃圾邮件分类系统，通过图片识别物体等。 机器学习的分类机">
+
+  <meta name="description" content="目录   机器学习第一周笔记  概述  什么是机器学习？ 机器学习的分类   线性回归  回归模型 梯度下降(Gradient descent)        机器学习第一周笔记  概述  什么是机器学习？ 从字面上来说，机器学习就是让机器通过模仿人学习的过程学习。也就是说让机器有能力学习，而不是通过准确的程序而实现。我们生活中无处不在存在着机器学习的应用，例如垃圾邮件分类系统，通过图片识别物体">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Machine Learning 学习笔记 1">
 <meta property="og:url" content="http://codingnote.com/2017/10/19/machine-learning-review1/index.html">
 <meta property="og:site_name" content="Coding Note">
-<meta property="og:description" content="目录  机器学习第一周笔记 概述 什么是机器学习？ 机器学习的分类   线性回归 回归模型 梯度下降(Gradient descent)       机器学习第一周笔记概述什么是机器学习？从字面上来说，机器学习就是让机器通过模仿人学习的过程学习。也就是说让机器有能力学习，而不是通过准确的程序而实现。我们生活中无处不在存在着机器学习的应用，例如垃圾邮件分类系统，通过图片识别物体等。 机器学习的分类机">
+<meta property="og:description" content="目录   机器学习第一周笔记  概述  什么是机器学习？ 机器学习的分类   线性回归  回归模型 梯度下降(Gradient descent)        机器学习第一周笔记  概述  什么是机器学习？ 从字面上来说，机器学习就是让机器通过模仿人学习的过程学习。也就是说让机器有能力学习，而不是通过准确的程序而实现。我们生活中无处不在存在着机器学习的应用，例如垃圾邮件分类系统，通过图片识别物体">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://codingnote.com/2017/10/19/machine-learning-review1/linear-regression-model.png">
 <meta property="og:image" content="http://codingnote.com/2017/10/19/machine-learning-review1/cost-function.png">
 <meta property="og:image" content="http://codingnote.com/2017/10/19/machine-learning-review1/gradient-descent.png">
 <meta property="article:published_time" content="2017-10-19T17:04:07.000Z">
-<meta property="article:modified_time" content="2020-03-15T10:37:11.249Z">
-<meta property="article:author" content="Shuwei Zhang &amp; Jinhai ZHOU">
+<meta property="article:modified_time" content="2020-12-30T16:02:34.355Z">
+<meta property="article:author" content="水 &amp; 海">
 <meta property="article:tag" content="Machine Learning">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://codingnote.com/2017/10/19/machine-learning-review1/linear-regression-model.png">
 
-
 <link rel="canonical" href="http://codingnote.com/2017/10/19/machine-learning-review1/">
 
 
-<script class="page-configurations">
+<script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -53,7 +49,8 @@
     lang   : 'zh-CN'
   };
 </script>
-<title>Machine Learning 学习笔记 1 | Coding Note</title>
+
+  <title>Machine Learning 学习笔记 1 | Coding Note</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-98330531-1"></script>
     <script>
@@ -67,65 +64,56 @@
 
 
 
+
+
+
   <noscript>
   <style>
-  body { margin-top: 2rem; }
-
+  .use-motion .brand,
   .use-motion .menu-item,
-  .use-motion .sidebar,
+  .sidebar-inner,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
+  .use-motion .site-subtitle {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
+      <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">Coding Note</h1>
-      <i class="logo-line"></i>
+      <span class="logo-line-after"><i></i></span>
     </a>
-      <p class="site-subtitle" itemprop="description">分享有关Coding的一切</p>
+      <p class="site-subtitle" itemprop="description">积土为山，积水为海</p>
   </div>
 
   <div class="site-nav-right">
@@ -137,11 +125,17 @@
 
 
 
+
 <nav class="site-nav">
-  <ul class="main-menu menu">
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">30</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -151,17 +145,12 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">29</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">35</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">25</span></a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">29</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">28</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -179,20 +168,21 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
+    <div class="popup search-popup">
+        <div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
   </div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
   </div>
 </div>
 
@@ -200,110 +190,29 @@
   </div>
 
 </div>
-        
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text">机器学习第一周笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">什么是机器学习？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">机器学习的分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">回归模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">梯度下降(Gradient descent)</span></a></li></ol></li></ol></li></div>
-        </section>
-        <!--/noindex-->
-
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Shuwei Zhang & Jinhai ZHOU" src="/images/codingnote_logo_cbg.jpg">
-  <p class="site-author-name" itemprop="name">Shuwei Zhang & Jinhai ZHOU</p>
-  <div class="site-description" itemprop="description">coding-note</div>
-</div>
-<div class="site-state-wrap site-overview-item animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">29</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">25</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">29</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author site-overview-item animated">
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0MwZGluZ05vdGU=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;C0dingNote"><i class="github fa-fw"></i>GitHub</span>
-      </span>
-  </div>
-  <div class="cc-license site-overview-item animated" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
-  </div>
-
-
-
-        </section>
-      </div>
-        <div class="back-to-top animated">
-          <i class="fa fa-arrow-up"></i>
-          <span>0%</span>
-        </div>
-    </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
     </header>
 
     
   <div class="reading-progress-bar"></div>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
 
-    <div class="main-inner post posts-expand">
+          <div class="content post posts-expand">
+            
 
-
-  
-
-
-<div class="post-block">
+    
   
   
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://codingnote.com/2017/10/19/machine-learning-review1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/codingnote_logo_cbg.jpg">
-      <meta itemprop="name" content="Shuwei Zhang & Jinhai ZHOU">
+      <meta itemprop="name" content="水 & 海">
       <meta itemprop="description" content="coding-note">
     </span>
 
@@ -315,46 +224,44 @@
           Machine Learning 学习笔记 1
         </h1>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-10-19 17:04:07" itemprop="dateCreated datePublished" datetime="2017-10-19T17:04:07Z">2017-10-19</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-03-15 10:37:11" itemprop="dateModified" datetime="2020-03-15T10:37:11Z">2020-03-15</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a>
-        </span>
-    </span>
+              <time title="创建时间：2017-10-19 17:04:07" itemprop="dateCreated datePublished" datetime="2017-10-19T17:04:07Z">2017-10-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-30 16:02:34" itemprop="dateModified" datetime="2020-12-30T16:02:34Z">2020-12-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Notes/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a>
+                </span>
+            </span>
 
-  
-    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="busuanzi_value_page_pv"></span>
-    </span>
-</div>
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -363,58 +270,75 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
+<!-- toc -->
 <ul>
-<li><a href="#机器学习第一周笔记">机器学习第一周笔记</a><ul>
-<li><a href="#概述">概述</a><ul>
-<li><a href="#什么是机器学习">什么是机器学习？</a></li>
-<li><a href="#机器学习的分类">机器学习的分类</a></li>
+<li><a href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%91%A8%E7%AC%94%E8%AE%B0">机器学习第一周笔记</a>
+<ul>
+<li><a href="#%E6%A6%82%E8%BF%B0">概述</a>
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">什么是机器学习？</a></li>
+<li><a href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%88%86%E7%B1%BB">机器学习的分类</a></li>
 </ul>
 </li>
-<li><a href="#线性回归">线性回归</a><ul>
-<li><a href="#回归模型">回归模型</a></li>
-<li><a href="#梯度下降gradient-descent">梯度下降(Gradient descent)</a></li>
+<li><a href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92">线性回归</a>
+<ul>
+<li><a href="#%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B">回归模型</a></li>
+<li><a href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8Dgradient-descent">梯度下降(Gradient descent)</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-<h1><span id="机器学习第一周笔记">机器学习第一周笔记</span></h1><h2><span id="概述">概述</span></h2><h3><span id="什么是机器学习">什么是机器学习？</span></h3><p>从字面上来说，机器学习就是让机器通过模仿人学习的过程学习。也就是说让机器有能力学习，而不是通过准确的程序而实现。我们生活中无处不在存在着机器学习的应用，例如垃圾邮件分类系统，通过图片识别物体等。</p>
-<h3><span id="机器学习的分类">机器学习的分类</span></h3><p>机器学习分为两大类：<br><a id="more"></a></p>
+<h1><span id="机器学习第一周笔记"> 机器学习第一周笔记</span></h1>
+<h2><span id="概述"> 概述</span></h2>
+<h3><span id="什么是机器学习"> 什么是机器学习？</span></h3>
+<p>从字面上来说，机器学习就是让机器通过模仿人学习的过程学习。也就是说让机器有能力学习，而不是通过准确的程序而实现。我们生活中无处不在存在着机器学习的应用，例如垃圾邮件分类系统，通过图片识别物体等。</p>
+<h3><span id="机器学习的分类"> 机器学习的分类</span></h3>
+<p>机器学习分为两大类：</p>
+<a id="more"></a>
 <ul>
-<li><p><strong>有监督学习(supervised learning)</strong>：给定输入数据和正确的输出结果，通过一系列“训练模型”使得输出结果和正确输出结果无限接近的过程。其中又可以分为两大类 <strong>回归(regression)</strong> 和 <strong>分类(classification)</strong> 问题。例如：给定某地区房屋的情况（房间个数，地理位置，周围环境…）及价格，来预测这个地区某个房子的价格。这就是一个回归问题。再比如通过一个人的照片来预测这个人的年龄。 而分类问题则是输出结果只有两种情况的问题。比如：预测一个病人的肿瘤是良性还是恶性；预测一封邮件是否是垃圾邮件等等。这种问题的结果只有两种情况。</p>
+<li>
+<p><strong>有监督学习(supervised learning)</strong>：给定输入数据和正确的输出结果，通过一系列“训练模型”使得输出结果和正确输出结果无限接近的过程。其中又可以分为两大类 <strong>回归(regression)</strong> 和 <strong>分类(classification)</strong> 问题。例如：给定某地区房屋的情况（房间个数，地理位置，周围环境…）及价格，来预测这个地区某个房子的价格。这就是一个回归问题。再比如通过一个人的照片来预测这个人的年龄。 而分类问题则是输出结果只有两种情况的问题。比如：预测一个病人的肿瘤是良性还是恶性；预测一封邮件是否是垃圾邮件等等。这种问题的结果只有两种情况。</p>
 </li>
-<li><p><strong>无监督学习(unsupervised learning)</strong>：没有给出正确的输出结果，让机器自己发现输入数据的结构。无监督学习最常见的应用就是分类。比如：给定用户数据，自动划分用户类比从而划分市场；给定一些文章报道，分类文章的类别，政治新闻，经济新闻，或文化新闻等等。</p>
-<h2><span id="线性回归">线性回归</span></h2><h3><span id="回归模型">回归模型</span></h3><p>通过训练数据集(training set)学习得到一个函数h(x)，使得输入数据X通过h函数映射的预测结果Y最接近正确值。线性回归的目标就是寻找到h函数使得其完美拟合输入X和输出Y的关系。</p>
+<li>
+<p><strong>无监督学习(unsupervised learning)</strong>：没有给出正确的输出结果，让机器自己发现输入数据的结构。无监督学习最常见的应用就是分类。比如：给定用户数据，自动划分用户类比从而划分市场；给定一些文章报道，分类文章的类别，政治新闻，经济新闻，或文化新闻等等。</p>
 </li>
 </ul>
-<img data-src="/2017/10/19/machine-learning-review1/linear-regression-model.png" title="learning regression model">
-<p>(Figure 1 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY291cnNlcmEub3JnL2xlYXJuL21hY2hpbmUtbGVhcm5pbmcvc3VwcGxlbWVudC9jUmEybS9tb2RlbC1yZXByZXNlbnRhdGlvbg==" title="https://www.coursera.org/learn/machine-learning/supplement/cRa2m/model-representation">https://www.coursera.org/learn/machine-learning/supplement/cRa2m/model-representation<i class="fa fa-external-link"></i></span>)</p>
-<p>既然已经有了这个模型我们下一个问题就是如何才能找到这样的一个h函数？<br>在线性回归里用来判断拟合函数h好坏的一个标准就是代价函数(Cost funtion)。这个函数的数学表示如下，其中用均方误差来表示预测结果与真实结果的误差。</p>
-<img data-src="/2017/10/19/machine-learning-review1/cost-function.png" title="Cost function">
+<h2><span id="线性回归"> 线性回归</span></h2>
+<h3><span id="回归模型"> 回归模型</span></h3>
+<p>通过训练数据集(training set)学习得到一个函数h(x)，使得输入数据X通过h函数映射的预测结果Y最接近正确值。线性回归的目标就是寻找到h函数使得其完美拟合输入X和输出Y的关系。</p>
+<img data-src="/2017/10/19/machine-learning-review1/linear-regression-model.png" class title="learning regression model">
+<p>(Figure 1 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY291cnNlcmEub3JnL2xlYXJuL21hY2hpbmUtbGVhcm5pbmcvc3VwcGxlbWVudC9jUmEybS9tb2RlbC1yZXByZXNlbnRhdGlvbg==">https://www.coursera.org/learn/machine-learning/supplement/cRa2m/model-representation<i class="fa fa-external-link-alt"></i></span>)</p>
+<p>既然已经有了这个模型我们下一个问题就是如何才能找到这样的一个h函数？<br>
+在线性回归里用来判断拟合函数h好坏的一个标准就是代价函数(Cost funtion)。这个函数的数学表示如下，其中用均方误差来表示预测结果与真实结果的误差。</p>
+<img data-src="/2017/10/19/machine-learning-review1/cost-function.png" class title="Cost function">
 <p>这时，机器学习过程的目标就是要找到一个h函数使得误差J最小。</p>
-<h3><span id="梯度下降gradient-descent">梯度下降(Gradient descent)</span></h3><p>求解最小代价函数的方法之一就是用梯度下降(Gradient descent)的方法。<br>数学上，<strong>梯度方向</strong>是<strong>函数值下降最为剧烈</strong>的方向。那么，沿着梯度方向走，我们就能接近其最小值，或者极小值，从而接近更高的预测精度。其数学表达如下：</p>
-<img data-src="/2017/10/19/machine-learning-review1/gradient-descent.png" title="Gradient descent">
-<p>其中<strong>学习率ɑ</strong>表示的是下降的速率，当这个值过大时会导致错过最小值（步子跨的太大）；当这个值过小时会导致下降的速度很慢（步子跨的太小）。<br>用梯度下降的方法就是不断的沿着梯度方向更新值，直到找到<strong>最小值</strong>。</p>
+<h3><span id="梯度下降gradient-descent"> 梯度下降(Gradient descent)</span></h3>
+<p>求解最小代价函数的方法之一就是用梯度下降(Gradient descent)的方法。<br>
+数学上，<strong>梯度方向</strong>是<strong>函数值下降最为剧烈</strong>的方向。那么，沿着梯度方向走，我们就能接近其最小值，或者极小值，从而接近更高的预测精度。其数学表达如下：</p>
+<img data-src="/2017/10/19/machine-learning-review1/gradient-descent.png" class title="Gradient descent">
+<p>其中<strong>学习率ɑ</strong>表示的是下降的速率，当这个值过大时会导致错过最小值（步子跨的太大）；当这个值过小时会导致下降的速度很慢（步子跨的太小）。<br>
+用梯度下降的方法就是不断的沿着梯度方向更新值，直到找到<strong>最小值</strong>。</p>
 
     </div>
 
     
     
     
+        
 
-    <footer class="post-footer">
-          
-
-<div class="post-copyright">
-<ul>
+<div>
+<ul class="post-copyright">
   <li class="post-copyright-author">
-      <strong>本文作者： </strong>Shuwei Zhang & Jinhai ZHOU
+    <strong>本文作者： </strong>水 & 海
   </li>
   <li class="post-copyright-link">
-      <strong>本文链接：</strong>
-      <a href="http://codingnote.com/2017/10/19/machine-learning-review1/" title="Machine Learning 学习笔记 1">http://codingnote.com/2017/10/19/machine-learning-review1/</a>
+    <strong>本文链接：</strong>
+    <a href="http://codingnote.com/2017/10/19/machine-learning-review1/" title="Machine Learning 学习笔记 1">http://codingnote.com/2017/10/19/machine-learning-review1/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -422,33 +346,37 @@
 </ul>
 </div>
 
+
+      <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
           </div>
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2017/09/25/backtick-in-python/" rel="prev" title="python中的反引号reverse quotes">
-                  <i class="fa fa-chevron-left"></i> python中的反引号reverse quotes
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2017/10/25/first-glance-at-RaspberryPi/" rel="next" title="初试树莓派RaspberryPi">
-                  初试树莓派RaspberryPi <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/25/backtick-in-python/" rel="prev" title="python中的反引号reverse quotes">
+      <i class="fa fa-chevron-left"></i> python中的反引号reverse quotes
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/10/25/first-glance-at-RaspberryPi/" rel="next" title="初试树莓派RaspberryPi">
+      初试树莓派RaspberryPi <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
-</div>
+  
+  
+  
 
 
 
-
-
-
+          </div>
+          
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -457,7 +385,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -466,27 +394,114 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
+      let commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> 目录</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text"> 机器学习第一周笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text"> 什么是机器学习？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text"> 机器学习的分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"> 线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text"> 回归模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text"> 梯度下降(Gradient descent)</span></a></li></ol></li></ol></li></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="水 & 海" src="/images/codingnote_logo_cbg.jpg">
+  <p class="site-author-name" itemprop="name">水 & 海</p>
+  <div class="site-description" itemprop="description">coding-note</div>
 </div>
-  </main>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0MwZGluZ05vdGU=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;C0dingNote"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
 
-  <footer class="footer">
-    <div class="footer-inner">
 
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
 
 <div class="copyright">
-  &copy; 
+  
+  &copy; 2017 – 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Shuwei Zhang & Jinhai ZHOU</span>
+  <span class="author" itemprop="copyrightHolder">水 & 海</span>
 </div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+        
 <div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
@@ -495,6 +510,7 @@
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
+    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
@@ -504,52 +520,80 @@
       </span>
     </span>
 </div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
   </div>
 
-    </div>
-  </footer>
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+
+
 
   
-
 <script src="/js/local-search.js"></script>
 
 
 
+
+
+
+
+
+
 <script>
-if (document.querySelectorAll('.pdf-container').length) {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2.2.4/pdfobject.min.js', () => {
-    document.querySelectorAll('.pdf-container').forEach(element => {
-      PDFObject.embed(element.dataset.target, element, {
-        pdfOpenParams: {
-          navpanes : 0,
-          toolbar  : 0,
-          statusbar: 0,
-          pagemode : 'thumbs',
-          view     : 'FitH'
-        },
-        PDFJS_URL: '/lib/pdf/web/viewer.html',
-        height   : element.dataset.height
-      });
-    });
-  }, window.PDFObject);
-}
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
 </script>
 
 
 
+
   
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-
-
-
-
+  
 
 </body>
 </html>

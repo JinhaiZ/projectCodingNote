@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"codingnote.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Correction of Error (COE)">
+<meta property="og:url" content="http://codingnote.com/2020/12/29/coe/index.html">
+<meta property="og:site_name" content="Coding Note">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://codingnote.com/2020/12/29/coe/coe_title.png">
+<meta property="og:image" content="http://codingnote.com/2020/12/29/coe/coe_process.png">
+<meta property="article:published_time" content="2020-12-29T17:13:43.000Z">
+<meta property="article:modified_time" content="2020-12-31T11:01:56.063Z">
+<meta property="article:author" content="水 &amp; 海">
+<meta property="article:tag" content="COE">
+<meta property="article:tag" content="亚马逊">
+<meta property="article:tag" content="软件工程">
+<meta property="article:tag" content="流程管理">
+<meta property="article:tag" content="质量管理">
+<meta property="article:tag" content="RCA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://codingnote.com/2020/12/29/coe/coe_title.png">
+
+<link rel="canonical" href="http://codingnote.com/2020/12/29/coe/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Correction of Error (COE) | Coding Note</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-98330531-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-98330531-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Coding Note</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">积土为山，积水为海</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">30</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://codingnote.com/2020/12/29/coe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/codingnote_logo_cbg.jpg">
+      <meta itemprop="name" content="水 & 海">
+      <meta itemprop="description" content="coding-note">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Correction of Error (COE)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-29 17:13:43" itemprop="dateCreated datePublished" datetime="2020-12-29T17:13:43Z">2020-12-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-31 11:01:56" itemprop="dateModified" datetime="2020-12-31T11:01:56Z">2020-12-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">软件工程</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">质量管理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86/%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">错误分析</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><img data-src="/2020/12/29/coe/coe_title.png" class title="COE">
+<a id="more"></a>
+<p><strong>文章目录</strong></p>
+<!-- toc -->
+<ul>
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a>
+<ul>
+<li><a href="#%E6%9C%AC%E6%96%87%E5%86%99%E4%BD%9C%E7%9A%84%E5%8E%9F%E5%9B%A0">本文写作的原因</a></li>
+<li><a href="#%E7%9B%AE%E6%A0%87%E8%AF%BB%E8%80%85">目标读者</a></li>
+<li><a href="#%E8%AF%BB%E5%AE%8C%E6%9C%AC%E6%96%87%E4%BD%A0%E5%B0%86%E8%8E%B7%E5%BE%97%E4%BB%80%E4%B9%88">读完本文你将获得什么？</a></li>
+</ul>
+</li>
+<li><a href="#%E6%AD%A3%E6%96%87">正文</a>
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AFcoe">什么是COE？</a></li>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E9%9C%80%E8%A6%81coe">什么时候需要COE？</a></li>
+<li><a href="#coe%E7%9A%84%E5%A5%BD%E5%A4%84">COE的好处</a>
+<ul>
+<li><a href="#%E4%B8%BE%E4%B8%AA%E4%BE%8B%E5%AD%90">举个例子</a></li>
+</ul>
+</li>
+<li><a href="#%E8%B0%81%E6%9D%A5%E5%86%99coe">谁来写COE？</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9D%82%E8%B0%88">杂谈</a>
+<ul>
+<li><a href="#coe%E6%98%AF%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%A3%80%E8%AE%A8%E4%B9%A6%E5%90%97">COE是软件开发工程师的&quot;检讨书&quot;吗？</a></li>
+<li><a href="#%E8%B5%B7%E8%8D%89coe%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%BC%9A%E6%84%9F%E5%88%B0%E5%86%85%E7%96%9A%E5%90%97">起草COE的软件开发工程师会感到内疚吗？</a></li>
+</ul>
+</li>
+<li><a href="#%E9%99%84%E5%BD%95">附录</a>
+<ul>
+<li><a href="#coe%E6%A8%A1%E6%9D%BF">COE模板</a>
+<ul>
+<li><a href="#%E9%94%99%E8%AF%AF%E7%AE%80%E8%BF%B0">错误简述</a></li>
+<li><a href="#%E9%94%99%E8%AF%AF%E5%BD%B1%E5%93%8D">错误影响</a></li>
+<li><a href="#%E6%A0%B9%E6%9C%AC%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90">根本原因分析</a></li>
+<li><a href="#%E5%8F%8D%E7%9C%81%E7%BB%8F%E9%AA%8C">反省经验</a></li>
+<li><a href="#%E7%BA%A0%E6%AD%A3%E6%8E%AA%E6%96%BD">纠正措施</a></li>
+</ul>
+</li>
+<li><a href="#coe%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93">COE流程总结</a></li>
+<li><a href="#%E5%AF%B9%E5%A4%96%E5%85%AC%E5%BC%80%E7%9A%84coe">对外公开的COE</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+<li><a href="#%E8%84%9A%E6%B3%A8">脚注</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="前言"> 前言</span></h1>
+<h2><span id="本文写作的原因"> 本文写作的原因</span></h2>
+<p>亚马逊作为一家科技公司，在软件工程上有许多值得借鉴学习的地方。其中COE作为质量管理的重要一环，十分独特。本文浅略介绍COE的实践方法，所有参考文献均来自互联网公开资料。</p>
+<h2><span id="目标读者"> 目标读者</span></h2>
+<p>COE属于软件工程领域中，质量管理流程中的错误管理。所以本文的目标读者是具有一定软件工程背景的软件开发工程师，软件工程管理人员，项目管理人员以及信息技术行业的从业者。</p>
+<h2><span id="读完本文你将获得什么"> 读完本文你将获得什么？</span></h2>
+<p>读完本文你将对COE流程有个大致的了解，理解为什么需要它，什么时候使用它，以及使用COE流程的好处。</p>
+<h1><span id="正文"> 正文</span></h1>
+<h2><span id="什么是coe"> 什么是COE？</span></h2>
+<p>COE<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>是一种通过记录和处理问题来提升软件工程质量的流程<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>。所谓记录问题就是通过标准化的文档来记录造成问题的根本原因，这一部分也叫根本原因分析<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>；所谓处理问题，就是通过标准化的流程来逐一消除造成问题的根本原因，顺藤摸瓜，釜底抽薪，从根本上解决问题。</p>
+<p>需要指出的是，COE即是一种流程，也是一种文档的类型。在没有特指的情况下，需要根据上下文来判断其具体含义。</p>
+<h2><span id="什么时候需要coe"> 什么时候需要COE？</span></h2>
+<p>COE一般用来对错误进行书面分析，然后留档保存。对于公司业务影响较小的问题，根本原因分析起来一般来说比较简单，不需要书面分析。即便根本原因分析起来复杂，因为对业务影响小，分析也没什么价值。而对公司业务影响较大的问题，则需要书面分析。书面分析至少有以下两个好处：</p>
+<ol>
+<li>对公司业务影响较大的问题，通常造成问题的因果关系复杂，书面记录有助于当事人顺藤摸瓜，分析问题。</li>
+<li>好记性不如烂笔头，书面记录不仅令当事人印象深刻，更重要的是，书面记录便于留档保存，可以供他人查阅和学习。</li>
+</ol>
+<div class="note info 如何定义业务影响的大小？">
+            <p>业务影响的定义对于不同行业的公司，对于不同大小的公司都是不同的。比如对于一家提供视频网站的公司，如果有10%的用户无法观看视频的插片广告，那么这是一个对业务影响较大的问题。如果有1个用户无法观看视频的插片广告，那么这是一个对业务影响较小的问题。此时可以根据公司的体量，设计双重指标，如果有超过x%的用户，或者超过y个用户无法观看视频的插片广告，那么这就是一个对对业务影响较大的问题。</p>
+          </div>
+<h2><span id="coe的好处"> COE的好处</span></h2>
+<p>COE不仅对根本原因分析进行书面记录，同时以规范的格式进行书面记录。规范的格式也有至少有以下两个好处：</p>
+<ol>
+<li>
+<p>便于阅读，和提取关键信息：想象一下，如果你的直属领导要求你从100篇错误分析文档中找出一共有多少文档是部门A发布的，一种情况是100篇文档格式不尽相同，发布部门信息散落各数，另一种情况是格式一致，发布部门信息都在前言里。必然是格式一致的文档能方便你提取你需要的关键信息。</p>
+</li>
+<li>
+<p>便于自动化提取关键指标：文档规范化后，可以交由软件自动读取，分析出关键指标。比如从1000篇COE中发现123篇的根本原因都是X，那么管理层可以得知解决X的重要性，并且可以用这些指标来进行科学决策。</p>
+</li>
+</ol>
+<h3><span id="举个例子"> 举个例子</span></h3>
+<p>其实根本原因分析普遍存在于软件工程的生产实践中，根据问题的影响范围，软件工程师会采用合适的方法来分析问题，以在电商工作的张三为例</p>
+<table>
+<thead>
+<tr>
+<th>No</th>
+<th>问题类型</th>
+<th>问题造成的后果</th>
+<th>问题的影响范围</th>
+<th>问题对公司造成的损失</th>
+<th>如何应对问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>张三电脑系统出现问题，没法开机</td>
+<td>张三工作进度收到影响</td>
+<td>张三一个人</td>
+<td>微小</td>
+<td>当天找IT部门修复电脑</td>
+</tr>
+<tr>
+<td>2</td>
+<td>张三的公司内部聊天系统出现问题，员工没办法新增好友</td>
+<td>使用该内部聊天软件的员工没法加新的好友</td>
+<td>公司内部员工</td>
+<td>有一定影响</td>
+<td>在几天的时间内紧急修复问题，或者回滚造成错误的代码</td>
+</tr>
+<tr>
+<td>3</td>
+<td>张三的公司网站用户购物车出现问题，没法把商品放入购物车</td>
+<td>用户没法购物</td>
+<td>100%的用户</td>
+<td>重大影响，生意没法做了</td>
+<td>在几分钟的时间内紧急修复问题，或者回滚造成错误的代码</td>
+</tr>
+</tbody>
+</table>
+<p>对于第一个例子，问题的影响的范围小，解决问题的方法也直截了当。根本原因分析心算即可完成，此时没有必要进行书面的根本原因分析。</p>
+<p>对于第二个例子，问题有一定的影响范围，而且不注意的话，错误有可能再次发生，为了避免类似的错误，应该进行书面的根本原因分析，记录问题的根本原因，并且在紧急修复问题后，应该提出避免类似错误的措施，并且和相关团队讨论，审核，施行该措施。</p>
+<p>对于第三个例子，问题的影响范围重大，不但要进行书面的根本原因分析。错误分析还要印发给各个部门，组织全公司的各个团队从错误中学习经验。</p>
+<p>对于第二个和第三个例子，COE可以标准化根本原因分析的流程，帮助张三快速，准确地分析出问题的根本原因。不仅如此，COE作为标准化的文档，可以帮助相关团队高效的审核，也可以帮助其他团队快速的提取出关键信息来学习。此外，由于文档使标准化的，张三的公司可以通过统计方法得到丰富的指标，比如有多少错误的根本原因是由于“证书过期”引起的，还有张三坐在部门一年的COE数量相比去年的变化，是多了还是少了。有了这些指标，项目经理和领导层可以根据数据来做出决策。</p>
+<h2><span id="谁来写coe"> 谁来写COE？</span></h2>
+<p>在软件系统错误发生时，一般由当事人起草COE。当事人可以是导致错误发生的软件开发工程师，可以是在代码审核过程中遗漏该错误的工程师，也可以是是该软件系统的负责人。选择他们是因为他们对出错误的系统最为熟悉。在亚马逊的企业文化里，由某一个人导致的软件系统错误也会同样发生在其他任何人上，所以要改善流程而不是批评指责某个具体的人。</p>
+<p>COE编写完后，相关团队会一起开诚布公的审核COE文档，不仅审核根本问题分析，而且要审核为了消除根本问题所制定的纠正措施<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup>。有些纠正措施致力解决眼前的问题，比如紧急修复一个错误。有些纠正措施则目标长远，目的是改善相关流程。解决短期和长期的纠正措施所需要的时间不同，所以纠正措施的预计交付日期也不尽相同，审核也包括评估纠正措施的预计交付日期。比如预计的交付日期是否合理。</p>
+<h1><span id="杂谈"> 杂谈</span></h1>
+<h2><span id="coe是软件开发工程师的quot检讨书quot吗"> COE是软件开发工程师的&quot;检讨书&quot;吗？</span></h2>
+<p>COE的终极目标是避免重蹈覆辙，而不是把错误归咎于某个人，因此造成错误的软件开发工程师不会，也不应该有任何的责罚。COE不是软件开发工程师的&quot;检讨书&quot;，而是软件开发工程师对抗来自项目经理不合理要求的“武器”，同时也是保护软件工程师的“防弹衣”。</p>
+<p>在COE审核结束后，COE里的纠正措施通常比实现软件的某个新功能有更高的优先级，如果此时有项目经理提出与COE相悖的优先级排期，比如得把COE的纠正措施搁置一旁去实现某个新功能。此时软件开发工程师可以援引COE的纠正措施来质疑不合理的要求。</p>
+<p>如果领导介入，得把COE的纠正措施搁置一旁。那么领导就需要承担COE中错误再次发生的后果。此时，如果为了完成项目新功能而搁置的COE使得错误重蹈覆辙，那么做出搁置COE的领导就要承担后果。</p>
+<h2><span id="起草coe的软件开发工程师会感到内疚吗"> 起草COE的软件开发工程师会感到内疚吗？</span></h2>
+<p>一般来说，起草COE的作者是对出错误的系统最为熟悉的工程师，并不一定是直接导致问题发生的工程师。就算是直接导致问题的工程师，他或许会对造成问题心存内疚，但是写COE却不会。不仅如此，写COE也是工程师的某种“荣誉”。软件系统不可能不出错，世界上最稳定的服务也无法达到100%的可用性<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup>。但是一篇一篇的COE，是亚马逊工程师们学习的源泉，成年累月地从错误中汲取经验，使得亚马逊服务的稳定性能向99.9%的小数点后再增加一位。</p>
+<h1><span id="附录"> 附录</span></h1>
+<h2><span id="coe模板"> COE模板</span></h2>
+<p>以下模板所有内容纯属杜撰，如有雷同，请勿对号入座。</p>
+<h3><span id="错误简述"> 错误简述</span></h3>
+<blockquote>
+<p>简述错误，并配以时间线</p>
+</blockquote>
+<p>2007年1月1日，时间下午14:00，公司A电商网站预计举行抽奖活动B。当日下午13：00。负责为抽奖活动提供技术支持的团队C的某软件工程师（注意不要出现姓名）发现一个会妨碍抽奖活动的bug，在巨大的时间压力下，修复该bug的代码未经测试便直接上线。导致公司网站的购物车功能从14：00瘫痪，直到14：30，该问题才由运营技术团队D发现并紧急回滚包含错误的代码。</p>
+<ul>
+<li>2007-1-1 13:00:00 (CST) 团队C的某软件工程师发现了一个会妨碍抽奖活动的bug。</li>
+<li>2007-1-1 13:15:00 (CST) 该软件工程师把码未经测试修复代码直接部署到生产环境中。</li>
+<li>2007-1-1 14:00:00 (CST) 电商网站的购物车功能开始瘫痪，用户无法把商品放入购物车中。</li>
+<li>2007-1-1 14:30:00 (CST) 运营技术团队D，通过每秒放入购物车物品件数指标的断崖式下跌发现购物车异常问题。</li>
+<li>2007-1-1 14:45:00 (CST) 运营技术团队D通过紧急回滚包含错误的代码恢复了购物车功能，网站购物车功能自此正常工作。</li>
+</ul>
+<h3><span id="错误影响"> 错误影响</span></h3>
+<blockquote>
+<p>错误对于用户，业务造成的影响，最好列举相关的指标</p>
+</blockquote>
+<p>该错误导致抽奖活动B取消，此外，由于购物车功能收到影响，45分钟内，网站的所有用户均无法把商品放入购物车中。根据历史数据，此时用户数量为X，活动B预计增加Q%的客流量，购物车转化率为Y%，平均每单收入为W元人民币。这次事故对于公司A的收益影响是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XQYW 元人名币</span><br></pre></td></tr></table></figure>
+<h3><span id="根本原因分析"> 根本原因分析</span></h3>
+<blockquote>
+<p>刨根问底，造成错误的最根本原因是什么</p>
+</blockquote>
+<ol>
+<li>为什么公司A购物车功能瘫痪了？<br>
+因为团队C的工程师把码未经测试修复代码直接部署到生产环境中</li>
+<li>为什么团队C的工程师把码未经测试修复代码直接部署到生产环境中？<br>
+为了紧急修复会妨碍抽奖活动的bug</li>
+<li>为什么修复妨碍抽奖活动的bug会影响网站A购物车功能？<br>
+因为抽奖活动代码和购物车功能代码过于耦合</li>
+<li>为什么抽奖活动B代码和购物车功能代码过于耦合？<br>
+因为负责购物车功能的团队没有提供相应的API，抽奖活动B的功能代码直接在购物车功能中实现了。</li>
+<li>为什么要购物车功能中实现抽奖活动B的功能，为何不先重构购物车功能并且先实现API？<br>
+因为抽奖活动B过于紧急，需要在2007-1-1上线。</li>
+</ol>
+<h3><span id="反省经验"> 反省经验</span></h3>
+<blockquote>
+<p>吃一堑长一智，从错误中学习到的宝贵经验</p>
+</blockquote>
+<ol>
+<li>要进行合理的项目排期，不能因小失大。技术团队要及时向上级反映情况，不能因为满足眼前的功能而放弃项目的长期规划。</li>
+<li>各个技术团队负责的产品要通过API定义的合同进行沟通，不能瞎耦合代码。</li>
+<li>紧急修复也要有相关流程，至少要通过同行代码评审和自动化测试。</li>
+</ol>
+<h3><span id="纠正措施"> 纠正措施</span></h3>
+<blockquote>
+<p>为了避免重蹈覆辙，都有那些短期或者长期的纠正措施</p>
+</blockquote>
+<ol>
+<li>短期措施：修复妨碍抽奖活动B的bug，对于抽奖活动重新排期。预计新的抽奖活动B时间：2007-1-7</li>
+<li>短期措施: 出台紧急修复流程，紧急修复至少需要通过同行代码评审和自动化测试。</li>
+<li>中期措施：对购物车功能进行重构，向抽奖活动B的技术团队提供API，通过API除去现在的耦合代码。预计完成时间：2007-2-1</li>
+<li>长期措施: 团队D负责审核现有代码库中的所有代码，责令没有通过API而是通过代码耦合方式沟通的团队除去耦合代码。预计完成时间：2008-1-1</li>
+</ol>
+<h2><span id="coe流程总结"> COE流程总结</span></h2>
+<img data-src="/2020/12/29/coe/coe_process.png" class title="COE流程总结">
+<h2><span id="对外公开的coe"> 对外公开的COE</span></h2>
+<blockquote>
+<p>对外公开的COE其格式有所变化，其侧重点在于错误分析，但是也可以看到具体的纠正措施</p>
+</blockquote>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS9tZXNzYWdlLzExMjAxLw==">2020年11月25日，最近一次，发生于US-EAST-1地区的Amazon Kinesis Event事故总结<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS9tZXNzYWdlLzQxOTI2Lw==">2017年2月28日，使Quora，Trello等网站停运数小时的著名的Amazon S3事故总结<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS9tZXNzYWdlLzY4MDU4Ny8=">2012年12月24日，发生于圣诞节前夜，把Netflix也拉下水的Amazon ELB事故总结<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+<h2><span id="参考文献"> 参考文献</span></h2>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly93YS5hd3MuYW1hem9uLmNvbS93YXQuY29uY2VwdC5jb2UuZW4uaHRtbA==">AWS Well-Architected Framework &gt; Concepts&gt; Correction of Error<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+<h2><span id="脚注"> 脚注</span></h2>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>COE：Correction Of Error，也即纠正错误。 <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>流程：软件工程流程的简称。流程，就是为了完成某一目标而进行的一系列，有序的步骤。就如同生活中，为了做菜这个目标，流程可以是就是先买菜，然后洗菜，最后炒菜。 <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>根本原因分析：Root Cause Analysis。顾名思义，沿着因果关系组成的链条，找到问题的根本原因。来源自管理学概念，详情参见https://en.wikipedia.org/wiki/Root_cause_analysis <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p>纠正措施： Corrective Action的直译。 <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn5" class="footnote-item"><p>可用性：Availability。简单的说，可用性就是一个系统处在可工作状态的时间的比例。例如，服务A在一年时间里（8760小时）有8751小时可用。其可用性则为8751/8760 = 0.999，或以百分比表示99.9%。详情参见https://en.wikipedia.org/wiki/Availability <a href="#fnref5" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>水 & 海
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://codingnote.com/2020/12/29/coe/" title="Correction of Error (COE)">http://codingnote.com/2020/12/29/coe/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/COE/" rel="tag"># COE</a>
+              <a href="/tags/%E4%BA%9A%E9%A9%AC%E9%80%8A/" rel="tag"># 亚马逊</a>
+              <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag"># 软件工程</a>
+              <a href="/tags/%E6%B5%81%E7%A8%8B%E7%AE%A1%E7%90%86/" rel="tag"># 流程管理</a>
+              <a href="/tags/%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86/" rel="tag"># 质量管理</a>
+              <a href="/tags/RCA/" rel="tag"># RCA</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/15/java-for-the-real-word-notes/" rel="prev" title="Java实践指南 注疏">
+      <i class="fa fa-chevron-left"></i> Java实践指南 注疏
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text"> 本文写作的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text"> 目标读者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text"> 读完本文你将获得什么？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"> 正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text"> 什么是COE？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text"> 什么时候需要COE？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text"> COE的好处</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.3.1.</span> <span class="nav-text"> 举个例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.4.</span> <span class="nav-text"> 谁来写COE？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text"> 杂谈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text"> COE是软件开发工程师的&quot;检讨书&quot;吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text"> 起草COE的软件开发工程师会感到内疚吗？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text"> 附录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text"> COE模板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.1.1.</span> <span class="nav-text"> 错误简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.1.2.</span> <span class="nav-text"> 错误影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.1.3.</span> <span class="nav-text"> 根本原因分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.1.4.</span> <span class="nav-text"> 反省经验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.1.5.</span> <span class="nav-text"> 纠正措施</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text"> COE流程总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text"> 对外公开的COE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.4.</span> <span class="nav-text"> 参考文献</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.5.</span> <span class="nav-text"> 脚注</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="水 & 海" src="/images/codingnote_logo_cbg.jpg">
+  <p class="site-author-name" itemprop="name">水 & 海</p>
+  <div class="site-description" itemprop="description">coding-note</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0MwZGluZ05vdGU=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;C0dingNote"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">水 & 海</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+
+</body>
+</html>
