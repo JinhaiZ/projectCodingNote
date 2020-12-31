@@ -23,12 +23,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"codingnote.com","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="目录  放弃Bash，使用Zsh Zsh的使用 安装Zsh 安装Zsh的配置插件，oh-my-zsh 更换oh-my-zsh默认主题     放弃Terminal，使用Terminator 安装Terminator 使用Terminator   进阶配置   作为一个小白全栈开发程序员，有一个顺手的开发环境能很好的节约自己的时间。这篇文章就简单的介绍一下，最近自己在Ubuntu系统上使用的全站开发">
+<meta name="description" content="目录   放弃Bash，使用Zsh  Zsh的使用  安装Zsh 安装Zsh的配置插件，oh-my-zsh 更换oh-my-zsh默认主题     放弃Terminal，使用Terminator  安装Terminator 使用Terminator   进阶配置   作为一个小白全栈开发程序员，有一个顺手的开发环境能很好的节约自己的时间。这篇文章就简单的介绍一下，最近自己在Ubuntu系统上使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="全栈开发小白的环境配置">
 <meta property="og:url" content="http://codingnote.com/2017/04/16/dev-env-for-full-stack-dev/index.html">
 <meta property="og:site_name" content="Coding Note">
-<meta property="og:description" content="目录  放弃Bash，使用Zsh Zsh的使用 安装Zsh 安装Zsh的配置插件，oh-my-zsh 更换oh-my-zsh默认主题     放弃Terminal，使用Terminator 安装Terminator 使用Terminator   进阶配置   作为一个小白全栈开发程序员，有一个顺手的开发环境能很好的节约自己的时间。这篇文章就简单的介绍一下，最近自己在Ubuntu系统上使用的全站开发">
+<meta property="og:description" content="目录   放弃Bash，使用Zsh  Zsh的使用  安装Zsh 安装Zsh的配置插件，oh-my-zsh 更换oh-my-zsh默认主题     放弃Terminal，使用Terminator  安装Terminator 使用Terminator   进阶配置   作为一个小白全栈开发程序员，有一个顺手的开发环境能很好的节约自己的时间。这篇文章就简单的介绍一下，最近自己在Ubuntu系统上使用">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://codingnote.com/2017/04/16/dev-env-for-full-stack-dev/14_28_14.png">
 <meta property="og:image" content="http://codingnote.com/2017/04/16/dev-env-for-full-stack-dev/14_52_22.png">
@@ -227,7 +227,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">放弃Bash，使用Zsh</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">Zsh的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">2.1.1.</span> <span class="nav-text">安装Zsh</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">2.1.2.</span> <span class="nav-text">安装Zsh的配置插件，oh-my-zsh</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">2.1.3.</span> <span class="nav-text">更换oh-my-zsh默认主题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">放弃Terminal，使用Terminator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">安装Terminator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">使用Terminator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">进阶配置</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> 目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"> 放弃Bash，使用Zsh</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text"> Zsh的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">2.1.1.</span> <span class="nav-text"> 安装Zsh</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">2.1.2.</span> <span class="nav-text"> 安装Zsh的配置插件，oh-my-zsh</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">2.1.3.</span> <span class="nav-text"> 更换oh-my-zsh默认主题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text"> 放弃Terminal，使用Terminator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text"> 安装Terminator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text"> 使用Terminator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text"> 进阶配置</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -367,79 +367,97 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
+<!-- toc -->
 <ul>
-<li><a href="#放弃bash使用zsh">放弃Bash，使用Zsh</a><ul>
-<li><a href="#zsh的使用">Zsh的使用</a><ul>
-<li><a href="#安装zsh">安装Zsh</a></li>
-<li><a href="#安装zsh的配置插件oh-my-zsh">安装Zsh的配置插件，oh-my-zsh</a></li>
-<li><a href="#更换oh-my-zsh默认主题">更换oh-my-zsh默认主题</a></li>
+<li><a href="#%E6%94%BE%E5%BC%83bash%E4%BD%BF%E7%94%A8zsh">放弃Bash，使用Zsh</a>
+<ul>
+<li><a href="#zsh%E7%9A%84%E4%BD%BF%E7%94%A8">Zsh的使用</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85zsh">安装Zsh</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85zsh%E7%9A%84%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6oh-my-zsh">安装Zsh的配置插件，oh-my-zsh</a></li>
+<li><a href="#%E6%9B%B4%E6%8D%A2oh-my-zsh%E9%BB%98%E8%AE%A4%E4%B8%BB%E9%A2%98">更换oh-my-zsh默认主题</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#放弃terminal使用terminator">放弃Terminal，使用Terminator</a><ul>
-<li><a href="#安装terminator">安装Terminator</a></li>
-<li><a href="#使用terminator">使用Terminator</a></li>
+<li><a href="#%E6%94%BE%E5%BC%83terminal%E4%BD%BF%E7%94%A8terminator">放弃Terminal，使用Terminator</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85terminator">安装Terminator</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8terminator">使用Terminator</a></li>
 </ul>
 </li>
-<li><a href="#进阶配置">进阶配置</a></li>
+<li><a href="#%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AE">进阶配置</a></li>
 </ul>
 <!-- tocstop -->
 <p>作为一个小白全栈开发程序员，有一个顺手的开发环境能很好的节约自己的时间。这篇文章就简单的介绍一下，最近自己在Ubuntu系统上使用的全站开发环境以及相应的配置流程。</p>
-<h2><span id="放弃bash使用zsh">放弃Bash，使用Zsh</span></h2>
+<h2><span id="放弃bash使用zsh"> 放弃Bash，使用Zsh</span></h2>
+
 <p>就笔者所使用的Ubuntu 16.04而言，Termianl默认的Shell是大名鼎鼎的Bash，虽然Bash几乎是所有Linux发行版的默认Shell，但对于我这个小白程序员而言却不一定是最优的选择。比如说我想知道Linux下常用的压缩解压缩命令tar后面可以用什么参数，怎么使用， 或者想要使用的某个命令我只记得其中的一部分，需要自动补全。这时候Zsh就能满足我这个小白的需求了。</p>
 <a id="more"></a>
-<h3><span id="zsh的使用">Zsh的使用</span></h3><h4><span id="安装zsh">安装Zsh</span></h4><ol>
-<li><p>用Ubuntu系统自带的软件包管理工具 <code>apt-get</code></p>
-<p><code>sudo apt-get update &amp;&amp; sudo apt-get install zsh</code></p>
-</li>
-<li><p>接着将Zsh设置为系统默认Shell</p>
-<p><code>chsh -s /bin/zsh</code></p>
-</li>
-<li><p>重启系统</p>
-<p><code>sudo reboot</code></p>
-</li>
-<li><p>重启系统，再次启动Terminal后，在Shell提示中选择 0 (生成一个空的Zsh配置文件.zshrc)， 接下来我们再详细说明如何配置Zsh</p>
-<img data-src="/2017/04/16/dev-env-for-full-stack-dev/14_28_14.png" title="重启系统在Shell提示中选择 0 (生成一个空的Zsh配置文件.zshrc)">
-</li>
-<li><p>验证安装，输入下面的命令，Terminal将会输出zsh</p>
-<p><code>echo $0</code></p>
-</li>
+<h3><span id="zsh的使用"> Zsh的使用</span></h3>
+<h4><span id="安装zsh"> 安装Zsh</span></h4>
+<ol>
+<li>用Ubuntu系统自带的软件包管理工具 <code>apt-get</code></li>
 </ol>
-<p>虽然按照以上步骤，我们在Ubuntu上安装好了Zsh，但是现在Zsh却并不好用。比如没有高亮显示，在git目录下也没有分支提示等。配置Zsh我们可以对用户根目录下的Zsh配置文件.zshrc<br>进行改动，也可以克隆Github上oh-my-zsh这个项目，使用预定义好的主题，来加快我们对Zsh的配置。</p>
-<h4><span id="安装zsh的配置插件oh-my-zsh">安装Zsh的配置插件，oh-my-zsh</span></h4><ul>
-<li><p>使用curl命令下载并执行oh-my-zsh的安装脚本</p>
+<p><code>sudo apt-get update &amp;&amp; sudo apt-get install zsh</code></p>
+<ol start="2">
+<li>接着将Zsh设置为系统默认Shell</li>
+</ol>
+<p><code>chsh -s /bin/zsh</code></p>
+<ol start="3">
+<li>重启系统</li>
+</ol>
+<p><code>sudo reboot</code></p>
+<ol start="4">
+<li>重启系统，再次启动Terminal后，在Shell提示中选择 0 (生成一个空的Zsh配置文件.zshrc)， 接下来我们再详细说明如何配置Zsh</li>
+</ol>
+  <img data-src="/2017/04/16/dev-env-for-full-stack-dev/14_28_14.png" class title="重启系统在Shell提示中选择 0 (生成一个空的Zsh配置文件.zshrc)">
+<ol start="5">
+<li>验证安装，输入下面的命令，Terminal将会输出zsh</li>
+</ol>
+<p><code>echo $0</code></p>
+<p>虽然按照以上步骤，我们在Ubuntu上安装好了Zsh，但是现在Zsh却并不好用。比如没有高亮显示，在git目录下也没有分支提示等。配置Zsh我们可以对用户根目录下的Zsh配置文件.zshrc<br>
+进行改动，也可以克隆Github上oh-my-zsh这个项目，使用预定义好的主题，来加快我们对Zsh的配置。</p>
+<h4><span id="安装zsh的配置插件oh-my-zsh"> 安装Zsh的配置插件，oh-my-zsh</span></h4>
+<ul>
+<li>
+<p>使用curl命令下载并执行oh-my-zsh的安装脚本</p>
 <p><code>sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;</code></p>
-<img data-src="/2017/04/16/dev-env-for-full-stack-dev/14_52_22.png" title="安装脚本执行完毕后，Zsh自动配置完毕">
+<img data-src="/2017/04/16/dev-env-for-full-stack-dev/14_52_22.png" class title="安装脚本执行完毕后，Zsh自动配置完毕">
 </li>
 </ul>
 <p>接下来我们就可以享受Zsh带给我们的便利了</p>
-<h4><span id="更换oh-my-zsh默认主题">更换oh-my-zsh默认主题</span></h4><p>oh-my-zsh 的主题是robbyrussell，效果图如上所示。同时，可以通过用户根目录下的Zsh配置文件.zshrc来更换oh-my-zsh 的主题，比如我很喜欢的agnoster。修改过程如下</p>
+<h4><span id="更换oh-my-zsh默认主题"> 更换oh-my-zsh默认主题</span></h4>
+<p>oh-my-zsh 的主题是robbyrussell，效果图如上所示。同时，可以通过用户根目录下的Zsh配置文件.zshrc来更换oh-my-zsh 的主题，比如我很喜欢的agnoster。修改过程如下</p>
 <ul>
-<li><p>将默认字段 <code>ZSH_THEME=&quot;robbyrussell&quot;</code> 改为<code>ZSH_THEME=&quot;agnoster&quot;</code></p>
+<li>
+<p>将默认字段 <code>ZSH_THEME=&quot;robbyrussell&quot;</code> 改为<code>ZSH_THEME=&quot;agnoster&quot;</code></p>
 </li>
-<li><p>由于agnoster主题使用了powerline中的字体，很有可能在没有相应字体的环境下，terminal会有如下字体显示问题</p>
-<img data-src="/2017/04/16/dev-env-for-full-stack-dev/agnoster_font_problem.png" title="agnoster 主题的zsh遇到了字体显示问题">
+<li>
+<p>由于agnoster主题使用了powerline中的字体，很有可能在没有相应字体的环境下，terminal会有如下字体显示问题</p>
+<img data-src="/2017/04/16/dev-env-for-full-stack-dev/agnoster_font_problem.png" class title="agnoster 主题的zsh遇到了字体显示问题">
 </li>
-</ul>
-<ul>
-<li><p>如果遇到字体显示问题，可以安装该<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bvd2VybGluZS9mb250cw==" title="https://github.com/powerline/fonts">repo<i class="fa fa-external-link"></i></span>中的字体或使用以下脚本安装缺失的字体</p>
+<li>
+<p>如果遇到字体显示问题，可以安装该<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bvd2VybGluZS9mb250cw==">repo<i class="fa fa-external-link-alt"></i></span>中的字体或使用以下脚本安装缺失的字体</p>
 <p><code>sudo apt-get install fonts-powerline</code></p>
-<img data-src="/2017/04/16/dev-env-for-full-stack-dev/agnoster_font_correct.png" title="agnoster 主题的zsh">
+<img data-src="/2017/04/16/dev-env-for-full-stack-dev/agnoster_font_correct.png" class title="agnoster 主题的zsh">
 </li>
 </ul>
-<h2><span id="放弃terminal使用terminator">放弃Terminal，使用Terminator</span></h2><p>Ubuntu系统自带的Terminal固然好用，但是也有局限性。比如我想要同时查看两个Web App运行状态在Terminal上的输出，就得打开两个Terminal的窗口来监视，有没有可能在一个窗口下打开多个Terminal，并来回切换呢？Terminator便是为解决这个需求而存在的。</p>
-<h3><span id="安装terminator">安装Terminator</span></h3><ol>
-<li><p>用Ubuntu系统自带的软件包管理工具 <code>apt-get</code></p>
-<p><code>sudo apt-get update &amp;&amp; sudo apt-get install terminator</code></p>
-</li>
-<li><p>后台运行Terminator</p>
-<p><code>terminator &amp;</code></p>
-</li>
+<h2><span id="放弃terminal使用terminator"> 放弃Terminal，使用Terminator</span></h2>
+<p>Ubuntu系统自带的Terminal固然好用，但是也有局限性。比如我想要同时查看两个Web App运行状态在Terminal上的输出，就得打开两个Terminal的窗口来监视，有没有可能在一个窗口下打开多个Terminal，并来回切换呢？Terminator便是为解决这个需求而存在的。</p>
+<h3><span id="安装terminator"> 安装Terminator</span></h3>
+<ol>
+<li>用Ubuntu系统自带的软件包管理工具 <code>apt-get</code></li>
 </ol>
+<p><code>sudo apt-get update &amp;&amp; sudo apt-get install terminator</code></p>
+<ol start="2">
+<li>后台运行Terminator</li>
+</ol>
+<p><code>terminator &amp;</code></p>
 <p>打开Terminator，系统自带的Terminal就可以关掉了。右键Terminator图标，选择固定到启动栏，这样以后可以直接点击图标启动Terminator，不用再通过系统自带的Terminal来启动了。</p>
-<h3><span id="使用terminator">使用Terminator</span></h3><img data-src="/2017/04/16/dev-env-for-full-stack-dev/16_02_44.png" title="同时打开了四个Terminal窗口的Terminator">
+<h3><span id="使用terminator"> 使用Terminator</span></h3>
+<img data-src="/2017/04/16/dev-env-for-full-stack-dev/16_02_44.png" class title="同时打开了四个Terminal窗口的Terminator">
 <p>借助快捷键，Terminator有着强大的多窗口Terminal管理功能，下面我选取最常用的几个功能进行介绍。</p>
 <ul>
 <li><kbd>shift</kbd> + <kbd>ctrl</kbd> + <kbd>o</kbd> 向下分裂与当前窗口等宽的新窗口</li>
@@ -448,7 +466,8 @@
 <li><kbd>shift</kbd> + <kbd>+</kbd> 增加当前窗口字体大小</li>
 <li><kbd>shift</kbd> + <kbd>-</kbd> 减小当前窗口字体大小</li>
 </ul>
-<h2><span id="进阶配置">进阶配置</span></h2><ul>
+<h2><span id="进阶配置"> 进阶配置</span></h2>
+<ul>
 <li><a href="http://codingnote.com/2017/05/21/use-vim/">超强文本编辑器Vi/Vim的配置与使用</a></li>
 <li><a href="http://codingnote.com/2017/04/16/dev-env-for-full-stack-dev/">终端下的多窗口与分屏神器Tmux…占坑用</a></li>
 </ul>

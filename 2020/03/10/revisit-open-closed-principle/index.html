@@ -23,12 +23,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"codingnote.com","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="目录  午餐时的争吵 经验法则与惯例 重温开闭原则 拓展阅读   午餐时的争吵今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。 第一个同事说这个代码虽然能满足现在的需求，但是却不易于向某个他描述的方向拓展，他言之凿凿，认为我们的软件不久就会有他描述的需求。与其等到新需求到来时在对软件进行改动，不如开始实现时就考虑到可能的拓展，让这个模块变">
+<meta name="description" content="目录   午餐时的争吵 经验法则与惯例 重温开闭原则 拓展阅读    午餐时的争吵 今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。 第一个同事说这个代码虽然能满足现在的需求，但是却不易于向某个他描述的方向拓展，他言之凿凿，认为我们的软件不久就会有他描述的需求。与其等到新需求到来时在对软件进行改动，不如开始实现时就考虑到可能的拓展，让这">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2020年 再看开闭原则">
 <meta property="og:url" content="http://codingnote.com/2020/03/10/revisit-open-closed-principle/index.html">
 <meta property="og:site_name" content="Coding Note">
-<meta property="og:description" content="目录  午餐时的争吵 经验法则与惯例 重温开闭原则 拓展阅读   午餐时的争吵今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。 第一个同事说这个代码虽然能满足现在的需求，但是却不易于向某个他描述的方向拓展，他言之凿凿，认为我们的软件不久就会有他描述的需求。与其等到新需求到来时在对软件进行改动，不如开始实现时就考虑到可能的拓展，让这个模块变">
+<meta property="og:description" content="目录   午餐时的争吵 经验法则与惯例 重温开闭原则 拓展阅读    午餐时的争吵 今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。 第一个同事说这个代码虽然能满足现在的需求，但是却不易于向某个他描述的方向拓展，他言之凿凿，认为我们的软件不久就会有他描述的需求。与其等到新需求到来时在对软件进行改动，不如开始实现时就考虑到可能的拓展，让这">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-10T21:59:13.000Z">
 <meta property="article:modified_time" content="2020-03-15T10:55:47.344Z">
@@ -220,7 +220,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text">午餐时的争吵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text">经验法则与惯例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text">重温开闭原则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text">拓展阅读</span></a></li></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> 目录</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text"> 午餐时的争吵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text"> 经验法则与惯例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text"> 重温开闭原则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text"> 拓展阅读</span></a></li></div>
         </section>
         <!--/noindex-->
 
@@ -360,22 +360,25 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
+<!-- toc -->
 <ul>
-<li><a href="#午餐时的争吵">午餐时的争吵</a></li>
-<li><a href="#经验法则与惯例">经验法则与惯例</a></li>
-<li><a href="#重温开闭原则">重温开闭原则</a></li>
-<li><a href="#拓展阅读">拓展阅读</a></li>
+<li><a href="#%E5%8D%88%E9%A4%90%E6%97%B6%E7%9A%84%E4%BA%89%E5%90%B5">午餐时的争吵</a></li>
+<li><a href="#%E7%BB%8F%E9%AA%8C%E6%B3%95%E5%88%99%E4%B8%8E%E6%83%AF%E4%BE%8B">经验法则与惯例</a></li>
+<li><a href="#%E9%87%8D%E6%B8%A9%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99">重温开闭原则</a></li>
+<li><a href="#%E6%8B%93%E5%B1%95%E9%98%85%E8%AF%BB">拓展阅读</a></li>
 </ul>
 <!-- tocstop -->
-<h1><span id="午餐时的争吵">午餐时的争吵</span></h1><p>今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。</p>
+<h1><span id="午餐时的争吵"> 午餐时的争吵</span></h1>
+<p>今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。</p>
 <p>第一个同事说这个代码虽然能满足现在的需求，但是却不易于向某个他描述的方向拓展，他言之凿凿，认为我们的软件不久就会有他描述的需求。与其等到新需求到来时在对软件进行改动，不如开始实现时就考虑到可能的拓展，让这个模块变得灵活以适应将来的需求。</p>
 <p>而另一位同事则不为所动，觉得YAGNI（You aren’t gonna need it）。就算我们真的要满足第一个同事所描述的需求，但是根据他的判断那也是很长时间（一年）之后的事了。如果现在就把模块变得易于拓展，那么无疑会增加代码的抽象层次，本来一个类就可以实现的功能，现在要多实现几个类。</p>
 <p>第三位同事也加入了讨论。把软件设计的灵活以适应将来的变化是一件好事，但是这么做也是有代价的。灵活意味着这个模块需要更高的抽象层次，在新的需求到来前，这个模块都需要保持它本不需要的抽象层次。况且现在我们假设对于需求的预测是正确的，假如需求根本不是我们想象的那样变化，那么现在的努力不就白费了吗？</p>
 <p>第一位同事似乎没有被说服，另外两位同事也各执已见。午饭结束，大家各自回到工位上继续搬砖了。</p>
 <p>虽然这次争论还没有结果，也还不知道谁对谁错。那么我们在实现某个模块时，究竟是只实现现有需求还是要考虑到将来的需求而将模块实现的灵活一点呢？</p>
 <a id="more"></a>
-<h1><span id="经验法则与惯例">经验法则与惯例</span></h1><p>面向对象程序设计至今已至少经存在了50年了（如果我们从1970年的Smalltalk语言开始算起，如果从1960年的Simula 67语言开始算起，那么时间会更长），我们现在遇到的各种问题，前人也几乎都遇到过了。这也是为什么面向对象程序设计会有如此多的模式（Pattern），甚至是名言警句（Maxim）。</p>
+<h1><span id="经验法则与惯例"> 经验法则与惯例</span></h1>
+<p>面向对象程序设计至今已至少经存在了50年了（如果我们从1970年的Smalltalk语言开始算起，如果从1960年的Simula 67语言开始算起，那么时间会更长），我们现在遇到的各种问题，前人也几乎都遇到过了。这也是为什么面向对象程序设计会有如此多的模式（Pattern），甚至是名言警句（Maxim）。</p>
 <p>如果问一位极限编程（extreme programming，XP）的专家，他会说</p>
 <blockquote>
 <p>YAGNI（You aren’t gonna need it），一个程序员不应该为软件增加不必要的功能</p>
@@ -384,7 +387,7 @@
 <blockquote>
 <p>我们应该遵守开闭原则（The Open-Closed Principle），软件中的对象（类，模块，函数等等）应该对于扩展是开放的，但是对于修改是封闭的</p>
 </blockquote>
-<p>而不久前Java大师Bruce Eckel恰巧在他的<span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJ1Y2VlY2tlbC5jb20vYmxvZy8yMDE5LTEyLTI0LXVuc3Bva2VuLWFzc3VtcHRpb25zLXVuZGVybHlpbmctb28tZGVzaWduLW1heGltcy8jZGlzcXVzX3RocmVhZA==" title="https://www.bruceeckel.com/blog/2019-12-24-unspoken-assumptions-underlying-oo-design-maxims/#disqus_thread">博客<i class="fa fa-external-link"></i></span>中写道</p>
+<p>而不久前Java大师Bruce Eckel恰巧在他的<span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJ1Y2VlY2tlbC5jb20vYmxvZy8yMDE5LTEyLTI0LXVuc3Bva2VuLWFzc3VtcHRpb25zLXVuZGVybHlpbmctb28tZGVzaWduLW1heGltcy8jZGlzcXVzX3RocmVhZA==">博客<i class="fa fa-external-link-alt"></i></span>中写道</p>
 <blockquote>
 <p>质疑抽象的合理性，在不使用教条的情况下如果不能解释抽象的合理性，就不要抽象</p>
 </blockquote>
@@ -393,14 +396,17 @@
 <p><em>Question your abstractions. If you can’t justify it (without quoting a maxim), take it out.</em></p>
 </blockquote>
 <p>但是不论是YAGNI还是SOLID，这些经验法则都是有适用条件的。在不同情况下，急切地套用这些法则还不如不去了解他们。在1988年Bertrand Meyer提出开闭法则32年后的今天，我们真的了解什么是开闭法则吗（The Open-Closed Principal）？</p>
-<h1><span id="重温开闭原则">重温开闭原则</span></h1><blockquote><p>软件中的对象（类，模块，函数等等）应该对于扩展是开放的，但是对于修改是封闭的。</p>
+<h1><span id="重温开闭原则"> 重温开闭原则</span></h1>
+<blockquote><p>软件中的对象（类，模块，函数等等）应该对于扩展是开放的，但是对于修改是封闭的。</p>
 <footer><strong>Bertrand Meyer</strong><cite>Object-Oriented Software Construction. Prentice Hall. 1988</cite></footer></blockquote>
 <p>开闭原则说了两件事</p>
 <ul>
-<li><p>软件中的对象应该对于扩展是开放的</p>
+<li>
+<p>软件中的对象应该对于扩展是开放的</p>
 <p>对象的行为可以被拓展，也就是说新的需求来临时，我们可以改变对象的行为以满足新的需求</p>
 </li>
-<li><p>软件中的对象应该对于修改是封闭的</p>
+<li>
+<p>软件中的对象应该对于修改是封闭的</p>
 <p>实现原有需求的的源代码不应该被修改</p>
 </li>
 </ul>
@@ -418,10 +424,11 @@
 </ul>
 <p>但是就好像老鼠团队开大会，谁去给猫挂铃铛的故事一样。开闭法则听起来诱人，可是又有谁知道一个软件里哪个模块，类应该关闭，哪个模块，类应该开放呢？假如新的需求不是打印新的形状而是先打印圆形再打印方形呢？那么上面的例子就不再试用了。可能会有人说，那么我在实现 <code>drawAllShapes()</code>就考虑到打印顺序的需求，再去要求每个形状实现 <code>Comparable&lt;Shape&gt;</code>接口就好了。哈哈，，今天有打印顺序的需求，明天又你想象不到的需求呢？只可惜软件开放工程师并不是预言家，要是软件开放工程师能准确语言客户的需求，那么现在软件开放领域也不会有那么多问题了。</p>
 <p>这就是开闭原则的陷阱，它要求使用者有非比寻常的见解。但是没有个十年软件开放经验，又怎么能获得寻常的见解呢？</p>
-<h1><span id="拓展阅读">拓展阅读</span></h1><ol>
-<li><span class="exturl" data-url="aHR0cHM6Ly9tYXJ0aW5mb3dsZXIuY29tL2JsaWtpL1lhZ25pLmh0bWw=" title="https://martinfowler.com/bliki/Yagni.html">Yagni, Martin Fowler<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93ZWIuYXJjaGl2ZS5vcmcvd2ViLzIwMTUwOTA1MDgxMTA1L2h0dHA6Ly93d3cub2JqZWN0bWVudG9yLmNvbS9yZXNvdXJjZXMvYXJ0aWNsZXMvb2NwLnBkZg==" title="https://web.archive.org/web/20150905081105/http://www.objectmentor.com/resources/articles/ocp.pdf">The Open-Closed Principle, Robert C. Martin<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJ1Y2VlY2tlbC5jb20vYmxvZy8yMDE5LTEyLTI0LXVuc3Bva2VuLWFzc3VtcHRpb25zLXVuZGVybHlpbmctb28tZGVzaWduLW1heGltcy8jZGlzcXVzX3RocmVhZA==" title="https://www.bruceeckel.com/blog/2019-12-24-unspoken-assumptions-underlying-oo-design-maxims/#disqus_thread">Unspoken Assumptions Underlying OO Design Maxims<i class="fa fa-external-link"></i></span></li>
+<h1><span id="拓展阅读"> 拓展阅读</span></h1>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYXJ0aW5mb3dsZXIuY29tL2JsaWtpL1lhZ25pLmh0bWw=">Yagni, Martin Fowler<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93ZWIuYXJjaGl2ZS5vcmcvd2ViLzIwMTUwOTA1MDgxMTA1L2h0dHA6Ly93d3cub2JqZWN0bWVudG9yLmNvbS9yZXNvdXJjZXMvYXJ0aWNsZXMvb2NwLnBkZg==">The Open-Closed Principle, Robert C. Martin<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJ1Y2VlY2tlbC5jb20vYmxvZy8yMDE5LTEyLTI0LXVuc3Bva2VuLWFzc3VtcHRpb25zLXVuZGVybHlpbmctb28tZGVzaWduLW1heGltcy8jZGlzcXVzX3RocmVhZA==">Unspoken Assumptions Underlying OO Design Maxims<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 
     </div>

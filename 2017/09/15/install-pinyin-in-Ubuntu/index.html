@@ -23,12 +23,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"codingnote.com","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="目录   安装IBus中文输入法 安装搜狗中文输入法   安装IBus中文输入法   最近又重新安装了Ubuntu系统。因为要写中文博客，没有中文输入法实在是麻烦。在Ubuntu上安装中文输入法确实没有Windows上显而易见，所以写下步骤方便自己将来参考。  首先进入系统设置选择language support，如果没有完整安装该功能，先根据系统提示完成安装  点击install&#x2F;remove">
+<meta name="description" content="目录   安装IBus中文输入法 安装搜狗中文输入法    安装IBus中文输入法    最近又重新安装了Ubuntu系统。因为要写中文博客，没有中文输入法实在是麻烦。在Ubuntu上安装中文输入法确实没有Windows上显而易见，所以写下步骤方便自己将来参考。   首先进入系统设置选择language support，如果没有完整安装该功能，先根据系统提示完成安装   点击install&#x2F;rem">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu上安装拼音输入法">
 <meta property="og:url" content="http://codingnote.com/2017/09/15/install-pinyin-in-Ubuntu/index.html">
 <meta property="og:site_name" content="Coding Note">
-<meta property="og:description" content="目录   安装IBus中文输入法 安装搜狗中文输入法   安装IBus中文输入法   最近又重新安装了Ubuntu系统。因为要写中文博客，没有中文输入法实在是麻烦。在Ubuntu上安装中文输入法确实没有Windows上显而易见，所以写下步骤方便自己将来参考。  首先进入系统设置选择language support，如果没有完整安装该功能，先根据系统提示完成安装  点击install&#x2F;remove">
+<meta property="og:description" content="目录   安装IBus中文输入法 安装搜狗中文输入法    安装IBus中文输入法    最近又重新安装了Ubuntu系统。因为要写中文博客，没有中文输入法实在是麻烦。在Ubuntu上安装中文输入法确实没有Windows上显而易见，所以写下步骤方便自己将来参考。   首先进入系统设置选择language support，如果没有完整安装该功能，先根据系统提示完成安装   点击install&#x2F;rem">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://codingnote.com/2017/09/15/install-pinyin-in-Ubuntu/successfully_installed_pinyin.png">
 <meta property="og:image" content="http://codingnote.com/2017/09/15/install-pinyin-in-Ubuntu/ubuntu_add_input_method.png">
@@ -223,7 +223,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">安装IBus中文输入法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">安装搜狗中文输入法</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> 安装IBus中文输入法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"> 安装搜狗中文输入法</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -366,51 +366,69 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>目录</p>
 <!-- toc -->
 <ul>
-<li><a href="#安装ibus中文输入法">安装IBus中文输入法</a></li>
-<li><a href="#安装搜狗中文输入法">安装搜狗中文输入法</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85ibus%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95">安装IBus中文输入法</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85%E6%90%9C%E7%8B%97%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95">安装搜狗中文输入法</a></li>
 </ul>
 <!-- tocstop -->
-<h3><span id="安装ibus中文输入法">安装IBus中文输入法</span></h3>  <img data-src="/2017/09/15/install-pinyin-in-Ubuntu/successfully_installed_pinyin.png" title="Ubuntu上的拼音输入法">
+<h3><span id="安装ibus中文输入法"> 安装IBus中文输入法</span></h3>
+  <img data-src="/2017/09/15/install-pinyin-in-Ubuntu/successfully_installed_pinyin.png" class title="Ubuntu上的拼音输入法">
 <p>最近又重新安装了Ubuntu系统。因为要写中文博客，没有中文输入法实在是麻烦。在Ubuntu上安装中文输入法确实没有Windows上显而易见，所以写下步骤方便自己将来参考。</p>
 <ol>
-<li><p>首先进入系统设置选择language support，如果没有完整安装该功能，先根据系统提示完成安装</p>
+<li>
+<p>首先进入系统设置选择language support，如果没有完整安装该功能，先根据系统提示完成安装</p>
 </li>
-<li><p>点击install/remove language 来安装中文支持</p>
+<li>
+<p>点击install/remove language 来安装中文支持</p>
 </li>
-<li><p>接下来在Terminal中手动安装下面任何一个输入法</p>
-<p> <code>sudo apt-get install ibus-pinyin</code></p>
-<p> <code>sudo apt-get install ibus-sunpinyin</code></p>
+<li>
+<p>接下来在Terminal中手动安装下面任何一个输入法</p>
+<p><code>sudo apt-get install ibus-pinyin</code></p>
+<p><code>sudo apt-get install ibus-sunpinyin</code></p>
 </li>
-<li><p>重启IBus daemon</p>
-<p> <code>ibus restart</code></p>
+<li>
+<p>重启IBus daemon</p>
+<p><code>ibus restart</code></p>
 </li>
-<li><p>再进入系统设置选择Text Entry，点击左下角的小加号并在add input source界面中搜索Chinese，选择一款拼音输入法</p>
-<img data-src="/2017/09/15/install-pinyin-in-Ubuntu/ubuntu_add_input_method.png" title="选择Pinyin输入法">
-</li>
-<li><p>使用吧</p>
+<li>
+<p>再进入系统设置选择Text Entry，点击左下角的小加号并在add input source界面中搜索Chinese，选择一款拼音输入法</p>
 </li>
 </ol>
-<h3><span id="安装搜狗中文输入法">安装搜狗中文输入法</span></h3><p>使用了几天IBus的中文输入发，使用体验简直弱爆了。首先4k屏适配有问题，待选框时刻游离在屏幕之外，然而最致命的是，IBus拼音输入法竟然有切换到双拼就无法再切换回来的bug。早年间我在ubuntu 14上使用过搜狗输入法，用户体验良好，于是试着在ubuntu 16.04上安装。虽然安装步骤比在ubuntu 14上稍稍复杂一些，但是搜狗输入法完美适配4k屏幕而且一如既往的好用。安装步骤如下：<br><a id="more"></a></p>
+  <img data-src="/2017/09/15/install-pinyin-in-Ubuntu/ubuntu_add_input_method.png" class title="选择Pinyin输入法">
+<ol start="6">
+<li>使用吧</li>
+</ol>
+<h3><span id="安装搜狗中文输入法"> 安装搜狗中文输入法</span></h3>
+<p>使用了几天IBus的中文输入发，使用体验简直弱爆了。首先4k屏适配有问题，待选框时刻游离在屏幕之外，然而最致命的是，IBus拼音输入法竟然有切换到双拼就无法再切换回来的bug。早年间我在ubuntu 14上使用过搜狗输入法，用户体验良好，于是试着在ubuntu 16.04上安装。虽然安装步骤比在ubuntu 14上稍稍复杂一些，但是搜狗输入法完美适配4k屏幕而且一如既往的好用。安装步骤如下：</p>
+<a id="more"></a>
 <ol>
-<li><p>搜狗舒服法依赖Fcitx键盘输入法系统而不是IBus，所以安装搜狗输入法前需要确认Fcitx已经安装，若没有安装Fcitx，可以通过terminal</p>
-<p> <code>sudo apt-get install fcitx</code></p>
-<p> 如果安装过程中需要额外依赖，可以通过以下命令安装</p>
-<p> <code>apt-get install -f</code></p>
+<li>
+<p>搜狗舒服法依赖Fcitx键盘输入法系统而不是IBus，所以安装搜狗输入法前需要确认Fcitx已经安装，若没有安装Fcitx，可以通过terminal</p>
+<p><code>sudo apt-get install fcitx</code></p>
+<p>如果安装过程中需要额外依赖，可以通过以下命令安装</p>
+<p><code>apt-get install -f</code></p>
 </li>
-<li><p>点击<span class="exturl" data-url="aHR0cDovL3Bpbnlpbi5zb2dvdS5jb20vbGludXgv" title="http://pinyin.sogou.com/linux/">这里<i class="fa fa-external-link"></i></span>下载搜狗中文输入法，有32bit和64bit安装包可选，ubuntu用户可以选择deb格式安装包用Ubuntu Software Center来安装，当然可以到下载路径下通过以下命令安装</p>
-<p> <code>sudo dpkg -i sogoupinyin_2.1.0.0086_amd64.deb</code></p>
+<li>
+<p>点击<span class="exturl" data-url="aHR0cDovL3Bpbnlpbi5zb2dvdS5jb20vbGludXgv">这里<i class="fa fa-external-link-alt"></i></span>下载搜狗中文输入法，有32bit和64bit安装包可选，ubuntu用户可以选择deb格式安装包用Ubuntu Software Center来安装，当然可以到下载路径下通过以下命令安装</p>
+<p><code>sudo dpkg -i sogoupinyin_2.1.0.0086_amd64.deb</code></p>
 </li>
-<li><p>安装完毕后，在从当前系统设置/语言支持里选择Fcitx做为键盘输入法系统</p>
+<li>
+<p>安装完毕后，在从当前系统设置/语言支持里选择Fcitx做为键盘输入法系统</p>
 </li>
-<li>退出登录，再重新登录</li>
-<li>现在在系统右上角应该能看到键盘图标，选择设置，添加搜狗中文书法</li>
-<li>开心的使用吧</li>
+<li>
+<p>退出登录，再重新登录</p>
+</li>
+<li>
+<p>现在在系统右上角应该能看到键盘图标，选择设置，添加搜狗中文书法</p>
+</li>
+<li>
+<p>开心的使用吧</p>
+</li>
 </ol>
 <p>参考资料</p>
 <ol>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy81OTM1Ni9ob3ctZG8taS1nZXQtY2hpbmVzZS1pbnB1dC10by13b3Jr" title="https://askubuntu.com/questions/59356/how-do-i-get-chinese-input-to-work">How do I get Chinese input to work?<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy80NTU2ODIvMTQtMDQtY2hpbmVzZS1pYnVzLWlucHV0LW5vLW9wdGlvbnM=" title="https://askubuntu.com/questions/455682/14-04-chinese-ibus-input-no-options">14.04 Chinese Ibus Input - No Options<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy80NTAyNTUvaW5zdGFsbGluZy1zb2dvdS0lRTYlOTAlOUMlRTclOEIlOTclRTYlOEIlQkMlRTklOUYlQjM=" title="https://askubuntu.com/questions/450255/installing-sogou-%E6%90%9C%E7%8B%97%E6%8B%BC%E9%9F%B3">Installing SOGOU 搜狗拼音<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy81OTM1Ni9ob3ctZG8taS1nZXQtY2hpbmVzZS1pbnB1dC10by13b3Jr">How do I get Chinese input to work?<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy80NTU2ODIvMTQtMDQtY2hpbmVzZS1pYnVzLWlucHV0LW5vLW9wdGlvbnM=">14.04 Chinese Ibus Input - No Options<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy80NTAyNTUvaW5zdGFsbGluZy1zb2dvdS0lRTYlOTAlOUMlRTclOEIlOTclRTYlOEIlQkMlRTklOUYlQjM=">Installing SOGOU 搜狗拼音<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 
     </div>

@@ -23,12 +23,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"codingnote.com","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="算法复杂度分析   情况 时间复杂度 空间复杂度     最优 O(N) O(K)   平均 O(N) O(K)   最差 O(N) O(K)    其中，K是数组中互不相同数的个数 算法分析遍历数组，算出每个数出现的次数。如果出现的次数为奇数，则返回该数。要点是选择用于记录不同数出现次数的计数器的数据结构和计数方法。对于计数器的数据结构，python built-in的字典可以满足O(1)的读取">
+<meta name="description" content="算法复杂度分析    情况 时间复杂度 空间复杂度     最优 O(N) O(K)   平均 O(N) O(K)   最差 O(N) O(K)    其中，K是数组中互不相同数的个数  算法分析 遍历数组，算出每个数出现的次数。如果出现的次数为奇数，则返回该数。要点是选择用于记录不同数出现次数的计数器的数据结构和计数方法。对于计数器的数据结构，python built-in的字典可以满足O(1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Codility OddOccurrencesInArray in Python">
 <meta property="og:url" content="http://codingnote.com/2017/05/29/odd-occurrences-in-array/index.html">
 <meta property="og:site_name" content="Coding Note">
-<meta property="og:description" content="算法复杂度分析   情况 时间复杂度 空间复杂度     最优 O(N) O(K)   平均 O(N) O(K)   最差 O(N) O(K)    其中，K是数组中互不相同数的个数 算法分析遍历数组，算出每个数出现的次数。如果出现的次数为奇数，则返回该数。要点是选择用于记录不同数出现次数的计数器的数据结构和计数方法。对于计数器的数据结构，python built-in的字典可以满足O(1)的读取">
+<meta property="og:description" content="算法复杂度分析    情况 时间复杂度 空间复杂度     最优 O(N) O(K)   平均 O(N) O(K)   最差 O(N) O(K)    其中，K是数组中互不相同数的个数  算法分析 遍历数组，算出每个数出现的次数。如果出现的次数为奇数，则返回该数。要点是选择用于记录不同数出现次数的计数器的数据结构和计数方法。对于计数器的数据结构，python built-in的字典可以满足O(1">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-05-29T21:07:09.000Z">
 <meta property="article:modified_time" content="2020-01-04T16:25:40.648Z">
@@ -220,7 +220,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">算法复杂度分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">算法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">源代码</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> 算法复杂度分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"> 算法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text"> 源代码</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -360,7 +360,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
 <thead>
 <tr>
 <th>情况</th>
@@ -387,8 +388,10 @@
 </tbody>
 </table>
 <p>其中，K是数组中互不相同数的个数</p>
-<h3><span id="算法分析">算法分析</span></h3><p>遍历数组，算出每个数出现的次数。如果出现的次数为奇数，则返回该数。要点是选择用于记录不同数出现次数的计数器的数据结构和计数方法。对于计数器的数据结构，python built-in的字典可以满足O(1)的读取和记录。对于计数方法，则不必详细记录出现次数，标记奇偶即可。在特定条件下，应该也可以使用位操作，利用二进制0，1比特来标记奇偶，以便使用更小的内存空间。</p>
-<h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    count = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> A:</span><br><span class="line">        <span class="keyword">if</span> num <span class="keyword">in</span> count:</span><br><span class="line">            count[num] = (count[num] + <span class="number">1</span>) % <span class="number">2</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            count[num] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> count:</span><br><span class="line">        <span class="keyword">if</span> count[k] == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> int(k)</span><br></pre></td></tr></table></figure>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p>遍历数组，算出每个数出现的次数。如果出现的次数为奇数，则返回该数。要点是选择用于记录不同数出现次数的计数器的数据结构和计数方法。对于计数器的数据结构，python built-in的字典可以满足O(1)的读取和记录。对于计数方法，则不必详细记录出现次数，标记奇偶即可。在特定条件下，应该也可以使用位操作，利用二进制0，1比特来标记奇偶，以便使用更小的内存空间。</p>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">A</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    count = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> A:</span><br><span class="line">        <span class="keyword">if</span> num <span class="keyword">in</span> count:</span><br><span class="line">            count[num] = (count[num] + <span class="number">1</span>) % <span class="number">2</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            count[num] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> count:</span><br><span class="line">        <span class="keyword">if</span> count[k] == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">int</span>(k)</span><br></pre></td></tr></table></figure>
 
     </div>
 

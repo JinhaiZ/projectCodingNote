@@ -347,7 +347,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
 <thead>
 <tr>
 <th>情况</th>
@@ -373,8 +374,10 @@
 </tr>
 </tbody>
 </table>
-<h3><span id="算法分析">算法分析</span></h3><p>可以想象有一个数组长度为N+1，数组元素为1,2,…N,N+1，这样便可以用等差求和公式算出该数组的总和。用总和减去输入数组A的和便可以知道数组A缺失了哪个元素。注意python <code>sum()</code>的算法复杂度为O(N)，故该算法的算法复杂度是O(N)。</p>
-<h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    N = len(A)</span><br><span class="line">    start = <span class="number">1</span></span><br><span class="line">    end = len(A)+<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> (N+<span class="number">1</span>)*(start+end)/<span class="number">2</span> - sum(A)</span><br></pre></td></tr></table></figure>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p>可以想象有一个数组长度为N+1，数组元素为1,2,…N,N+1，这样便可以用等差求和公式算出该数组的总和。用总和减去输入数组A的和便可以知道数组A缺失了哪个元素。注意python <code>sum()</code>的算法复杂度为O(N)，故该算法的算法复杂度是O(N)。</p>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">A</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    N = <span class="built_in">len</span>(A)</span><br><span class="line">    start = <span class="number">1</span></span><br><span class="line">    end = <span class="built_in">len</span>(A)+<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> (N+<span class="number">1</span>)*(start+end)/<span class="number">2</span> - <span class="built_in">sum</span>(A)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -458,7 +461,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
 <thead>
 <tr>
 <th>情况</th>
@@ -485,9 +489,12 @@
 </tbody>
 </table>
 <p>算法复杂度不依赖于输入数据的多少，该算法总是在固定时间内完成。</p>
-<h3><span id="算法分析">算法分析</span></h3><p>已知长度Y-X，步长D，求步数。难点在于长度能否整除步长，若能整除，返回步长，若不能整除，对步长向上取整。向上取整可以同python math库里的ceil函数。如果不想加载math库，只用python内建函数可以吗？其实也是可以的。难度在对于求得的步长是否+1上。由于python除法<code>/</code>会截断小数部分，我们可以用取余<code>%</code>操作判断长度能否整除步长，若能整除，返回步长，若不能整除，对步长+1即可。</p>
-<h3><span id="python-数值转换">Python 数值转换</span></h3><p>python 数值转换函数<code>int()</code>把bool型转换为int型整数值，<code>int(True) =&gt; 1</code> <code>int(False) =&gt; 0</code></p>
-<h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(X, Y, D)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="keyword">return</span> (Y-X)/D + int((Y-X)%D &gt; <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p>已知长度Y-X，步长D，求步数。难点在于长度能否整除步长，若能整除，返回步长，若不能整除，对步长向上取整。向上取整可以同python math库里的ceil函数。如果不想加载math库，只用python内建函数可以吗？其实也是可以的。难度在对于求得的步长是否+1上。由于python除法<code>/</code>会截断小数部分，我们可以用取余<code>%</code>操作判断长度能否整除步长，若能整除，返回步长，若不能整除，对步长+1即可。</p>
+<h3><span id="python-数值转换"> Python 数值转换</span></h3>
+<p>python 数值转换函数<code>int()</code>把bool型转换为int型整数值，<code>int(True) =&gt; 1</code> <code>int(False) =&gt; 0</code></p>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">X, Y, D</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="keyword">return</span> (Y-X)/D + <span class="built_in">int</span>((Y-X)%D &gt; <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -571,7 +578,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
 <thead>
 <tr>
 <th>情况</th>
@@ -598,8 +606,10 @@
 </tbody>
 </table>
 <p>其中，K是数组中互不相同数的个数</p>
-<h3><span id="算法分析">算法分析</span></h3><p>遍历数组，算出每个数出现的次数。如果出现的次数为奇数，则返回该数。要点是选择用于记录不同数出现次数的计数器的数据结构和计数方法。对于计数器的数据结构，python built-in的字典可以满足O(1)的读取和记录。对于计数方法，则不必详细记录出现次数，标记奇偶即可。在特定条件下，应该也可以使用位操作，利用二进制0，1比特来标记奇偶，以便使用更小的内存空间。</p>
-<h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    count = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> A:</span><br><span class="line">        <span class="keyword">if</span> num <span class="keyword">in</span> count:</span><br><span class="line">            count[num] = (count[num] + <span class="number">1</span>) % <span class="number">2</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            count[num] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> count:</span><br><span class="line">        <span class="keyword">if</span> count[k] == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> int(k)</span><br></pre></td></tr></table></figure>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p>遍历数组，算出每个数出现的次数。如果出现的次数为奇数，则返回该数。要点是选择用于记录不同数出现次数的计数器的数据结构和计数方法。对于计数器的数据结构，python built-in的字典可以满足O(1)的读取和记录。对于计数方法，则不必详细记录出现次数，标记奇偶即可。在特定条件下，应该也可以使用位操作，利用二进制0，1比特来标记奇偶，以便使用更小的内存空间。</p>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">A</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    count = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> A:</span><br><span class="line">        <span class="keyword">if</span> num <span class="keyword">in</span> count:</span><br><span class="line">            count[num] = (count[num] + <span class="number">1</span>) % <span class="number">2</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            count[num] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> count:</span><br><span class="line">        <span class="keyword">if</span> count[k] == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">int</span>(k)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -683,7 +693,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
 <thead>
 <tr>
 <th>情况</th>
@@ -709,31 +720,32 @@
 </tr>
 </tbody>
 </table>
-<h3><span id="算法分析">算法分析</span></h3><p>并不是要真的右移K次数组，K对N取模，可求出实际要右移的次数K = K%N。利用python数组切片操作，以N-k为切点，将数组分成前后两部分，颠倒前后顺序拼接后便可得到右移K次的数组。</p>
-<h3><span id="pyhton数据切片">Pyhton数据切片</span></h3><p><code>a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></p>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p>并不是要真的右移K次数组，K对N取模，可求出实际要右移的次数K = K%N。利用python数组切片操作，以N-k为切点，将数组分成前后两部分，颠倒前后顺序拼接后便可得到右移K次的数组。</p>
+<h3><span id="pyhton数据切片"> Pyhton数据切片</span></h3>
+<p><code>a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></p>
 <ul>
-<li>给切片起始、终止值和步长，<ul>
+<li>给切片起始、终止值和步长，</li>
 <li><code>a[0:5:2] # [0, 2, 4]</code></li>
-</ul>
-</li>
-<li>给切片起始和终止值，步长值缺省时其默认值为1<ul>
+<li>给切片起始和终止值，步长值缺省时其默认值为1
+<ul>
 <li><code>a[0:5] # [0, 1, 2, 3, 4]</code></li>
-<li><code>a[0:]    # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></li>
-<li><code>a[:5]      # [0, 1, 2, 3, 4]</code></li>
-<li><code>a[:]         # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></li>
+<li><code>a[0:] # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></li>
+<li><code>a[:5] # [0, 1, 2, 3, 4]</code></li>
+<li><code>a[:] # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></li>
 </ul>
 </li>
-<li>给负值<ul>
-<li><code>a[-1]    # 9</code></li>
-<li><code>a[-2:]   # [8, 9]</code></li>
-<li><code>a[:-2]   # [0, 1, 2, 3, 4, 5, 6, 7]</code></li>
+<li>给负值</li>
+<li><code>a[-1] # 9</code></li>
+<li><code>a[-2:] # [8, 9]</code></li>
+<li><code>a[:-2] # [0, 1, 2, 3, 4, 5, 6, 7]</code></li>
 </ul>
-</li>
-</ul>
-<h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(A, K)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="comment"># N number of array A</span></span><br><span class="line">    N = len(A)</span><br><span class="line">    <span class="keyword">if</span> (N == <span class="number">0</span>):</span><br><span class="line">        <span class="keyword">return</span> A</span><br><span class="line">    K = K%N</span><br><span class="line">    first = A[N-K:]</span><br><span class="line">    last = A[:N-K]</span><br><span class="line">    <span class="keyword">return</span> first+last</span><br></pre></td></tr></table></figure>
-<h3><span id="参考">参考</span></h3><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93aWtpLnB5dGhvbi5vcmcvbW9pbi9UaW1lQ29tcGxleGl0eQ==" title="https://wiki.python.org/moin/TimeComplexity">Python数组切片算法复杂度分析<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNTA5MjExL2V4cGxhaW4tcHl0aG9ucy1zbGljZS1ub3RhdGlvbg==" title="https://stackoverflow.com/questions/509211/explain-pythons-slice-notation">Python数组切片操作解释<i class="fa fa-external-link"></i></span></li>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">A, K</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="comment"># N number of array A</span></span><br><span class="line">    N = <span class="built_in">len</span>(A)</span><br><span class="line">    <span class="keyword">if</span> (N == <span class="number">0</span>):</span><br><span class="line">        <span class="keyword">return</span> A</span><br><span class="line">    K = K%N</span><br><span class="line">    first = A[N-K:]</span><br><span class="line">    last = A[:N-K]</span><br><span class="line">    <span class="keyword">return</span> first+last</span><br></pre></td></tr></table></figure>
+<h3><span id="参考"> 参考</span></h3>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93aWtpLnB5dGhvbi5vcmcvbW9pbi9UaW1lQ29tcGxleGl0eQ==">Python数组切片算法复杂度分析<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNTA5MjExL2V4cGxhaW4tcHl0aG9ucy1zbGljZS1ub3RhdGlvbg==">Python数组切片操作解释<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
       
@@ -818,7 +830,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
 <thead>
 <tr>
 <th>情况</th>
@@ -844,8 +857,10 @@
 </tr>
 </tbody>
 </table>
-<h3><span id="算法分析">算法分析</span></h3><p>利用python built-in函数<code>bin()</code>将十进制输入转换为二进制字符串，遇到字符‘0’，计数器<code>count += 1</code>，遇到字符‘1’，计数器清空。变量<code>max</code>记录<code>count</code>最大值，函数最后返回<code>max</code>。但是有一个问题，转换为二进制表示的N没有前导0，但需要注意处理后缀0，以免错误计数。否则，若二进制表示为1001000时，函数返回3而不是2。</p>
-<h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(N)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="keyword">if</span> (N &gt; <span class="number">2147483647</span> <span class="keyword">or</span> N &lt; <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    s = bin(N)[<span class="number">2</span>:]</span><br><span class="line">    last = s.__len__()<span class="number">-1</span></span><br><span class="line">    <span class="keyword">while</span> (s[last] == <span class="string">'0'</span>):</span><br><span class="line">        last -= <span class="number">1</span></span><br><span class="line">    s = s[<span class="number">0</span>:last+<span class="number">1</span>]</span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    max = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="string">'0'</span>):</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> (count &gt; max):</span><br><span class="line">                max = count</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> max</span><br></pre></td></tr></table></figure>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p>利用python built-in函数<code>bin()</code>将十进制输入转换为二进制字符串，遇到字符‘0’，计数器<code>count += 1</code>，遇到字符‘1’，计数器清空。变量<code>max</code>记录<code>count</code>最大值，函数最后返回<code>max</code>。但是有一个问题，转换为二进制表示的N没有前导0，但需要注意处理后缀0，以免错误计数。否则，若二进制表示为1001000时，函数返回3而不是2。</p>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">N</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="keyword">if</span> (N &gt; <span class="number">2147483647</span> <span class="keyword">or</span> N &lt; <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    s = <span class="built_in">bin</span>(N)[<span class="number">2</span>:]</span><br><span class="line">    last = s.__len__()-<span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> (s[last] == <span class="string">&#x27;0&#x27;</span>):</span><br><span class="line">        last -= <span class="number">1</span></span><br><span class="line">    s = s[<span class="number">0</span>:last+<span class="number">1</span>]</span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="built_in">max</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="string">&#x27;0&#x27;</span>):</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> (count &gt; <span class="built_in">max</span>):</span><br><span class="line">                <span class="built_in">max</span> = count</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">max</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -929,15 +944,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
+          <h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<!-- toc -->
 <ul>
-<li><a href="#为什么要学习vim">为什么要学习Vim</a></li>
-<li><a href="#学习vim的正确姿势">学习Vim的正确姿势</a></li>
-<li><a href="#配置vim的省时办法">配置Vim的省时办法</a></li>
-<li><a href="#vim插件使用">Vim插件使用</a></li>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6%E4%B9%A0vim">为什么要学习Vim</a></li>
+<li><a href="#%E5%AD%A6%E4%B9%A0vim%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF">学习Vim的正确姿势</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AEvim%E7%9A%84%E7%9C%81%E6%97%B6%E5%8A%9E%E6%B3%95">配置Vim的省时办法</a></li>
+<li><a href="#vim%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8">Vim插件使用</a></li>
 </ul>
 <!-- tocstop -->
-<h2 id="为什么要学习Vim"><a href="#为什么要学习Vim" class="headerlink" title="为什么要学习Vim"></a>为什么要学习Vim</h2><p>Vi或者Vim（Vi加强版）是众多Linux发行版中终端环境自带的文本编辑器，但似乎熟练掌握Vi/Vi不是在Linux上进行软件开发活动的必要条件。因为在Linux上开发软件的过程中，我们总是能找到更便于上手的，学习曲线更平缓的替代工具，比如gedit，sublime或者atom。然而在某些情况下，掌握Vi/Vim却显得十分的必要，比如需要远程链接到一台上个世纪的古董服务器上修改几行配置代码时，使用Vi/Vim进行编辑几乎是你的唯一选择，毕竟Vi诞生于1976年，比Linux的第一个版本发行时还要早17年，此外Vi/Vim可以直接运行在终端环境中，而gedit，sublime或者atom却需要在桌面环境的支持下才能运行。<br>
+<h2 id="为什么要学习vim"><a class="markdownIt-Anchor" href="#为什么要学习vim"></a> 为什么要学习Vim</h2>
+<p>Vi或者Vim（Vi加强版）是众多Linux发行版中终端环境自带的文本编辑器，但似乎熟练掌握Vi/Vi不是在Linux上进行软件开发活动的必要条件。因为在Linux上开发软件的过程中，我们总是能找到更便于上手的，学习曲线更平缓的替代工具，比如gedit，sublime或者atom。然而在某些情况下，掌握Vi/Vim却显得十分的必要，比如需要远程链接到一台上个世纪的古董服务器上修改几行配置代码时，使用Vi/Vim进行编辑几乎是你的唯一选择，毕竟Vi诞生于1976年，比Linux的第一个版本发行时还要早17年，此外Vi/Vim可以直接运行在终端环境中，而gedit，sublime或者atom却需要在桌面环境的支持下才能运行。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/05/21/use-vim/#more" rel="contents">
@@ -947,7 +964,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
 
     
     
@@ -1028,16 +1045,18 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
+          <h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<!-- toc -->
 <ul>
-<li><a href="#开发分支-dev">开发分支 DEV</a></li>
-<li><a href="#测试分支-test">测试分支 TEST</a></li>
-<li><a href="#缓冲分支-staging">缓冲分支 STAGING</a></li>
-<li><a href="#生产分支-prod">生产分支 PROD</a></li>
+<li><a href="#%E5%BC%80%E5%8F%91%E5%88%86%E6%94%AF-dev">开发分支 DEV</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95%E5%88%86%E6%94%AF-test">测试分支 TEST</a></li>
+<li><a href="#%E7%BC%93%E5%86%B2%E5%88%86%E6%94%AF-staging">缓冲分支 STAGING</a></li>
+<li><a href="#%E7%94%9F%E4%BA%A7%E5%88%86%E6%94%AF-prod">生产分支 PROD</a></li>
 </ul>
 <!-- tocstop -->
 <p>一般来说，利用git进行多人协作的网站开发项目都有不止一个分支，其中每一个分支对应于网站部署的一个架构。虽然网站部署架构千差万别，但几乎都是从开发环境（DEV）开始并以生产环境（PROD）结束，所以对应到git分支上就是 开发分支，测试分支，缓存分支和生产分支。</p>
-<h3 id="开发分支-DEV"><a href="#开发分支-DEV" class="headerlink" title="开发分支 DEV"></a>开发分支 DEV</h3><p>开发分支是本地开发环境上用于开发新功能的分支，开发人员可以方便的在本地进行单元测试<br>
+<h3 id="开发分支-dev"><a class="markdownIt-Anchor" href="#开发分支-dev"></a> 开发分支 DEV</h3>
+<p>开发分支是本地开发环境上用于开发新功能的分支，开发人员可以方便的在本地进行单元测试</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/05/08/git-branch-and-deployment-architectures/#more" rel="contents">
@@ -1047,7 +1066,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
 
     
     
@@ -1128,14 +1147,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
+          <h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<!-- toc -->
 <ul>
-<li><a href="#什么时候使用cherry-pick">什么时候使用Cherry-pick</a></li>
-<li><a href="#一个例子">一个例子</a></li>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8cherry-pick">什么时候使用Cherry-pick</a></li>
+<li><a href="#%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90">一个例子</a></li>
 </ul>
 <!-- tocstop -->
 <p>一般来说，掌握了git的commit，branch，merge几个命令就足以应付90%的工作场景了，但是有时候我们也需要处理稍微复杂一点的工作场景，比如整理提交记录。</p>
-<h2 id="什么时候使用Cherry-pick"><a href="#什么时候使用Cherry-pick" class="headerlink" title="什么时候使用Cherry-pick"></a>什么时候使用Cherry-pick</h2><p>Cherry pick 直译成中文就是采樱桃，樱桃有好有坏，挑选樱桃的过程就形象的类比了我们应用该命令挑选提交（Commit）的过程。<br>一般来说，利用git进行多人协作的网站开发项目都有不止一个分支，其中每一个分支对应于网站部署的一个架构。在多分支环境下，如果我们想要将一个或者一些在其他分支下提交（Commit）复制到当前分支所在的位置（HEAD）的话，<code>cherry-pick</code> 是最直接，最方便的办法了。<br>
+<h2 id="什么时候使用cherry-pick"><a class="markdownIt-Anchor" href="#什么时候使用cherry-pick"></a> 什么时候使用Cherry-pick</h2>
+<p>Cherry pick 直译成中文就是采樱桃，樱桃有好有坏，挑选樱桃的过程就形象的类比了我们应用该命令挑选提交（Commit）的过程。<br>
+一般来说，利用git进行多人协作的网站开发项目都有不止一个分支，其中每一个分支对应于网站部署的一个架构。在多分支环境下，如果我们想要将一个或者一些在其他分支下提交（Commit）复制到当前分支所在的位置（HEAD）的话，<code>cherry-pick</code> 是最直接，最方便的办法了。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/05/07/git-cherry-pick/#more" rel="contents">
@@ -1145,7 +1167,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
 
     
     
@@ -1226,16 +1248,21 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
+          <h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<!-- toc -->
 <ul>
-<li><a href="#通过conig命令设置git别名">通过conig命令设置Git别名</a></li>
-<li><a href="#通过config文件设置git别名">通过config文件设置Git别名</a></li>
+<li><a href="#%E9%80%9A%E8%BF%87conig%E5%91%BD%E4%BB%A4%E8%AE%BE%E7%BD%AEgit%E5%88%AB%E5%90%8D">通过conig命令设置Git别名</a></li>
+<li><a href="#%E9%80%9A%E8%BF%87config%E6%96%87%E4%BB%B6%E8%AE%BE%E7%BD%AEgit%E5%88%AB%E5%90%8D">通过config文件设置Git别名</a></li>
 </ul>
 <!-- tocstop -->
-<p>刚刚进公司时，发现同事在使用Git时都是输入一些我从来没见过的命令，比如<code>git st</code>, <code>git ci</code>什么的，但是这些命令在自己的电脑上却不存在。更有甚者，有同事优雅的在终端上输入<code>git fuck</code>命令，git竟把远端的branch fetch回本地了，我的天，难道自己用的是假git吗？<br>我弱弱问身边的同事，这才知道git别名的存在，借助于git别名我们就可以为git已有的命令取个上口好记的别名了。</p>
-<h2 id="通过conig命令设置Git别名"><a href="#通过conig命令设置Git别名" class="headerlink" title="通过conig命令设置Git别名"></a>通过conig命令设置Git别名</h2><p>通常情况下，git最常用的几个命令是 <code>git branch</code>, <code>git checkout</code>, <code>git commit</code> 和<code>git status</code>。如果只是为这几个命令设置git别名，最简单的方法是在终端中输入以下命令</p>
+<p>刚刚进公司时，发现同事在使用Git时都是输入一些我从来没见过的命令，比如<code>git st</code>, <code>git ci</code>什么的，但是这些命令在自己的电脑上却不存在。更有甚者，有同事优雅的在终端上输入<code>git fuck</code>命令，git竟把远端的branch fetch回本地了，我的天，难道自己用的是假git吗？<br>
+我弱弱问身边的同事，这才知道git别名的存在，借助于git别名我们就可以为git已有的命令取个上口好记的别名了。</p>
+<h2 id="通过conig命令设置git别名"><a class="markdownIt-Anchor" href="#通过conig命令设置git别名"></a> 通过conig命令设置Git别名</h2>
+<p>通常情况下，git最常用的几个命令是 <code>git branch</code>, <code>git checkout</code>, <code>git commit</code> 和<code>git status</code>。如果只是为这几个命令设置git别名，最简单的方法是在终端中输入以下命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.br branch</span><br><span class="line">git config --global alias.co checkout</span><br><span class="line">git config --global alias.ci commit</span><br><span class="line">git config --global alias.st status</span><br></pre></td></tr></table></figure>
-<h2 id="通过config文件设置Git别名"><a href="#通过config文件设置Git别名" class="headerlink" title="通过config文件设置Git别名"></a>通过config文件设置Git别名</h2><p>不过，如果我们一次想设置的别名比较多，那么我们可以通过修改<code>~/.gitconfig</code>文件来实现。<br>这时我们可以通过添加以下字段来完成和上述一样的设置.<br>
+<h2 id="通过config文件设置git别名"><a class="markdownIt-Anchor" href="#通过config文件设置git别名"></a> 通过config文件设置Git别名</h2>
+<p>不过，如果我们一次想设置的别名比较多，那么我们可以通过修改<code>~/.gitconfig</code>文件来实现。<br>
+这时我们可以通过添加以下字段来完成和上述一样的设置.</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/05/07/git-alias/#more" rel="contents">
@@ -1245,7 +1272,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
 
     
     
@@ -1326,27 +1353,32 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
+          <h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<!-- toc -->
 <ul>
-<li><a href="#放弃bash使用zsh">放弃Bash，使用Zsh</a><ul>
-<li><a href="#zsh的使用">Zsh的使用</a><ul>
-<li><a href="#安装zsh">安装Zsh</a></li>
-<li><a href="#安装zsh的配置插件oh-my-zsh">安装Zsh的配置插件，oh-my-zsh</a></li>
-<li><a href="#更换oh-my-zsh默认主题">更换oh-my-zsh默认主题</a></li>
+<li><a href="#%E6%94%BE%E5%BC%83bash%E4%BD%BF%E7%94%A8zsh">放弃Bash，使用Zsh</a>
+<ul>
+<li><a href="#zsh%E7%9A%84%E4%BD%BF%E7%94%A8">Zsh的使用</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85zsh">安装Zsh</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85zsh%E7%9A%84%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6oh-my-zsh">安装Zsh的配置插件，oh-my-zsh</a></li>
+<li><a href="#%E6%9B%B4%E6%8D%A2oh-my-zsh%E9%BB%98%E8%AE%A4%E4%B8%BB%E9%A2%98">更换oh-my-zsh默认主题</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#放弃terminal使用terminator">放弃Terminal，使用Terminator</a><ul>
-<li><a href="#安装terminator">安装Terminator</a></li>
-<li><a href="#使用terminator">使用Terminator</a></li>
+<li><a href="#%E6%94%BE%E5%BC%83terminal%E4%BD%BF%E7%94%A8terminator">放弃Terminal，使用Terminator</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85terminator">安装Terminator</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8terminator">使用Terminator</a></li>
 </ul>
 </li>
-<li><a href="#进阶配置">进阶配置</a></li>
+<li><a href="#%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AE">进阶配置</a></li>
 </ul>
 <!-- tocstop -->
 <p>作为一个小白全栈开发程序员，有一个顺手的开发环境能很好的节约自己的时间。这篇文章就简单的介绍一下，最近自己在Ubuntu系统上使用的全站开发环境以及相应的配置流程。</p>
-<h2 id="放弃Bash，使用Zsh"><a href="#放弃Bash，使用Zsh" class="headerlink" title="放弃Bash，使用Zsh"></a>放弃Bash，使用Zsh</h2>
+<h2 id="放弃bash使用zsh"><a class="markdownIt-Anchor" href="#放弃bash使用zsh"></a> 放弃Bash，使用Zsh</h2>
+
 <p>就笔者所使用的Ubuntu 16.04而言，Termianl默认的Shell是大名鼎鼎的Bash，虽然Bash几乎是所有Linux发行版的默认Shell，但对于我这个小白程序员而言却不一定是最优的选择。比如说我想知道Linux下常用的压缩解压缩命令tar后面可以用什么参数，怎么使用， 或者想要使用的某个命令我只记得其中的一部分，需要自动补全。这时候Zsh就能满足我这个小白的需求了。</p>
           <!--noindex-->
             <div class="post-button">

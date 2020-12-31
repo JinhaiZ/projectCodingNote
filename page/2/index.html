@@ -343,15 +343,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
+          <h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<!-- toc -->
 <ul>
-<li><a href="#反引号">反引号`</a></li>
-<li><a href="#repr函数">repr函数</a></li>
-<li><a href="#关于单例的思考">关于单例的思考</a></li>
+<li><a href="#%E5%8F%8D%E5%BC%95%E5%8F%B7">反引号`</a></li>
+<li><a href="#repr%E5%87%BD%E6%95%B0">repr函数</a></li>
+<li><a href="#%E5%85%B3%E4%BA%8E%E5%8D%95%E4%BE%8B%E7%9A%84%E6%80%9D%E8%80%83">关于单例的思考</a></li>
 </ul>
 <!-- tocstop -->
-<h3 id="反引号"><a href="#反引号" class="headerlink" title="反引号`"></a>反引号`</h3><p>今天在看一本基于python2.2的Design Pattern书，其中有一段关于单例的代码我很不解，因为用到了反引号`，也就是reverse quotes。书中代码如下</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OnlyOne</span>:</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">__OnlyOne</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">      self.val = arg</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">      <span class="keyword">return</span> `self` + self.val</span><br><span class="line">  instance = <span class="literal">None</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> OnlyOne.instance:</span><br><span class="line">      OnlyOne.instance = OnlyOne.__OnlyOne(arg)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      OnlyOne.instance.val = arg</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> getattr(self.instance, name)</span><br><span class="line"></span><br><span class="line">x = OnlyOne(<span class="string">'sausage'</span>)</span><br><span class="line"><span class="keyword">print</span> x</span><br><span class="line">y = OnlyOne(<span class="string">'eggs'</span>)</span><br><span class="line"><span class="keyword">print</span> y</span><br><span class="line">z = OnlyOne(<span class="string">'spam'</span>)</span><br><span class="line"><span class="keyword">print</span> z</span><br><span class="line"><span class="keyword">print</span> x</span><br><span class="line"><span class="keyword">print</span> y</span><br><span class="line"><span class="keyword">print</span> `x`</span><br><span class="line"><span class="keyword">print</span> `y`</span><br><span class="line"><span class="keyword">print</span> `z`</span><br></pre></td></tr></table></figure>
+<h3 id="反引号"><a class="markdownIt-Anchor" href="#反引号"></a> 反引号`</h3>
+<p>今天在看一本基于python2.2的Design Pattern书，其中有一段关于单例的代码我很不解，因为用到了反引号`，也就是reverse quotes。书中代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OnlyOne</span>:</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">__OnlyOne</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, arg</span>):</span></span><br><span class="line">      self.val = arg</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">      <span class="keyword">return</span> `self` + self.val</span><br><span class="line">  instance = <span class="literal">None</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, arg</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> OnlyOne.instance:</span><br><span class="line">      OnlyOne.instance = OnlyOne.__OnlyOne(arg)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      OnlyOne.instance.val = arg</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">getattr</span>(self.instance, name)</span><br><span class="line"></span><br><span class="line">x = OnlyOne(<span class="string">&#x27;sausage&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span> x</span><br><span class="line">y = OnlyOne(<span class="string">&#x27;eggs&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span> y</span><br><span class="line">z = OnlyOne(<span class="string">&#x27;spam&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span> z</span><br><span class="line"><span class="built_in">print</span> x</span><br><span class="line"><span class="built_in">print</span> y</span><br><span class="line"><span class="built_in">print</span> `x`</span><br><span class="line"><span class="built_in">print</span> `y`</span><br><span class="line"><span class="built_in">print</span> `z`</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/09/25/backtick-in-python/#more" rel="contents">
@@ -438,23 +440,25 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
+          <h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<!-- toc -->
 <ul>
-<li><a href="#可迭代对象">可迭代对象</a></li>
-<li><a href="#迭代器">迭代器</a></li>
-<li><a href="#生成器">生成器</a></li>
-<li><a href="#关键词yield">关键词Yield</a></li>
-<li><a href="#什么时候使用生成器">什么时候使用生成器</a></li>
-<li><a href="#从design-pattern角度看生成器">从Design Pattern角度看生成器</a></li>
+<li><a href="#%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1">可迭代对象</a></li>
+<li><a href="#%E8%BF%AD%E4%BB%A3%E5%99%A8">迭代器</a></li>
+<li><a href="#%E7%94%9F%E6%88%90%E5%99%A8">生成器</a></li>
+<li><a href="#%E5%85%B3%E9%94%AE%E8%AF%8Dyield">关键词Yield</a></li>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8%E7%94%9F%E6%88%90%E5%99%A8">什么时候使用生成器</a></li>
+<li><a href="#%E4%BB%8Edesign-pattern%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%94%9F%E6%88%90%E5%99%A8">从Design Pattern角度看生成器</a></li>
 </ul>
 <!-- tocstop -->
-<h3 id="可迭代对象"><a href="#可迭代对象" class="headerlink" title="可迭代对象"></a>可迭代对象</h3><p>要想理解python中的生成器，得先从可迭代对象Iterable说起。什么是可迭代对象呢？</p>
+<h3 id="可迭代对象"><a class="markdownIt-Anchor" href="#可迭代对象"></a> 可迭代对象</h3>
+<p>要想理解python中的生成器，得先从可迭代对象Iterable说起。什么是可迭代对象呢？</p>
 <blockquote>
-<p>定义了可以返回一个迭代器的<strong>iter</strong>方法的对象，或者定义了可以支持下标索引的<strong>getitem</strong>方法的对象，就是一个可迭代对象</p>
+<p>定义了可以返回一个迭代器的__iter__方法的对象，或者定义了可以支持下标索引的__getitem__方法的对象，就是一个可迭代对象</p>
 </blockquote>
 <p>所以我们可以用如下方法来判断一个实例是否为可迭代对象</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hasattr((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>), <span class="string">'__iter__'</span>) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">hasattr([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], <span class="string">'__iter__'</span>) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">hasattr(&#123;&#125;, <span class="string">'__iter__'</span>) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">hasattr(<span class="string">'abc'</span>, <span class="string">'__getitem__'</span>) <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
-<p>知道了可迭代对象的定义，那么可迭代对象又有什么用呢，如下列所示，我们经常在python中使用for…in循环，那么for…in循环能在所有对象上使用吗？<br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">hasattr</span>((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>), <span class="string">&#x27;__iter__&#x27;</span>) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">hasattr</span>([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], <span class="string">&#x27;__iter__&#x27;</span>) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">hasattr</span>(&#123;&#125;, <span class="string">&#x27;__iter__&#x27;</span>) <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">hasattr</span>(<span class="string">&#x27;abc&#x27;</span>, <span class="string">&#x27;__getitem__&#x27;</span>) <span class="comment"># True</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>知道了可迭代对象的定义，那么可迭代对象又有什么用呢，如下列所示，我们经常在python中使用for…in循环，那么for…in循环能在所有对象上使用吗？</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/09/25/generator-in-python/#more" rel="contents">
@@ -464,7 +468,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
 
     
     
@@ -543,7 +547,7 @@
     <div class="post-body" itemprop="articleBody">
           <!-- toc -->
 <!-- tocstop -->
-<p>最近在看一本基于pyhton的Design Pattern方面的书，其中涉及到了python的多态，也就是polymorphism。用python来解释，到底什么是多态(polymorphism)呢？StackOverflow上有一个很好的答案，下面便是答案中举的例子<br>
+<p>最近在看一本基于pyhton的Design Pattern方面的书，其中涉及到了python的多态，也就是polymorphism。用python来解释，到底什么是多态(polymorphism)呢？StackOverflow上有一个很好的答案，下面便是答案中举的例子</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/09/25/polymorphism-in-python/#more" rel="contents">
@@ -553,7 +557,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
 
     
     
@@ -634,20 +638,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
+          <h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<!-- toc -->
 <ul>
-<li><a href="#制作ubuntu启动u盘">制作Ubuntu启动U盘</a></li>
-<li><a href="#安装ubuntu">安装Ubuntu</a></li>
-<li><a href="#解决驱动问题">解决驱动问题</a><ul>
-<li><a href="#安装killer网卡驱动">安装killer网卡驱动</a></li>
-<li><a href="#安装蓝牙驱动">安装蓝牙驱动</a></li>
+<li><a href="#%E5%88%B6%E4%BD%9Cubuntu%E5%90%AF%E5%8A%A8u%E7%9B%98">制作Ubuntu启动U盘</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85ubuntu">安装Ubuntu</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98">解决驱动问题</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85killer%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8">安装killer网卡驱动</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85%E8%93%9D%E7%89%99%E9%A9%B1%E5%8A%A8">安装蓝牙驱动</a></li>
 </ul>
 </li>
-<li><a href="#进阶配置alienfx">进阶配置AlienFx</a></li>
+<li><a href="#%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AEalienfx">进阶配置AlienFx</a></li>
 </ul>
 <!-- tocstop -->
 <p>作为一个游戏发烧友，同时也是小白全栈开发程序员我买了Alienware却只用来打游戏是在是太可惜了。为了搞搞开发，昨天配置了一天WSL (Windows Subsystems for Linxu)，用了Hyper+zsh的终端组合。其中在zsh中输入atom能启动windows的Atom也着实把我惊艳了一把，但其实也就算仅限于打开而已。事实是Windows中的文本编辑器并不能直接编辑其子系统中的文件。所以这个子系统在某些方便我觉得还没有Vagrant方便，没有图形界面，意味着不能使用Atom，Visual Studio Code这样代表先进生产力的工具，于是配置WSL搞搞开发的想法就此作罢。</p>
-<p>子系统搞不成，于是有了直接在Ubuntu上工作的想法。其实Alienware上安装Ubuntu不是很难，除了一些蓝牙和Wi-Fi方面的兼容问题，安装过程非常顺利。接下来step by step记录安装过程。<br>
+<p>子系统搞不成，于是有了直接在Ubuntu上工作的想法。其实Alienware上安装Ubuntu不是很难，除了一些蓝牙和Wi-Fi方面的兼容问题，安装过程非常顺利。接下来step by step记录安装过程。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/09/15/install-ubuntu-on-alienware/#more" rel="contents">
@@ -657,7 +663,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
 
     
     
@@ -741,31 +747,39 @@
           <p>目录</p>
 <!-- toc -->
 <ul>
-<li><a href="#安装ibus中文输入法">安装IBus中文输入法</a></li>
-<li><a href="#安装搜狗中文输入法">安装搜狗中文输入法</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85ibus%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95">安装IBus中文输入法</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85%E6%90%9C%E7%8B%97%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95">安装搜狗中文输入法</a></li>
 </ul>
 <!-- tocstop -->
-<h3 id="安装IBus中文输入法"><a href="#安装IBus中文输入法" class="headerlink" title="安装IBus中文输入法"></a>安装IBus中文输入法</h3>  <img data-src="/2017/09/15/install-pinyin-in-Ubuntu/successfully_installed_pinyin.png" title="Ubuntu上的拼音输入法">
+<h3 id="安装ibus中文输入法"><a class="markdownIt-Anchor" href="#安装ibus中文输入法"></a> 安装IBus中文输入法</h3>
+  <img data-src="/2017/09/15/install-pinyin-in-Ubuntu/successfully_installed_pinyin.png" class title="Ubuntu上的拼音输入法">
 <p>最近又重新安装了Ubuntu系统。因为要写中文博客，没有中文输入法实在是麻烦。在Ubuntu上安装中文输入法确实没有Windows上显而易见，所以写下步骤方便自己将来参考。</p>
 <ol>
-<li><p>首先进入系统设置选择language support，如果没有完整安装该功能，先根据系统提示完成安装</p>
+<li>
+<p>首先进入系统设置选择language support，如果没有完整安装该功能，先根据系统提示完成安装</p>
 </li>
-<li><p>点击install/remove language 来安装中文支持</p>
+<li>
+<p>点击install/remove language 来安装中文支持</p>
 </li>
-<li><p>接下来在Terminal中手动安装下面任何一个输入法</p>
-<p> <code>sudo apt-get install ibus-pinyin</code></p>
-<p> <code>sudo apt-get install ibus-sunpinyin</code></p>
+<li>
+<p>接下来在Terminal中手动安装下面任何一个输入法</p>
+<p><code>sudo apt-get install ibus-pinyin</code></p>
+<p><code>sudo apt-get install ibus-sunpinyin</code></p>
 </li>
-<li><p>重启IBus daemon</p>
-<p> <code>ibus restart</code></p>
+<li>
+<p>重启IBus daemon</p>
+<p><code>ibus restart</code></p>
 </li>
-<li><p>再进入系统设置选择Text Entry，点击左下角的小加号并在add input source界面中搜索Chinese，选择一款拼音输入法</p>
-<img data-src="/2017/09/15/install-pinyin-in-Ubuntu/ubuntu_add_input_method.png" title="选择Pinyin输入法">
-</li>
-<li><p>使用吧</p>
+<li>
+<p>再进入系统设置选择Text Entry，点击左下角的小加号并在add input source界面中搜索Chinese，选择一款拼音输入法</p>
 </li>
 </ol>
-<h3 id="安装搜狗中文输入法"><a href="#安装搜狗中文输入法" class="headerlink" title="安装搜狗中文输入法"></a>安装搜狗中文输入法</h3><p>使用了几天IBus的中文输入发，使用体验简直弱爆了。首先4k屏适配有问题，待选框时刻游离在屏幕之外，然而最致命的是，IBus拼音输入法竟然有切换到双拼就无法再切换回来的bug。早年间我在ubuntu 14上使用过搜狗输入法，用户体验良好，于是试着在ubuntu 16.04上安装。虽然安装步骤比在ubuntu 14上稍稍复杂一些，但是搜狗输入法完美适配4k屏幕而且一如既往的好用。安装步骤如下：<br>
+  <img data-src="/2017/09/15/install-pinyin-in-Ubuntu/ubuntu_add_input_method.png" class title="选择Pinyin输入法">
+<ol start="6">
+<li>使用吧</li>
+</ol>
+<h3 id="安装搜狗中文输入法"><a class="markdownIt-Anchor" href="#安装搜狗中文输入法"></a> 安装搜狗中文输入法</h3>
+<p>使用了几天IBus的中文输入发，使用体验简直弱爆了。首先4k屏适配有问题，待选框时刻游离在屏幕之外，然而最致命的是，IBus拼音输入法竟然有切换到双拼就无法再切换回来的bug。早年间我在ubuntu 14上使用过搜狗输入法，用户体验良好，于是试着在ubuntu 16.04上安装。虽然安装步骤比在ubuntu 14上稍稍复杂一些，但是搜狗输入法完美适配4k屏幕而且一如既往的好用。安装步骤如下：</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/09/15/install-pinyin-in-Ubuntu/#more" rel="contents">
@@ -775,7 +789,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
 
     
     
@@ -856,7 +870,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
 <thead>
 <tr>
 <th>情况</th>
@@ -883,8 +898,10 @@
 </tbody>
 </table>
 <p>设输入数组长度为N，最优情况在输入数组的最大值不等于N时达成</p>
-<h3><span id="算法分析">算法分析</span></h3><p><strong>permutation</strong> 被定义为长为N的数组，包含整数1到N，且每个整数包含有且仅有一次。根据定义，我们必须遍历完输入数组才能知道是否1到N的每个整数包含有且仅有一次，所以算法复杂度为O(N)且无法继续优化。如何检测输入数组中1到N的每个整数出现有且仅有一次呢？一个比较直观的方法是用一个长度为N的数组作标记，遍历输入数组并在标记数组的对应项作标记，一旦该标记数组所有项均被标记，则说明输入数组满足permutation定义。但是该方法有一个缺点，就是需要成比例于输入数组长度N的存储空间。有没有不需要额外存储空间的算法呢？答案当然是有的，技巧在于利用输入数组，在遍历输入数组的同时，利用输入数组做标记。由于输入数组各项均为正整数，我们可以将某一项置为负值来标记该项索引+1对应的正整数出现过一次。</p>
-<h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(len(A)):</span><br><span class="line">        index = A[i] <span class="keyword">if</span> A[i] &gt; <span class="number">0</span> <span class="keyword">else</span> -A[i]</span><br><span class="line">        <span class="keyword">if</span> index &gt; len(A) <span class="keyword">or</span> A[index - <span class="number">1</span>] &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            A[index - <span class="number">1</span>] = -A[index - <span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p><strong>permutation</strong> 被定义为长为N的数组，包含整数1到N，且每个整数包含有且仅有一次。根据定义，我们必须遍历完输入数组才能知道是否1到N的每个整数包含有且仅有一次，所以算法复杂度为O(N)且无法继续优化。如何检测输入数组中1到N的每个整数出现有且仅有一次呢？一个比较直观的方法是用一个长度为N的数组作标记，遍历输入数组并在标记数组的对应项作标记，一旦该标记数组所有项均被标记，则说明输入数组满足permutation定义。但是该方法有一个缺点，就是需要成比例于输入数组长度N的存储空间。有没有不需要额外存储空间的算法呢？答案当然是有的，技巧在于利用输入数组，在遍历输入数组的同时，利用输入数组做标记。由于输入数组各项均为正整数，我们可以将某一项置为负值来标记该项索引+1对应的正整数出现过一次。</p>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">A</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="built_in">len</span>(A)):</span><br><span class="line">        index = A[i] <span class="keyword">if</span> A[i] &gt; <span class="number">0</span> <span class="keyword">else</span> -A[i]</span><br><span class="line">        <span class="keyword">if</span> index &gt; <span class="built_in">len</span>(A) <span class="keyword">or</span> A[index - <span class="number">1</span>] &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            A[index - <span class="number">1</span>] = -A[index - <span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -968,7 +985,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
 <thead>
 <tr>
 <th>情况</th>
@@ -994,8 +1012,10 @@
 </tr>
 </tbody>
 </table>
-<h3><span id="算法分析">算法分析</span></h3><p>创建检查数组check，遍历数组A的项，若某项的值为整数x，则以整数x作为索引，将check数组对应的项置1。在遍历check数组，寻找值为0时索引的最小值。</p>
-<h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    n=len(A)</span><br><span class="line">    max_A=<span class="number">100001</span></span><br><span class="line">    check=[<span class="number">0</span>]*(max_A+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(n):</span><br><span class="line">        <span class="keyword">if</span>(A[i]&gt;=<span class="number">0</span> <span class="keyword">and</span> A[i]&lt;max_A <span class="keyword">and</span> check[A[i]<span class="number">-1</span>]==<span class="number">0</span>):</span><br><span class="line">            check[A[i]<span class="number">-1</span>]=<span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> ind <span class="keyword">in</span> xrange(max_A+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span>(check[ind]==<span class="number">0</span>):</span><br><span class="line">            <span class="keyword">return</span> ind+<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p>创建检查数组check，遍历数组A的项，若某项的值为整数x，则以整数x作为索引，将check数组对应的项置1。在遍历check数组，寻找值为0时索引的最小值。</p>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">A</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    n=<span class="built_in">len</span>(A)</span><br><span class="line">    max_A=<span class="number">100001</span></span><br><span class="line">    check=[<span class="number">0</span>]*(max_A+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(n):</span><br><span class="line">        <span class="keyword">if</span>(A[i]&gt;=<span class="number">0</span> <span class="keyword">and</span> A[i]&lt;max_A <span class="keyword">and</span> check[A[i]-<span class="number">1</span>]==<span class="number">0</span>):</span><br><span class="line">            check[A[i]-<span class="number">1</span>]=<span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> ind <span class="keyword">in</span> xrange(max_A+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span>(check[ind]==<span class="number">0</span>):</span><br><span class="line">            <span class="keyword">return</span> ind+<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1079,7 +1099,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
 <thead>
 <tr>
 <th>情况</th>
@@ -1105,9 +1126,11 @@
 </tr>
 </tbody>
 </table>
-<h3><span id="算法分析">算法分析</span></h3><p>若要达到最差情况下的时间复杂度为O(N+M)，那就意味着不能在<code>A[K] = N + 1</code>时依次将每个<code>counter</code>的值置为当前<code>counters</code>数组的最大值。因为max counter操作的复杂度为O(N)且需要嵌套在复杂度为O(M)的循环中，这样算法的复杂度至少为O(NM)。也就以为着当<code>A[K] = N + 1</code>时，我们不能立即执行max counter操作。借用下惰性求值的概念，只有在真的需要某个<code>counter</code>值的情况的下才执行计算。这就需要建立两个变量，<code>max_A</code>记录当前<code>counters</code>的最大值，<code>lastUpdate</code>记录上一次执行max counter操作时<code>max_A</code>的值。这样只有当<code>A[K] = N + 1</code>时，才把<code>max_A</code>的值赋值给<code>lastUpdate</code>。而当<code>A[i] &lt; N+1</code>时，则要根据<code>lastUpdate</code>的值来更新<code>counter</code>和<code>max_A</code>的值。</p>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p>若要达到最差情况下的时间复杂度为O(N+M)，那就意味着不能在<code>A[K] = N + 1</code>时依次将每个<code>counter</code>的值置为当前<code>counters</code>数组的最大值。因为max counter操作的复杂度为O(N)且需要嵌套在复杂度为O(M)的循环中，这样算法的复杂度至少为O(NM)。也就以为着当<code>A[K] = N + 1</code>时，我们不能立即执行max counter操作。借用下惰性求值的概念，只有在真的需要某个<code>counter</code>值的情况的下才执行计算。这就需要建立两个变量，<code>max_A</code>记录当前<code>counters</code>的最大值，<code>lastUpdate</code>记录上一次执行max counter操作时<code>max_A</code>的值。这样只有当<code>A[K] = N + 1</code>时，才把<code>max_A</code>的值赋值给<code>lastUpdate</code>。而当<code>A[i] &lt; N+1</code>时，则要根据<code>lastUpdate</code>的值来更新<code>counter</code>和<code>max_A</code>的值。</p>
 <p>最后在返回所<code>counters</code>数组值之前，需要根据<code>lastUpdate</code>的值对每个counter的值进行计算</p>
-<h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(N, A)</span>:</span></span><br><span class="line">    <span class="comment"># each element of array A is an integer within the range [1..N + 1]</span></span><br><span class="line">    <span class="comment"># N and M are integers within the range [1..100,000]</span></span><br><span class="line">    M = len(A)</span><br><span class="line">    max_A = <span class="number">0</span></span><br><span class="line">    lastUpdate = <span class="number">0</span></span><br><span class="line">    counters=[<span class="number">0</span>]*N</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(M):</span><br><span class="line">        <span class="keyword">if</span> (A[i]==N+<span class="number">1</span>):</span><br><span class="line">            lastUpdate = max_A</span><br><span class="line">        <span class="keyword">if</span> (A[i]&lt;N+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> (counters[A[i]<span class="number">-1</span>]&lt;lastUpdate):</span><br><span class="line">                counters[A[i]<span class="number">-1</span>]=lastUpdate+<span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> (counters[A[i]<span class="number">-1</span>]&gt;max_A):</span><br><span class="line">                    max_A=counters[A[i]<span class="number">-1</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                counters[A[i]<span class="number">-1</span>]=counters[A[i]<span class="number">-1</span>]+<span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> (counters[A[i]<span class="number">-1</span>]&gt;max_A):</span><br><span class="line">                    max_A=counters[A[i]<span class="number">-1</span>]</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> xrange(N):</span><br><span class="line">        <span class="keyword">if</span> (counters[j]&lt;lastUpdate):</span><br><span class="line">            counters[j]=lastUpdate</span><br><span class="line">    <span class="keyword">return</span> counters</span><br><span class="line"><span class="comment">#  time complexity: O(N + M)</span></span><br></pre></td></tr></table></figure>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">N, A</span>):</span></span><br><span class="line">    <span class="comment"># each element of array A is an integer within the range [1..N + 1]</span></span><br><span class="line">    <span class="comment"># N and M are integers within the range [1..100,000]</span></span><br><span class="line">    M = <span class="built_in">len</span>(A)</span><br><span class="line">    max_A = <span class="number">0</span></span><br><span class="line">    lastUpdate = <span class="number">0</span></span><br><span class="line">    counters=[<span class="number">0</span>]*N</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(M):</span><br><span class="line">        <span class="keyword">if</span> (A[i]==N+<span class="number">1</span>):</span><br><span class="line">            lastUpdate = max_A</span><br><span class="line">        <span class="keyword">if</span> (A[i]&lt;N+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> (counters[A[i]-<span class="number">1</span>]&lt;lastUpdate):</span><br><span class="line">                counters[A[i]-<span class="number">1</span>]=lastUpdate+<span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> (counters[A[i]-<span class="number">1</span>]&gt;max_A):</span><br><span class="line">                    max_A=counters[A[i]-<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                counters[A[i]-<span class="number">1</span>]=counters[A[i]-<span class="number">1</span>]+<span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> (counters[A[i]-<span class="number">1</span>]&gt;max_A):</span><br><span class="line">                    max_A=counters[A[i]-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> xrange(N):</span><br><span class="line">        <span class="keyword">if</span> (counters[j]&lt;lastUpdate):</span><br><span class="line">            counters[j]=lastUpdate</span><br><span class="line">    <span class="keyword">return</span> counters</span><br><span class="line"><span class="comment">#  time complexity: O(N + M)</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1191,7 +1214,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
 <thead>
 <tr>
 <th>情况</th>
@@ -1218,8 +1242,10 @@
 </tbody>
 </table>
 <p>最优情况在输入数组长度小于河宽X下达成</p>
-<h3><span id="算法分析">算法分析</span></h3><p>依次读取输入数组的项，当读取过的项的集合包含1到X在内的所有整数时，输出当前项的数组索引。对于记录读取过的项的集合，可以用一个长度为X+1的<code>check</code>数组来记录。若读取了整数z，就把整数z作为索引，将对应的项置1。对于判断读取过的项的集合是否包含1到X在内的所有整数，我们都可以遍历<code>check</code>数组，检查索引1到X对应的项是否全部为1，如果不是，则说明我们还没有包含1到X在内的所有整数。但是这样，该判断算法需要遍历<code>check</code>数组，复杂度为O(X)。不过有一个小技巧可以将该判断算法降为O(1)，那就是在<code>check</code>数组的基础上，再使用step_left变量来记录还需要读取多少个不同的整数后读取过的项的集合才能包含1到X在内的所有整数。若读取了整数z，除了把整数z作为索引，将对应的项置1外，还要根据条件来更新<code>step_left</code>的值。此时，检查算法只需要判断<code>step_left</code>是否为0即可得知读取过的项的集合是否包含1到X在内的所有整数了。</p>
-<h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(X, A)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    n = len(A)</span><br><span class="line">    <span class="keyword">if</span> (n &lt; X):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">    step_left = X</span><br><span class="line">    check = [<span class="number">0</span>]*(X+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(n):</span><br><span class="line">        <span class="keyword">if</span> (check[A[i]]==<span class="number">0</span>):</span><br><span class="line">            check[A[i]]=<span class="number">1</span></span><br><span class="line">            step_left -=<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> (step_left==<span class="number">0</span>):</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p>依次读取输入数组的项，当读取过的项的集合包含1到X在内的所有整数时，输出当前项的数组索引。对于记录读取过的项的集合，可以用一个长度为X+1的<code>check</code>数组来记录。若读取了整数z，就把整数z作为索引，将对应的项置1。对于判断读取过的项的集合是否包含1到X在内的所有整数，我们都可以遍历<code>check</code>数组，检查索引1到X对应的项是否全部为1，如果不是，则说明我们还没有包含1到X在内的所有整数。但是这样，该判断算法需要遍历<code>check</code>数组，复杂度为O(X)。不过有一个小技巧可以将该判断算法降为O(1)，那就是在<code>check</code>数组的基础上，再使用step_left变量来记录还需要读取多少个不同的整数后读取过的项的集合才能包含1到X在内的所有整数。若读取了整数z，除了把整数z作为索引，将对应的项置1外，还要根据条件来更新<code>step_left</code>的值。此时，检查算法只需要判断<code>step_left</code>是否为0即可得知读取过的项的集合是否包含1到X在内的所有整数了。</p>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">X, A</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    n = <span class="built_in">len</span>(A)</span><br><span class="line">    <span class="keyword">if</span> (n &lt; X):</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">    step_left = X</span><br><span class="line">    check = [<span class="number">0</span>]*(X+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(n):</span><br><span class="line">        <span class="keyword">if</span> (check[A[i]]==<span class="number">0</span>):</span><br><span class="line">            check[A[i]]=<span class="number">1</span></span><br><span class="line">            step_left -=<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> (step_left==<span class="number">0</span>):</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1303,7 +1329,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
 <thead>
 <tr>
 <th>情况</th>
@@ -1329,8 +1356,10 @@
 </tr>
 </tbody>
 </table>
-<h3><span id="算法分析">算法分析</span></h3><p>构造数组前段总和<code>first = A[0]</code>以及数组后端总和<code>last = sum(A) - A[0]</code>，第一个差值便是<code>abs(first - last)</code>。遍历数组时，不必每次都重新构造数组前段总和以及数组后端总和，只需向first增加当前遍历元素，想las减去当前遍历元素，另外，也只要一个变量min_diff来记录最小差值即可。</p>
-<h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    first = A[<span class="number">0</span>]</span><br><span class="line">    last = sum(A) - A[<span class="number">0</span>]</span><br><span class="line">    N = len(A)</span><br><span class="line">    min_diff = abs(first - last)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">1</span>, N - <span class="number">1</span>):</span><br><span class="line">        num = A[i]</span><br><span class="line">        first += num</span><br><span class="line">        last -= num</span><br><span class="line">        min_diff = min(abs(first - last), min_diff)</span><br><span class="line">    <span class="keyword">return</span> min_diff</span><br></pre></td></tr></table></figure>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p>构造数组前段总和<code>first = A[0]</code>以及数组后端总和<code>last = sum(A) - A[0]</code>，第一个差值便是<code>abs(first - last)</code>。遍历数组时，不必每次都重新构造数组前段总和以及数组后端总和，只需向first增加当前遍历元素，想las减去当前遍历元素，另外，也只要一个变量min_diff来记录最小差值即可。</p>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">A</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    first = A[<span class="number">0</span>]</span><br><span class="line">    last = <span class="built_in">sum</span>(A) - A[<span class="number">0</span>]</span><br><span class="line">    N = <span class="built_in">len</span>(A)</span><br><span class="line">    min_diff = <span class="built_in">abs</span>(first - last)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">1</span>, N - <span class="number">1</span>):</span><br><span class="line">        num = A[i]</span><br><span class="line">        first += num</span><br><span class="line">        last -= num</span><br><span class="line">        min_diff = <span class="built_in">min</span>(<span class="built_in">abs</span>(first - last), min_diff)</span><br><span class="line">    <span class="keyword">return</span> min_diff</span><br></pre></td></tr></table></figure>
 
       
     </div>

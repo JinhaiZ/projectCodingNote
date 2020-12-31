@@ -23,12 +23,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"codingnote.com","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="算法复杂度分析   情况 时间复杂度 空间复杂度     最优 O(1) O(1)   平均 O(1) O(1)   最差 O(1) O(1)    算法复杂度不依赖于输入数据的多少，该算法总是在固定时间内完成。 算法分析已知长度Y-X，步长D，求步数。难点在于长度能否整除步长，若能整除，返回步长，若不能整除，对步长向上取整。向上取整可以同python math库里的ceil函数。如果不想加载ma">
+<meta name="description" content="算法复杂度分析    情况 时间复杂度 空间复杂度     最优 O(1) O(1)   平均 O(1) O(1)   最差 O(1) O(1)    算法复杂度不依赖于输入数据的多少，该算法总是在固定时间内完成。  算法分析 已知长度Y-X，步长D，求步数。难点在于长度能否整除步长，若能整除，返回步长，若不能整除，对步长向上取整。向上取整可以同python math库里的ceil函数。如果不想">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Codility FrogJmp in Python">
 <meta property="og:url" content="http://codingnote.com/2017/05/31/codility-frog-jmp/index.html">
 <meta property="og:site_name" content="Coding Note">
-<meta property="og:description" content="算法复杂度分析   情况 时间复杂度 空间复杂度     最优 O(1) O(1)   平均 O(1) O(1)   最差 O(1) O(1)    算法复杂度不依赖于输入数据的多少，该算法总是在固定时间内完成。 算法分析已知长度Y-X，步长D，求步数。难点在于长度能否整除步长，若能整除，返回步长，若不能整除，对步长向上取整。向上取整可以同python math库里的ceil函数。如果不想加载ma">
+<meta property="og:description" content="算法复杂度分析    情况 时间复杂度 空间复杂度     最优 O(1) O(1)   平均 O(1) O(1)   最差 O(1) O(1)    算法复杂度不依赖于输入数据的多少，该算法总是在固定时间内完成。  算法分析 已知长度Y-X，步长D，求步数。难点在于长度能否整除步长，若能整除，返回步长，若不能整除，对步长向上取整。向上取整可以同python math库里的ceil函数。如果不想">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-05-31T19:28:25.000Z">
 <meta property="article:modified_time" content="2020-01-04T16:25:40.601Z">
@@ -220,7 +220,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">算法复杂度分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">算法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Python 数值转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">源代码</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> 算法复杂度分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"> 算法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text"> Python 数值转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text"> 源代码</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -360,7 +360,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
 <thead>
 <tr>
 <th>情况</th>
@@ -387,9 +388,12 @@
 </tbody>
 </table>
 <p>算法复杂度不依赖于输入数据的多少，该算法总是在固定时间内完成。</p>
-<h3><span id="算法分析">算法分析</span></h3><p>已知长度Y-X，步长D，求步数。难点在于长度能否整除步长，若能整除，返回步长，若不能整除，对步长向上取整。向上取整可以同python math库里的ceil函数。如果不想加载math库，只用python内建函数可以吗？其实也是可以的。难度在对于求得的步长是否+1上。由于python除法<code>/</code>会截断小数部分，我们可以用取余<code>%</code>操作判断长度能否整除步长，若能整除，返回步长，若不能整除，对步长+1即可。</p>
-<h3><span id="python-数值转换">Python 数值转换</span></h3><p>python 数值转换函数<code>int()</code>把bool型转换为int型整数值，<code>int(True) =&gt; 1</code> <code>int(False) =&gt; 0</code></p>
-<h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(X, Y, D)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="keyword">return</span> (Y-X)/D + int((Y-X)%D &gt; <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p>已知长度Y-X，步长D，求步数。难点在于长度能否整除步长，若能整除，返回步长，若不能整除，对步长向上取整。向上取整可以同python math库里的ceil函数。如果不想加载math库，只用python内建函数可以吗？其实也是可以的。难度在对于求得的步长是否+1上。由于python除法<code>/</code>会截断小数部分，我们可以用取余<code>%</code>操作判断长度能否整除步长，若能整除，返回步长，若不能整除，对步长+1即可。</p>
+<h3><span id="python-数值转换"> Python 数值转换</span></h3>
+<p>python 数值转换函数<code>int()</code>把bool型转换为int型整数值，<code>int(True) =&gt; 1</code> <code>int(False) =&gt; 0</code></p>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">X, Y, D</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="keyword">return</span> (Y-X)/D + <span class="built_in">int</span>((Y-X)%D &gt; <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 
     </div>
 

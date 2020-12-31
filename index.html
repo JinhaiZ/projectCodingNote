@@ -321,7 +321,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-31 11:01:56" itemprop="dateModified" datetime="2020-12-31T11:01:56Z">2020-12-31</time>
+        <time title="修改时间：2020-12-31 11:29:31" itemprop="dateModified" datetime="2020-12-31T11:29:31Z">2020-12-31</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -442,14 +442,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
+          <h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<!-- toc -->
 <ul>
-<li><a href="#java虚拟机">Java虚拟机</a></li>
-<li><a href="#拓展阅读">拓展阅读</a></li>
-<li><a href="#构建工具">构建工具</a></li>
+<li><a href="#java%E8%99%9A%E6%8B%9F%E6%9C%BA">Java虚拟机</a></li>
+<li><a href="#%E6%8B%93%E5%B1%95%E9%98%85%E8%AF%BB">拓展阅读</a></li>
+<li><a href="#%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7">构建工具</a></li>
 </ul>
 <!-- tocstop -->
-<h2 id="Java虚拟机"><a href="#Java虚拟机" class="headerlink" title="Java虚拟机"></a>Java虚拟机</h2><p>JVM(Java Virtual Machine) 既可以指Java虚拟机规范，也可以指具体的某个实现。当JVM指Java虚拟机规范时，我们要注意虚拟机规范的版本。比如是JVM 1.8 还是 JVM 1.9。Java有很好的向后兼容性，使用高版本的Java编译器也可以顺利编译针对低版本JVM开发的代码。也正是由于Java的向后兼容，很多过时的语言规范成了新的语言规范的包袱，很多过时的标准类库依然遗留在新版本的JDK中。</p>
+<h2 id="java虚拟机"><a class="markdownIt-Anchor" href="#java虚拟机"></a> Java虚拟机</h2>
+<p>JVM(Java Virtual Machine) 既可以指Java虚拟机规范，也可以指具体的某个实现。当JVM指Java虚拟机规范时，我们要注意虚拟机规范的版本。比如是JVM 1.8 还是 JVM 1.9。Java有很好的向后兼容性，使用高版本的Java编译器也可以顺利编译针对低版本JVM开发的代码。也正是由于Java的向后兼容，很多过时的语言规范成了新的语言规范的包袱，很多过时的标准类库依然遗留在新版本的JDK中。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/03/15/java-for-the-real-word-notes/#more" rel="contents">
@@ -540,15 +542,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
+          <h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<!-- toc -->
 <ul>
-<li><a href="#午餐时的争吵">午餐时的争吵</a></li>
-<li><a href="#经验法则与惯例">经验法则与惯例</a></li>
-<li><a href="#重温开闭原则">重温开闭原则</a></li>
-<li><a href="#拓展阅读">拓展阅读</a></li>
+<li><a href="#%E5%8D%88%E9%A4%90%E6%97%B6%E7%9A%84%E4%BA%89%E5%90%B5">午餐时的争吵</a></li>
+<li><a href="#%E7%BB%8F%E9%AA%8C%E6%B3%95%E5%88%99%E4%B8%8E%E6%83%AF%E4%BE%8B">经验法则与惯例</a></li>
+<li><a href="#%E9%87%8D%E6%B8%A9%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99">重温开闭原则</a></li>
+<li><a href="#%E6%8B%93%E5%B1%95%E9%98%85%E8%AF%BB">拓展阅读</a></li>
 </ul>
 <!-- tocstop -->
-<h1 id="午餐时的争吵"><a href="#午餐时的争吵" class="headerlink" title="午餐时的争吵"></a>午餐时的争吵</h1><p>今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。</p>
+<h1 id="午餐时的争吵"><a class="markdownIt-Anchor" href="#午餐时的争吵"></a> 午餐时的争吵</h1>
+<p>今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。</p>
 <p>第一个同事说这个代码虽然能满足现在的需求，但是却不易于向某个他描述的方向拓展，他言之凿凿，认为我们的软件不久就会有他描述的需求。与其等到新需求到来时在对软件进行改动，不如开始实现时就考虑到可能的拓展，让这个模块变得灵活以适应将来的需求。</p>
 <p>而另一位同事则不为所动，觉得YAGNI（You aren’t gonna need it）。就算我们真的要满足第一个同事所描述的需求，但是根据他的判断那也是很长时间（一年）之后的事了。如果现在就把模块变得易于拓展，那么无疑会增加代码的抽象层次，本来一个类就可以实现的功能，现在要多实现几个类。</p>
 <p>第三位同事也加入了讨论。把软件设计的灵活以适应将来的变化是一件好事，但是这么做也是有代价的。灵活意味着这个模块需要更高的抽象层次，在新的需求到来前，这个模块都需要保持它本不需要的抽象层次。况且现在我们假设对于需求的预测是正确的，假如需求根本不是我们想象的那样变化，那么现在的努力不就白费了吗？</p>
@@ -749,23 +753,28 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
+          <h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<!-- toc -->
 <ul>
-<li><a href="#java-泛型">Java 泛型</a><ul>
-<li><a href="#我们为什么需要泛型">我们为什么需要泛型</a></li>
+<li><a href="#java-%E6%B3%9B%E5%9E%8B">Java 泛型</a>
+<ul>
+<li><a href="#%E6%88%91%E4%BB%AC%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B3%9B%E5%9E%8B">我们为什么需要泛型</a></li>
 </ul>
 </li>
-<li><a href="#有限通配符">有限通配符</a><ul>
-<li><a href="#下限通配符">下限通配符</a></li>
-<li><a href="#上限通配符">上限通配符</a></li>
+<li><a href="#%E6%9C%89%E9%99%90%E9%80%9A%E9%85%8D%E7%AC%A6">有限通配符</a>
+<ul>
+<li><a href="#%E4%B8%8B%E9%99%90%E9%80%9A%E9%85%8D%E7%AC%A6">下限通配符</a></li>
+<li><a href="#%E4%B8%8A%E9%99%90%E9%80%9A%E9%85%8D%E7%AC%A6">上限通配符</a></li>
 </ul>
 </li>
-<li><a href="#无限通配符">无限通配符</a></li>
-<li><a href="#总结">总结</a></li>
-<li><a href="#参考">参考</a></li>
+<li><a href="#%E6%97%A0%E9%99%90%E9%80%9A%E9%85%8D%E7%AC%A6">无限通配符</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
-<h1 id="Java-泛型"><a href="#Java-泛型" class="headerlink" title="Java 泛型"></a>Java 泛型</h1><h2 id="我们为什么需要泛型"><a href="#我们为什么需要泛型" class="headerlink" title="我们为什么需要泛型"></a>我们为什么需要泛型</h2><p>自从Java SE 1.5引入<strong>泛型（Generics）</strong> 之前，Java程序员想要写出通用的代码有点难度。比如想要得到Java某个集合（<code>Collection</code>）的最大值，在没有泛型的情况下，我们需要针对每个特定类型去写特定的求最大值方法。</p>
+<h1 id="java-泛型"><a class="markdownIt-Anchor" href="#java-泛型"></a> Java 泛型</h1>
+<h2 id="我们为什么需要泛型"><a class="markdownIt-Anchor" href="#我们为什么需要泛型"></a> 我们为什么需要泛型</h2>
+<p>自从Java SE 1.5引入<strong>泛型（Generics）</strong> 之前，Java程序员想要写出通用的代码有点难度。比如想要得到Java某个集合（<code>Collection</code>）的最大值，在没有泛型的情况下，我们需要针对每个特定类型去写特定的求最大值方法。</p>
 <p>比如针对<code>Number</code>集合我们需要实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Number <span class="title">max</span><span class="params">(NumberCollection coll, NumberComparator comp)</span></span></span><br></pre></td></tr></table></figure>
 <p>针对<code>Integer</code>集合我们需要实现</p>
@@ -775,7 +784,7 @@
 <p>因为Java所有的类都是<code>Object</code>的子类。当然这样实现的坏处就是需要做<strong>对象转型(Casting)</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Integer maxInterger = (Integer) max(coll, comp)</span><br></pre></td></tr></table></figure>
 <p>然而对象转型也是非常罪恶的，因为一旦错误地使用了对象转型，代码只有到<strong>运行阶段（runtime）</strong> 才会报错。所以我们要尽可能的避免对象转型。</p>
-<p>而有了泛型以后，我们只需要实现<br>
+<p>而有了泛型以后，我们只需要实现</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/03/03/java-generics/#more" rel="contents">
@@ -785,7 +794,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
 
     
     
@@ -964,34 +973,41 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
+          <h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<!-- toc -->
 <ul>
-<li><a href="#简短的介绍">简短的介绍</a></li>
-<li><a href="#git-request-pull">Git request-pull</a><ul>
-<li><a href="#使用目的">使用目的</a></li>
-<li><a href="#使用方法">使用方法</a></li>
-<li><a href="#一个例子">一个例子</a></li>
+<li><a href="#%E7%AE%80%E7%9F%AD%E7%9A%84%E4%BB%8B%E7%BB%8D">简短的介绍</a></li>
+<li><a href="#git-request-pull">Git request-pull</a>
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8%E7%9B%AE%E7%9A%84">使用目的</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95">使用方法</a></li>
+<li><a href="#%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90">一个例子</a></li>
 </ul>
 </li>
-<li><a href="#github-pull-request">Github Pull Request</a><ul>
-<li><a href="#使用目的-1">使用目的</a></li>
-<li><a href="#使用方法-1">使用方法</a><ul>
-<li><a href="#使用github-web界面">使用Github web界面</a></li>
-<li><a href="#使用command-line">使用Command line</a></li>
+<li><a href="#github-pull-request">Github Pull Request</a>
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8%E7%9B%AE%E7%9A%84-1">使用目的</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95-1">使用方法</a>
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8github-web%E7%95%8C%E9%9D%A2">使用Github web界面</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8command-line">使用Command line</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#参考">参考</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
-<h2 id="简短的介绍"><a href="#简短的介绍" class="headerlink" title="简短的介绍"></a>简短的介绍</h2><p><code>request-pull</code> 和 <code>Pull Request</code>的名称如此相似，但是他们的功能是完全不同的。</p>
+<h2 id="简短的介绍"><a class="markdownIt-Anchor" href="#简短的介绍"></a> 简短的介绍</h2>
+<p><code>request-pull</code> 和 <code>Pull Request</code>的名称如此相似，但是他们的功能是完全不同的。</p>
 <p><code>request-pull</code>是git的命令，它用于生成发送到邮件列表的待处理的更改的摘要。默认情况下，GitHub没有集成这个功能。</p>
 <p><code>Pull Request</code>是GitHub特有的一项功能(简称PR)。它用于向Github托管的某一项目中的某一分支提出合并请求。项目管理者则可以在github的web界面上合并来自不同分支的代码，解决合并冲突，做代码审查或对代码进行评论。</p>
-<h2 id="Git-request-pull"><a href="#Git-request-pull" class="headerlink" title="Git request-pull"></a>Git request-pull</h2><h3 id="使用目的"><a href="#使用目的" class="headerlink" title="使用目的"></a>使用目的</h3><blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1yZXF1ZXN0LXB1bGw=" title="https://git-scm.com/docs/git-request-pull">Generates a summary of pending changes<i class="fa fa-external-link"></i></span></p>
+<h2 id="git-request-pull"><a class="markdownIt-Anchor" href="#git-request-pull"></a> Git request-pull</h2>
+<h3 id="使用目的"><a class="markdownIt-Anchor" href="#使用目的"></a> 使用目的</h3>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1yZXF1ZXN0LXB1bGw=">Generates a summary of pending changes<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
-<p>生成待处理的更改的摘要<br>
+<p>生成待处理的更改的摘要</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/01/04/git-request-pull/#more" rel="contents">
@@ -1001,7 +1017,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
 
     
     
@@ -1069,9 +1085,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
+          <h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<!-- toc -->
 <!-- tocstop -->
-<p>翻译自:<span class="exturl" data-url="aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vamJvbmVyLzI4NDE4MzI=" title="https://gist.github.com/jboner/2841832">Latency Numbers Every Programmer Should Know<i class="fa fa-external-link"></i></span></p>
+<p>翻译自:<span class="exturl" data-url="aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vamJvbmVyLzI4NDE4MzI=">Latency Numbers Every Programmer Should Know<i class="fa fa-external-link-alt"></i></span></p>
 <hr>
 <table>
 <thead>
@@ -1096,7 +1113,7 @@
 <td>5   ns</td>
 <td></td>
 <td></td>
-<td>　</td>
+<td></td>
 </tr>
 <tr>
 <td>CPU L2 级缓存访问</td>
@@ -1162,7 +1179,7 @@
 <td>~1GB/sec SSD, 4X memory</td>
 </tr>
 <tr>
-<td>磁盘寻址           　</td>
+<td>磁盘寻址</td>
 <td>10,000,000   ns</td>
 <td>10,000 us</td>
 <td>10 ms</td>
@@ -1274,22 +1291,27 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- toc -->
+          <h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<!-- toc -->
 <ul>
-<li><a href="#第一印象">第一印象</a></li>
-<li><a href="#远程连接">远程连接</a><ul>
-<li><a href="#通过ssh">通过ssh</a></li>
-<li><a href="#通过vnc-viewer">通过VNC Viewer</a></li>
+<li><a href="#%E7%AC%AC%E4%B8%80%E5%8D%B0%E8%B1%A1">第一印象</a></li>
+<li><a href="#%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5">远程连接</a>
+<ul>
+<li><a href="#%E9%80%9A%E8%BF%87ssh">通过ssh</a></li>
+<li><a href="#%E9%80%9A%E8%BF%87vnc-viewer">通过VNC Viewer</a></li>
 </ul>
 </li>
-<li><a href="#树莓派的缺点">树莓派的缺点</a></li>
-<li><a href="#总结">总结</a></li>
+<li><a href="#%E6%A0%91%E8%8E%93%E6%B4%BE%E7%9A%84%E7%BC%BA%E7%82%B9">树莓派的缺点</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 </ul>
 <!-- tocstop -->
-<h2 id="第一印象"><a href="#第一印象" class="headerlink" title="第一印象"></a>第一印象</h2><p>大约在20天前，我在亚马逊上冲动的购买了这个东西</p>
-<img data-src="/2017/10/25/first-glance-at-RaspberryPi/Raspberry-Pi-3-Official-Desktop-Starter-Kit.png" title="Raspberry Pi 3 Official Desktop Starter Kit">
+<h2 id="第一印象"><a class="markdownIt-Anchor" href="#第一印象"></a> 第一印象</h2>
+<p>大约在20天前，我在亚马逊上冲动的购买了这个东西</p>
+<img data-src="/2017/10/25/first-glance-at-RaspberryPi/Raspberry-Pi-3-Official-Desktop-Starter-Kit.png" class title="Raspberry Pi 3 Official Desktop Starter Kit">
 <p>树莓派3的官方Desktop Starter Kit，其实也就是树莓派3开发板+16GB miroSD装机卡+壳子+充电器套装。不过这样一套买下来，上手把玩树莓派要方便许多，机子到手第一天我就按照说明书安装了树莓派定制Debian的发型版Raspbian系统。第一感觉还挺好用，通过HDMI连接上显示器，再用4个USB接口中的两个连接键盘和鼠标就可以当做桌面电脑使用了。如果要通过个人电脑远程连接树莓派的话，ssh和VNC Viewer都很好用。</p>
-<h2 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h2><h3 id="通过ssh"><a href="#通过ssh" class="headerlink" title="通过ssh"></a>通过ssh</h3><p><em>注意，以下步骤均在个人电脑上完成，不是在树莓派上</em><br>
+<h2 id="远程连接"><a class="markdownIt-Anchor" href="#远程连接"></a> 远程连接</h2>
+<h3 id="通过ssh"><a class="markdownIt-Anchor" href="#通过ssh"></a> 通过ssh</h3>
+<p><em>注意，以下步骤均在个人电脑上完成，不是在树莓派上</em></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/10/25/first-glance-at-RaspberryPi/#more" rel="contents">
@@ -1299,7 +1321,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
 
     
     

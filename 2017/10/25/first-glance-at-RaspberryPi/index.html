@@ -23,12 +23,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"codingnote.com","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="目录  第一印象 远程连接 通过ssh 通过VNC Viewer   树莓派的缺点 总结   第一印象大约在20天前，我在亚马逊上冲动的购买了这个东西  树莓派3的官方Desktop Starter Kit，其实也就是树莓派3开发板+16GB miroSD装机卡+壳子+充电器套装。不过这样一套买下来，上手把玩树莓派要方便许多，机子到手第一天我就按照说明书安装了树莓派定制Debian的发型版Rasp">
+<meta name="description" content="目录   第一印象 远程连接  通过ssh 通过VNC Viewer   树莓派的缺点 总结    第一印象 大约在20天前，我在亚马逊上冲动的购买了这个东西  树莓派3的官方Desktop Starter Kit，其实也就是树莓派3开发板+16GB miroSD装机卡+壳子+充电器套装。不过这样一套买下来，上手把玩树莓派要方便许多，机子到手第一天我就按照说明书安装了树莓派定制Debian的发型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初试树莓派RaspberryPi">
 <meta property="og:url" content="http://codingnote.com/2017/10/25/first-glance-at-RaspberryPi/index.html">
 <meta property="og:site_name" content="Coding Note">
-<meta property="og:description" content="目录  第一印象 远程连接 通过ssh 通过VNC Viewer   树莓派的缺点 总结   第一印象大约在20天前，我在亚马逊上冲动的购买了这个东西  树莓派3的官方Desktop Starter Kit，其实也就是树莓派3开发板+16GB miroSD装机卡+壳子+充电器套装。不过这样一套买下来，上手把玩树莓派要方便许多，机子到手第一天我就按照说明书安装了树莓派定制Debian的发型版Rasp">
+<meta property="og:description" content="目录   第一印象 远程连接  通过ssh 通过VNC Viewer   树莓派的缺点 总结    第一印象 大约在20天前，我在亚马逊上冲动的购买了这个东西  树莓派3的官方Desktop Starter Kit，其实也就是树莓派3开发板+16GB miroSD装机卡+壳子+充电器套装。不过这样一套买下来，上手把玩树莓派要方便许多，机子到手第一天我就按照说明书安装了树莓派定制Debian的发型">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://codingnote.com/2017/10/25/first-glance-at-RaspberryPi/Raspberry-Pi-3-Official-Desktop-Starter-Kit.png">
 <meta property="article:published_time" content="2017-10-24T23:05:00.000Z">
@@ -221,7 +221,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">第一印象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">远程连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">通过ssh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">通过VNC Viewer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">树莓派的缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> 目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"> 第一印象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text"> 远程连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text"> 通过ssh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text"> 通过VNC Viewer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text"> 树莓派的缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text"> 总结</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -361,59 +361,70 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
+<!-- toc -->
 <ul>
-<li><a href="#第一印象">第一印象</a></li>
-<li><a href="#远程连接">远程连接</a><ul>
-<li><a href="#通过ssh">通过ssh</a></li>
-<li><a href="#通过vnc-viewer">通过VNC Viewer</a></li>
+<li><a href="#%E7%AC%AC%E4%B8%80%E5%8D%B0%E8%B1%A1">第一印象</a></li>
+<li><a href="#%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5">远程连接</a>
+<ul>
+<li><a href="#%E9%80%9A%E8%BF%87ssh">通过ssh</a></li>
+<li><a href="#%E9%80%9A%E8%BF%87vnc-viewer">通过VNC Viewer</a></li>
 </ul>
 </li>
-<li><a href="#树莓派的缺点">树莓派的缺点</a></li>
-<li><a href="#总结">总结</a></li>
+<li><a href="#%E6%A0%91%E8%8E%93%E6%B4%BE%E7%9A%84%E7%BC%BA%E7%82%B9">树莓派的缺点</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 </ul>
 <!-- tocstop -->
-<h2><span id="第一印象">第一印象</span></h2><p>大约在20天前，我在亚马逊上冲动的购买了这个东西</p>
-<img data-src="/2017/10/25/first-glance-at-RaspberryPi/Raspberry-Pi-3-Official-Desktop-Starter-Kit.png" title="Raspberry Pi 3 Official Desktop Starter Kit">
+<h2><span id="第一印象"> 第一印象</span></h2>
+<p>大约在20天前，我在亚马逊上冲动的购买了这个东西</p>
+<img data-src="/2017/10/25/first-glance-at-RaspberryPi/Raspberry-Pi-3-Official-Desktop-Starter-Kit.png" class title="Raspberry Pi 3 Official Desktop Starter Kit">
 <p>树莓派3的官方Desktop Starter Kit，其实也就是树莓派3开发板+16GB miroSD装机卡+壳子+充电器套装。不过这样一套买下来，上手把玩树莓派要方便许多，机子到手第一天我就按照说明书安装了树莓派定制Debian的发型版Raspbian系统。第一感觉还挺好用，通过HDMI连接上显示器，再用4个USB接口中的两个连接键盘和鼠标就可以当做桌面电脑使用了。如果要通过个人电脑远程连接树莓派的话，ssh和VNC Viewer都很好用。</p>
-<h2><span id="远程连接">远程连接</span></h2><h3><span id="通过ssh">通过ssh</span></h3><p><em>注意，以下步骤均在个人电脑上完成，不是在树莓派上</em><br><a id="more"></a><br>首先通过Vim 修改本地hosts文件<code>vim /etc/hosts</code> 加入raspberrypi的ip地址，以后就可以通过<code>ssh pi@raspberrypi</code>的方式ssh到树莓派中，如果嫌每次连接都要输入密码麻烦，可以把公钥导入到树莓派中，具体方法如下</p>
+<h2><span id="远程连接"> 远程连接</span></h2>
+<h3><span id="通过ssh"> 通过ssh</span></h3>
+<p><em>注意，以下步骤均在个人电脑上完成，不是在树莓派上</em></p>
+<a id="more"></a>
+<p>首先通过Vim 修改本地hosts文件<code>vim /etc/hosts</code> 加入raspberrypi的ip地址，以后就可以通过<code>ssh pi@raspberrypi</code>的方式ssh到树莓派中，如果嫌每次连接都要输入密码麻烦，可以把公钥导入到树莓派中，具体方法如下</p>
 <ol>
-<li><p>生成公钥私钥对</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将公钥传输到raspberrypi上</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id pi@raspberrypi</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>测试一下，现在用<code>ssh pi@raspberrypi</code>远程登录树莓派就不需要输入密码了</p>
-</li>
-<li><p>(可选步骤)为了安全性考虑，关闭树莓派上远程ssh密码登录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-<p>找到<code>PermitRootLogin</code>这一行，并将它改成<code>PermitRootLogin without-password</code>，如果这一行是被注释的，记得取消注释以此覆盖默认配置。修改并保存，最后运行下面命令使修改生效</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service ssh restart</span><br></pre></td></tr></table></figure>
-</li>
+<li>生成公钥私钥对</li>
 </ol>
-<h3><span id="通过vnc-viewer">通过VNC Viewer</span></h3><ol>
-<li><p>首先，在树莓派上通过下列命令开启VNC Viewer</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install realvnc-vnc-server realvnc-vnc-viewer</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接着，在个人电脑上，或者手机上下载VNC Viewer客户端</p>
-</li>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>将公钥传输到raspberrypi上</li>
+</ol>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id pi@raspberrypi</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>测试一下，现在用<code>ssh pi@raspberrypi</code>远程登录树莓派就不需要输入密码了</li>
+<li>(可选步骤)为了安全性考虑，关闭树莓派上远程ssh密码登录</li>
+</ol>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano &#x2F;etc&#x2F;ssh&#x2F;sshd_config</span><br></pre></td></tr></table></figure>
+<p>找到<code>PermitRootLogin</code>这一行，并将它改成<code>PermitRootLogin without-password</code>，如果这一行是被注释的，记得取消注释以此覆盖默认配置。修改并保存，最后运行下面命令使修改生效</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service ssh restart</span><br></pre></td></tr></table></figure>
+<h3><span id="通过vnc-viewer"> 通过VNC Viewer</span></h3>
+<ol>
+<li>首先，在树莓派上通过下列命令开启VNC Viewer</li>
+</ol>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install realvnc-vnc-server realvnc-vnc-viewer</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>接着，在个人电脑上，或者手机上下载VNC Viewer客户端</li>
 <li>最后，在远程连接设备端(个人电脑或者手机)输入树莓派的用户名，密码，ip地址即可远程连接树莓派了</li>
 </ol>
-<h2><span id="树莓派的缺点">树莓派的缺点</span></h2><p>在树莓派3上做全栈开发并不是很理想，因为部分软件对32bit ARM架构处理器的兼容性不是很好，查看树莓派3的CPU架构可以使用如下命令，结果如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ lscpu</span><br><span class="line">Architecture:          armv7l</span><br><span class="line">Byte Order:            Little Endian</span><br><span class="line">CPU(s):                4</span><br><span class="line">On-line CPU(s) list:   0-3</span><br><span class="line">Thread(s) per core:    1</span><br><span class="line">Core(s) per socket:    4</span><br><span class="line">Socket(s):             1</span><br><span class="line">Model:                 4</span><br><span class="line">Model name:            ARMv7 Processor rev 4 (v7l)</span><br><span class="line">CPU max MHz:           1200.0000</span><br><span class="line">CPU min MHz:           600.0000</span><br><span class="line">BogoMIPS:              38.40</span><br><span class="line">Flags:                 half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm crc32</span><br></pre></td></tr></table></figure>
+<h2><span id="树莓派的缺点"> 树莓派的缺点</span></h2>
+<p>在树莓派3上做全栈开发并不是很理想，因为部分软件对32bit ARM架构处理器的兼容性不是很好，查看树莓派3的CPU架构可以使用如下命令，结果如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ lscpu</span><br><span class="line">Architecture:          armv7l</span><br><span class="line">Byte Order:            Little Endian</span><br><span class="line">CPU(s):                4</span><br><span class="line">On-line CPU(s) list:   0-3</span><br><span class="line">Thread(s) per core:    1</span><br><span class="line">Core(s) per socket:    4</span><br><span class="line">Socket(s):             1</span><br><span class="line">Model:                 4</span><br><span class="line">Model name:            ARMv7 Processor rev 4 (v7l)</span><br><span class="line">CPU max MHz:           1200.0000</span><br><span class="line">CPU min MHz:           600.0000</span><br><span class="line">BogoMIPS:              38.40</span><br><span class="line">Flags:                 half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm crc32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>可以看到树莓派3采用一块ARMv7架构的CPU，通过查阅维基百科，得知ARMv1到ARMv7架构都是32 bits寻址，直到ARMv8架构才出现64 bits寻址。</p>
-<p>故事起源于我想在树莓派上安装<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dla2FuL3dla2Fu" title="https://github.com/wekan/wekan">wekan<i class="fa fa-external-link"></i></span>，wekan是类似于<span class="exturl" data-url="aHR0cHM6Ly90cmVsbG8uY29tLw==" title="https://trello.com/">Trello<i class="fa fa-external-link"></i></span>的Kanban类项目管理软件，奈何wekan是基于Meteor建立的，而Meteor对安装环境有x86_64的假设，即使修改源代码去掉该假设也不能顺利安装，参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21ldGVvci9tZXRlb3IvaXNzdWVzLzQ0Mg==" title="https://github.com/meteor/meteor/issues/442">meteor/issues/442<i class="fa fa-external-link"></i></span>。好消息是2017年6月份，Meteor团队开始着手与增加Meteor对ARM架构CPU的支持，参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21ldGVvci9tZXRlb3ItZmVhdHVyZS1yZXF1ZXN0cy9pc3N1ZXMvMTMw" title="https://github.com/meteor/meteor-feature-requests/issues/130">meteor-feature-requests/issues/130<i class="fa fa-external-link"></i></span>。</p>
-<p>不能在树莓派上安装wekan，让我有点小小的伤心，但是接下来发生的事情就让我对在树莓派上搞全栈开发暂时失去了兴趣。故事是这样的，为了学习网爬虫，我做了一个每天计算出Stackoverflow最火热问题的项目来练手，该项目的的爬虫部分基于Scapy框架，数据库我选用了最新版本的MongoDB (v3.4.9)　来存储爬取的网页内容。开发完成后我利用crontab在自己的电脑上让它每天晚上10点5分定时在<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ppbmhhaVovc3RhY2tvdmVyZmxvdy10cmVuZGluZw==" title="https://github.com/JinhaiZ/stackoverflow-trending">这里<i class="fa fa-external-link"></i></span>update最火热问题排行。</p>
+<p>故事起源于我想在树莓派上安装<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dla2FuL3dla2Fu">wekan<i class="fa fa-external-link-alt"></i></span>，wekan是类似于<span class="exturl" data-url="aHR0cHM6Ly90cmVsbG8uY29tLw==">Trello<i class="fa fa-external-link-alt"></i></span>的Kanban类项目管理软件，奈何wekan是基于Meteor建立的，而Meteor对安装环境有x86_64的假设，即使修改源代码去掉该假设也不能顺利安装，参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21ldGVvci9tZXRlb3IvaXNzdWVzLzQ0Mg==">meteor/issues/442<i class="fa fa-external-link-alt"></i></span>。好消息是2017年6月份，Meteor团队开始着手与增加Meteor对ARM架构CPU的支持，参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21ldGVvci9tZXRlb3ItZmVhdHVyZS1yZXF1ZXN0cy9pc3N1ZXMvMTMw">meteor-feature-requests/issues/130<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>不能在树莓派上安装wekan，让我有点小小的伤心，但是接下来发生的事情就让我对在树莓派上搞全栈开发暂时失去了兴趣。故事是这样的，为了学习网爬虫，我做了一个每天计算出Stackoverflow最火热问题的项目来练手，该项目的的爬虫部分基于Scapy框架，数据库我选用了最新版本的MongoDB (v3.4.9)　来存储爬取的网页内容。开发完成后我利用crontab在自己的电脑上让它每天晚上10点5分定时在<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ppbmhhaVovc3RhY2tvdmVyZmxvdy10cmVuZGluZw==">这里<i class="fa fa-external-link-alt"></i></span>update最火热问题排行。</p>
 <p>问题是我的电脑并不是每天晚上10点5分都处于运行状态，有好几次因为我没有开机导致当天我写的程序没有update。于是乎我有了把MongoDB和网页爬取程序部署在树莓派上的想法。说干就干，在树莓派上陆续安装了相应的开发环境，主要是python的开发环境，比如安装Scapy框架可以通过下面的命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># install Scrapy</span><br><span class="line">sudo apt-get install libffi-dev</span><br><span class="line">sudo apt-get install libxml2-dev</span><br><span class="line">sudo apt-get install libxslt1-dev</span><br><span class="line">sudo apt-get install python-dev</span><br><span class="line">sudo pip install scrapy</span><br></pre></td></tr></table></figure>
-<p>然而在安装最新版的MongoDB时我遇到了无法解决的问题，实际上，通过下面命令可以安装MongoDB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># install MongoDB</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install mongodb-server</span><br></pre></td></tr></table></figure></p>
+<p>然而在安装最新版的MongoDB时我遇到了无法解决的问题，实际上，通过下面命令可以安装MongoDB</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># install MongoDB</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install mongodb-server</span><br></pre></td></tr></table></figure>
 <p>但是版本号停留在了v2.4.14，经过查询得知v2.4.14版本后MongoDB就放弃了对32 bit ARM架构CPU的支持，导致树莓派3无法安装最新的MongoDB。奈何我的程序用了大量新版本的特性，比如<code>$slice</code>选择符等，最后在树莓派上部署爬虫的想法只好作罢。</p>
-<h2><span id="总结">总结</span></h2><p>第一次接触”单板电脑”(SBC, Single Board Computer)还是很有新鲜感的，低廉的售价，和正常PC几乎一样的功能以及丰富的DIY选项让人很难拒绝。不过作为一个全栈开发人员，想要在树莓派上部署应用，不能安装最新的MongoDB意味着几年前比较流行的MEAN框架在树莓派上可能会行不通，部分框架，例如于ARM处理器有兼容问题的Meteor，会导致部分软件例如wekan在树莓派上无法应用，这些问题在购买前还是要考虑的。</p>
+<h2><span id="总结"> 总结</span></h2>
+<p>第一次接触&quot;单板电脑&quot;(SBC, Single Board Computer)还是很有新鲜感的，低廉的售价，和正常PC几乎一样的功能以及丰富的DIY选项让人很难拒绝。不过作为一个全栈开发人员，想要在树莓派上部署应用，不能安装最新的MongoDB意味着几年前比较流行的MEAN框架在树莓派上可能会行不通，部分框架，例如于ARM处理器有兼容问题的Meteor，会导致部分软件例如wekan在树莓派上无法应用，这些问题在购买前还是要考虑的。</p>
 <p>参考</p>
 <ol>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZGlnaXRhbG9jZWFuLmNvbS9jb21tdW5pdHkvdHV0b3JpYWxzL2hvdy10by1zZXQtdXAtc3NoLWtleXMtLTI=" title="https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2">How To Set Up SSH Keys<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmFzcGJlcnJ5cGkub3JnL2RvY3VtZW50YXRpb24vcmVtb3RlLWFjY2Vzcy92bmMv" title="https://www.raspberrypi.org/documentation/remote-access/vnc/">VNC (VIRTUAL NETWORK COMPUTING)<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZGlnaXRhbG9jZWFuLmNvbS9jb21tdW5pdHkvdHV0b3JpYWxzL2hvdy10by1zZXQtdXAtc3NoLWtleXMtLTI=">How To Set Up SSH Keys<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmFzcGJlcnJ5cGkub3JnL2RvY3VtZW50YXRpb24vcmVtb3RlLWFjY2Vzcy92bmMv">VNC (VIRTUAL NETWORK COMPUTING)<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 
     </div>

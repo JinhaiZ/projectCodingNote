@@ -23,12 +23,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"codingnote.com","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="目录  为什么要学习Vim 学习Vim的正确姿势 配置Vim的省时办法 Vim插件使用   为什么要学习VimVi或者Vim（Vi加强版）是众多Linux发行版中终端环境自带的文本编辑器，但似乎熟练掌握Vi&#x2F;Vi不是在Linux上进行软件开发活动的必要条件。因为在Linux上开发软件的过程中，我们总是能找到更便于上手的，学习曲线更平缓的替代工具，比如gedit，sublime或者atom。然而在某">
+<meta name="description" content="目录   为什么要学习Vim 学习Vim的正确姿势 配置Vim的省时办法 Vim插件使用    为什么要学习Vim Vi或者Vim（Vi加强版）是众多Linux发行版中终端环境自带的文本编辑器，但似乎熟练掌握Vi&#x2F;Vi不是在Linux上进行软件开发活动的必要条件。因为在Linux上开发软件的过程中，我们总是能找到更便于上手的，学习曲线更平缓的替代工具，比如gedit，sublime或者atom。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="超强文本编辑器Vi&#x2F;Vim的配置与使用">
 <meta property="og:url" content="http://codingnote.com/2017/05/21/use-vim/index.html">
 <meta property="og:site_name" content="Coding Note">
-<meta property="og:description" content="目录  为什么要学习Vim 学习Vim的正确姿势 配置Vim的省时办法 Vim插件使用   为什么要学习VimVi或者Vim（Vi加强版）是众多Linux发行版中终端环境自带的文本编辑器，但似乎熟练掌握Vi&#x2F;Vi不是在Linux上进行软件开发活动的必要条件。因为在Linux上开发软件的过程中，我们总是能找到更便于上手的，学习曲线更平缓的替代工具，比如gedit，sublime或者atom。然而在某">
+<meta property="og:description" content="目录   为什么要学习Vim 学习Vim的正确姿势 配置Vim的省时办法 Vim插件使用    为什么要学习Vim Vi或者Vim（Vi加强版）是众多Linux发行版中终端环境自带的文本编辑器，但似乎熟练掌握Vi&#x2F;Vi不是在Linux上进行软件开发活动的必要条件。因为在Linux上开发软件的过程中，我们总是能找到更便于上手的，学习曲线更平缓的替代工具，比如gedit，sublime或者atom。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://codingnote.com/2017/05/21/use-vim/vimtutor.png">
 <meta property="og:image" content="http://codingnote.com/2017/05/21/use-vim/vimrc.png">
@@ -222,7 +222,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">为什么要学习Vim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">学习Vim的正确姿势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">配置Vim的省时办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">Vim插件使用</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> 目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"> 为什么要学习Vim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text"> 学习Vim的正确姿势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text"> 配置Vim的省时办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text"> Vim插件使用</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -362,21 +362,28 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
+<!-- toc -->
 <ul>
-<li><a href="#为什么要学习vim">为什么要学习Vim</a></li>
-<li><a href="#学习vim的正确姿势">学习Vim的正确姿势</a></li>
-<li><a href="#配置vim的省时办法">配置Vim的省时办法</a></li>
-<li><a href="#vim插件使用">Vim插件使用</a></li>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6%E4%B9%A0vim">为什么要学习Vim</a></li>
+<li><a href="#%E5%AD%A6%E4%B9%A0vim%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF">学习Vim的正确姿势</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AEvim%E7%9A%84%E7%9C%81%E6%97%B6%E5%8A%9E%E6%B3%95">配置Vim的省时办法</a></li>
+<li><a href="#vim%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8">Vim插件使用</a></li>
 </ul>
 <!-- tocstop -->
-<h2><span id="为什么要学习vim">为什么要学习Vim</span></h2><p>Vi或者Vim（Vi加强版）是众多Linux发行版中终端环境自带的文本编辑器，但似乎熟练掌握Vi/Vi不是在Linux上进行软件开发活动的必要条件。因为在Linux上开发软件的过程中，我们总是能找到更便于上手的，学习曲线更平缓的替代工具，比如gedit，sublime或者atom。然而在某些情况下，掌握Vi/Vim却显得十分的必要，比如需要远程链接到一台上个世纪的古董服务器上修改几行配置代码时，使用Vi/Vim进行编辑几乎是你的唯一选择，毕竟Vi诞生于1976年，比Linux的第一个版本发行时还要早17年，此外Vi/Vim可以直接运行在终端环境中，而gedit，sublime或者atom却需要在桌面环境的支持下才能运行。<br><a id="more"></a><br>在刚进入公司实习时，培训材料中就有如何使用Vim以及如何用Vundle配置Vim的教程。但是其实我发现公司里用的最多的文本编辑器不是Vim，而是Atom。这样的现象，我个人觉得还是由于Vim的学习曲线些陡峭造成的。毕竟Vim不如gedit，sublime或者atom般开箱即用（out of the box），新手并不能指望在半个小时内掌握它，用它进行简单的编辑操作。此外，插件管理也不如sumblim或者atom般显而易见。我记得在实习第一周培训时，我自己就用了一天时间来配置Vim，给Vim安装Airline，NERDTree，Fugitive等等插件，来让Vim看起来更像一个桌面环境下的文本编辑器。实际上，公司里还是有人在使用Vim的，通常他们的编程水平都很高，完全不用鼠标，也很少从终端中切换出来，除非他们在搞全栈开发，需要时不时的在浏览器中测试下代码。</p>
+<h2><span id="为什么要学习vim"> 为什么要学习Vim</span></h2>
+<p>Vi或者Vim（Vi加强版）是众多Linux发行版中终端环境自带的文本编辑器，但似乎熟练掌握Vi/Vi不是在Linux上进行软件开发活动的必要条件。因为在Linux上开发软件的过程中，我们总是能找到更便于上手的，学习曲线更平缓的替代工具，比如gedit，sublime或者atom。然而在某些情况下，掌握Vi/Vim却显得十分的必要，比如需要远程链接到一台上个世纪的古董服务器上修改几行配置代码时，使用Vi/Vim进行编辑几乎是你的唯一选择，毕竟Vi诞生于1976年，比Linux的第一个版本发行时还要早17年，此外Vi/Vim可以直接运行在终端环境中，而gedit，sublime或者atom却需要在桌面环境的支持下才能运行。</p>
+<a id="more"></a>
+<p>在刚进入公司实习时，培训材料中就有如何使用Vim以及如何用Vundle配置Vim的教程。但是其实我发现公司里用的最多的文本编辑器不是Vim，而是Atom。这样的现象，我个人觉得还是由于Vim的学习曲线些陡峭造成的。毕竟Vim不如gedit，sublime或者atom般开箱即用（out of the box），新手并不能指望在半个小时内掌握它，用它进行简单的编辑操作。此外，插件管理也不如sumblim或者atom般显而易见。我记得在实习第一周培训时，我自己就用了一天时间来配置Vim，给Vim安装Airline，NERDTree，Fugitive等等插件，来让Vim看起来更像一个桌面环境下的文本编辑器。实际上，公司里还是有人在使用Vim的，通常他们的编程水平都很高，完全不用鼠标，也很少从终端中切换出来，除非他们在搞全栈开发，需要时不时的在浏览器中测试下代码。</p>
 <p>有人说Vi/Vim是人类历史上最好用的文本编辑器，虽然我不知道此话的出处是哪里，暂且认同此话，如果能熟练掌握人类历史上最好用的文本编辑器，那自己作为程序员的逼格也会是相当的高，在众多的文本编辑器中，Vi/Vim应该是最符合Geek的。</p>
-<h2><span id="学习vim的正确姿势">学习Vim的正确姿势</span></h2><p>如果你有心，在Google里搜索Vim学习指南，我相信会有不少的学习笔记，或者类似于《X分钟/小时内掌握人类历史上最好用的文本编辑器》的文章。相信我，后面那种类型的文章还是不要看了，除非是vimtutor的翻译，后面我会提到。其实我很同意陈皓在<span class="exturl" data-url="aHR0cDovL2Nvb2xzaGVsbC5jbi9hcnRpY2xlcy81NDI2Lmh0bWw=" title="http://coolshell.cn/articles/5426.html">《简明 VIM 练级攻略》<i class="fa fa-external-link"></i></span>中把学习Vim喻为学习钢琴，学习Vim不是30分钟的事情，而是需要几个星期去不断练习的。实际上，大多数Linux发行版除了自带Vi/Vim编辑器外，也内置了Vi/Vim的教程，在终端中输入<code>vimtutor</code>你就可以进入一个交互式的Vim学习教程中，该教程一共有7节，从hjkl光标移动，到编辑vimrc脚本均有涉及。默认的vimtutor是英文版的，网上也有很好的翻译版本，比如<span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dqcDIwMTMvdGhlX3Jvb21fb2ZfZXhlcmNpc2VzL21hc3Rlci8lRTglQUYlQkIlRTQlQjklQTYlRTclQUMlOTQlRTglQUUlQjAvdmltdHV0b3IvMzAlRTUlODglODYlRTklOTIlOUYlRTUlQUQlQTYlRTQlQkMlOUF2aW0lRTQlQjklOEJ2aW10dXRvciglRTUlOEYlOEMlRTglQUYlQUQlRTclODklODgpLnR4dA==" title="https://raw.githubusercontent.com/wjp2013/the_room_of_exercises/master/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/vimtutor/30%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9Avim%E4%B9%8Bvimtutor(%E5%8F%8C%E8%AF%AD%E7%89%88).txt">《30分钟学会vim之vimtutor(双语版)》<i class="fa fa-external-link"></i></span></p>
- <img data-src="/2017/05/21/use-vim/vimtutor.png" title="Vi/Vim编辑器的内置了的Vi/Vim教程">
-<h2><span id="配置vim的省时办法">配置Vim的省时办法</span></h2><p>之前我有提到在实习第一周培训时，我自己就用了一天时间来配置Vim，给Vim安装Airline，NERDTree，Fugitive等等插件。Vim有一个非常好的插件管理工具<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1Z1bmRsZVZpbS9WdW5kbGUudmlt" title="https://github.com/VundleVim/Vundle.vim">Vundle<i class="fa fa-external-link"></i></span>，安装完Vundle后，我们可以根据自己的喜好来管理，安装Vim插件来对Vim进行配置。其实直到今天我才发现了配置Vim更简单的方法，那就是用Vim发行版<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NwZjEzL3NwZjEzLXZpbQ==" title="https://github.com/spf13/spf13-vim">spf13<i class="fa fa-external-link"></i></span>。spf13是一个跨平台的Vim发行版，可以在Windows，Linux和Mac平台上运行。简单来说，spf13就是帮你写好了vimrc文件，在Vim中执行PluginInstall命令后，所有在vimrc里设置好的插件就会依次安装。</p>
- <img data-src="/2017/05/21/use-vim/vimrc.png" title="安装完spf13-vim发行版后的vimrc配置文件">
-<h2><span id="vim插件使用">Vim插件使用</span></h2><p>spf13集成了超多的Vim插件，比如用于显示文件目录结构的NERDTree，方便文件查找的ctrlp，集成语法检查Syntastic，Git集成的Fugitive等等。先在这里占个坑，接下来会写每个插件的使用方法</p>
+<h2><span id="学习vim的正确姿势"> 学习Vim的正确姿势</span></h2>
+<p>如果你有心，在Google里搜索Vim学习指南，我相信会有不少的学习笔记，或者类似于《X分钟/小时内掌握人类历史上最好用的文本编辑器》的文章。相信我，后面那种类型的文章还是不要看了，除非是vimtutor的翻译，后面我会提到。其实我很同意陈皓在<span class="exturl" data-url="aHR0cDovL2Nvb2xzaGVsbC5jbi9hcnRpY2xlcy81NDI2Lmh0bWw=">《简明 VIM 练级攻略》<i class="fa fa-external-link-alt"></i></span>中把学习Vim喻为学习钢琴，学习Vim不是30分钟的事情，而是需要几个星期去不断练习的。实际上，大多数Linux发行版除了自带Vi/Vim编辑器外，也内置了Vi/Vim的教程，在终端中输入<code>vimtutor</code>你就可以进入一个交互式的Vim学习教程中，该教程一共有7节，从hjkl光标移动，到编辑vimrc脚本均有涉及。默认的vimtutor是英文版的，网上也有很好的翻译版本，比如<span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dqcDIwMTMvdGhlX3Jvb21fb2ZfZXhlcmNpc2VzL21hc3Rlci8lRTglQUYlQkIlRTQlQjklQTYlRTclQUMlOTQlRTglQUUlQjAvdmltdHV0b3IvMzAlRTUlODglODYlRTklOTIlOUYlRTUlQUQlQTYlRTQlQkMlOUF2aW0lRTQlQjklOEJ2aW10dXRvciglRTUlOEYlOEMlRTglQUYlQUQlRTclODklODgpLnR4dA==">《30分钟学会vim之vimtutor(双语版)》<i class="fa fa-external-link-alt"></i></span></p>
+ <img data-src="/2017/05/21/use-vim/vimtutor.png" class title="Vi&#x2F;Vim编辑器的内置了的Vi&#x2F;Vim教程">
+<h2><span id="配置vim的省时办法"> 配置Vim的省时办法</span></h2>
+<p>之前我有提到在实习第一周培训时，我自己就用了一天时间来配置Vim，给Vim安装Airline，NERDTree，Fugitive等等插件。Vim有一个非常好的插件管理工具<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1Z1bmRsZVZpbS9WdW5kbGUudmlt">Vundle<i class="fa fa-external-link-alt"></i></span>，安装完Vundle后，我们可以根据自己的喜好来管理，安装Vim插件来对Vim进行配置。其实直到今天我才发现了配置Vim更简单的方法，那就是用Vim发行版<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NwZjEzL3NwZjEzLXZpbQ==">spf13<i class="fa fa-external-link-alt"></i></span>。spf13是一个跨平台的Vim发行版，可以在Windows，Linux和Mac平台上运行。简单来说，spf13就是帮你写好了vimrc文件，在Vim中执行PluginInstall命令后，所有在vimrc里设置好的插件就会依次安装。</p>
+ <img data-src="/2017/05/21/use-vim/vimrc.png" class title="安装完spf13-vim发行版后的vimrc配置文件">
+<h2><span id="vim插件使用"> Vim插件使用</span></h2>
+<p>spf13集成了超多的Vim插件，比如用于显示文件目录结构的NERDTree，方便文件查找的ctrlp，集成语法检查Syntastic，Git集成的Fugitive等等。先在这里占个坑，接下来会写每个插件的使用方法</p>
 <ul>
 <li><a href>Vim最好用的插件管理器Vundle</a></li>
 <li><a href>文件导航利器NERDTree</a></li>

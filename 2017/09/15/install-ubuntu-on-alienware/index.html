@@ -23,12 +23,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"codingnote.com","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="目录  制作Ubuntu启动U盘 安装Ubuntu 解决驱动问题 安装killer网卡驱动 安装蓝牙驱动   进阶配置AlienFx   作为一个游戏发烧友，同时也是小白全栈开发程序员我买了Alienware却只用来打游戏是在是太可惜了。为了搞搞开发，昨天配置了一天WSL (Windows Subsystems for Linxu)，用了Hyper+zsh的终端组合。其中在zsh中输入atom能启">
+<meta name="description" content="目录   制作Ubuntu启动U盘 安装Ubuntu 解决驱动问题  安装killer网卡驱动 安装蓝牙驱动   进阶配置AlienFx   作为一个游戏发烧友，同时也是小白全栈开发程序员我买了Alienware却只用来打游戏是在是太可惜了。为了搞搞开发，昨天配置了一天WSL (Windows Subsystems for Linxu)，用了Hyper+zsh的终端组合。其中在zsh中输入ato">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Alienware上安装Ubuntu">
 <meta property="og:url" content="http://codingnote.com/2017/09/15/install-ubuntu-on-alienware/index.html">
 <meta property="og:site_name" content="Coding Note">
-<meta property="og:description" content="目录  制作Ubuntu启动U盘 安装Ubuntu 解决驱动问题 安装killer网卡驱动 安装蓝牙驱动   进阶配置AlienFx   作为一个游戏发烧友，同时也是小白全栈开发程序员我买了Alienware却只用来打游戏是在是太可惜了。为了搞搞开发，昨天配置了一天WSL (Windows Subsystems for Linxu)，用了Hyper+zsh的终端组合。其中在zsh中输入atom能启">
+<meta property="og:description" content="目录   制作Ubuntu启动U盘 安装Ubuntu 解决驱动问题  安装killer网卡驱动 安装蓝牙驱动   进阶配置AlienFx   作为一个游戏发烧友，同时也是小白全栈开发程序员我买了Alienware却只用来打游戏是在是太可惜了。为了搞搞开发，昨天配置了一天WSL (Windows Subsystems for Linxu)，用了Hyper+zsh的终端组合。其中在zsh中输入ato">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://codingnote.com/2017/09/15/install-ubuntu-on-alienware/rufus_en_2x.png">
 <meta property="og:image" content="http://codingnote.com/2017/09/15/install-ubuntu-on-alienware/alienware_wifi_driver.png">
@@ -224,7 +224,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">制作Ubuntu启动U盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">安装Ubuntu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">解决驱动问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">安装killer网卡驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">安装蓝牙驱动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">进阶配置AlienFx</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> 目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"> 制作Ubuntu启动U盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text"> 安装Ubuntu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text"> 解决驱动问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text"> 安装killer网卡驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text"> 安装蓝牙驱动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text"> 进阶配置AlienFx</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -364,54 +364,67 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
+<!-- toc -->
 <ul>
-<li><a href="#制作ubuntu启动u盘">制作Ubuntu启动U盘</a></li>
-<li><a href="#安装ubuntu">安装Ubuntu</a></li>
-<li><a href="#解决驱动问题">解决驱动问题</a><ul>
-<li><a href="#安装killer网卡驱动">安装killer网卡驱动</a></li>
-<li><a href="#安装蓝牙驱动">安装蓝牙驱动</a></li>
+<li><a href="#%E5%88%B6%E4%BD%9Cubuntu%E5%90%AF%E5%8A%A8u%E7%9B%98">制作Ubuntu启动U盘</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85ubuntu">安装Ubuntu</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98">解决驱动问题</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85killer%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8">安装killer网卡驱动</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85%E8%93%9D%E7%89%99%E9%A9%B1%E5%8A%A8">安装蓝牙驱动</a></li>
 </ul>
 </li>
-<li><a href="#进阶配置alienfx">进阶配置AlienFx</a></li>
+<li><a href="#%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AEalienfx">进阶配置AlienFx</a></li>
 </ul>
 <!-- tocstop -->
 <p>作为一个游戏发烧友，同时也是小白全栈开发程序员我买了Alienware却只用来打游戏是在是太可惜了。为了搞搞开发，昨天配置了一天WSL (Windows Subsystems for Linxu)，用了Hyper+zsh的终端组合。其中在zsh中输入atom能启动windows的Atom也着实把我惊艳了一把，但其实也就算仅限于打开而已。事实是Windows中的文本编辑器并不能直接编辑其子系统中的文件。所以这个子系统在某些方便我觉得还没有Vagrant方便，没有图形界面，意味着不能使用Atom，Visual Studio Code这样代表先进生产力的工具，于是配置WSL搞搞开发的想法就此作罢。</p>
-<p>子系统搞不成，于是有了直接在Ubuntu上工作的想法。其实Alienware上安装Ubuntu不是很难，除了一些蓝牙和Wi-Fi方面的兼容问题，安装过程非常顺利。接下来step by step记录安装过程。<br><a id="more"></a></p>
-<h2><span id="制作ubuntu启动u盘">制作Ubuntu启动U盘</span></h2><p>在Ubuntu官方网站下载16.04 LTS系统镜像，并将其制作成启动U盘。<br>制作启动U盘的工具有很多，<span class="exturl" data-url="aHR0cHM6Ly9ydWZ1cy5ha2VvLmllLw==" title="https://rufus.akeo.ie/">Rufus<i class="fa fa-external-link"></i></span> 是我用的一款，界面简单清爽无广告不收费。</p>
+<p>子系统搞不成，于是有了直接在Ubuntu上工作的想法。其实Alienware上安装Ubuntu不是很难，除了一些蓝牙和Wi-Fi方面的兼容问题，安装过程非常顺利。接下来step by step记录安装过程。</p>
+<a id="more"></a>
+<h2><span id="制作ubuntu启动u盘"> 制作Ubuntu启动U盘</span></h2>
+<p>在Ubuntu官方网站下载16.04 LTS系统镜像，并将其制作成启动U盘。<br>
+制作启动U盘的工具有很多，<span class="exturl" data-url="aHR0cHM6Ly9ydWZ1cy5ha2VvLmllLw==">Rufus<i class="fa fa-external-link-alt"></i></span> 是我用的一款，界面简单清爽无广告不收费。</p>
 <p>Rufus界面如下，制作启动U盘时，注意Partition schemem and target system type选择同时支持UEFI和BIOS的格式。</p>
-<img data-src="/2017/09/15/install-ubuntu-on-alienware/rufus_en_2x.png" title="用Rufus制作Ubuntu启动U盘 (图片来源rufus.akeo.ie)">
-<h2><span id="安装ubuntu">安装Ubuntu</span></h2><p>重新启动Windows，启动黑屏时按F11进入UEFI界面，有两个配置需要更改</p>
+<img data-src="/2017/09/15/install-ubuntu-on-alienware/rufus_en_2x.png" class title="用Rufus制作Ubuntu启动U盘 (图片来源rufus.akeo.ie)">
+<h2><span id="安装ubuntu"> 安装Ubuntu</span></h2>
+<p>重新启动Windows，启动黑屏时按F11进入UEFI界面，有两个配置需要更改</p>
 <ul>
 <li>关闭secure boot</li>
 <li>打开legecy boot mode</li>
 </ul>
 <p>插入Ubuntu启动U盘符，再次重新启动，按下F11，选择从U盘启动，接下来的步骤和在普通电脑上安装双系统无异。</p>
 <p>安装完成后，再次启动，boot loader已经从windows boot manager变成了GRUB(<strong>GR</strong>and <strong>U</strong>nified <strong>B</strong>ootloader)。以后在便可以在GRUB界面中选择进入的系统是Ubuntu还是Windows。</p>
-<h2><span id="解决驱动问题">解决驱动问题</span></h2><p>进入安装完毕的Ubuntu，我遇到的第一个问题就是无法连接Wi-Fi。安装驱动程序有一个一般性的方法，先通过下面的命令查看自己使用的设备是什么型号，然后在网上搜索该型号设备的驱动程序。</p>
+<h2><span id="解决驱动问题"> 解决驱动问题</span></h2>
+<p>进入安装完毕的Ubuntu，我遇到的第一个问题就是无法连接Wi-Fi。安装驱动程序有一个一般性的方法，先通过下面的命令查看自己使用的设备是什么型号，然后在网上搜索该型号设备的驱动程序。</p>
 <ul>
-<li><p><code>lsusb</code> 查看usb接口的设备</p>
+<li>
+<p><code>lsusb</code> 查看usb接口的设备</p>
 </li>
-<li><p><code>lspci</code> 查看pci接口的设备</p>
+<li>
+<p><code>lspci</code> 查看pci接口的设备</p>
 </li>
 </ul>
-<h3><span id="安装killer网卡驱动">安装killer网卡驱动</span></h3><p>如下图所示，<code>lspci | grep -i net</code>命令显示我使用的网卡型号是Qualcomm Atheros Killer E2400，通过搜索，发现Alienware使用的killer网卡的<span class="exturl" data-url="aHR0cHM6Ly93d3cua2lsbGVybmV0d29ya2luZy5jb20vZHJpdmVyLWRvd25sb2Fkcy9rbm93bGVkZ2UtYmFzZT92aWV3PXRvcGljJmFtcDtpZD0y" title="https://www.killernetworking.com/driver-downloads/knowledge-base?view=topic&amp;id=2">官方网站<i class="fa fa-external-link"></i></span>提供了相关驱动的下载。</p>
-<img data-src="/2017/09/15/install-ubuntu-on-alienware/alienware_wifi_driver.png" title="安装killer网卡驱动">
+<h3><span id="安装killer网卡驱动"> 安装killer网卡驱动</span></h3>
+<p>如下图所示，<code>lspci | grep -i net</code>命令显示我使用的网卡型号是Qualcomm Atheros Killer E2400，通过搜索，发现Alienware使用的killer网卡的<span class="exturl" data-url="aHR0cHM6Ly93d3cua2lsbGVybmV0d29ya2luZy5jb20vZHJpdmVyLWRvd25sb2Fkcy9rbm93bGVkZ2UtYmFzZT92aWV3PXRvcGljJmFtcDtpZD0y">官方网站<i class="fa fa-external-link-alt"></i></span>提供了相关驱动的下载。</p>
+<img data-src="/2017/09/15/install-ubuntu-on-alienware/alienware_wifi_driver.png" class title="安装killer网卡驱动">
 <p>如上图所示，可通过如下命令安装killer网卡驱动</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://mirrors.kernel.org/ubuntu/pool/main/l/linux-firmware/linux-firmware_1.164_all.deb</span><br><span class="line">sudo dpkg -i linux-firmware*.deb</span><br><span class="line">sudo modprobe -r ath10k_pci &amp;&amp; sudo modprobe ath10k_pci</span><br></pre></td></tr></table></figure>
-<h3><span id="安装蓝牙驱动">安装蓝牙驱动</span></h3><p>首先通过下面的命令卸载已安装的蓝牙驱动并且安装新的蓝牙驱动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http:&#x2F;&#x2F;mirrors.kernel.org&#x2F;ubuntu&#x2F;pool&#x2F;main&#x2F;l&#x2F;linux-firmware&#x2F;linux-firmware_1.164_all.deb</span><br><span class="line">sudo dpkg -i linux-firmware*.deb</span><br><span class="line">sudo modprobe -r ath10k_pci &amp;&amp; sudo modprobe ath10k_pci</span><br></pre></td></tr></table></figure>
+<h3><span id="安装蓝牙驱动"> 安装蓝牙驱动</span></h3>
+<p>首先通过下面的命令卸载已安装的蓝牙驱动并且安装新的蓝牙驱动</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge blueman bluez-utils bluez bluetooth</span><br><span class="line">sudo apt-get install blueman bluez-utils bluez bluetooth</span><br></pre></td></tr></table></figure>
 <p>然后再启动蓝牙服务</p>
 <p><code>sudo /etc/init.d/bluetooth start</code></p>
-<p>如下图所示，接下来就可以通过Blueman管理系统蓝牙连接了<br><img data-src="/2017/09/15/install-ubuntu-on-alienware/ubuntu_blueman_interface.png" title="Ubuntu上蓝牙连接管理软件Blueman界面"></p>
-<h2><span id="进阶配置alienfx">进阶配置AlienFx</span></h2><p>Alienware的一大特色就是它有狂野炫酷的灯，更换Ubuntu平台后，一个大问题就是戴尔官方没有Ubuntu平台的AlienFx。</p>
-<p>通过查询，发现有人写了开源版本的AlienFx，只可惜项目已经有好几年无人维护。下载最新版本试用后，不出以外的，该软件并不支持最新的Alienware，该软件支持的Alienware系列可以从<span class="exturl" data-url="aHR0cHM6Ly9kb2MudWJ1bnR1LWZyLm9yZy9hbGllbmZ4" title="https://doc.ubuntu-fr.org/alienfx">该网站<i class="fa fa-external-link"></i></span>中找到。</p>
+<p>如下图所示，接下来就可以通过Blueman管理系统蓝牙连接了</p>
+<img data-src="/2017/09/15/install-ubuntu-on-alienware/ubuntu_blueman_interface.png" class title="Ubuntu上蓝牙连接管理软件Blueman界面">
+<h2><span id="进阶配置alienfx"> 进阶配置AlienFx</span></h2>
+<p>Alienware的一大特色就是它有狂野炫酷的灯，更换Ubuntu平台后，一个大问题就是戴尔官方没有Ubuntu平台的AlienFx。</p>
+<p>通过查询，发现有人写了开源版本的AlienFx，只可惜项目已经有好几年无人维护。下载最新版本试用后，不出以外的，该软件并不支持最新的Alienware，该软件支持的Alienware系列可以从<span class="exturl" data-url="aHR0cHM6Ly9kb2MudWJ1bnR1LWZyLm9yZy9hbGllbmZ4">该网站<i class="fa fa-external-link-alt"></i></span>中找到。</p>
 <p>参考资料</p>
 <ol>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ydWZ1cy5ha2VvLmllLw==" title="https://rufus.akeo.ie/">Rufus Offical Site<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cua2lsbGVybmV0d29ya2luZy5jb20vZHJpdmVyLWRvd25sb2Fkcy9rbm93bGVkZ2UtYmFzZT92aWV3PXRvcGljJmFtcDtpZD0y" title="https://www.killernetworking.com/driver-downloads/knowledge-base?view=topic&amp;id=2">Killer Networking<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy83NzY4MDYvYmx1ZXRvb3RoLW9uLXVidW50dS0xNi0wNA==" title="https://askubuntu.com/questions/776806/bluetooth-on-ubuntu-16-04">Bluetooth on Ubuntu 16.04<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kb2MudWJ1bnR1LWZyLm9yZy9hbGllbmZ4" title="https://doc.ubuntu-fr.org/alienfx">AlienFx on Ubuntu<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ydWZ1cy5ha2VvLmllLw==">Rufus Offical Site<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cua2lsbGVybmV0d29ya2luZy5jb20vZHJpdmVyLWRvd25sb2Fkcy9rbm93bGVkZ2UtYmFzZT92aWV3PXRvcGljJmFtcDtpZD0y">Killer Networking<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy83NzY4MDYvYmx1ZXRvb3RoLW9uLXVidW50dS0xNi0wNA==">Bluetooth on Ubuntu 16.04<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kb2MudWJ1bnR1LWZyLm9yZy9hbGllbmZ4">AlienFx on Ubuntu<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 
     </div>

@@ -23,12 +23,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"codingnote.com","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="算法复杂度分析   情况 时间复杂度 空间复杂度     最优 O(N) O(1)   平均 O(N) O(1)   最差 O(N) O(1)    设输入数组长度为N，最优情况在输入数组的最大值不等于N时达成 算法分析permutation 被定义为长为N的数组，包含整数1到N，且每个整数包含有且仅有一次。根据定义，我们必须遍历完输入数组才能知道是否1到N的每个整数包含有且仅有一次，所以算法复杂">
+<meta name="description" content="算法复杂度分析    情况 时间复杂度 空间复杂度     最优 O(N) O(1)   平均 O(N) O(1)   最差 O(N) O(1)    设输入数组长度为N，最优情况在输入数组的最大值不等于N时达成  算法分析 permutation 被定义为长为N的数组，包含整数1到N，且每个整数包含有且仅有一次。根据定义，我们必须遍历完输入数组才能知道是否1到N的每个整数包含有且仅有一次，所以">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Codility PermCheck in Python">
 <meta property="og:url" content="http://codingnote.com/2017/06/02/codility-perm-check/index.html">
 <meta property="og:site_name" content="Coding Note">
-<meta property="og:description" content="算法复杂度分析   情况 时间复杂度 空间复杂度     最优 O(N) O(1)   平均 O(N) O(1)   最差 O(N) O(1)    设输入数组长度为N，最优情况在输入数组的最大值不等于N时达成 算法分析permutation 被定义为长为N的数组，包含整数1到N，且每个整数包含有且仅有一次。根据定义，我们必须遍历完输入数组才能知道是否1到N的每个整数包含有且仅有一次，所以算法复杂">
+<meta property="og:description" content="算法复杂度分析    情况 时间复杂度 空间复杂度     最优 O(N) O(1)   平均 O(N) O(1)   最差 O(N) O(1)    设输入数组长度为N，最优情况在输入数组的最大值不等于N时达成  算法分析 permutation 被定义为长为N的数组，包含整数1到N，且每个整数包含有且仅有一次。根据定义，我们必须遍历完输入数组才能知道是否1到N的每个整数包含有且仅有一次，所以">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-02T21:25:05.000Z">
 <meta property="article:modified_time" content="2020-01-04T16:25:40.604Z">
@@ -220,7 +220,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">算法复杂度分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">算法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">源代码</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> 算法复杂度分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"> 算法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text"> 源代码</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -360,7 +360,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析">算法复杂度分析</span></h3><table>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
 <thead>
 <tr>
 <th>情况</th>
@@ -387,8 +388,10 @@
 </tbody>
 </table>
 <p>设输入数组长度为N，最优情况在输入数组的最大值不等于N时达成</p>
-<h3><span id="算法分析">算法分析</span></h3><p><strong>permutation</strong> 被定义为长为N的数组，包含整数1到N，且每个整数包含有且仅有一次。根据定义，我们必须遍历完输入数组才能知道是否1到N的每个整数包含有且仅有一次，所以算法复杂度为O(N)且无法继续优化。如何检测输入数组中1到N的每个整数出现有且仅有一次呢？一个比较直观的方法是用一个长度为N的数组作标记，遍历输入数组并在标记数组的对应项作标记，一旦该标记数组所有项均被标记，则说明输入数组满足permutation定义。但是该方法有一个缺点，就是需要成比例于输入数组长度N的存储空间。有没有不需要额外存储空间的算法呢？答案当然是有的，技巧在于利用输入数组，在遍历输入数组的同时，利用输入数组做标记。由于输入数组各项均为正整数，我们可以将某一项置为负值来标记该项索引+1对应的正整数出现过一次。</p>
-<h3><span id="源代码">源代码</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(len(A)):</span><br><span class="line">        index = A[i] <span class="keyword">if</span> A[i] &gt; <span class="number">0</span> <span class="keyword">else</span> -A[i]</span><br><span class="line">        <span class="keyword">if</span> index &gt; len(A) <span class="keyword">or</span> A[index - <span class="number">1</span>] &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            A[index - <span class="number">1</span>] = -A[index - <span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p><strong>permutation</strong> 被定义为长为N的数组，包含整数1到N，且每个整数包含有且仅有一次。根据定义，我们必须遍历完输入数组才能知道是否1到N的每个整数包含有且仅有一次，所以算法复杂度为O(N)且无法继续优化。如何检测输入数组中1到N的每个整数出现有且仅有一次呢？一个比较直观的方法是用一个长度为N的数组作标记，遍历输入数组并在标记数组的对应项作标记，一旦该标记数组所有项均被标记，则说明输入数组满足permutation定义。但是该方法有一个缺点，就是需要成比例于输入数组长度N的存储空间。有没有不需要额外存储空间的算法呢？答案当然是有的，技巧在于利用输入数组，在遍历输入数组的同时，利用输入数组做标记。由于输入数组各项均为正整数，我们可以将某一项置为负值来标记该项索引+1对应的正整数出现过一次。</p>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">A</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="built_in">len</span>(A)):</span><br><span class="line">        index = A[i] <span class="keyword">if</span> A[i] &gt; <span class="number">0</span> <span class="keyword">else</span> -A[i]</span><br><span class="line">        <span class="keyword">if</span> index &gt; <span class="built_in">len</span>(A) <span class="keyword">or</span> A[index - <span class="number">1</span>] &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            A[index - <span class="number">1</span>] = -A[index - <span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
 
     </div>
 

@@ -23,12 +23,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"codingnote.com","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="目录  翻译自:Latency Numbers Every Programmer Should Know     操作 延迟(纳秒) 延迟(微秒) 延迟(毫秒) 参考     CPU L1 级缓存访问 0.5   ns      分支预测错误* 5   ns   　   CPU L2 级缓存访问 7   ns   14x L1 cache   互斥体Mutex 加锁&#x2F;解锁 25   ns">
+<meta name="description" content="目录   翻译自:Latency Numbers Every Programmer Should Know     操作 延迟(纳秒) 延迟(微秒) 延迟(毫秒) 参考     CPU L1 级缓存访问 0.5   ns      分支预测错误* 5   ns      CPU L2 级缓存访问 7   ns   14x L1 cache   互斥体Mutex 加锁&#x2F;解锁 25   ns">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每个程序员都应该知道的延迟时间表">
 <meta property="og:url" content="http://codingnote.com/2017/10/30/Latency-Numbers-Every-Programmer-Should-Know/index.html">
 <meta property="og:site_name" content="Coding Note">
-<meta property="og:description" content="目录  翻译自:Latency Numbers Every Programmer Should Know     操作 延迟(纳秒) 延迟(微秒) 延迟(毫秒) 参考     CPU L1 级缓存访问 0.5   ns      分支预测错误* 5   ns   　   CPU L2 级缓存访问 7   ns   14x L1 cache   互斥体Mutex 加锁&#x2F;解锁 25   ns">
+<meta property="og:description" content="目录   翻译自:Latency Numbers Every Programmer Should Know     操作 延迟(纳秒) 延迟(微秒) 延迟(毫秒) 参考     CPU L1 级缓存访问 0.5   ns      分支预测错误* 5   ns      CPU L2 级缓存访问 7   ns   14x L1 cache   互斥体Mutex 加锁&#x2F;解锁 25   ns">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://i.imgur.com/k0t1e.png">
 <meta property="article:published_time" content="2017-10-30T21:01:05.000Z">
@@ -220,7 +220,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> 目录</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -347,9 +347,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录">目录</span></h2><!-- toc -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
+<!-- toc -->
 <!-- tocstop -->
-<p>翻译自:<span class="exturl" data-url="aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vamJvbmVyLzI4NDE4MzI=" title="https://gist.github.com/jboner/2841832">Latency Numbers Every Programmer Should Know<i class="fa fa-external-link"></i></span></p>
+<p>翻译自:<span class="exturl" data-url="aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vamJvbmVyLzI4NDE4MzI=">Latency Numbers Every Programmer Should Know<i class="fa fa-external-link-alt"></i></span></p>
 <hr>
 <table>
 <thead>
@@ -374,7 +375,7 @@
 <td>5   ns</td>
 <td></td>
 <td></td>
-<td>　</td>
+<td></td>
 </tr>
 <tr>
 <td>CPU L2 级缓存访问</td>
@@ -440,7 +441,7 @@
 <td>~1GB/sec SSD, 4X memory</td>
 </tr>
 <tr>
-<td>磁盘寻址           　</td>
+<td>磁盘寻址</td>
 <td>10,000,000   ns</td>
 <td>10,000 us</td>
 <td>10 ms</td>
@@ -469,14 +470,16 @@
 <blockquote>
 <p>来回通讯延迟（Round-trip delay time），在通讯（Communication）、电脑网络（Computer network）领域中，意指：在双方通讯中，发讯方的讯号（Signal）传播（Propagation）到收讯方的时间（意即：传播延迟（Propagation delay）），加上收讯方回传讯息到发讯方的时间（如果没有造成双向传播速率差异的因素，此时间与发讯方将讯号传播到收讯方的时间一样久）</p>
 </blockquote>
-<p>最后附上一张形象的图片<br><img data-src="http://i.imgur.com/k0t1e.png" alt="Latency Numbers Every Programmer Should Know "><br>Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=" title="https://imgur.com/k0t1e">https://imgur.com/k0t1e<i class="fa fa-external-link"></i></span></p>
+<p>最后附上一张形象的图片<br>
+<img data-src="http://i.imgur.com/k0t1e.png" alt="Latency Numbers Every Programmer Should Know "><br>
+Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https://imgur.com/k0t1e<i class="fa fa-external-link-alt"></i></span></p>
 <p>参考：</p>
 <ol>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vamJvbmVyLzI4NDE4MzI=" title="https://gist.github.com/jboner/2841832">Latency Numbers Every Programmer Should Know<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWNuL0NQVSVFNyVCQyU5MyVFNSVBRCU5OA==" title="https://zh.wikipedia.org/zh-cn/CPU%E7%BC%93%E5%AD%98">CPU缓存<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWNuLyVFNSU4OCU4NiVFNiU5NCVBRiVFOSVBMCU5MCVFNiVCOCVBQyVFNSU5OSVBOA==" title="https://zh.wikipedia.org/zh-cn/%E5%88%86%E6%94%AF%E9%A0%90%E6%B8%AC%E5%99%A8">分支预测器<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvQnJhbmNoX21pc3ByZWRpY3Rpb24=" title="https://en.wikipedia.org/wiki/Branch_misprediction">Branch misprediction<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWNuLyVFNCVCRSU4NiVFNSU5QiU5RSVFOSU4MCU5QSVFOCVBOCU4QSVFNSVCQiVCNiVFOSU4MSVCMg==" title="https://zh.wikipedia.org/zh-cn/%E4%BE%86%E5%9B%9E%E9%80%9A%E8%A8%8A%E5%BB%B6%E9%81%B2">来回通讯延迟<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vamJvbmVyLzI4NDE4MzI=">Latency Numbers Every Programmer Should Know<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWNuL0NQVSVFNyVCQyU5MyVFNSVBRCU5OA==">CPU缓存<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWNuLyVFNSU4OCU4NiVFNiU5NCVBRiVFOSVBMCU5MCVFNiVCOCVBQyVFNSU5OSVBOA==">分支预测器<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvQnJhbmNoX21pc3ByZWRpY3Rpb24=">Branch misprediction<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWNuLyVFNCVCRSU4NiVFNSU5QiU5RSVFOSU4MCU5QSVFOCVBOCU4QSVFNSVCQiVCNiVFOSU4MSVCMg==">来回通讯延迟<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
 
     </div>
