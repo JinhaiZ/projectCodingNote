@@ -1,140 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>python中的反引号reverse quotes</title>
-    <url>/2017/09/25/backtick-in-python/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
-<!-- toc -->
-<ul>
-<li><a href="#%E5%8F%8D%E5%BC%95%E5%8F%B7">反引号`</a></li>
-<li><a href="#repr%E5%87%BD%E6%95%B0">repr函数</a></li>
-<li><a href="#%E5%85%B3%E4%BA%8E%E5%8D%95%E4%BE%8B%E7%9A%84%E6%80%9D%E8%80%83">关于单例的思考</a></li>
-</ul>
-<!-- tocstop -->
-<h3><span id="反引号"> 反引号`</span></h3>
-<p>今天在看一本基于python2.2的Design Pattern书，其中有一段关于单例的代码我很不解，因为用到了反引号`，也就是reverse quotes。书中代码如下</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OnlyOne</span>:</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">__OnlyOne</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, arg</span>):</span></span><br><span class="line">      self.val = arg</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">      <span class="keyword">return</span> `self` + self.val</span><br><span class="line">  instance = <span class="literal">None</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, arg</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> OnlyOne.instance:</span><br><span class="line">      OnlyOne.instance = OnlyOne.__OnlyOne(arg)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      OnlyOne.instance.val = arg</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">getattr</span>(self.instance, name)</span><br><span class="line"></span><br><span class="line">x = OnlyOne(<span class="string">&#x27;sausage&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span> x</span><br><span class="line">y = OnlyOne(<span class="string">&#x27;eggs&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span> y</span><br><span class="line">z = OnlyOne(<span class="string">&#x27;spam&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span> z</span><br><span class="line"><span class="built_in">print</span> x</span><br><span class="line"><span class="built_in">print</span> y</span><br><span class="line"><span class="built_in">print</span> `x`</span><br><span class="line"><span class="built_in">print</span> `y`</span><br><span class="line"><span class="built_in">print</span> `z`</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>console输出结果是</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;sausage</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;eggs</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;spam</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;spam</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;spam</span><br><span class="line">&lt;__builtin__.OnlyOne instance at 0x7ff4670b01b8&gt;</span><br><span class="line">&lt;__builtin__.OnlyOne instance at 0x7ff4670b0290&gt;</span><br><span class="line">&lt;__builtin__.OnlyOne instance at 0x7ff4670b02d8&gt;</span><br></pre></td></tr></table></figure>
-<p>反引号`到底有什么用呢？经过查询,反引号在python2中是repr()函数的别名(alias)，但是反引号别名表示已经在pyhton3.0中取消了。至于为何取消，Guido van Rossum他本人的解释是反引号`和正常引号‘的相似性实在是太令人误解了，此外反引号在印刷字体以及输入方面都有不少问题。</p>
-<h3><span id="repr函数"> repr函数</span></h3>
-<p>知道了python中反引号`其实是repr()函数的别名，那么python中repr函数本身又是干什么的呢？</p>
-<blockquote>
-<p><strong>repr(object)</strong><br>
-Return a string containing a printable representation of an object. This is the same value yielded by conversions (reverse quotes). It is sometimes useful to be able to access this operation as an ordinary function. For many types, this function makes an attempt to return a string that would yield an object with the same value when passed to eval(), otherwise the representation is a string enclosed in angle brackets that contains the name of the type of the object together with additional information often including the name and address of the object. A class can control what this function returns for its instances by defining a <strong>repr</strong>() method.</p>
-</blockquote>
-<p>根据上述节选自python官方文档的解释，可以知道repr函数主要功能是返回object的一种可打印字符串表示。一般来说，repr函数被设计成其输出可以被eval函数生成值相同的object，或者，被设计成返一个包含在尖头括号中的字符串，其中包含对象类型名称和一些附加信息。而附加信息通常包括这个对象的名字和物理地址。</p>
-<p>在Desgin Patter作者给出的单例代码中，repr函数便输出了对象的名字和物理地址。</p>
-<h3><span id="关于单例的思考"> 关于单例的思考</span></h3>
-<p>一般讲Desgin Pattern的书几乎一开始都会讲单例，毕竟单例是最容易理解的Desgin Pattern。作者在实现单例时用了nested class方法，内部class是一个私有class，这样外部无法直接访问。那么print函数又是如何访问到私有class的<code>__str__</code>函数的呢？这就要靠wrapper class的<code>__getattr__</code>函数了，在这里作者巧妙实现了一个delegation。这也是为什么print OnlyOne class的instance时，console输出都是私有class的<code>__str__</code>函数定义的结果。</p>
-<p>参考</p>
-<ol>
-<li><a href="https://stackoverflow.com/questions/1673071/what-do-backticks-mean-to-the-python-interpreter-num">What do backticks mean to the python interpreter: num<br>
-</a></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9tYWlsLnB5dGhvbi5vcmcvcGlwZXJtYWlsL3B5dGhvbi1pZGVhcy8yMDA3LUphbnVhcnkvMDAwMDU0Lmh0bWw=">[Python-ideas] new operators via backquoting<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnB5dGhvbi5vcmcvMi9saWJyYXJ5L2Z1bmN0aW9ucy5odG1sI3JlcHI=">docs.python repr(object)<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cDovL3d3dy5taW5kdmlldy5uZXQvQm9va3MvUHl0aG9uL1RoaW5raW5nSW5QeXRob24uaHRtbA==">Bruce Eckel Thinking in Python<i class="fa fa-external-link-alt"></i></span></li>
-</ol>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>reverse quotes</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Codility BinaryGap in Python</title>
-    <url>/2017/05/22/codility-binary-gap/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
-<table>
-<thead>
-<tr>
-<th>情况</th>
-<th>时间复杂度</th>
-<th>空间复杂度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>最优</td>
-<td>O(N)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>平均</td>
-<td>O(N)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>最差</td>
-<td>O(N)</td>
-<td>O(1)</td>
-</tr>
-</tbody>
-</table>
-<h3><span id="算法分析"> 算法分析</span></h3>
-<p>利用python built-in函数<code>bin()</code>将十进制输入转换为二进制字符串，遇到字符‘0’，计数器<code>count += 1</code>，遇到字符‘1’，计数器清空。变量<code>max</code>记录<code>count</code>最大值，函数最后返回<code>max</code>。但是有一个问题，转换为二进制表示的N没有前导0，但需要注意处理后缀0，以免错误计数。否则，若二进制表示为1001000时，函数返回3而不是2。</p>
-<h3><span id="源代码"> 源代码</span></h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">N</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="keyword">if</span> (N &gt; <span class="number">2147483647</span> <span class="keyword">or</span> N &lt; <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    s = <span class="built_in">bin</span>(N)[<span class="number">2</span>:]</span><br><span class="line">    last = s.__len__()-<span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> (s[last] == <span class="string">&#x27;0&#x27;</span>):</span><br><span class="line">        last -= <span class="number">1</span></span><br><span class="line">    s = s[<span class="number">0</span>:last+<span class="number">1</span>]</span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="built_in">max</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="string">&#x27;0&#x27;</span>):</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> (count &gt; <span class="built_in">max</span>):</span><br><span class="line">                <span class="built_in">max</span> = count</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">max</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Notes</category>
-        <category>Codility</category>
-      </categories>
-      <tags>
-        <tag>Codility</tag>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Codility FrogRiverOne in Python</title>
-    <url>/2017/06/02/codility-frog-river-one/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
-<table>
-<thead>
-<tr>
-<th>情况</th>
-<th>时间复杂度</th>
-<th>空间复杂度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>最优</td>
-<td>O(1)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>平均</td>
-<td>O(N)</td>
-<td>O(X)</td>
-</tr>
-<tr>
-<td>最差</td>
-<td>O(N)</td>
-<td>O(X)</td>
-</tr>
-</tbody>
-</table>
-<p>最优情况在输入数组长度小于河宽X下达成</p>
-<h3><span id="算法分析"> 算法分析</span></h3>
-<p>依次读取输入数组的项，当读取过的项的集合包含1到X在内的所有整数时，输出当前项的数组索引。对于记录读取过的项的集合，可以用一个长度为X+1的<code>check</code>数组来记录。若读取了整数z，就把整数z作为索引，将对应的项置1。对于判断读取过的项的集合是否包含1到X在内的所有整数，我们都可以遍历<code>check</code>数组，检查索引1到X对应的项是否全部为1，如果不是，则说明我们还没有包含1到X在内的所有整数。但是这样，该判断算法需要遍历<code>check</code>数组，复杂度为O(X)。不过有一个小技巧可以将该判断算法降为O(1)，那就是在<code>check</code>数组的基础上，再使用step_left变量来记录还需要读取多少个不同的整数后读取过的项的集合才能包含1到X在内的所有整数。若读取了整数z，除了把整数z作为索引，将对应的项置1外，还要根据条件来更新<code>step_left</code>的值。此时，检查算法只需要判断<code>step_left</code>是否为0即可得知读取过的项的集合是否包含1到X在内的所有整数了。</p>
-<h3><span id="源代码"> 源代码</span></h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">X, A</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    n = <span class="built_in">len</span>(A)</span><br><span class="line">    <span class="keyword">if</span> (n &lt; X):</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">    step_left = X</span><br><span class="line">    check = [<span class="number">0</span>]*(X+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(n):</span><br><span class="line">        <span class="keyword">if</span> (check[A[i]]==<span class="number">0</span>):</span><br><span class="line">            check[A[i]]=<span class="number">1</span></span><br><span class="line">            step_left -=<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> (step_left==<span class="number">0</span>):</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Notes</category>
-        <category>Codility</category>
-      </categories>
-      <tags>
-        <tag>Codility</tag>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>每个程序员都应该知道的延迟时间表</title>
     <url>/2017/10/30/Latency-Numbers-Every-Programmer-Should-Know/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
@@ -274,6 +140,50 @@ Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https:/
 ]]></content>
   </entry>
   <entry>
+    <title>Codility BinaryGap in Python</title>
+    <url>/2017/05/22/codility-binary-gap/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>时间复杂度</th>
+<th>空间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最优</td>
+<td>O(N)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>平均</td>
+<td>O(N)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>最差</td>
+<td>O(N)</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p>利用python built-in函数<code>bin()</code>将十进制输入转换为二进制字符串，遇到字符‘0’，计数器<code>count += 1</code>，遇到字符‘1’，计数器清空。变量<code>max</code>记录<code>count</code>最大值，函数最后返回<code>max</code>。但是有一个问题，转换为二进制表示的N没有前导0，但需要注意处理后缀0，以免错误计数。否则，若二进制表示为1001000时，函数返回3而不是2。</p>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">N</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="keyword">if</span> (N &gt; <span class="number">2147483647</span> <span class="keyword">or</span> N &lt; <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    s = <span class="built_in">bin</span>(N)[<span class="number">2</span>:]</span><br><span class="line">    last = s.__len__()-<span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> (s[last] == <span class="string">&#x27;0&#x27;</span>):</span><br><span class="line">        last -= <span class="number">1</span></span><br><span class="line">    s = s[<span class="number">0</span>:last+<span class="number">1</span>]</span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="built_in">max</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="string">&#x27;0&#x27;</span>):</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> (count &gt; <span class="built_in">max</span>):</span><br><span class="line">                <span class="built_in">max</span> = count</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">max</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Notes</category>
+        <category>Codility</category>
+      </categories>
+      <tags>
+        <tag>Codility</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Codility FrogJmp in Python</title>
     <url>/2017/05/31/codility-frog-jmp/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
@@ -310,51 +220,6 @@ Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https:/
 <p>python 数值转换函数<code>int()</code>把bool型转换为int型整数值，<code>int(True) =&gt; 1</code> <code>int(False) =&gt; 0</code></p>
 <h3><span id="源代码"> 源代码</span></h3>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">X, Y, D</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    <span class="keyword">return</span> (Y-X)/D + <span class="built_in">int</span>((Y-X)%D &gt; <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Notes</category>
-        <category>Codility</category>
-      </categories>
-      <tags>
-        <tag>Codility</tag>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Codility Maxcountersers in Python</title>
-    <url>/2017/06/02/codility-max-counters/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
-<table>
-<thead>
-<tr>
-<th>情况</th>
-<th>时间复杂度</th>
-<th>空间复杂度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>最优</td>
-<td>O(N+M)</td>
-<td>O(N)</td>
-</tr>
-<tr>
-<td>平均</td>
-<td>O(N+M)</td>
-<td>O(N)</td>
-</tr>
-<tr>
-<td>最差</td>
-<td>O(N+M)</td>
-<td>O(N)</td>
-</tr>
-</tbody>
-</table>
-<h3><span id="算法分析"> 算法分析</span></h3>
-<p>若要达到最差情况下的时间复杂度为O(N+M)，那就意味着不能在<code>A[K] = N + 1</code>时依次将每个<code>counter</code>的值置为当前<code>counters</code>数组的最大值。因为max counter操作的复杂度为O(N)且需要嵌套在复杂度为O(M)的循环中，这样算法的复杂度至少为O(NM)。也就以为着当<code>A[K] = N + 1</code>时，我们不能立即执行max counter操作。借用下惰性求值的概念，只有在真的需要某个<code>counter</code>值的情况的下才执行计算。这就需要建立两个变量，<code>max_A</code>记录当前<code>counters</code>的最大值，<code>lastUpdate</code>记录上一次执行max counter操作时<code>max_A</code>的值。这样只有当<code>A[K] = N + 1</code>时，才把<code>max_A</code>的值赋值给<code>lastUpdate</code>。而当<code>A[i] &lt; N+1</code>时，则要根据<code>lastUpdate</code>的值来更新<code>counter</code>和<code>max_A</code>的值。</p>
-<p>最后在返回所<code>counters</code>数组值之前，需要根据<code>lastUpdate</code>的值对每个counter的值进行计算</p>
-<h3><span id="源代码"> 源代码</span></h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">N, A</span>):</span></span><br><span class="line">    <span class="comment"># each element of array A is an integer within the range [1..N + 1]</span></span><br><span class="line">    <span class="comment"># N and M are integers within the range [1..100,000]</span></span><br><span class="line">    M = <span class="built_in">len</span>(A)</span><br><span class="line">    max_A = <span class="number">0</span></span><br><span class="line">    lastUpdate = <span class="number">0</span></span><br><span class="line">    counters=[<span class="number">0</span>]*N</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(M):</span><br><span class="line">        <span class="keyword">if</span> (A[i]==N+<span class="number">1</span>):</span><br><span class="line">            lastUpdate = max_A</span><br><span class="line">        <span class="keyword">if</span> (A[i]&lt;N+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> (counters[A[i]-<span class="number">1</span>]&lt;lastUpdate):</span><br><span class="line">                counters[A[i]-<span class="number">1</span>]=lastUpdate+<span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> (counters[A[i]-<span class="number">1</span>]&gt;max_A):</span><br><span class="line">                    max_A=counters[A[i]-<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                counters[A[i]-<span class="number">1</span>]=counters[A[i]-<span class="number">1</span>]+<span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> (counters[A[i]-<span class="number">1</span>]&gt;max_A):</span><br><span class="line">                    max_A=counters[A[i]-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> xrange(N):</span><br><span class="line">        <span class="keyword">if</span> (counters[j]&lt;lastUpdate):</span><br><span class="line">            counters[j]=lastUpdate</span><br><span class="line">    <span class="keyword">return</span> counters</span><br><span class="line"><span class="comment">#  time complexity: O(N + M)</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Notes</category>
@@ -433,6 +298,51 @@ Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https:/
       </tags>
   </entry>
   <entry>
+    <title>Codility Maxcountersers in Python</title>
+    <url>/2017/06/02/codility-max-counters/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>时间复杂度</th>
+<th>空间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最优</td>
+<td>O(N+M)</td>
+<td>O(N)</td>
+</tr>
+<tr>
+<td>平均</td>
+<td>O(N+M)</td>
+<td>O(N)</td>
+</tr>
+<tr>
+<td>最差</td>
+<td>O(N+M)</td>
+<td>O(N)</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p>若要达到最差情况下的时间复杂度为O(N+M)，那就意味着不能在<code>A[K] = N + 1</code>时依次将每个<code>counter</code>的值置为当前<code>counters</code>数组的最大值。因为max counter操作的复杂度为O(N)且需要嵌套在复杂度为O(M)的循环中，这样算法的复杂度至少为O(NM)。也就以为着当<code>A[K] = N + 1</code>时，我们不能立即执行max counter操作。借用下惰性求值的概念，只有在真的需要某个<code>counter</code>值的情况的下才执行计算。这就需要建立两个变量，<code>max_A</code>记录当前<code>counters</code>的最大值，<code>lastUpdate</code>记录上一次执行max counter操作时<code>max_A</code>的值。这样只有当<code>A[K] = N + 1</code>时，才把<code>max_A</code>的值赋值给<code>lastUpdate</code>。而当<code>A[i] &lt; N+1</code>时，则要根据<code>lastUpdate</code>的值来更新<code>counter</code>和<code>max_A</code>的值。</p>
+<p>最后在返回所<code>counters</code>数组值之前，需要根据<code>lastUpdate</code>的值对每个counter的值进行计算</p>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">N, A</span>):</span></span><br><span class="line">    <span class="comment"># each element of array A is an integer within the range [1..N + 1]</span></span><br><span class="line">    <span class="comment"># N and M are integers within the range [1..100,000]</span></span><br><span class="line">    M = <span class="built_in">len</span>(A)</span><br><span class="line">    max_A = <span class="number">0</span></span><br><span class="line">    lastUpdate = <span class="number">0</span></span><br><span class="line">    counters=[<span class="number">0</span>]*N</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(M):</span><br><span class="line">        <span class="keyword">if</span> (A[i]==N+<span class="number">1</span>):</span><br><span class="line">            lastUpdate = max_A</span><br><span class="line">        <span class="keyword">if</span> (A[i]&lt;N+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> (counters[A[i]-<span class="number">1</span>]&lt;lastUpdate):</span><br><span class="line">                counters[A[i]-<span class="number">1</span>]=lastUpdate+<span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> (counters[A[i]-<span class="number">1</span>]&gt;max_A):</span><br><span class="line">                    max_A=counters[A[i]-<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                counters[A[i]-<span class="number">1</span>]=counters[A[i]-<span class="number">1</span>]+<span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> (counters[A[i]-<span class="number">1</span>]&gt;max_A):</span><br><span class="line">                    max_A=counters[A[i]-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> xrange(N):</span><br><span class="line">        <span class="keyword">if</span> (counters[j]&lt;lastUpdate):</span><br><span class="line">            counters[j]=lastUpdate</span><br><span class="line">    <span class="keyword">return</span> counters</span><br><span class="line"><span class="comment">#  time complexity: O(N + M)</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Notes</category>
+        <category>Codility</category>
+      </categories>
+      <tags>
+        <tag>Codility</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Codility MissingInteger in Python</title>
     <url>/2017/06/02/codility-missing-integer/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
@@ -477,8 +387,8 @@ Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https:/
       </tags>
   </entry>
   <entry>
-    <title>Codility PermMissingElem in Python</title>
-    <url>/2017/05/31/codility-perm-missing-elem/</url>
+    <title>Codility FrogRiverOne in Python</title>
+    <url>/2017/06/02/codility-frog-river-one/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
 <table>
 <thead>
@@ -491,25 +401,26 @@ Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https:/
 <tbody>
 <tr>
 <td>最优</td>
-<td>O(N)</td>
+<td>O(1)</td>
 <td>O(1)</td>
 </tr>
 <tr>
 <td>平均</td>
 <td>O(N)</td>
-<td>O(1)</td>
+<td>O(X)</td>
 </tr>
 <tr>
 <td>最差</td>
 <td>O(N)</td>
-<td>O(1)</td>
+<td>O(X)</td>
 </tr>
 </tbody>
 </table>
+<p>最优情况在输入数组长度小于河宽X下达成</p>
 <h3><span id="算法分析"> 算法分析</span></h3>
-<p>可以想象有一个数组长度为N+1，数组元素为1,2,…N,N+1，这样便可以用等差求和公式算出该数组的总和。用总和减去输入数组A的和便可以知道数组A缺失了哪个元素。注意python <code>sum()</code>的算法复杂度为O(N)，故该算法的算法复杂度是O(N)。</p>
+<p>依次读取输入数组的项，当读取过的项的集合包含1到X在内的所有整数时，输出当前项的数组索引。对于记录读取过的项的集合，可以用一个长度为X+1的<code>check</code>数组来记录。若读取了整数z，就把整数z作为索引，将对应的项置1。对于判断读取过的项的集合是否包含1到X在内的所有整数，我们都可以遍历<code>check</code>数组，检查索引1到X对应的项是否全部为1，如果不是，则说明我们还没有包含1到X在内的所有整数。但是这样，该判断算法需要遍历<code>check</code>数组，复杂度为O(X)。不过有一个小技巧可以将该判断算法降为O(1)，那就是在<code>check</code>数组的基础上，再使用step_left变量来记录还需要读取多少个不同的整数后读取过的项的集合才能包含1到X在内的所有整数。若读取了整数z，除了把整数z作为索引，将对应的项置1外，还要根据条件来更新<code>step_left</code>的值。此时，检查算法只需要判断<code>step_left</code>是否为0即可得知读取过的项的集合是否包含1到X在内的所有整数了。</p>
 <h3><span id="源代码"> 源代码</span></h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">A</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    N = <span class="built_in">len</span>(A)</span><br><span class="line">    start = <span class="number">1</span></span><br><span class="line">    end = <span class="built_in">len</span>(A)+<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> (N+<span class="number">1</span>)*(start+end)/<span class="number">2</span> - <span class="built_in">sum</span>(A)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">X, A</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    n = <span class="built_in">len</span>(A)</span><br><span class="line">    <span class="keyword">if</span> (n &lt; X):</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">    step_left = X</span><br><span class="line">    check = [<span class="number">0</span>]*(X+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(n):</span><br><span class="line">        <span class="keyword">if</span> (check[A[i]]==<span class="number">0</span>):</span><br><span class="line">            check[A[i]]=<span class="number">1</span></span><br><span class="line">            step_left -=<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> (step_left==<span class="number">0</span>):</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Notes</category>
@@ -782,11 +693,11 @@ Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https:/
 </li>
 <li id="fn2" class="footnote-item"><p>流程：软件工程流程的简称。流程，就是为了完成某一目标而进行的一系列，有序的步骤。就如同生活中，为了做菜这个目标，流程可以是就是先买菜，然后洗菜，最后炒菜。 <a href="#fnref2" class="footnote-backref">↩︎</a></p>
 </li>
-<li id="fn3" class="footnote-item"><p>根本原因分析：Root Cause Analysis。顾名思义，沿着因果关系组成的链条，找到问题的根本原因。来源自管理学概念，详情参见https://en.wikipedia.org/wiki/Root_cause_analysis <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+<li id="fn3" class="footnote-item"><p>根本原因分析：Root Cause Analysis。顾名思义，沿着因果关系组成的链条，找到问题的根本原因。来源自管理学概念，详情参见<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvUm9vdF9jYXVzZV9hbmFseXNpcw==">https://en.wikipedia.org/wiki/Root_cause_analysis<i class="fa fa-external-link-alt"></i></span> <a href="#fnref3" class="footnote-backref">↩︎</a></p>
 </li>
 <li id="fn4" class="footnote-item"><p>纠正措施： Corrective Action的直译。 <a href="#fnref4" class="footnote-backref">↩︎</a></p>
 </li>
-<li id="fn5" class="footnote-item"><p>可用性：Availability。简单的说，可用性就是一个系统处在可工作状态的时间的比例。例如，服务A在一年时间里（8760小时）有8751小时可用。其可用性则为8751/8760 = 0.999，或以百分比表示99.9%。详情参见https://en.wikipedia.org/wiki/Availability <a href="#fnref5" class="footnote-backref">↩︎</a></p>
+<li id="fn5" class="footnote-item"><p>可用性：Availability。简单的说，可用性就是一个系统处在可工作状态的时间的比例。例如，服务A在一年时间里（8760小时）有8751小时可用。其可用性则为8751/8760 = 0.999，或以百分比表示99.9%。详情参见<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvQXZhaWxhYmlsaXR5">https://en.wikipedia.org/wiki/Availability<i class="fa fa-external-link-alt"></i></span> <a href="#fnref5" class="footnote-backref">↩︎</a></p>
 </li>
 </ol>
 </section>
@@ -803,6 +714,178 @@ Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https:/
         <tag>流程管理</tag>
         <tag>质量管理</tag>
         <tag>RCA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Design review 设计评审</title>
+    <url>/2020/02/23/design-review/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>文章目录</strong></p>
+<!-- toc -->
+<ul>
+<li><a href="#%E8%83%8C%E6%99%AF">背景</a></li>
+<li><a href="#%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3">设计文档</a></li>
+<li><a href="#%E8%AF%84%E5%AE%A1">评审</a></li>
+</ul>
+<!-- tocstop -->
+<h1><span id="背景"> 背景</span></h1>
+<p>几年前在实习时，我完全没有接触过设计评审。当时的团队采用Scrum开发过程。开发团队采取一个架构师（Architect）和三到四个开发者（Developers）的配置。为了保证开发速度，冲刺订单（Spring backlog）里的大多数任务（Ticket）都有架构师写的详细开发步骤。架构师在团队里负责了大多数的软件设计任务，开发者则专注于将架构师的想法实现。</p>
+<p>参加工作后，由于开发领域，开发过程，甚至是公司文化都与我实习过的公司有很多不同。在此期间，我也接触到了相当多的设计文档和设计评审。</p>
+<p>2019年，我在开发团队里承担的设计任务也越来越多，写过的设计文档有二三十个。参加的设计评审则是更多。一年下来，我对设计评审，这个软件开发中的一个流程，有了自己的一些看法，下面则是我对设计评审的一个小总结。</p>
+<a id="more"></a>
+<h1><span id="设计文档"> 设计文档</span></h1>
+<p>设计评审，需要首先有设计。这里说的设计就是设计文档（全称软件开发设计文档）。这是在软件开发之前，一种把软件设计思路结构化记录下来的资料。我第一次接触设计文档是在大学的软件工程课上。当时我也在课程项目中写过设计文档，但是却对为什么需要设计文档体会不深。毕竟当时的项目都很小，难度也不大。写设计文档无非是根据模板填充文字的游戏罢了。</p>
+<p>但是当项目参与人员众多，开发难度大时，软件设计，作为软件开发的一个流程，被重视起来。我们在实践过程中，尤其是在一些重要的工作上 （比如时间跨度长，需要几个Sprint周期才能完成的工作，或者涉及多个团队，需要跨团队分工协作时），需要先把思路写下来，通过设计评审分享出来，得到相关人员的批准或者承诺后，再进行实现。</p>
+<p>也许短期看，写设计文档，走完设计评审流程比直接蒙头实现软件要慢的多。但是一个好的设计可以在长期为产品的开发节省大量的时间。试想一下在有其他团队对你的软件库（Library）或者Web Service产生依赖时你才发现你的代码需要重新设计的情况，这时不仅是自己负责的项目会受到影响，使用你的代码的其他团队的项目也都会受到影响。</p>
+<p>设计评审是软件开发的一个重要环节，写好设计文档则是让设计评审成功的第一步。在我看来，一个好的设计文档应至少包括如下几项：</p>
+<ul>
+<li>Problem statement。陈述待解决的问题，以及为什么要解决这个问题，或者说，不解决这个问题的后果是什么。</li>
+<li>Recommended proposal。详细阐明推荐的解决方案，以及Pros/Cons的比较。</li>
+<li>Alternatives。其他可行的解决方案，一般来说解决方案不止一种，也需要有Pros/Cons 对比。能让评审人知道trade-off是什么。</li>
+</ul>
+<p>更加详细的设计文档除了上面几项外还会有：</p>
+<ul>
+<li>Background。交代问题的背景，比如总项目的进程，该问题所属项目与总项目之间的关系。</li>
+<li>Term。术语表。通常在抽象度高的讨论中，会用到很多术语以及缩略语。它们应该在术语表里进行定义，以避免歧义。</li>
+<li>Plan。项目的计划。实现过程复杂时，需要分解实现过程，定义每个阶段的需要交付的模块。或者是每个阶段性成果Milestone是什么。</li>
+</ul>
+<h1><span id="评审"> 评审</span></h1>
+<p>一个成功的设计评审需要以下要素。</p>
+<ul>
+<li>精简的评审团。只让必要的人参与进来。比如项目负责人，项目的主要贡献者或者受到最大影响的人。他们对设计思路的方向最有发言权，能提出有建设性的意见，而且能最后拍板。邀请不必要的人，会增加讨论中的噪音，以致评审流程变慢。</li>
+<li>提前制定好的议案。有效率的讨论需要高质量的议案。设计评审的发起人需要准备好评审大会的议案流程，先讨论重要的点，比如一旦敲定就可以让部分项目先开展实现的点。这样接下来的点可以在不阻塞项目进展的情况下讨论。</li>
+<li>Meeting Minutes。及时分享会议记录，其中包括参与的人，何时做出了什么决定或者得到了什么共识。当评审大会需要分几次召开时，会议记录作为之前会议的备忘能让我们避免重复讨论。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>软件开发实践</category>
+        <category>设计评审</category>
+      </categories>
+      <tags>
+        <tag>软件设计</tag>
+        <tag>文档</tag>
+        <tag>设计评审</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>初试树莓派RaspberryPi</title>
+    <url>/2017/10/25/first-glance-at-RaspberryPi/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
+<!-- toc -->
+<ul>
+<li><a href="#%E7%AC%AC%E4%B8%80%E5%8D%B0%E8%B1%A1">第一印象</a></li>
+<li><a href="#%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5">远程连接</a>
+<ul>
+<li><a href="#%E9%80%9A%E8%BF%87ssh">通过ssh</a></li>
+<li><a href="#%E9%80%9A%E8%BF%87vnc-viewer">通过VNC Viewer</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A0%91%E8%8E%93%E6%B4%BE%E7%9A%84%E7%BC%BA%E7%82%B9">树莓派的缺点</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+<!-- tocstop -->
+<h2><span id="第一印象"> 第一印象</span></h2>
+<p>大约在20天前，我在亚马逊上冲动的购买了这个东西</p>
+<img data-src="/2017/10/25/first-glance-at-RaspberryPi/Raspberry-Pi-3-Official-Desktop-Starter-Kit.png" class title="Raspberry Pi 3 Official Desktop Starter Kit">
+<p>树莓派3的官方Desktop Starter Kit，其实也就是树莓派3开发板+16GB miroSD装机卡+壳子+充电器套装。不过这样一套买下来，上手把玩树莓派要方便许多，机子到手第一天我就按照说明书安装了树莓派定制Debian的发型版Raspbian系统。第一感觉还挺好用，通过HDMI连接上显示器，再用4个USB接口中的两个连接键盘和鼠标就可以当做桌面电脑使用了。如果要通过个人电脑远程连接树莓派的话，ssh和VNC Viewer都很好用。</p>
+<h2><span id="远程连接"> 远程连接</span></h2>
+<h3><span id="通过ssh"> 通过ssh</span></h3>
+<p><em>注意，以下步骤均在个人电脑上完成，不是在树莓派上</em></p>
+<a id="more"></a>
+<p>首先通过Vim 修改本地hosts文件<code>vim /etc/hosts</code> 加入raspberrypi的ip地址，以后就可以通过<code>ssh pi@raspberrypi</code>的方式ssh到树莓派中，如果嫌每次连接都要输入密码麻烦，可以把公钥导入到树莓派中，具体方法如下</p>
+<ol>
+<li>生成公钥私钥对</li>
+</ol>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>将公钥传输到raspberrypi上</li>
+</ol>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-copy-id pi@raspberrypi</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>测试一下，现在用<code>ssh pi@raspberrypi</code>远程登录树莓派就不需要输入密码了</li>
+<li>(可选步骤)为了安全性考虑，关闭树莓派上远程ssh密码登录</li>
+</ol>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo nano &#x2F;etc&#x2F;ssh&#x2F;sshd_config</span><br></pre></td></tr></table></figure>
+<p>找到<code>PermitRootLogin</code>这一行，并将它改成<code>PermitRootLogin without-password</code>，如果这一行是被注释的，记得取消注释以此覆盖默认配置。修改并保存，最后运行下面命令使修改生效</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo service ssh restart</span><br></pre></td></tr></table></figure>
+<h3><span id="通过vnc-viewer"> 通过VNC Viewer</span></h3>
+<ol>
+<li>首先，在树莓派上通过下列命令开启VNC Viewer</li>
+</ol>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install realvnc-vnc-server realvnc-vnc-viewer</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>接着，在个人电脑上，或者手机上下载VNC Viewer客户端</li>
+<li>最后，在远程连接设备端(个人电脑或者手机)输入树莓派的用户名，密码，ip地址即可远程连接树莓派了</li>
+</ol>
+<h2><span id="树莓派的缺点"> 树莓派的缺点</span></h2>
+<p>在树莓派3上做全栈开发并不是很理想，因为部分软件对32bit ARM架构处理器的兼容性不是很好，查看树莓派3的CPU架构可以使用如下命令，结果如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ lscpu</span><br><span class="line">Architecture:          armv7l</span><br><span class="line">Byte Order:            Little Endian</span><br><span class="line">CPU(s):                4</span><br><span class="line">On-line CPU(s) list:   0-3</span><br><span class="line">Thread(s) per core:    1</span><br><span class="line">Core(s) per socket:    4</span><br><span class="line">Socket(s):             1</span><br><span class="line">Model:                 4</span><br><span class="line">Model name:            ARMv7 Processor rev 4 (v7l)</span><br><span class="line">CPU max MHz:           1200.0000</span><br><span class="line">CPU min MHz:           600.0000</span><br><span class="line">BogoMIPS:              38.40</span><br><span class="line">Flags:                 half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm crc32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>可以看到树莓派3采用一块ARMv7架构的CPU，通过查阅维基百科，得知ARMv1到ARMv7架构都是32 bits寻址，直到ARMv8架构才出现64 bits寻址。</p>
+<p>故事起源于我想在树莓派上安装<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dla2FuL3dla2Fu">wekan<i class="fa fa-external-link-alt"></i></span>，wekan是类似于<span class="exturl" data-url="aHR0cHM6Ly90cmVsbG8uY29tLw==">Trello<i class="fa fa-external-link-alt"></i></span>的Kanban类项目管理软件，奈何wekan是基于Meteor建立的，而Meteor对安装环境有x86_64的假设，即使修改源代码去掉该假设也不能顺利安装，参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21ldGVvci9tZXRlb3IvaXNzdWVzLzQ0Mg==">meteor/issues/442<i class="fa fa-external-link-alt"></i></span>。好消息是2017年6月份，Meteor团队开始着手与增加Meteor对ARM架构CPU的支持，参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21ldGVvci9tZXRlb3ItZmVhdHVyZS1yZXF1ZXN0cy9pc3N1ZXMvMTMw">meteor-feature-requests/issues/130<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>不能在树莓派上安装wekan，让我有点小小的伤心，但是接下来发生的事情就让我对在树莓派上搞全栈开发暂时失去了兴趣。故事是这样的，为了学习网爬虫，我做了一个每天计算出Stackoverflow最火热问题的项目来练手，该项目的的爬虫部分基于Scapy框架，数据库我选用了最新版本的MongoDB (v3.4.9)　来存储爬取的网页内容。开发完成后我利用crontab在自己的电脑上让它每天晚上10点5分定时在<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ppbmhhaVovc3RhY2tvdmVyZmxvdy10cmVuZGluZw==">这里<i class="fa fa-external-link-alt"></i></span>update最火热问题排行。</p>
+<p>问题是我的电脑并不是每天晚上10点5分都处于运行状态，有好几次因为我没有开机导致当天我写的程序没有update。于是乎我有了把MongoDB和网页爬取程序部署在树莓派上的想法。说干就干，在树莓派上陆续安装了相应的开发环境，主要是python的开发环境，比如安装Scapy框架可以通过下面的命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># install Scrapy</span><br><span class="line">sudo apt-get install libffi-dev</span><br><span class="line">sudo apt-get install libxml2-dev</span><br><span class="line">sudo apt-get install libxslt1-dev</span><br><span class="line">sudo apt-get install python-dev</span><br><span class="line">sudo pip install scrapy</span><br></pre></td></tr></table></figure>
+<p>然而在安装最新版的MongoDB时我遇到了无法解决的问题，实际上，通过下面命令可以安装MongoDB</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># install MongoDB</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install mongodb-server</span><br></pre></td></tr></table></figure>
+<p>但是版本号停留在了v2.4.14，经过查询得知v2.4.14版本后MongoDB就放弃了对32 bit ARM架构CPU的支持，导致树莓派3无法安装最新的MongoDB。奈何我的程序用了大量新版本的特性，比如<code>$slice</code>选择符等，最后在树莓派上部署爬虫的想法只好作罢。</p>
+<h2><span id="总结"> 总结</span></h2>
+<p>第一次接触&quot;单板电脑&quot;(SBC, Single Board Computer)还是很有新鲜感的，低廉的售价，和正常PC几乎一样的功能以及丰富的DIY选项让人很难拒绝。不过作为一个全栈开发人员，想要在树莓派上部署应用，不能安装最新的MongoDB意味着几年前比较流行的MEAN框架在树莓派上可能会行不通，部分框架，例如于ARM处理器有兼容问题的Meteor，会导致部分软件例如wekan在树莓派上无法应用，这些问题在购买前还是要考虑的。</p>
+<p>参考</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZGlnaXRhbG9jZWFuLmNvbS9jb21tdW5pdHkvdHV0b3JpYWxzL2hvdy10by1zZXQtdXAtc3NoLWtleXMtLTI=">How To Set Up SSH Keys<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmFzcGJlcnJ5cGkub3JnL2RvY3VtZW50YXRpb24vcmVtb3RlLWFjY2Vzcy92bmMv">VNC (VIRTUAL NETWORK COMPUTING)<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>折腾</category>
+      </categories>
+      <tags>
+        <tag>RaspberryPi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python中的反引号reverse quotes</title>
+    <url>/2017/09/25/backtick-in-python/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
+<!-- toc -->
+<ul>
+<li><a href="#%E5%8F%8D%E5%BC%95%E5%8F%B7">反引号`</a></li>
+<li><a href="#repr%E5%87%BD%E6%95%B0">repr函数</a></li>
+<li><a href="#%E5%85%B3%E4%BA%8E%E5%8D%95%E4%BE%8B%E7%9A%84%E6%80%9D%E8%80%83">关于单例的思考</a></li>
+</ul>
+<!-- tocstop -->
+<h3><span id="反引号"> 反引号`</span></h3>
+<p>今天在看一本基于python2.2的Design Pattern书，其中有一段关于单例的代码我很不解，因为用到了反引号`，也就是reverse quotes。书中代码如下</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OnlyOne</span>:</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">__OnlyOne</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, arg</span>):</span></span><br><span class="line">      self.val = arg</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">      <span class="keyword">return</span> `self` + self.val</span><br><span class="line">  instance = <span class="literal">None</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, arg</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> OnlyOne.instance:</span><br><span class="line">      OnlyOne.instance = OnlyOne.__OnlyOne(arg)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      OnlyOne.instance.val = arg</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">getattr</span>(self.instance, name)</span><br><span class="line"></span><br><span class="line">x = OnlyOne(<span class="string">&#x27;sausage&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span> x</span><br><span class="line">y = OnlyOne(<span class="string">&#x27;eggs&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span> y</span><br><span class="line">z = OnlyOne(<span class="string">&#x27;spam&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span> z</span><br><span class="line"><span class="built_in">print</span> x</span><br><span class="line"><span class="built_in">print</span> y</span><br><span class="line"><span class="built_in">print</span> `x`</span><br><span class="line"><span class="built_in">print</span> `y`</span><br><span class="line"><span class="built_in">print</span> `z`</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>console输出结果是</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;sausage</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;eggs</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;spam</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;spam</span><br><span class="line">&lt;__builtin__.__OnlyOne instance at 0x7ff4670b0200&gt;spam</span><br><span class="line">&lt;__builtin__.OnlyOne instance at 0x7ff4670b01b8&gt;</span><br><span class="line">&lt;__builtin__.OnlyOne instance at 0x7ff4670b0290&gt;</span><br><span class="line">&lt;__builtin__.OnlyOne instance at 0x7ff4670b02d8&gt;</span><br></pre></td></tr></table></figure>
+<p>反引号`到底有什么用呢？经过查询,反引号在python2中是repr()函数的别名(alias)，但是反引号别名表示已经在pyhton3.0中取消了。至于为何取消，Guido van Rossum他本人的解释是反引号`和正常引号‘的相似性实在是太令人误解了，此外反引号在印刷字体以及输入方面都有不少问题。</p>
+<h3><span id="repr函数"> repr函数</span></h3>
+<p>知道了python中反引号`其实是repr()函数的别名，那么python中repr函数本身又是干什么的呢？</p>
+<blockquote>
+<p><strong>repr(object)</strong><br>
+Return a string containing a printable representation of an object. This is the same value yielded by conversions (reverse quotes). It is sometimes useful to be able to access this operation as an ordinary function. For many types, this function makes an attempt to return a string that would yield an object with the same value when passed to eval(), otherwise the representation is a string enclosed in angle brackets that contains the name of the type of the object together with additional information often including the name and address of the object. A class can control what this function returns for its instances by defining a <strong>repr</strong>() method.</p>
+</blockquote>
+<p>根据上述节选自python官方文档的解释，可以知道repr函数主要功能是返回object的一种可打印字符串表示。一般来说，repr函数被设计成其输出可以被eval函数生成值相同的object，或者，被设计成返一个包含在尖头括号中的字符串，其中包含对象类型名称和一些附加信息。而附加信息通常包括这个对象的名字和物理地址。</p>
+<p>在Desgin Patter作者给出的单例代码中，repr函数便输出了对象的名字和物理地址。</p>
+<h3><span id="关于单例的思考"> 关于单例的思考</span></h3>
+<p>一般讲Desgin Pattern的书几乎一开始都会讲单例，毕竟单例是最容易理解的Desgin Pattern。作者在实现单例时用了nested class方法，内部class是一个私有class，这样外部无法直接访问。那么print函数又是如何访问到私有class的<code>__str__</code>函数的呢？这就要靠wrapper class的<code>__getattr__</code>函数了，在这里作者巧妙实现了一个delegation。这也是为什么print OnlyOne class的instance时，console输出都是私有class的<code>__str__</code>函数定义的结果。</p>
+<p>参考</p>
+<ol>
+<li><a href="https://stackoverflow.com/questions/1673071/what-do-backticks-mean-to-the-python-interpreter-num">What do backticks mean to the python interpreter: num<br>
+</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tYWlsLnB5dGhvbi5vcmcvcGlwZXJtYWlsL3B5dGhvbi1pZGVhcy8yMDA3LUphbnVhcnkvMDAwMDU0Lmh0bWw=">[Python-ideas] new operators via backquoting<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnB5dGhvbi5vcmcvMi9saWJyYXJ5L2Z1bmN0aW9ucy5odG1sI3JlcHI=">docs.python repr(object)<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy5taW5kdmlldy5uZXQvQm9va3MvUHl0aG9uL1RoaW5raW5nSW5QeXRob24uaHRtbA==">Bruce Eckel Thinking in Python<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>reverse quotes</tag>
       </tags>
   </entry>
   <entry>
@@ -968,130 +1051,37 @@ Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https:/
       </tags>
   </entry>
   <entry>
-    <title>初试树莓派RaspberryPi</title>
-    <url>/2017/10/25/first-glance-at-RaspberryPi/</url>
+    <title>Git分支与部署架构</title>
+    <url>/2017/05/08/git-branch-and-deployment-architectures/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
 <!-- toc -->
 <ul>
-<li><a href="#%E7%AC%AC%E4%B8%80%E5%8D%B0%E8%B1%A1">第一印象</a></li>
-<li><a href="#%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5">远程连接</a>
-<ul>
-<li><a href="#%E9%80%9A%E8%BF%87ssh">通过ssh</a></li>
-<li><a href="#%E9%80%9A%E8%BF%87vnc-viewer">通过VNC Viewer</a></li>
-</ul>
-</li>
-<li><a href="#%E6%A0%91%E8%8E%93%E6%B4%BE%E7%9A%84%E7%BC%BA%E7%82%B9">树莓派的缺点</a></li>
-<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+<li><a href="#%E5%BC%80%E5%8F%91%E5%88%86%E6%94%AF-dev">开发分支 DEV</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95%E5%88%86%E6%94%AF-test">测试分支 TEST</a></li>
+<li><a href="#%E7%BC%93%E5%86%B2%E5%88%86%E6%94%AF-staging">缓冲分支 STAGING</a></li>
+<li><a href="#%E7%94%9F%E4%BA%A7%E5%88%86%E6%94%AF-prod">生产分支 PROD</a></li>
 </ul>
 <!-- tocstop -->
-<h2><span id="第一印象"> 第一印象</span></h2>
-<p>大约在20天前，我在亚马逊上冲动的购买了这个东西</p>
-<img data-src="/2017/10/25/first-glance-at-RaspberryPi/Raspberry-Pi-3-Official-Desktop-Starter-Kit.png" class title="Raspberry Pi 3 Official Desktop Starter Kit">
-<p>树莓派3的官方Desktop Starter Kit，其实也就是树莓派3开发板+16GB miroSD装机卡+壳子+充电器套装。不过这样一套买下来，上手把玩树莓派要方便许多，机子到手第一天我就按照说明书安装了树莓派定制Debian的发型版Raspbian系统。第一感觉还挺好用，通过HDMI连接上显示器，再用4个USB接口中的两个连接键盘和鼠标就可以当做桌面电脑使用了。如果要通过个人电脑远程连接树莓派的话，ssh和VNC Viewer都很好用。</p>
-<h2><span id="远程连接"> 远程连接</span></h2>
-<h3><span id="通过ssh"> 通过ssh</span></h3>
-<p><em>注意，以下步骤均在个人电脑上完成，不是在树莓派上</em></p>
+<p>一般来说，利用git进行多人协作的网站开发项目都有不止一个分支，其中每一个分支对应于网站部署的一个架构。虽然网站部署架构千差万别，但几乎都是从开发环境（DEV）开始并以生产环境（PROD）结束，所以对应到git分支上就是 开发分支，测试分支，缓存分支和生产分支。</p>
+<h3><span id="开发分支-dev"> 开发分支 DEV</span></h3>
+<p>开发分支是本地开发环境上用于开发新功能的分支，开发人员可以方便的在本地进行单元测试</p>
 <a id="more"></a>
-<p>首先通过Vim 修改本地hosts文件<code>vim /etc/hosts</code> 加入raspberrypi的ip地址，以后就可以通过<code>ssh pi@raspberrypi</code>的方式ssh到树莓派中，如果嫌每次连接都要输入密码麻烦，可以把公钥导入到树莓派中，具体方法如下</p>
-<ol>
-<li>生成公钥私钥对</li>
-</ol>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>将公钥传输到raspberrypi上</li>
-</ol>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-copy-id pi@raspberrypi</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>测试一下，现在用<code>ssh pi@raspberrypi</code>远程登录树莓派就不需要输入密码了</li>
-<li>(可选步骤)为了安全性考虑，关闭树莓派上远程ssh密码登录</li>
-</ol>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo nano &#x2F;etc&#x2F;ssh&#x2F;sshd_config</span><br></pre></td></tr></table></figure>
-<p>找到<code>PermitRootLogin</code>这一行，并将它改成<code>PermitRootLogin without-password</code>，如果这一行是被注释的，记得取消注释以此覆盖默认配置。修改并保存，最后运行下面命令使修改生效</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo service ssh restart</span><br></pre></td></tr></table></figure>
-<h3><span id="通过vnc-viewer"> 通过VNC Viewer</span></h3>
-<ol>
-<li>首先，在树莓派上通过下列命令开启VNC Viewer</li>
-</ol>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install realvnc-vnc-server realvnc-vnc-viewer</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>接着，在个人电脑上，或者手机上下载VNC Viewer客户端</li>
-<li>最后，在远程连接设备端(个人电脑或者手机)输入树莓派的用户名，密码，ip地址即可远程连接树莓派了</li>
-</ol>
-<h2><span id="树莓派的缺点"> 树莓派的缺点</span></h2>
-<p>在树莓派3上做全栈开发并不是很理想，因为部分软件对32bit ARM架构处理器的兼容性不是很好，查看树莓派3的CPU架构可以使用如下命令，结果如下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ lscpu</span><br><span class="line">Architecture:          armv7l</span><br><span class="line">Byte Order:            Little Endian</span><br><span class="line">CPU(s):                4</span><br><span class="line">On-line CPU(s) list:   0-3</span><br><span class="line">Thread(s) per core:    1</span><br><span class="line">Core(s) per socket:    4</span><br><span class="line">Socket(s):             1</span><br><span class="line">Model:                 4</span><br><span class="line">Model name:            ARMv7 Processor rev 4 (v7l)</span><br><span class="line">CPU max MHz:           1200.0000</span><br><span class="line">CPU min MHz:           600.0000</span><br><span class="line">BogoMIPS:              38.40</span><br><span class="line">Flags:                 half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm crc32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>可以看到树莓派3采用一块ARMv7架构的CPU，通过查阅维基百科，得知ARMv1到ARMv7架构都是32 bits寻址，直到ARMv8架构才出现64 bits寻址。</p>
-<p>故事起源于我想在树莓派上安装<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dla2FuL3dla2Fu">wekan<i class="fa fa-external-link-alt"></i></span>，wekan是类似于<span class="exturl" data-url="aHR0cHM6Ly90cmVsbG8uY29tLw==">Trello<i class="fa fa-external-link-alt"></i></span>的Kanban类项目管理软件，奈何wekan是基于Meteor建立的，而Meteor对安装环境有x86_64的假设，即使修改源代码去掉该假设也不能顺利安装，参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21ldGVvci9tZXRlb3IvaXNzdWVzLzQ0Mg==">meteor/issues/442<i class="fa fa-external-link-alt"></i></span>。好消息是2017年6月份，Meteor团队开始着手与增加Meteor对ARM架构CPU的支持，参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21ldGVvci9tZXRlb3ItZmVhdHVyZS1yZXF1ZXN0cy9pc3N1ZXMvMTMw">meteor-feature-requests/issues/130<i class="fa fa-external-link-alt"></i></span>。</p>
-<p>不能在树莓派上安装wekan，让我有点小小的伤心，但是接下来发生的事情就让我对在树莓派上搞全栈开发暂时失去了兴趣。故事是这样的，为了学习网爬虫，我做了一个每天计算出Stackoverflow最火热问题的项目来练手，该项目的的爬虫部分基于Scapy框架，数据库我选用了最新版本的MongoDB (v3.4.9)　来存储爬取的网页内容。开发完成后我利用crontab在自己的电脑上让它每天晚上10点5分定时在<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ppbmhhaVovc3RhY2tvdmVyZmxvdy10cmVuZGluZw==">这里<i class="fa fa-external-link-alt"></i></span>update最火热问题排行。</p>
-<p>问题是我的电脑并不是每天晚上10点5分都处于运行状态，有好几次因为我没有开机导致当天我写的程序没有update。于是乎我有了把MongoDB和网页爬取程序部署在树莓派上的想法。说干就干，在树莓派上陆续安装了相应的开发环境，主要是python的开发环境，比如安装Scapy框架可以通过下面的命令</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># install Scrapy</span><br><span class="line">sudo apt-get install libffi-dev</span><br><span class="line">sudo apt-get install libxml2-dev</span><br><span class="line">sudo apt-get install libxslt1-dev</span><br><span class="line">sudo apt-get install python-dev</span><br><span class="line">sudo pip install scrapy</span><br></pre></td></tr></table></figure>
-<p>然而在安装最新版的MongoDB时我遇到了无法解决的问题，实际上，通过下面命令可以安装MongoDB</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># install MongoDB</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install mongodb-server</span><br></pre></td></tr></table></figure>
-<p>但是版本号停留在了v2.4.14，经过查询得知v2.4.14版本后MongoDB就放弃了对32 bit ARM架构CPU的支持，导致树莓派3无法安装最新的MongoDB。奈何我的程序用了大量新版本的特性，比如<code>$slice</code>选择符等，最后在树莓派上部署爬虫的想法只好作罢。</p>
-<h2><span id="总结"> 总结</span></h2>
-<p>第一次接触&quot;单板电脑&quot;(SBC, Single Board Computer)还是很有新鲜感的，低廉的售价，和正常PC几乎一样的功能以及丰富的DIY选项让人很难拒绝。不过作为一个全栈开发人员，想要在树莓派上部署应用，不能安装最新的MongoDB意味着几年前比较流行的MEAN框架在树莓派上可能会行不通，部分框架，例如于ARM处理器有兼容问题的Meteor，会导致部分软件例如wekan在树莓派上无法应用，这些问题在购买前还是要考虑的。</p>
-<p>参考</p>
-<ol>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZGlnaXRhbG9jZWFuLmNvbS9jb21tdW5pdHkvdHV0b3JpYWxzL2hvdy10by1zZXQtdXAtc3NoLWtleXMtLTI=">How To Set Up SSH Keys<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmFzcGJlcnJ5cGkub3JnL2RvY3VtZW50YXRpb24vcmVtb3RlLWFjY2Vzcy92bmMv">VNC (VIRTUAL NETWORK COMPUTING)<i class="fa fa-external-link-alt"></i></span></li>
-</ol>
+<h3><span id="测试分支-test"> 测试分支 TEST</span></h3>
+<p>测试分支对应于测试环境，新功能开发完毕并在本地环境通过单元测试后，开发分支才可以合并到测试分支中，之后将测试分支部署到测试环境中进行集成测试</p>
+<h3><span id="缓冲分支-staging"> 缓冲分支 STAGING</span></h3>
+<p>缓冲分支对应于缓冲环境，它是是生产环境的镜像，拥有和生产环境一样的硬件，软件环境，所以在这里可以进行和生产环境一样的测试（性能测试，负载测试等）。当新功能在测试环境通过集成测试后，开发分支才可以合并到缓冲分支中，之后将缓存分支部署到缓冲环境里进行和生产环境一样的测试</p>
+<h3><span id="生产分支-prod"> 生产分支 PROD</span></h3>
+<p>生产分支对应于生产环境，生产环境也就是用户可以直接交互的环境。我们访问的网站，其实都是部署在生产环境里的。新功能在缓存分支通过测试后，含有新功能的开发分支最后并入生产分支中，生产分支被部署到生产环境里，新功能此时也最终被交付到了用户手中。</p>
+<p>一般来说，含有新功能的分支按顺序合并到测试分支，缓存分支和生产分支中，包含新功能的测试分支，缓存分支和生产分支也按顺序被部署到测试环境，缓存环境和生产环境中。一个网站的新功能就是这样经历重重测试，最终交付到用户手中哒。</p>
+<p>想要知道更多有关部署架构知识，请参考<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRGVwbG95bWVudF9lbnZpcm9ubWVudA==">Wiki部署环境<i class="fa fa-external-link-alt"></i></span></p>
 ]]></content>
       <categories>
-        <category>Linux</category>
-        <category>折腾</category>
+        <category>Git</category>
+        <category>Git Basics</category>
       </categories>
       <tags>
-        <tag>RaspberryPi</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Design review 设计评审</title>
-    <url>/2020/02/23/design-review/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>文章目录</strong></p>
-<!-- toc -->
-<ul>
-<li><a href="#%E8%83%8C%E6%99%AF">背景</a></li>
-<li><a href="#%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3">设计文档</a></li>
-<li><a href="#%E8%AF%84%E5%AE%A1">评审</a></li>
-</ul>
-<!-- tocstop -->
-<h1><span id="背景"> 背景</span></h1>
-<p>几年前在实习时，我完全没有接触过设计评审。当时的团队采用Scrum开发过程。开发团队采取一个架构师（Architect）和三到四个开发者（Developers）的配置。为了保证开发速度，冲刺订单（Spring backlog）里的大多数任务（Ticket）都有架构师写的详细开发步骤。架构师在团队里负责了大多数的软件设计任务，开发者则专注于将架构师的想法实现。</p>
-<p>参加工作后，由于开发领域，开发过程，甚至是公司文化都与我实习过的公司有很多不同。在此期间，我也接触到了相当多的设计文档和设计评审。</p>
-<p>2019年，我在开发团队里承担的设计任务也越来越多，写过的设计文档有二三十个。参加的设计评审则是更多。一年下来，我对设计评审，这个软件开发中的一个流程，有了自己的一些看法，下面则是我对设计评审的一个小总结。</p>
-<a id="more"></a>
-<h1><span id="设计文档"> 设计文档</span></h1>
-<p>设计评审，需要首先有设计。这里说的设计就是设计文档（全称软件开发设计文档）。这是在软件开发之前，一种把软件设计思路结构化记录下来的资料。我第一次接触设计文档是在大学的软件工程课上。当时我也在课程项目中写过设计文档，但是却对为什么需要设计文档体会不深。毕竟当时的项目都很小，难度也不大。写设计文档无非是根据模板填充文字的游戏罢了。</p>
-<p>但是当项目参与人员众多，开发难度大时，软件设计，作为软件开发的一个流程，被重视起来。我们在实践过程中，尤其是在一些重要的工作上 （比如时间跨度长，需要几个Sprint周期才能完成的工作，或者涉及多个团队，需要跨团队分工协作时），需要先把思路写下来，通过设计评审分享出来，得到相关人员的批准或者承诺后，再进行实现。</p>
-<p>也许短期看，写设计文档，走完设计评审流程比直接蒙头实现软件要慢的多。但是一个好的设计可以在长期为产品的开发节省大量的时间。试想一下在有其他团队对你的软件库（Library）或者Web Service产生依赖时你才发现你的代码需要重新设计的情况，这时不仅是自己负责的项目会受到影响，使用你的代码的其他团队的项目也都会受到影响。</p>
-<p>设计评审是软件开发的一个重要环节，写好设计文档则是让设计评审成功的第一步。在我看来，一个好的设计文档应至少包括如下几项：</p>
-<ul>
-<li>Problem statement。陈述待解决的问题，以及为什么要解决这个问题，或者说，不解决这个问题的后果是什么。</li>
-<li>Recommended proposal。详细阐明推荐的解决方案，以及Pros/Cons的比较。</li>
-<li>Alternatives。其他可行的解决方案，一般来说解决方案不止一种，也需要有Pros/Cons 对比。能让评审人知道trade-off是什么。</li>
-</ul>
-<p>更加详细的设计文档除了上面几项外还会有：</p>
-<ul>
-<li>Background。交代问题的背景，比如总项目的进程，该问题所属项目与总项目之间的关系。</li>
-<li>Term。术语表。通常在抽象度高的讨论中，会用到很多术语以及缩略语。它们应该在术语表里进行定义，以避免歧义。</li>
-<li>Plan。项目的计划。实现过程复杂时，需要分解实现过程，定义每个阶段的需要交付的模块。或者是每个阶段性成果Milestone是什么。</li>
-</ul>
-<h1><span id="评审"> 评审</span></h1>
-<p>一个成功的设计评审需要以下要素。</p>
-<ul>
-<li>精简的评审团。只让必要的人参与进来。比如项目负责人，项目的主要贡献者或者受到最大影响的人。他们对设计思路的方向最有发言权，能提出有建设性的意见，而且能最后拍板。邀请不必要的人，会增加讨论中的噪音，以致评审流程变慢。</li>
-<li>提前制定好的议案。有效率的讨论需要高质量的议案。设计评审的发起人需要准备好评审大会的议案流程，先讨论重要的点，比如一旦敲定就可以让部分项目先开展实现的点。这样接下来的点可以在不阻塞项目进展的情况下讨论。</li>
-<li>Meeting Minutes。及时分享会议记录，其中包括参与的人，何时做出了什么决定或者得到了什么共识。当评审大会需要分几次召开时，会议记录作为之前会议的备忘能让我们避免重复讨论。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>软件开发实践</category>
-        <category>设计评审</category>
-      </categories>
-      <tags>
-        <tag>软件设计</tag>
-        <tag>文档</tag>
-        <tag>设计评审</tag>
+        <tag>Git</tag>
+        <tag>部署架构</tag>
       </tags>
   </entry>
   <entry>
@@ -1224,220 +1214,47 @@ Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https:/
       </tags>
   </entry>
   <entry>
-    <title>Git cherry-pick</title>
-    <url>/2017/05/07/git-cherry-pick/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
-<!-- toc -->
-<ul>
-<li><a href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8cherry-pick">什么时候使用Cherry-pick</a></li>
-<li><a href="#%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90">一个例子</a></li>
-</ul>
-<!-- tocstop -->
-<p>一般来说，掌握了git的commit，branch，merge几个命令就足以应付90%的工作场景了，但是有时候我们也需要处理稍微复杂一点的工作场景，比如整理提交记录。</p>
-<h2><span id="什么时候使用cherry-pick"> 什么时候使用Cherry-pick</span></h2>
-<p>Cherry pick 直译成中文就是采樱桃，樱桃有好有坏，挑选樱桃的过程就形象的类比了我们应用该命令挑选提交（Commit）的过程。<br>
-一般来说，利用git进行多人协作的网站开发项目都有不止一个分支，其中每一个分支对应于网站部署的一个架构。在多分支环境下，如果我们想要将一个或者一些在其他分支下提交（Commit）复制到当前分支所在的位置（HEAD）的话，<code>cherry-pick</code> 是最直接，最方便的办法了。</p>
-<a id="more"></a>
-<h2><span id="一个例子"> 一个例子</span></h2>
-<p><img data-src="https://cloud.githubusercontent.com/assets/15102793/25820068/4d99fcec-3430-11e7-8c66-3138cad6182f.png" alt="git cherry-pick命令图示，图片来源：http://learngitbranching.js.org"></p>
-<p>如上图所示，如果我们想要将side分支上C2与C4分支复制到当前分支master所在位置的话，<code>git cherry-pick C2 C4</code> 能帮助我们吧side分支上的C2与C4提交以此应用到当前分支中，产生C2’与C4’提交，其中，这两个提交的内容分别和C2与C4对应，不过hash值会重新计算，不再与原hash值一样。</p>
-<p>在这里我也要推荐一个学习git操作的好网站 <span class="exturl" data-url="aHR0cDovL2xlYXJuZ2l0YnJhbmNoaW5nLmpzLm9yZy8=">learngitbranching.js.org<i class="fa fa-external-link-alt"></i></span>，也就是上面截图的来源。虽然网站名字叫做learn git branching，但是教学内容几乎涵盖git的方方面面。最重要的是，与看教程不同的是，该网站有交互式的git log graph，是git入门的不二之选。</p>
+    <title>Codility PermMissingElem in Python</title>
+    <url>/2017/05/31/codility-perm-missing-elem/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>时间复杂度</th>
+<th>空间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最优</td>
+<td>O(N)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>平均</td>
+<td>O(N)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>最差</td>
+<td>O(N)</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p>可以想象有一个数组长度为N+1，数组元素为1,2,…N,N+1，这样便可以用等差求和公式算出该数组的总和。用总和减去输入数组A的和便可以知道数组A缺失了哪个元素。注意python <code>sum()</code>的算法复杂度为O(N)，故该算法的算法复杂度是O(N)。</p>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">A</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    N = <span class="built_in">len</span>(A)</span><br><span class="line">    start = <span class="number">1</span></span><br><span class="line">    end = <span class="built_in">len</span>(A)+<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> (N+<span class="number">1</span>)*(start+end)/<span class="number">2</span> - <span class="built_in">sum</span>(A)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>Git</category>
-        <category>Git Advances</category>
+        <category>Notes</category>
+        <category>Codility</category>
       </categories>
       <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git分支与部署架构</title>
-    <url>/2017/05/08/git-branch-and-deployment-architectures/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
-<!-- toc -->
-<ul>
-<li><a href="#%E5%BC%80%E5%8F%91%E5%88%86%E6%94%AF-dev">开发分支 DEV</a></li>
-<li><a href="#%E6%B5%8B%E8%AF%95%E5%88%86%E6%94%AF-test">测试分支 TEST</a></li>
-<li><a href="#%E7%BC%93%E5%86%B2%E5%88%86%E6%94%AF-staging">缓冲分支 STAGING</a></li>
-<li><a href="#%E7%94%9F%E4%BA%A7%E5%88%86%E6%94%AF-prod">生产分支 PROD</a></li>
-</ul>
-<!-- tocstop -->
-<p>一般来说，利用git进行多人协作的网站开发项目都有不止一个分支，其中每一个分支对应于网站部署的一个架构。虽然网站部署架构千差万别，但几乎都是从开发环境（DEV）开始并以生产环境（PROD）结束，所以对应到git分支上就是 开发分支，测试分支，缓存分支和生产分支。</p>
-<h3><span id="开发分支-dev"> 开发分支 DEV</span></h3>
-<p>开发分支是本地开发环境上用于开发新功能的分支，开发人员可以方便的在本地进行单元测试</p>
-<a id="more"></a>
-<h3><span id="测试分支-test"> 测试分支 TEST</span></h3>
-<p>测试分支对应于测试环境，新功能开发完毕并在本地环境通过单元测试后，开发分支才可以合并到测试分支中，之后将测试分支部署到测试环境中进行集成测试</p>
-<h3><span id="缓冲分支-staging"> 缓冲分支 STAGING</span></h3>
-<p>缓冲分支对应于缓冲环境，它是是生产环境的镜像，拥有和生产环境一样的硬件，软件环境，所以在这里可以进行和生产环境一样的测试（性能测试，负载测试等）。当新功能在测试环境通过集成测试后，开发分支才可以合并到缓冲分支中，之后将缓存分支部署到缓冲环境里进行和生产环境一样的测试</p>
-<h3><span id="生产分支-prod"> 生产分支 PROD</span></h3>
-<p>生产分支对应于生产环境，生产环境也就是用户可以直接交互的环境。我们访问的网站，其实都是部署在生产环境里的。新功能在缓存分支通过测试后，含有新功能的开发分支最后并入生产分支中，生产分支被部署到生产环境里，新功能此时也最终被交付到了用户手中。</p>
-<p>一般来说，含有新功能的分支按顺序合并到测试分支，缓存分支和生产分支中，包含新功能的测试分支，缓存分支和生产分支也按顺序被部署到测试环境，缓存环境和生产环境中。一个网站的新功能就是这样经历重重测试，最终交付到用户手中哒。</p>
-<p>想要知道更多有关部署架构知识，请参考<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRGVwbG95bWVudF9lbnZpcm9ubWVudA==">Wiki部署环境<i class="fa fa-external-link-alt"></i></span></p>
-]]></content>
-      <categories>
-        <category>Git</category>
-        <category>Git Basics</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-        <tag>部署架构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Ubuntu上安装拼音输入法</title>
-    <url>/2017/09/15/install-pinyin-in-Ubuntu/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>目录</p>
-<!-- toc -->
-<ul>
-<li><a href="#%E5%AE%89%E8%A3%85ibus%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95">安装IBus中文输入法</a></li>
-<li><a href="#%E5%AE%89%E8%A3%85%E6%90%9C%E7%8B%97%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95">安装搜狗中文输入法</a></li>
-</ul>
-<!-- tocstop -->
-<h3><span id="安装ibus中文输入法"> 安装IBus中文输入法</span></h3>
-  <img data-src="/2017/09/15/install-pinyin-in-Ubuntu/successfully_installed_pinyin.png" class title="Ubuntu上的拼音输入法">
-<p>最近又重新安装了Ubuntu系统。因为要写中文博客，没有中文输入法实在是麻烦。在Ubuntu上安装中文输入法确实没有Windows上显而易见，所以写下步骤方便自己将来参考。</p>
-<ol>
-<li>
-<p>首先进入系统设置选择language support，如果没有完整安装该功能，先根据系统提示完成安装</p>
-</li>
-<li>
-<p>点击install/remove language 来安装中文支持</p>
-</li>
-<li>
-<p>接下来在Terminal中手动安装下面任何一个输入法</p>
-<p><code>sudo apt-get install ibus-pinyin</code></p>
-<p><code>sudo apt-get install ibus-sunpinyin</code></p>
-</li>
-<li>
-<p>重启IBus daemon</p>
-<p><code>ibus restart</code></p>
-</li>
-<li>
-<p>再进入系统设置选择Text Entry，点击左下角的小加号并在add input source界面中搜索Chinese，选择一款拼音输入法</p>
-</li>
-</ol>
-  <img data-src="/2017/09/15/install-pinyin-in-Ubuntu/ubuntu_add_input_method.png" class title="选择Pinyin输入法">
-<ol start="6">
-<li>使用吧</li>
-</ol>
-<h3><span id="安装搜狗中文输入法"> 安装搜狗中文输入法</span></h3>
-<p>使用了几天IBus的中文输入发，使用体验简直弱爆了。首先4k屏适配有问题，待选框时刻游离在屏幕之外，然而最致命的是，IBus拼音输入法竟然有切换到双拼就无法再切换回来的bug。早年间我在ubuntu 14上使用过搜狗输入法，用户体验良好，于是试着在ubuntu 16.04上安装。虽然安装步骤比在ubuntu 14上稍稍复杂一些，但是搜狗输入法完美适配4k屏幕而且一如既往的好用。安装步骤如下：</p>
-<a id="more"></a>
-<ol>
-<li>
-<p>搜狗舒服法依赖Fcitx键盘输入法系统而不是IBus，所以安装搜狗输入法前需要确认Fcitx已经安装，若没有安装Fcitx，可以通过terminal</p>
-<p><code>sudo apt-get install fcitx</code></p>
-<p>如果安装过程中需要额外依赖，可以通过以下命令安装</p>
-<p><code>apt-get install -f</code></p>
-</li>
-<li>
-<p>点击<span class="exturl" data-url="aHR0cDovL3Bpbnlpbi5zb2dvdS5jb20vbGludXgv">这里<i class="fa fa-external-link-alt"></i></span>下载搜狗中文输入法，有32bit和64bit安装包可选，ubuntu用户可以选择deb格式安装包用Ubuntu Software Center来安装，当然可以到下载路径下通过以下命令安装</p>
-<p><code>sudo dpkg -i sogoupinyin_2.1.0.0086_amd64.deb</code></p>
-</li>
-<li>
-<p>安装完毕后，在从当前系统设置/语言支持里选择Fcitx做为键盘输入法系统</p>
-</li>
-<li>
-<p>退出登录，再重新登录</p>
-</li>
-<li>
-<p>现在在系统右上角应该能看到键盘图标，选择设置，添加搜狗中文书法</p>
-</li>
-<li>
-<p>开心的使用吧</p>
-</li>
-</ol>
-<p>参考资料</p>
-<ol>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy81OTM1Ni9ob3ctZG8taS1nZXQtY2hpbmVzZS1pbnB1dC10by13b3Jr">How do I get Chinese input to work?<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy80NTU2ODIvMTQtMDQtY2hpbmVzZS1pYnVzLWlucHV0LW5vLW9wdGlvbnM=">14.04 Chinese Ibus Input - No Options<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy80NTAyNTUvaW5zdGFsbGluZy1zb2dvdS0lRTYlOTAlOUMlRTclOEIlOTclRTYlOEIlQkMlRTklOUYlQjM=">Installing SOGOU 搜狗拼音<i class="fa fa-external-link-alt"></i></span></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Linux</category>
-        <category>拼音输入法</category>
-      </categories>
-      <tags>
-        <tag>pinyin</tag>
-        <tag>input method</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在Alienware上安装Ubuntu</title>
-    <url>/2017/09/15/install-ubuntu-on-alienware/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
-<!-- toc -->
-<ul>
-<li><a href="#%E5%88%B6%E4%BD%9Cubuntu%E5%90%AF%E5%8A%A8u%E7%9B%98">制作Ubuntu启动U盘</a></li>
-<li><a href="#%E5%AE%89%E8%A3%85ubuntu">安装Ubuntu</a></li>
-<li><a href="#%E8%A7%A3%E5%86%B3%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98">解决驱动问题</a>
-<ul>
-<li><a href="#%E5%AE%89%E8%A3%85killer%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8">安装killer网卡驱动</a></li>
-<li><a href="#%E5%AE%89%E8%A3%85%E8%93%9D%E7%89%99%E9%A9%B1%E5%8A%A8">安装蓝牙驱动</a></li>
-</ul>
-</li>
-<li><a href="#%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AEalienfx">进阶配置AlienFx</a></li>
-</ul>
-<!-- tocstop -->
-<p>作为一个游戏发烧友，同时也是小白全栈开发程序员我买了Alienware却只用来打游戏是在是太可惜了。为了搞搞开发，昨天配置了一天WSL (Windows Subsystems for Linxu)，用了Hyper+zsh的终端组合。其中在zsh中输入atom能启动windows的Atom也着实把我惊艳了一把，但其实也就算仅限于打开而已。事实是Windows中的文本编辑器并不能直接编辑其子系统中的文件。所以这个子系统在某些方便我觉得还没有Vagrant方便，没有图形界面，意味着不能使用Atom，Visual Studio Code这样代表先进生产力的工具，于是配置WSL搞搞开发的想法就此作罢。</p>
-<p>子系统搞不成，于是有了直接在Ubuntu上工作的想法。其实Alienware上安装Ubuntu不是很难，除了一些蓝牙和Wi-Fi方面的兼容问题，安装过程非常顺利。接下来step by step记录安装过程。</p>
-<a id="more"></a>
-<h2><span id="制作ubuntu启动u盘"> 制作Ubuntu启动U盘</span></h2>
-<p>在Ubuntu官方网站下载16.04 LTS系统镜像，并将其制作成启动U盘。<br>
-制作启动U盘的工具有很多，<span class="exturl" data-url="aHR0cHM6Ly9ydWZ1cy5ha2VvLmllLw==">Rufus<i class="fa fa-external-link-alt"></i></span> 是我用的一款，界面简单清爽无广告不收费。</p>
-<p>Rufus界面如下，制作启动U盘时，注意Partition schemem and target system type选择同时支持UEFI和BIOS的格式。</p>
-<img data-src="/2017/09/15/install-ubuntu-on-alienware/rufus_en_2x.png" class title="用Rufus制作Ubuntu启动U盘 (图片来源rufus.akeo.ie)">
-<h2><span id="安装ubuntu"> 安装Ubuntu</span></h2>
-<p>重新启动Windows，启动黑屏时按F11进入UEFI界面，有两个配置需要更改</p>
-<ul>
-<li>关闭secure boot</li>
-<li>打开legecy boot mode</li>
-</ul>
-<p>插入Ubuntu启动U盘符，再次重新启动，按下F11，选择从U盘启动，接下来的步骤和在普通电脑上安装双系统无异。</p>
-<p>安装完成后，再次启动，boot loader已经从windows boot manager变成了GRUB(<strong>GR</strong>and <strong>U</strong>nified <strong>B</strong>ootloader)。以后在便可以在GRUB界面中选择进入的系统是Ubuntu还是Windows。</p>
-<h2><span id="解决驱动问题"> 解决驱动问题</span></h2>
-<p>进入安装完毕的Ubuntu，我遇到的第一个问题就是无法连接Wi-Fi。安装驱动程序有一个一般性的方法，先通过下面的命令查看自己使用的设备是什么型号，然后在网上搜索该型号设备的驱动程序。</p>
-<ul>
-<li>
-<p><code>lsusb</code> 查看usb接口的设备</p>
-</li>
-<li>
-<p><code>lspci</code> 查看pci接口的设备</p>
-</li>
-</ul>
-<h3><span id="安装killer网卡驱动"> 安装killer网卡驱动</span></h3>
-<p>如下图所示，<code>lspci | grep -i net</code>命令显示我使用的网卡型号是Qualcomm Atheros Killer E2400，通过搜索，发现Alienware使用的killer网卡的<span class="exturl" data-url="aHR0cHM6Ly93d3cua2lsbGVybmV0d29ya2luZy5jb20vZHJpdmVyLWRvd25sb2Fkcy9rbm93bGVkZ2UtYmFzZT92aWV3PXRvcGljJmFtcDtpZD0y">官方网站<i class="fa fa-external-link-alt"></i></span>提供了相关驱动的下载。</p>
-<img data-src="/2017/09/15/install-ubuntu-on-alienware/alienware_wifi_driver.png" class title="安装killer网卡驱动">
-<p>如上图所示，可通过如下命令安装killer网卡驱动</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget http:&#x2F;&#x2F;mirrors.kernel.org&#x2F;ubuntu&#x2F;pool&#x2F;main&#x2F;l&#x2F;linux-firmware&#x2F;linux-firmware_1.164_all.deb</span><br><span class="line">sudo dpkg -i linux-firmware*.deb</span><br><span class="line">sudo modprobe -r ath10k_pci &amp;&amp; sudo modprobe ath10k_pci</span><br></pre></td></tr></table></figure>
-<h3><span id="安装蓝牙驱动"> 安装蓝牙驱动</span></h3>
-<p>首先通过下面的命令卸载已安装的蓝牙驱动并且安装新的蓝牙驱动</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get purge blueman bluez-utils bluez bluetooth</span><br><span class="line">sudo apt-get install blueman bluez-utils bluez bluetooth</span><br></pre></td></tr></table></figure>
-<p>然后再启动蓝牙服务</p>
-<p><code>sudo /etc/init.d/bluetooth start</code></p>
-<p>如下图所示，接下来就可以通过Blueman管理系统蓝牙连接了</p>
-<img data-src="/2017/09/15/install-ubuntu-on-alienware/ubuntu_blueman_interface.png" class title="Ubuntu上蓝牙连接管理软件Blueman界面">
-<h2><span id="进阶配置alienfx"> 进阶配置AlienFx</span></h2>
-<p>Alienware的一大特色就是它有狂野炫酷的灯，更换Ubuntu平台后，一个大问题就是戴尔官方没有Ubuntu平台的AlienFx。</p>
-<p>通过查询，发现有人写了开源版本的AlienFx，只可惜项目已经有好几年无人维护。下载最新版本试用后，不出以外的，该软件并不支持最新的Alienware，该软件支持的Alienware系列可以从<span class="exturl" data-url="aHR0cHM6Ly9kb2MudWJ1bnR1LWZyLm9yZy9hbGllbmZ4">该网站<i class="fa fa-external-link-alt"></i></span>中找到。</p>
-<p>参考资料</p>
-<ol>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ydWZ1cy5ha2VvLmllLw==">Rufus Offical Site<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cua2lsbGVybmV0d29ya2luZy5jb20vZHJpdmVyLWRvd25sb2Fkcy9rbm93bGVkZ2UtYmFzZT92aWV3PXRvcGljJmFtcDtpZD0y">Killer Networking<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy83NzY4MDYvYmx1ZXRvb3RoLW9uLXVidW50dS0xNi0wNA==">Bluetooth on Ubuntu 16.04<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kb2MudWJ1bnR1LWZyLm9yZy9hbGllbmZ4">AlienFx on Ubuntu<i class="fa fa-external-link-alt"></i></span></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Linux</category>
-        <category>折腾</category>
-      </categories>
-      <tags>
-        <tag>Ubuntu</tag>
-        <tag>Alienware</tag>
+        <tag>Codility</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -1541,6 +1358,144 @@ Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https:/
       <tags>
         <tag>Git</tag>
         <tag>Github</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在Alienware上安装Ubuntu</title>
+    <url>/2017/09/15/install-ubuntu-on-alienware/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
+<!-- toc -->
+<ul>
+<li><a href="#%E5%88%B6%E4%BD%9Cubuntu%E5%90%AF%E5%8A%A8u%E7%9B%98">制作Ubuntu启动U盘</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85ubuntu">安装Ubuntu</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98">解决驱动问题</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85killer%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8">安装killer网卡驱动</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85%E8%93%9D%E7%89%99%E9%A9%B1%E5%8A%A8">安装蓝牙驱动</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AEalienfx">进阶配置AlienFx</a></li>
+</ul>
+<!-- tocstop -->
+<p>作为一个游戏发烧友，同时也是小白全栈开发程序员我买了Alienware却只用来打游戏是在是太可惜了。为了搞搞开发，昨天配置了一天WSL (Windows Subsystems for Linxu)，用了Hyper+zsh的终端组合。其中在zsh中输入atom能启动windows的Atom也着实把我惊艳了一把，但其实也就算仅限于打开而已。事实是Windows中的文本编辑器并不能直接编辑其子系统中的文件。所以这个子系统在某些方便我觉得还没有Vagrant方便，没有图形界面，意味着不能使用Atom，Visual Studio Code这样代表先进生产力的工具，于是配置WSL搞搞开发的想法就此作罢。</p>
+<p>子系统搞不成，于是有了直接在Ubuntu上工作的想法。其实Alienware上安装Ubuntu不是很难，除了一些蓝牙和Wi-Fi方面的兼容问题，安装过程非常顺利。接下来step by step记录安装过程。</p>
+<a id="more"></a>
+<h2><span id="制作ubuntu启动u盘"> 制作Ubuntu启动U盘</span></h2>
+<p>在Ubuntu官方网站下载16.04 LTS系统镜像，并将其制作成启动U盘。<br>
+制作启动U盘的工具有很多，<span class="exturl" data-url="aHR0cHM6Ly9ydWZ1cy5ha2VvLmllLw==">Rufus<i class="fa fa-external-link-alt"></i></span> 是我用的一款，界面简单清爽无广告不收费。</p>
+<p>Rufus界面如下，制作启动U盘时，注意Partition schemem and target system type选择同时支持UEFI和BIOS的格式。</p>
+<img data-src="/2017/09/15/install-ubuntu-on-alienware/rufus_en_2x.png" class title="用Rufus制作Ubuntu启动U盘 (图片来源rufus.akeo.ie)">
+<h2><span id="安装ubuntu"> 安装Ubuntu</span></h2>
+<p>重新启动Windows，启动黑屏时按F11进入UEFI界面，有两个配置需要更改</p>
+<ul>
+<li>关闭secure boot</li>
+<li>打开legecy boot mode</li>
+</ul>
+<p>插入Ubuntu启动U盘符，再次重新启动，按下F11，选择从U盘启动，接下来的步骤和在普通电脑上安装双系统无异。</p>
+<p>安装完成后，再次启动，boot loader已经从windows boot manager变成了GRUB(<strong>GR</strong>and <strong>U</strong>nified <strong>B</strong>ootloader)。以后在便可以在GRUB界面中选择进入的系统是Ubuntu还是Windows。</p>
+<h2><span id="解决驱动问题"> 解决驱动问题</span></h2>
+<p>进入安装完毕的Ubuntu，我遇到的第一个问题就是无法连接Wi-Fi。安装驱动程序有一个一般性的方法，先通过下面的命令查看自己使用的设备是什么型号，然后在网上搜索该型号设备的驱动程序。</p>
+<ul>
+<li>
+<p><code>lsusb</code> 查看usb接口的设备</p>
+</li>
+<li>
+<p><code>lspci</code> 查看pci接口的设备</p>
+</li>
+</ul>
+<h3><span id="安装killer网卡驱动"> 安装killer网卡驱动</span></h3>
+<p>如下图所示，<code>lspci | grep -i net</code>命令显示我使用的网卡型号是Qualcomm Atheros Killer E2400，通过搜索，发现Alienware使用的killer网卡的<span class="exturl" data-url="aHR0cHM6Ly93d3cua2lsbGVybmV0d29ya2luZy5jb20vZHJpdmVyLWRvd25sb2Fkcy9rbm93bGVkZ2UtYmFzZT92aWV3PXRvcGljJmFtcDtpZD0y">官方网站<i class="fa fa-external-link-alt"></i></span>提供了相关驱动的下载。</p>
+<img data-src="/2017/09/15/install-ubuntu-on-alienware/alienware_wifi_driver.png" class title="安装killer网卡驱动">
+<p>如上图所示，可通过如下命令安装killer网卡驱动</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget http:&#x2F;&#x2F;mirrors.kernel.org&#x2F;ubuntu&#x2F;pool&#x2F;main&#x2F;l&#x2F;linux-firmware&#x2F;linux-firmware_1.164_all.deb</span><br><span class="line">sudo dpkg -i linux-firmware*.deb</span><br><span class="line">sudo modprobe -r ath10k_pci &amp;&amp; sudo modprobe ath10k_pci</span><br></pre></td></tr></table></figure>
+<h3><span id="安装蓝牙驱动"> 安装蓝牙驱动</span></h3>
+<p>首先通过下面的命令卸载已安装的蓝牙驱动并且安装新的蓝牙驱动</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get purge blueman bluez-utils bluez bluetooth</span><br><span class="line">sudo apt-get install blueman bluez-utils bluez bluetooth</span><br></pre></td></tr></table></figure>
+<p>然后再启动蓝牙服务</p>
+<p><code>sudo /etc/init.d/bluetooth start</code></p>
+<p>如下图所示，接下来就可以通过Blueman管理系统蓝牙连接了</p>
+<img data-src="/2017/09/15/install-ubuntu-on-alienware/ubuntu_blueman_interface.png" class title="Ubuntu上蓝牙连接管理软件Blueman界面">
+<h2><span id="进阶配置alienfx"> 进阶配置AlienFx</span></h2>
+<p>Alienware的一大特色就是它有狂野炫酷的灯，更换Ubuntu平台后，一个大问题就是戴尔官方没有Ubuntu平台的AlienFx。</p>
+<p>通过查询，发现有人写了开源版本的AlienFx，只可惜项目已经有好几年无人维护。下载最新版本试用后，不出以外的，该软件并不支持最新的Alienware，该软件支持的Alienware系列可以从<span class="exturl" data-url="aHR0cHM6Ly9kb2MudWJ1bnR1LWZyLm9yZy9hbGllbmZ4">该网站<i class="fa fa-external-link-alt"></i></span>中找到。</p>
+<p>参考资料</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ydWZ1cy5ha2VvLmllLw==">Rufus Offical Site<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cua2lsbGVybmV0d29ya2luZy5jb20vZHJpdmVyLWRvd25sb2Fkcy9rbm93bGVkZ2UtYmFzZT92aWV3PXRvcGljJmFtcDtpZD0y">Killer Networking<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy83NzY4MDYvYmx1ZXRvb3RoLW9uLXVidW50dS0xNi0wNA==">Bluetooth on Ubuntu 16.04<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kb2MudWJ1bnR1LWZyLm9yZy9hbGllbmZ4">AlienFx on Ubuntu<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>折腾</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+        <tag>Alienware</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Machine Learning 学习笔记 1</title>
+    <url>/2017/10/19/machine-learning-review1/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
+<!-- toc -->
+<ul>
+<li><a href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%91%A8%E7%AC%94%E8%AE%B0">机器学习第一周笔记</a>
+<ul>
+<li><a href="#%E6%A6%82%E8%BF%B0">概述</a>
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">什么是机器学习？</a></li>
+<li><a href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%88%86%E7%B1%BB">机器学习的分类</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92">线性回归</a>
+<ul>
+<li><a href="#%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B">回归模型</a></li>
+<li><a href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8Dgradient-descent">梯度下降(Gradient descent)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="机器学习第一周笔记"> 机器学习第一周笔记</span></h1>
+<h2><span id="概述"> 概述</span></h2>
+<h3><span id="什么是机器学习"> 什么是机器学习？</span></h3>
+<p>从字面上来说，机器学习就是让机器通过模仿人学习的过程学习。也就是说让机器有能力学习，而不是通过准确的程序而实现。我们生活中无处不在存在着机器学习的应用，例如垃圾邮件分类系统，通过图片识别物体等。</p>
+<h3><span id="机器学习的分类"> 机器学习的分类</span></h3>
+<p>机器学习分为两大类：</p>
+<a id="more"></a>
+<ul>
+<li>
+<p><strong>有监督学习(supervised learning)</strong>：给定输入数据和正确的输出结果，通过一系列“训练模型”使得输出结果和正确输出结果无限接近的过程。其中又可以分为两大类 <strong>回归(regression)</strong> 和 <strong>分类(classification)</strong> 问题。例如：给定某地区房屋的情况（房间个数，地理位置，周围环境…）及价格，来预测这个地区某个房子的价格。这就是一个回归问题。再比如通过一个人的照片来预测这个人的年龄。 而分类问题则是输出结果只有两种情况的问题。比如：预测一个病人的肿瘤是良性还是恶性；预测一封邮件是否是垃圾邮件等等。这种问题的结果只有两种情况。</p>
+</li>
+<li>
+<p><strong>无监督学习(unsupervised learning)</strong>：没有给出正确的输出结果，让机器自己发现输入数据的结构。无监督学习最常见的应用就是分类。比如：给定用户数据，自动划分用户类比从而划分市场；给定一些文章报道，分类文章的类别，政治新闻，经济新闻，或文化新闻等等。</p>
+</li>
+</ul>
+<h2><span id="线性回归"> 线性回归</span></h2>
+<h3><span id="回归模型"> 回归模型</span></h3>
+<p>通过训练数据集(training set)学习得到一个函数h(x)，使得输入数据X通过h函数映射的预测结果Y最接近正确值。线性回归的目标就是寻找到h函数使得其完美拟合输入X和输出Y的关系。</p>
+<img data-src="/2017/10/19/machine-learning-review1/linear-regression-model.png" class title="learning regression model">
+<p>(Figure 1 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY291cnNlcmEub3JnL2xlYXJuL21hY2hpbmUtbGVhcm5pbmcvc3VwcGxlbWVudC9jUmEybS9tb2RlbC1yZXByZXNlbnRhdGlvbg==">https://www.coursera.org/learn/machine-learning/supplement/cRa2m/model-representation<i class="fa fa-external-link-alt"></i></span>)</p>
+<p>既然已经有了这个模型我们下一个问题就是如何才能找到这样的一个h函数？<br>
+在线性回归里用来判断拟合函数h好坏的一个标准就是代价函数(Cost funtion)。这个函数的数学表示如下，其中用均方误差来表示预测结果与真实结果的误差。</p>
+<img data-src="/2017/10/19/machine-learning-review1/cost-function.png" class title="Cost function">
+<p>这时，机器学习过程的目标就是要找到一个h函数使得误差J最小。</p>
+<h3><span id="梯度下降gradient-descent"> 梯度下降(Gradient descent)</span></h3>
+<p>求解最小代价函数的方法之一就是用梯度下降(Gradient descent)的方法。<br>
+数学上，<strong>梯度方向</strong>是<strong>函数值下降最为剧烈</strong>的方向。那么，沿着梯度方向走，我们就能接近其最小值，或者极小值，从而接近更高的预测精度。其数学表达如下：</p>
+<img data-src="/2017/10/19/machine-learning-review1/gradient-descent.png" class title="Gradient descent">
+<p>其中<strong>学习率ɑ</strong>表示的是下降的速率，当这个值过大时会导致错过最小值（步子跨的太大）；当这个值过小时会导致下降的速度很慢（步子跨的太小）。<br>
+用梯度下降的方法就是不断的沿着梯度方向更新值，直到找到<strong>最小值</strong>。</p>
+]]></content>
+      <categories>
+        <category>Notes</category>
+        <category>Machine Learning</category>
+      </categories>
+      <tags>
+        <tag>Machine Learning</tag>
       </tags>
   </entry>
   <entry>
@@ -1670,9 +1625,119 @@ Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https:/
       </tags>
   </entry>
   <entry>
-    <title>Java实践指南 注疏</title>
-    <url>/2020/03/15/java-for-the-real-word-notes/</url>
+    <title>Git cherry-pick</title>
+    <url>/2017/05/07/git-cherry-pick/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
+<!-- toc -->
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8cherry-pick">什么时候使用Cherry-pick</a></li>
+<li><a href="#%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90">一个例子</a></li>
+</ul>
+<!-- tocstop -->
+<p>一般来说，掌握了git的commit，branch，merge几个命令就足以应付90%的工作场景了，但是有时候我们也需要处理稍微复杂一点的工作场景，比如整理提交记录。</p>
+<h2><span id="什么时候使用cherry-pick"> 什么时候使用Cherry-pick</span></h2>
+<p>Cherry pick 直译成中文就是采樱桃，樱桃有好有坏，挑选樱桃的过程就形象的类比了我们应用该命令挑选提交（Commit）的过程。<br>
+一般来说，利用git进行多人协作的网站开发项目都有不止一个分支，其中每一个分支对应于网站部署的一个架构。在多分支环境下，如果我们想要将一个或者一些在其他分支下提交（Commit）复制到当前分支所在的位置（HEAD）的话，<code>cherry-pick</code> 是最直接，最方便的办法了。</p>
+<a id="more"></a>
+<h2><span id="一个例子"> 一个例子</span></h2>
+<p><img data-src="https://cloud.githubusercontent.com/assets/15102793/25820068/4d99fcec-3430-11e7-8c66-3138cad6182f.png" alt="git cherry-pick命令图示，图片来源：http://learngitbranching.js.org"></p>
+<p>如上图所示，如果我们想要将side分支上C2与C4分支复制到当前分支master所在位置的话，<code>git cherry-pick C2 C4</code> 能帮助我们吧side分支上的C2与C4提交以此应用到当前分支中，产生C2’与C4’提交，其中，这两个提交的内容分别和C2与C4对应，不过hash值会重新计算，不再与原hash值一样。</p>
+<p>在这里我也要推荐一个学习git操作的好网站 <span class="exturl" data-url="aHR0cDovL2xlYXJuZ2l0YnJhbmNoaW5nLmpzLm9yZy8=">learngitbranching.js.org<i class="fa fa-external-link-alt"></i></span>，也就是上面截图的来源。虽然网站名字叫做learn git branching，但是教学内容几乎涵盖git的方方面面。最重要的是，与看教程不同的是，该网站有交互式的git log graph，是git入门的不二之选。</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+        <category>Git Advances</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu上安装拼音输入法</title>
+    <url>/2017/09/15/install-pinyin-in-Ubuntu/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>目录</p>
+<!-- toc -->
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85ibus%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95">安装IBus中文输入法</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85%E6%90%9C%E7%8B%97%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95">安装搜狗中文输入法</a></li>
+</ul>
+<!-- tocstop -->
+<h3><span id="安装ibus中文输入法"> 安装IBus中文输入法</span></h3>
+  <img data-src="/2017/09/15/install-pinyin-in-Ubuntu/successfully_installed_pinyin.png" class title="Ubuntu上的拼音输入法">
+<p>最近又重新安装了Ubuntu系统。因为要写中文博客，没有中文输入法实在是麻烦。在Ubuntu上安装中文输入法确实没有Windows上显而易见，所以写下步骤方便自己将来参考。</p>
+<ol>
+<li>
+<p>首先进入系统设置选择language support，如果没有完整安装该功能，先根据系统提示完成安装</p>
+</li>
+<li>
+<p>点击install/remove language 来安装中文支持</p>
+</li>
+<li>
+<p>接下来在Terminal中手动安装下面任何一个输入法</p>
+<p><code>sudo apt-get install ibus-pinyin</code></p>
+<p><code>sudo apt-get install ibus-sunpinyin</code></p>
+</li>
+<li>
+<p>重启IBus daemon</p>
+<p><code>ibus restart</code></p>
+</li>
+<li>
+<p>再进入系统设置选择Text Entry，点击左下角的小加号并在add input source界面中搜索Chinese，选择一款拼音输入法</p>
+</li>
+</ol>
+  <img data-src="/2017/09/15/install-pinyin-in-Ubuntu/ubuntu_add_input_method.png" class title="选择Pinyin输入法">
+<ol start="6">
+<li>使用吧</li>
+</ol>
+<h3><span id="安装搜狗中文输入法"> 安装搜狗中文输入法</span></h3>
+<p>使用了几天IBus的中文输入发，使用体验简直弱爆了。首先4k屏适配有问题，待选框时刻游离在屏幕之外，然而最致命的是，IBus拼音输入法竟然有切换到双拼就无法再切换回来的bug。早年间我在ubuntu 14上使用过搜狗输入法，用户体验良好，于是试着在ubuntu 16.04上安装。虽然安装步骤比在ubuntu 14上稍稍复杂一些，但是搜狗输入法完美适配4k屏幕而且一如既往的好用。安装步骤如下：</p>
+<a id="more"></a>
+<ol>
+<li>
+<p>搜狗舒服法依赖Fcitx键盘输入法系统而不是IBus，所以安装搜狗输入法前需要确认Fcitx已经安装，若没有安装Fcitx，可以通过terminal</p>
+<p><code>sudo apt-get install fcitx</code></p>
+<p>如果安装过程中需要额外依赖，可以通过以下命令安装</p>
+<p><code>apt-get install -f</code></p>
+</li>
+<li>
+<p>点击<span class="exturl" data-url="aHR0cDovL3Bpbnlpbi5zb2dvdS5jb20vbGludXgv">这里<i class="fa fa-external-link-alt"></i></span>下载搜狗中文输入法，有32bit和64bit安装包可选，ubuntu用户可以选择deb格式安装包用Ubuntu Software Center来安装，当然可以到下载路径下通过以下命令安装</p>
+<p><code>sudo dpkg -i sogoupinyin_2.1.0.0086_amd64.deb</code></p>
+</li>
+<li>
+<p>安装完毕后，在从当前系统设置/语言支持里选择Fcitx做为键盘输入法系统</p>
+</li>
+<li>
+<p>退出登录，再重新登录</p>
+</li>
+<li>
+<p>现在在系统右上角应该能看到键盘图标，选择设置，添加搜狗中文书法</p>
+</li>
+<li>
+<p>开心的使用吧</p>
+</li>
+</ol>
+<p>参考资料</p>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy81OTM1Ni9ob3ctZG8taS1nZXQtY2hpbmVzZS1pbnB1dC10by13b3Jr">How do I get Chinese input to work?<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy80NTU2ODIvMTQtMDQtY2hpbmVzZS1pYnVzLWlucHV0LW5vLW9wdGlvbnM=">14.04 Chinese Ibus Input - No Options<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy80NTAyNTUvaW5zdGFsbGluZy1zb2dvdS0lRTYlOTAlOUMlRTclOEIlOTclRTYlOEIlQkMlRTklOUYlQjM=">Installing SOGOU 搜狗拼音<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>拼音输入法</category>
+      </categories>
+      <tags>
+        <tag>pinyin</tag>
+        <tag>input method</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《Java实践指南》读书笔记</title>
+    <url>/2020/03/15/java-for-the-real-word-notes/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><img data-src="/2020/03/15/java-for-the-real-word-notes/java_for_the_real_world_title.png" class title="COE">
+<a id="more"></a>
+<p><strong>目录</strong></p>
 <!-- toc -->
 <ul>
 <li><a href="#java%E8%99%9A%E6%8B%9F%E6%9C%BA">Java虚拟机</a></li>
@@ -1682,7 +1747,6 @@ Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https:/
 <!-- tocstop -->
 <h2><span id="java虚拟机"> Java虚拟机</span></h2>
 <p>JVM(Java Virtual Machine) 既可以指Java虚拟机规范，也可以指具体的某个实现。当JVM指Java虚拟机规范时，我们要注意虚拟机规范的版本。比如是JVM 1.8 还是 JVM 1.9。Java有很好的向后兼容性，使用高版本的Java编译器也可以顺利编译针对低版本JVM开发的代码。也正是由于Java的向后兼容，很多过时的语言规范成了新的语言规范的包袱，很多过时的标准类库依然遗留在新版本的JDK中。</p>
-<a id="more"></a>
 <ul>
 <li>
 <p>过时的java.util.Date包</p>
@@ -1814,11 +1878,57 @@ Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https:/
 </table>
 ]]></content>
       <categories>
-        <category>Java实践指南</category>
-        <category>注疏</category>
+        <category>读书笔记</category>
+        <category>《Java实践指南》</category>
       </categories>
       <tags>
-        <tag>Java实践指南</tag>
+        <tag>Java</tag>
+        <tag>读书笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Codility OddOccurrencesInArray in Python</title>
+    <url>/2017/05/29/odd-occurrences-in-array/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>时间复杂度</th>
+<th>空间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最优</td>
+<td>O(N)</td>
+<td>O(K)</td>
+</tr>
+<tr>
+<td>平均</td>
+<td>O(N)</td>
+<td>O(K)</td>
+</tr>
+<tr>
+<td>最差</td>
+<td>O(N)</td>
+<td>O(K)</td>
+</tr>
+</tbody>
+</table>
+<p>其中，K是数组中互不相同数的个数</p>
+<h3><span id="算法分析"> 算法分析</span></h3>
+<p>遍历数组，算出每个数出现的次数。如果出现的次数为奇数，则返回该数。要点是选择用于记录不同数出现次数的计数器的数据结构和计数方法。对于计数器的数据结构，python built-in的字典可以满足O(1)的读取和记录。对于计数方法，则不必详细记录出现次数，标记奇偶即可。在特定条件下，应该也可以使用位操作，利用二进制0，1比特来标记奇偶，以便使用更小的内存空间。</p>
+<h3><span id="源代码"> 源代码</span></h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">A</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    count = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> A:</span><br><span class="line">        <span class="keyword">if</span> num <span class="keyword">in</span> count:</span><br><span class="line">            count[num] = (count[num] + <span class="number">1</span>) % <span class="number">2</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            count[num] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> count:</span><br><span class="line">        <span class="keyword">if</span> count[k] == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">int</span>(k)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Notes</category>
+        <category>Codility</category>
+      </categories>
+      <tags>
+        <tag>Codility</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -1933,114 +2043,6 @@ Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https:/
       </tags>
   </entry>
   <entry>
-    <title>Machine Learning 学习笔记 1</title>
-    <url>/2017/10/19/machine-learning-review1/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
-<!-- toc -->
-<ul>
-<li><a href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%91%A8%E7%AC%94%E8%AE%B0">机器学习第一周笔记</a>
-<ul>
-<li><a href="#%E6%A6%82%E8%BF%B0">概述</a>
-<ul>
-<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">什么是机器学习？</a></li>
-<li><a href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%88%86%E7%B1%BB">机器学习的分类</a></li>
-</ul>
-</li>
-<li><a href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92">线性回归</a>
-<ul>
-<li><a href="#%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B">回归模型</a></li>
-<li><a href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8Dgradient-descent">梯度下降(Gradient descent)</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-<h1><span id="机器学习第一周笔记"> 机器学习第一周笔记</span></h1>
-<h2><span id="概述"> 概述</span></h2>
-<h3><span id="什么是机器学习"> 什么是机器学习？</span></h3>
-<p>从字面上来说，机器学习就是让机器通过模仿人学习的过程学习。也就是说让机器有能力学习，而不是通过准确的程序而实现。我们生活中无处不在存在着机器学习的应用，例如垃圾邮件分类系统，通过图片识别物体等。</p>
-<h3><span id="机器学习的分类"> 机器学习的分类</span></h3>
-<p>机器学习分为两大类：</p>
-<a id="more"></a>
-<ul>
-<li>
-<p><strong>有监督学习(supervised learning)</strong>：给定输入数据和正确的输出结果，通过一系列“训练模型”使得输出结果和正确输出结果无限接近的过程。其中又可以分为两大类 <strong>回归(regression)</strong> 和 <strong>分类(classification)</strong> 问题。例如：给定某地区房屋的情况（房间个数，地理位置，周围环境…）及价格，来预测这个地区某个房子的价格。这就是一个回归问题。再比如通过一个人的照片来预测这个人的年龄。 而分类问题则是输出结果只有两种情况的问题。比如：预测一个病人的肿瘤是良性还是恶性；预测一封邮件是否是垃圾邮件等等。这种问题的结果只有两种情况。</p>
-</li>
-<li>
-<p><strong>无监督学习(unsupervised learning)</strong>：没有给出正确的输出结果，让机器自己发现输入数据的结构。无监督学习最常见的应用就是分类。比如：给定用户数据，自动划分用户类比从而划分市场；给定一些文章报道，分类文章的类别，政治新闻，经济新闻，或文化新闻等等。</p>
-</li>
-</ul>
-<h2><span id="线性回归"> 线性回归</span></h2>
-<h3><span id="回归模型"> 回归模型</span></h3>
-<p>通过训练数据集(training set)学习得到一个函数h(x)，使得输入数据X通过h函数映射的预测结果Y最接近正确值。线性回归的目标就是寻找到h函数使得其完美拟合输入X和输出Y的关系。</p>
-<img data-src="/2017/10/19/machine-learning-review1/linear-regression-model.png" class title="learning regression model">
-<p>(Figure 1 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY291cnNlcmEub3JnL2xlYXJuL21hY2hpbmUtbGVhcm5pbmcvc3VwcGxlbWVudC9jUmEybS9tb2RlbC1yZXByZXNlbnRhdGlvbg==">https://www.coursera.org/learn/machine-learning/supplement/cRa2m/model-representation<i class="fa fa-external-link-alt"></i></span>)</p>
-<p>既然已经有了这个模型我们下一个问题就是如何才能找到这样的一个h函数？<br>
-在线性回归里用来判断拟合函数h好坏的一个标准就是代价函数(Cost funtion)。这个函数的数学表示如下，其中用均方误差来表示预测结果与真实结果的误差。</p>
-<img data-src="/2017/10/19/machine-learning-review1/cost-function.png" class title="Cost function">
-<p>这时，机器学习过程的目标就是要找到一个h函数使得误差J最小。</p>
-<h3><span id="梯度下降gradient-descent"> 梯度下降(Gradient descent)</span></h3>
-<p>求解最小代价函数的方法之一就是用梯度下降(Gradient descent)的方法。<br>
-数学上，<strong>梯度方向</strong>是<strong>函数值下降最为剧烈</strong>的方向。那么，沿着梯度方向走，我们就能接近其最小值，或者极小值，从而接近更高的预测精度。其数学表达如下：</p>
-<img data-src="/2017/10/19/machine-learning-review1/gradient-descent.png" class title="Gradient descent">
-<p>其中<strong>学习率ɑ</strong>表示的是下降的速率，当这个值过大时会导致错过最小值（步子跨的太大）；当这个值过小时会导致下降的速度很慢（步子跨的太小）。<br>
-用梯度下降的方法就是不断的沿着梯度方向更新值，直到找到<strong>最小值</strong>。</p>
-]]></content>
-      <categories>
-        <category>Notes</category>
-        <category>Machine Learning</category>
-      </categories>
-      <tags>
-        <tag>Machine Learning</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Codility OddOccurrencesInArray in Python</title>
-    <url>/2017/05/29/odd-occurrences-in-array/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3><span id="算法复杂度分析"> 算法复杂度分析</span></h3>
-<table>
-<thead>
-<tr>
-<th>情况</th>
-<th>时间复杂度</th>
-<th>空间复杂度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>最优</td>
-<td>O(N)</td>
-<td>O(K)</td>
-</tr>
-<tr>
-<td>平均</td>
-<td>O(N)</td>
-<td>O(K)</td>
-</tr>
-<tr>
-<td>最差</td>
-<td>O(N)</td>
-<td>O(K)</td>
-</tr>
-</tbody>
-</table>
-<p>其中，K是数组中互不相同数的个数</p>
-<h3><span id="算法分析"> 算法分析</span></h3>
-<p>遍历数组，算出每个数出现的次数。如果出现的次数为奇数，则返回该数。要点是选择用于记录不同数出现次数的计数器的数据结构和计数方法。对于计数器的数据结构，python built-in的字典可以满足O(1)的读取和记录。对于计数方法，则不必详细记录出现次数，标记奇偶即可。在特定条件下，应该也可以使用位操作，利用二进制0，1比特来标记奇偶，以便使用更小的内存空间。</p>
-<h3><span id="源代码"> 源代码</span></h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">A</span>):</span></span><br><span class="line">    <span class="comment"># write your code in Python 2.7</span></span><br><span class="line">    count = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> A:</span><br><span class="line">        <span class="keyword">if</span> num <span class="keyword">in</span> count:</span><br><span class="line">            count[num] = (count[num] + <span class="number">1</span>) % <span class="number">2</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            count[num] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> count:</span><br><span class="line">        <span class="keyword">if</span> count[k] == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">int</span>(k)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Notes</category>
-        <category>Codility</category>
-      </categories>
-      <tags>
-        <tag>Codility</tag>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>用python来探讨多态</title>
     <url>/2017/09/25/polymorphism-in-python/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
@@ -2069,57 +2071,56 @@ Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https:/
   <entry>
     <title>2020年 再看开闭原则</title>
     <url>/2020/03/10/revisit-open-closed-principle/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><img data-src="/2020/03/10/revisit-open-closed-principle/revisit_open_close_principal.png" class title="revisit open close principal">
+<a id="more"></a>
+<p><strong>文章目录</strong></p>
 <!-- toc -->
 <ul>
 <li><a href="#%E5%8D%88%E9%A4%90%E6%97%B6%E7%9A%84%E4%BA%89%E5%90%B5">午餐时的争吵</a></li>
 <li><a href="#%E7%BB%8F%E9%AA%8C%E6%B3%95%E5%88%99%E4%B8%8E%E6%83%AF%E4%BE%8B">经验法则与惯例</a></li>
 <li><a href="#%E9%87%8D%E6%B8%A9%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99">重温开闭原则</a></li>
 <li><a href="#%E6%8B%93%E5%B1%95%E9%98%85%E8%AF%BB">拓展阅读</a></li>
+<li><a href="#%E8%84%9A%E6%B3%A8">脚注</a></li>
 </ul>
 <!-- tocstop -->
 <h1><span id="午餐时的争吵"> 午餐时的争吵</span></h1>
-<p>今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。</p>
-<p>第一个同事说这个代码虽然能满足现在的需求，但是却不易于向某个他描述的方向拓展，他言之凿凿，认为我们的软件不久就会有他描述的需求。与其等到新需求到来时在对软件进行改动，不如开始实现时就考虑到可能的拓展，让这个模块变得灵活以适应将来的需求。</p>
-<p>而另一位同事则不为所动，觉得YAGNI（You aren’t gonna need it）。就算我们真的要满足第一个同事所描述的需求，但是根据他的判断那也是很长时间（一年）之后的事了。如果现在就把模块变得易于拓展，那么无疑会增加代码的抽象层次，本来一个类就可以实现的功能，现在要多实现几个类。</p>
-<p>第三位同事也加入了讨论。把软件设计的灵活以适应将来的变化是一件好事，但是这么做也是有代价的。灵活意味着这个模块需要更高的抽象层次，在新的需求到来前，这个模块都需要保持它本不需要的抽象层次。况且现在我们假设对于需求的预测是正确的，假如需求根本不是我们想象的那样变化，那么现在的努力不就白费了吗？</p>
+<p>今天中午我偶然路过公司二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，他们原来是在代码评审上有了分歧。</p>
+<p>第一个同事说这个代码虽然能满足现在的需求，但是却不易于向某个他描述的方向拓展，他言之凿凿，认为我们的软件不久就会有他描述的需求。相比于被动等待，不如主动出击，现在就考虑将来的需求，多花些时间设计这个模块，使其变得易于拓展以适应将来的需求。</p>
+<p>而另一位同事则不为所动，觉得YAGNI<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>。就算我们真的要满足第一个同事所描述的需求，但是根据他的判断那也是很长时间（至少一年）之后的事了。如果现在就把模块变得易于拓展，那么无疑会增加代码的抽象层次，本来一个类<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>就可以实现的功能，现在要使用好几个类。</p>
+<p>第三位同事也加入了讨论。把软件设计的灵活以适应将来的变化是一件好事，但是这么做也是有代价的。灵活意味着这个模块需要更高的抽象层次，在新的需求到来前，这个模块都需要保持它本不需要的抽象层次。况且现在我们假设对于将来需求的预测是正确的，如果我们预测错了，那么现在的努力不就白费了吗？</p>
 <p>第一位同事似乎没有被说服，另外两位同事也各执已见。午饭结束，大家各自回到工位上继续搬砖了。</p>
 <p>虽然这次争论还没有结果，也还不知道谁对谁错。那么我们在实现某个模块时，究竟是只实现现有需求还是要考虑到将来的需求而将模块实现的灵活一点呢？</p>
-<a id="more"></a>
 <h1><span id="经验法则与惯例"> 经验法则与惯例</span></h1>
-<p>面向对象程序设计至今已至少经存在了50年了（如果我们从1970年的Smalltalk语言开始算起，如果从1960年的Simula 67语言开始算起，那么时间会更长），我们现在遇到的各种问题，前人也几乎都遇到过了。这也是为什么面向对象程序设计会有如此多的模式（Pattern），甚至是名言警句（Maxim）。</p>
-<p>如果问一位极限编程（extreme programming，XP）的专家，他会说</p>
+<p>如果我们从1970年的Smalltalk语言开始算起，面向对象程序设计至今已至少经存在了50年了（如果从1960年的Simula 67语言开始算起，那么时间会更长）。我们现在遇到的各种问题，前人几乎都遇到过了。这也是为什么面向对象程序设计会有总结出如此多的模式（Pattern），甚至是名言警句（Maxim）。</p>
+<p>“们在实现某个模块时，究竟是只实现现有需求还是要考虑到将来的需求而将模块实现的灵活一点呢？”</p>
+<p>对于这个问题，如果问一位极限编程<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>的专家，他会说：</p>
 <blockquote>
-<p>YAGNI（You aren’t gonna need it），一个程序员不应该为软件增加不必要的功能</p>
+<p>YAGNI，一个程序员不应该为软件增加不必要的功能。</p>
 </blockquote>
-<p>SOLID主义者会说</p>
+<p>对于这个问题，如果问一位SOLID主义者<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup>，他会说：</p>
 <blockquote>
-<p>我们应该遵守开闭原则（The Open-Closed Principle），软件中的对象（类，模块，函数等等）应该对于扩展是开放的，但是对于修改是封闭的</p>
+<p>我们应该遵守开闭原则<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup>，软件中的对象（类，模块，函数等等）应该对于扩展是开放的，但是对于修改是封闭的。</p>
 </blockquote>
-<p>而不久前Java大师Bruce Eckel恰巧在他的<span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJ1Y2VlY2tlbC5jb20vYmxvZy8yMDE5LTEyLTI0LXVuc3Bva2VuLWFzc3VtcHRpb25zLXVuZGVybHlpbmctb28tZGVzaWduLW1heGltcy8jZGlzcXVzX3RocmVhZA==">博客<i class="fa fa-external-link-alt"></i></span>中写道</p>
+<p>对于这个问题，其实不久前Java大师Bruce Eckel恰巧在他的<span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJ1Y2VlY2tlbC5jb20vYmxvZy8yMDE5LTEyLTI0LXVuc3Bva2VuLWFzc3VtcHRpb25zLXVuZGVybHlpbmctb28tZGVzaWduLW1heGltcy8jZGlzcXVzX3RocmVhZA==">博客<i class="fa fa-external-link-alt"></i></span>中写道</p>
 <blockquote>
-<p>质疑抽象的合理性，在不使用教条的情况下如果不能解释抽象的合理性，就不要抽象</p>
+<p>质疑抽象的合理性，在不使用教条的情况下如果不能解释抽象的合理性，就不要抽象<sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup></p>
 </blockquote>
-<p><em>原文是</em></p>
-<blockquote>
-<p><em>Question your abstractions. If you can’t justify it (without quoting a maxim), take it out.</em></p>
-</blockquote>
-<p>但是不论是YAGNI还是SOLID，这些经验法则都是有适用条件的。在不同情况下，急切地套用这些法则还不如不去了解他们。在1988年Bertrand Meyer提出开闭法则32年后的今天，我们真的了解什么是开闭法则吗（The Open-Closed Principal）？</p>
+<p>但是不论是YAGNI还是SOLID，这些经验法则都是有适用条件的。在不同情况下，教条地套用这些法则还不如对这些法则一无所知。在1988年Bertrand Meyer提出开闭法则32年后的今天，我们真的了解什么是开闭原则吗？</p>
 <h1><span id="重温开闭原则"> 重温开闭原则</span></h1>
 <blockquote><p>软件中的对象（类，模块，函数等等）应该对于扩展是开放的，但是对于修改是封闭的。</p>
 <footer><strong>Bertrand Meyer</strong><cite>Object-Oriented Software Construction. Prentice Hall. 1988</cite></footer></blockquote>
 <p>开闭原则说了两件事</p>
 <ul>
 <li>
-<p>软件中的对象应该对于扩展是开放的</p>
+<p>软件中的对象对于扩展应该是开放的</p>
 <p>对象的行为可以被拓展，也就是说新的需求来临时，我们可以改变对象的行为以满足新的需求</p>
 </li>
 <li>
-<p>软件中的对象应该对于修改是封闭的</p>
+<p>软件中的对象对于修改应该是封闭的</p>
 <p>实现原有需求的的源代码不应该被修改</p>
 </li>
 </ul>
-<p>难道这两句话不矛盾吗？如果我们不修改源代码怎么拓展对象原有的行为？难道有不写代码就满足需求的魔法吗？当然，不写代码时不肯能的。但是不修改原先的代码，而在软件的某一处增加代码来拓展对象的行为确实有可能的。</p>
+<p>难道这两句话不矛盾吗？如果我们不修改源代码怎么拓展对象原有的行为？难道有不写代码就满足需求的魔法吗？当然，不修改代码是不可能的。但是不修改原先的代码，而只在软件的某一处增加代码来拓展对象的行为确实有可能的。</p>
 <blockquote><p>抽象是解决问题的关键</p>
 <footer><strong>Robert C. Martin</strong><cite>The Open-Close Principal</cite></footer></blockquote>
 <p>Robert C. Martin 拿了C++写了一个关于在GUI打印形状的例子。比如我们现在有在GUI上打印方块和圆的需求，熟悉过程式编程人会实现类似于下面的程序。</p>
@@ -2131,22 +2132,42 @@ Credit: <span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20vazB0MWU=">https:/
 <li>若需要打印新的形状只需要实现新的类，新的类的实现与原先的各种实现是解耦的，并不需要修改原先的实现</li>
 <li><code>drawAllShapes()</code> 没有改变</li>
 </ul>
-<p>但是就好像老鼠团队开大会，谁去给猫挂铃铛的故事一样。开闭法则听起来诱人，可是又有谁知道一个软件里哪个模块，类应该关闭，哪个模块，类应该开放呢？假如新的需求不是打印新的形状而是先打印圆形再打印方形呢？那么上面的例子就不再试用了。可能会有人说，那么我在实现 <code>drawAllShapes()</code>就考虑到打印顺序的需求，再去要求每个形状实现 <code>Comparable&lt;Shape&gt;</code>接口就好了。哈哈，，今天有打印顺序的需求，明天又你想象不到的需求呢？只可惜软件开放工程师并不是预言家，要是软件开放工程师能准确语言客户的需求，那么现在软件开放领域也不会有那么多问题了。</p>
-<p>这就是开闭原则的陷阱，它要求使用者有非比寻常的见解。但是没有个十年软件开放经验，又怎么能获得寻常的见解呢？</p>
+<p>但是就好像老鼠团大会，谁去给猫挂铃铛的故事一样。开闭法则听起来诱人，可是又有谁知道一个软件里哪个模块，类应该关闭，哪个模块，类应该开放呢？假如新的需求不是打印新的形状而是先打印圆形再打印方形呢？那么上面的例子就不再试用了。可能会有人说，那么我在实现 <code>drawAllShapes()</code>就考虑到打印顺序的需求，再去要求每个形状实现 <code>Comparable&lt;Shape&gt;</code>接口就好了。哈哈，，今天有打印顺序的需求，明天又你想象不到的需求呢？只可惜软件开发工程师并不是预言家，要是软件开放工程师能准确地预测客户的需求，那么现在软件工程领域也不会有那么多问题了。</p>
+<p>这就是开闭原则的陷阱，它要求使用者对特定领域的知识有非比寻常的见解。但是没有个十年软件开放经验，又怎么能获得非比寻常的见解呢？</p>
 <h1><span id="拓展阅读"> 拓展阅读</span></h1>
 <ol>
 <li><span class="exturl" data-url="aHR0cHM6Ly9tYXJ0aW5mb3dsZXIuY29tL2JsaWtpL1lhZ25pLmh0bWw=">Yagni, Martin Fowler<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly93ZWIuYXJjaGl2ZS5vcmcvd2ViLzIwMTUwOTA1MDgxMTA1L2h0dHA6Ly93d3cub2JqZWN0bWVudG9yLmNvbS9yZXNvdXJjZXMvYXJ0aWNsZXMvb2NwLnBkZg==">The Open-Closed Principle, Robert C. Martin<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJ1Y2VlY2tlbC5jb20vYmxvZy8yMDE5LTEyLTI0LXVuc3Bva2VuLWFzc3VtcHRpb25zLXVuZGVybHlpbmctb28tZGVzaWduLW1heGltcy8jZGlzcXVzX3RocmVhZA==">Unspoken Assumptions Underlying OO Design Maxims<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
+<h1><span id="脚注"> 脚注</span></h1>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>YAGANI：You aren’t gonna need it的缩写，直译为你不会需要它。详情参见马丁·福勒的博客<span class="exturl" data-url="aHR0cHM6Ly9tYXJ0aW5mb3dsZXIuY29tL2JsaWtpL1lhZ25pLmh0bWw=">https://martinfowler.com/bliki/Yagni.html<i class="fa fa-external-link-alt"></i></span> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>类：class，此处特指面向对象编程语言中的类。 <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>极限编程：Extreme Programming，简称XP。它是一种软件工程方法学，是敏捷软件开发的一种方式。如同其他敏捷方法学，极限编程和传统方法学的本质不同在于它更强调可适应性而不是可预测性。详情参见<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRXh0cmVtZV9wcm9ncmFtbWluZw==">https://en.wikipedia.org/wiki/Extreme_programming<i class="fa fa-external-link-alt"></i></span> <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p>SOLID主义者：那些把所谓软件工程中设计模式的六大原则奉为圭臬的人。 <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn5" class="footnote-item"><p>开闭原则：The Open-Closed Principle，软件工程中设计模式的六大原则之一。 <a href="#fnref5" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn6" class="footnote-item"><p>质疑抽象的合理性，在不使用教条的情况下如果不能解释抽象的合理性，就不要抽象。原文是Question your abstractions. If you can’t justify it (without quoting a maxim), take it out. 详情参见<span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJ1Y2VlY2tlbC5jb20vYmxvZy8yMDE5LTEyLTI0LXVuc3Bva2VuLWFzc3VtcHRpb25zLXVuZGVybHlpbmctb28tZGVzaWduLW1heGltcw==">https://www.bruceeckel.com/blog/2019-12-24-unspoken-assumptions-underlying-oo-design-maxims<i class="fa fa-external-link-alt"></i></span> <a href="#fnref6" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
 ]]></content>
       <categories>
-        <category>开闭原则</category>
+        <category>软件工程</category>
         <category>设计模式</category>
+        <category>开闭原则</category>
       </categories>
       <tags>
         <tag>设计模式</tag>
         <tag>经验法则</tag>
+        <tag>开闭原则</tag>
       </tags>
   </entry>
   <entry>

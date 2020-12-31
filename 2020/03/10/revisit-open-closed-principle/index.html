@@ -23,19 +23,20 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"codingnote.com","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="目录   午餐时的争吵 经验法则与惯例 重温开闭原则 拓展阅读    午餐时的争吵 今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。 第一个同事说这个代码虽然能满足现在的需求，但是却不易于向某个他描述的方向拓展，他言之凿凿，认为我们的软件不久就会有他描述的需求。与其等到新需求到来时在对软件进行改动，不如开始实现时就考虑到可能的拓展，让这">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2020年 再看开闭原则">
 <meta property="og:url" content="http://codingnote.com/2020/03/10/revisit-open-closed-principle/index.html">
 <meta property="og:site_name" content="Coding Note">
-<meta property="og:description" content="目录   午餐时的争吵 经验法则与惯例 重温开闭原则 拓展阅读    午餐时的争吵 今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。 第一个同事说这个代码虽然能满足现在的需求，但是却不易于向某个他描述的方向拓展，他言之凿凿，认为我们的软件不久就会有他描述的需求。与其等到新需求到来时在对软件进行改动，不如开始实现时就考虑到可能的拓展，让这">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://codingnote.com/2020/03/10/revisit-open-closed-principle/revisit_open_close_principal.png">
 <meta property="article:published_time" content="2020-03-10T21:59:13.000Z">
-<meta property="article:modified_time" content="2020-03-15T10:55:47.344Z">
+<meta property="article:modified_time" content="2020-12-31T17:05:29.620Z">
 <meta property="article:author" content="水 &amp; 海">
 <meta property="article:tag" content="设计模式">
 <meta property="article:tag" content="经验法则">
+<meta property="article:tag" content="开闭原则">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://codingnote.com/2020/03/10/revisit-open-closed-principle/revisit_open_close_principal.png">
 
 
 <link rel="canonical" href="http://codingnote.com/2020/03/10/revisit-open-closed-principle/">
@@ -148,7 +149,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">35</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">36</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -220,7 +221,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> 目录</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text"> 午餐时的争吵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text"> 经验法则与惯例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text"> 重温开闭原则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text"> 拓展阅读</span></a></li></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"> 午餐时的争吵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"> 经验法则与惯例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text"> 重温开闭原则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text"> 拓展阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text"> 脚注</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -248,7 +249,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -327,7 +328,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-03-15 10:55:47" itemprop="dateModified" datetime="2020-03-15T10:55:47Z">2020-03-15</time>
+        <time title="修改时间：2020-12-31 17:05:29" itemprop="dateModified" datetime="2020-12-31T17:05:29Z">2020-12-31</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -335,11 +336,15 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/" itemprop="url" rel="index"><span itemprop="name">开闭原则</span></a>
+          <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">软件工程</span></a>
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+          <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/" itemprop="url" rel="index"><span itemprop="name">开闭原则</span></a>
         </span>
     </span>
 
@@ -360,57 +365,56 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2><span id="目录"> 目录</span></h2>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><img data-src="/2020/03/10/revisit-open-closed-principle/revisit_open_close_principal.png" class title="revisit open close principal">
+<a id="more"></a>
+<p><strong>文章目录</strong></p>
 <!-- toc -->
 <ul>
 <li><a href="#%E5%8D%88%E9%A4%90%E6%97%B6%E7%9A%84%E4%BA%89%E5%90%B5">午餐时的争吵</a></li>
 <li><a href="#%E7%BB%8F%E9%AA%8C%E6%B3%95%E5%88%99%E4%B8%8E%E6%83%AF%E4%BE%8B">经验法则与惯例</a></li>
 <li><a href="#%E9%87%8D%E6%B8%A9%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99">重温开闭原则</a></li>
 <li><a href="#%E6%8B%93%E5%B1%95%E9%98%85%E8%AF%BB">拓展阅读</a></li>
+<li><a href="#%E8%84%9A%E6%B3%A8">脚注</a></li>
 </ul>
 <!-- tocstop -->
 <h1><span id="午餐时的争吵"> 午餐时的争吵</span></h1>
-<p>今天中午我偶然路过二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，原来是在代码评审上有了分歧。</p>
-<p>第一个同事说这个代码虽然能满足现在的需求，但是却不易于向某个他描述的方向拓展，他言之凿凿，认为我们的软件不久就会有他描述的需求。与其等到新需求到来时在对软件进行改动，不如开始实现时就考虑到可能的拓展，让这个模块变得灵活以适应将来的需求。</p>
-<p>而另一位同事则不为所动，觉得YAGNI（You aren’t gonna need it）。就算我们真的要满足第一个同事所描述的需求，但是根据他的判断那也是很长时间（一年）之后的事了。如果现在就把模块变得易于拓展，那么无疑会增加代码的抽象层次，本来一个类就可以实现的功能，现在要多实现几个类。</p>
-<p>第三位同事也加入了讨论。把软件设计的灵活以适应将来的变化是一件好事，但是这么做也是有代价的。灵活意味着这个模块需要更高的抽象层次，在新的需求到来前，这个模块都需要保持它本不需要的抽象层次。况且现在我们假设对于需求的预测是正确的，假如需求根本不是我们想象的那样变化，那么现在的努力不就白费了吗？</p>
+<p>今天中午我偶然路过公司二楼的厨房，听到同事们边吃午饭边争论着什么。我好奇的前去观摩，他们原来是在代码评审上有了分歧。</p>
+<p>第一个同事说这个代码虽然能满足现在的需求，但是却不易于向某个他描述的方向拓展，他言之凿凿，认为我们的软件不久就会有他描述的需求。相比于被动等待，不如主动出击，现在就考虑将来的需求，多花些时间设计这个模块，使其变得易于拓展以适应将来的需求。</p>
+<p>而另一位同事则不为所动，觉得YAGNI<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>。就算我们真的要满足第一个同事所描述的需求，但是根据他的判断那也是很长时间（至少一年）之后的事了。如果现在就把模块变得易于拓展，那么无疑会增加代码的抽象层次，本来一个类<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>就可以实现的功能，现在要使用好几个类。</p>
+<p>第三位同事也加入了讨论。把软件设计的灵活以适应将来的变化是一件好事，但是这么做也是有代价的。灵活意味着这个模块需要更高的抽象层次，在新的需求到来前，这个模块都需要保持它本不需要的抽象层次。况且现在我们假设对于将来需求的预测是正确的，如果我们预测错了，那么现在的努力不就白费了吗？</p>
 <p>第一位同事似乎没有被说服，另外两位同事也各执已见。午饭结束，大家各自回到工位上继续搬砖了。</p>
 <p>虽然这次争论还没有结果，也还不知道谁对谁错。那么我们在实现某个模块时，究竟是只实现现有需求还是要考虑到将来的需求而将模块实现的灵活一点呢？</p>
-<a id="more"></a>
 <h1><span id="经验法则与惯例"> 经验法则与惯例</span></h1>
-<p>面向对象程序设计至今已至少经存在了50年了（如果我们从1970年的Smalltalk语言开始算起，如果从1960年的Simula 67语言开始算起，那么时间会更长），我们现在遇到的各种问题，前人也几乎都遇到过了。这也是为什么面向对象程序设计会有如此多的模式（Pattern），甚至是名言警句（Maxim）。</p>
-<p>如果问一位极限编程（extreme programming，XP）的专家，他会说</p>
+<p>如果我们从1970年的Smalltalk语言开始算起，面向对象程序设计至今已至少经存在了50年了（如果从1960年的Simula 67语言开始算起，那么时间会更长）。我们现在遇到的各种问题，前人几乎都遇到过了。这也是为什么面向对象程序设计会有总结出如此多的模式（Pattern），甚至是名言警句（Maxim）。</p>
+<p>“们在实现某个模块时，究竟是只实现现有需求还是要考虑到将来的需求而将模块实现的灵活一点呢？”</p>
+<p>对于这个问题，如果问一位极限编程<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>的专家，他会说：</p>
 <blockquote>
-<p>YAGNI（You aren’t gonna need it），一个程序员不应该为软件增加不必要的功能</p>
+<p>YAGNI，一个程序员不应该为软件增加不必要的功能。</p>
 </blockquote>
-<p>SOLID主义者会说</p>
+<p>对于这个问题，如果问一位SOLID主义者<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup>，他会说：</p>
 <blockquote>
-<p>我们应该遵守开闭原则（The Open-Closed Principle），软件中的对象（类，模块，函数等等）应该对于扩展是开放的，但是对于修改是封闭的</p>
+<p>我们应该遵守开闭原则<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup>，软件中的对象（类，模块，函数等等）应该对于扩展是开放的，但是对于修改是封闭的。</p>
 </blockquote>
-<p>而不久前Java大师Bruce Eckel恰巧在他的<span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJ1Y2VlY2tlbC5jb20vYmxvZy8yMDE5LTEyLTI0LXVuc3Bva2VuLWFzc3VtcHRpb25zLXVuZGVybHlpbmctb28tZGVzaWduLW1heGltcy8jZGlzcXVzX3RocmVhZA==">博客<i class="fa fa-external-link-alt"></i></span>中写道</p>
+<p>对于这个问题，其实不久前Java大师Bruce Eckel恰巧在他的<span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJ1Y2VlY2tlbC5jb20vYmxvZy8yMDE5LTEyLTI0LXVuc3Bva2VuLWFzc3VtcHRpb25zLXVuZGVybHlpbmctb28tZGVzaWduLW1heGltcy8jZGlzcXVzX3RocmVhZA==">博客<i class="fa fa-external-link-alt"></i></span>中写道</p>
 <blockquote>
-<p>质疑抽象的合理性，在不使用教条的情况下如果不能解释抽象的合理性，就不要抽象</p>
+<p>质疑抽象的合理性，在不使用教条的情况下如果不能解释抽象的合理性，就不要抽象<sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup></p>
 </blockquote>
-<p><em>原文是</em></p>
-<blockquote>
-<p><em>Question your abstractions. If you can’t justify it (without quoting a maxim), take it out.</em></p>
-</blockquote>
-<p>但是不论是YAGNI还是SOLID，这些经验法则都是有适用条件的。在不同情况下，急切地套用这些法则还不如不去了解他们。在1988年Bertrand Meyer提出开闭法则32年后的今天，我们真的了解什么是开闭法则吗（The Open-Closed Principal）？</p>
+<p>但是不论是YAGNI还是SOLID，这些经验法则都是有适用条件的。在不同情况下，教条地套用这些法则还不如对这些法则一无所知。在1988年Bertrand Meyer提出开闭法则32年后的今天，我们真的了解什么是开闭原则吗？</p>
 <h1><span id="重温开闭原则"> 重温开闭原则</span></h1>
 <blockquote><p>软件中的对象（类，模块，函数等等）应该对于扩展是开放的，但是对于修改是封闭的。</p>
 <footer><strong>Bertrand Meyer</strong><cite>Object-Oriented Software Construction. Prentice Hall. 1988</cite></footer></blockquote>
 <p>开闭原则说了两件事</p>
 <ul>
 <li>
-<p>软件中的对象应该对于扩展是开放的</p>
+<p>软件中的对象对于扩展应该是开放的</p>
 <p>对象的行为可以被拓展，也就是说新的需求来临时，我们可以改变对象的行为以满足新的需求</p>
 </li>
 <li>
-<p>软件中的对象应该对于修改是封闭的</p>
+<p>软件中的对象对于修改应该是封闭的</p>
 <p>实现原有需求的的源代码不应该被修改</p>
 </li>
 </ul>
-<p>难道这两句话不矛盾吗？如果我们不修改源代码怎么拓展对象原有的行为？难道有不写代码就满足需求的魔法吗？当然，不写代码时不肯能的。但是不修改原先的代码，而在软件的某一处增加代码来拓展对象的行为确实有可能的。</p>
+<p>难道这两句话不矛盾吗？如果我们不修改源代码怎么拓展对象原有的行为？难道有不写代码就满足需求的魔法吗？当然，不修改代码是不可能的。但是不修改原先的代码，而只在软件的某一处增加代码来拓展对象的行为确实有可能的。</p>
 <blockquote><p>抽象是解决问题的关键</p>
 <footer><strong>Robert C. Martin</strong><cite>The Open-Close Principal</cite></footer></blockquote>
 <p>Robert C. Martin 拿了C++写了一个关于在GUI打印形状的例子。比如我们现在有在GUI上打印方块和圆的需求，熟悉过程式编程人会实现类似于下面的程序。</p>
@@ -422,14 +426,32 @@
 <li>若需要打印新的形状只需要实现新的类，新的类的实现与原先的各种实现是解耦的，并不需要修改原先的实现</li>
 <li><code>drawAllShapes()</code> 没有改变</li>
 </ul>
-<p>但是就好像老鼠团队开大会，谁去给猫挂铃铛的故事一样。开闭法则听起来诱人，可是又有谁知道一个软件里哪个模块，类应该关闭，哪个模块，类应该开放呢？假如新的需求不是打印新的形状而是先打印圆形再打印方形呢？那么上面的例子就不再试用了。可能会有人说，那么我在实现 <code>drawAllShapes()</code>就考虑到打印顺序的需求，再去要求每个形状实现 <code>Comparable&lt;Shape&gt;</code>接口就好了。哈哈，，今天有打印顺序的需求，明天又你想象不到的需求呢？只可惜软件开放工程师并不是预言家，要是软件开放工程师能准确语言客户的需求，那么现在软件开放领域也不会有那么多问题了。</p>
-<p>这就是开闭原则的陷阱，它要求使用者有非比寻常的见解。但是没有个十年软件开放经验，又怎么能获得寻常的见解呢？</p>
+<p>但是就好像老鼠团大会，谁去给猫挂铃铛的故事一样。开闭法则听起来诱人，可是又有谁知道一个软件里哪个模块，类应该关闭，哪个模块，类应该开放呢？假如新的需求不是打印新的形状而是先打印圆形再打印方形呢？那么上面的例子就不再试用了。可能会有人说，那么我在实现 <code>drawAllShapes()</code>就考虑到打印顺序的需求，再去要求每个形状实现 <code>Comparable&lt;Shape&gt;</code>接口就好了。哈哈，，今天有打印顺序的需求，明天又你想象不到的需求呢？只可惜软件开发工程师并不是预言家，要是软件开放工程师能准确地预测客户的需求，那么现在软件工程领域也不会有那么多问题了。</p>
+<p>这就是开闭原则的陷阱，它要求使用者对特定领域的知识有非比寻常的见解。但是没有个十年软件开放经验，又怎么能获得非比寻常的见解呢？</p>
 <h1><span id="拓展阅读"> 拓展阅读</span></h1>
 <ol>
 <li><span class="exturl" data-url="aHR0cHM6Ly9tYXJ0aW5mb3dsZXIuY29tL2JsaWtpL1lhZ25pLmh0bWw=">Yagni, Martin Fowler<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly93ZWIuYXJjaGl2ZS5vcmcvd2ViLzIwMTUwOTA1MDgxMTA1L2h0dHA6Ly93d3cub2JqZWN0bWVudG9yLmNvbS9yZXNvdXJjZXMvYXJ0aWNsZXMvb2NwLnBkZg==">The Open-Closed Principle, Robert C. Martin<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJ1Y2VlY2tlbC5jb20vYmxvZy8yMDE5LTEyLTI0LXVuc3Bva2VuLWFzc3VtcHRpb25zLXVuZGVybHlpbmctb28tZGVzaWduLW1heGltcy8jZGlzcXVzX3RocmVhZA==">Unspoken Assumptions Underlying OO Design Maxims<i class="fa fa-external-link-alt"></i></span></li>
 </ol>
+<h1><span id="脚注"> 脚注</span></h1>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>YAGANI：You aren’t gonna need it的缩写，直译为你不会需要它。详情参见马丁·福勒的博客<span class="exturl" data-url="aHR0cHM6Ly9tYXJ0aW5mb3dsZXIuY29tL2JsaWtpL1lhZ25pLmh0bWw=">https://martinfowler.com/bliki/Yagni.html<i class="fa fa-external-link-alt"></i></span> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>类：class，此处特指面向对象编程语言中的类。 <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>极限编程：Extreme Programming，简称XP。它是一种软件工程方法学，是敏捷软件开发的一种方式。如同其他敏捷方法学，极限编程和传统方法学的本质不同在于它更强调可适应性而不是可预测性。详情参见<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRXh0cmVtZV9wcm9ncmFtbWluZw==">https://en.wikipedia.org/wiki/Extreme_programming<i class="fa fa-external-link-alt"></i></span> <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p>SOLID主义者：那些把所谓软件工程中设计模式的六大原则奉为圭臬的人。 <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn5" class="footnote-item"><p>开闭原则：The Open-Closed Principle，软件工程中设计模式的六大原则之一。 <a href="#fnref5" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn6" class="footnote-item"><p>质疑抽象的合理性，在不使用教条的情况下如果不能解释抽象的合理性，就不要抽象。原文是Question your abstractions. If you can’t justify it (without quoting a maxim), take it out. 详情参见<span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJ1Y2VlY2tlbC5jb20vYmxvZy8yMDE5LTEyLTI0LXVuc3Bva2VuLWFzc3VtcHRpb25zLXVuZGVybHlpbmctb28tZGVzaWduLW1heGltcw==">https://www.bruceeckel.com/blog/2019-12-24-unspoken-assumptions-underlying-oo-design-maxims<i class="fa fa-external-link-alt"></i></span> <a href="#fnref6" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
 
     </div>
 
@@ -458,6 +480,7 @@
           <div class="post-tags">
               <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
               <a href="/tags/%E7%BB%8F%E9%AA%8C%E6%B3%95%E5%88%99/" rel="tag"># 经验法则</a>
+              <a href="/tags/%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/" rel="tag"># 开闭原则</a>
           </div>
 
         
@@ -469,8 +492,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/03/15/java-for-the-real-word-notes/" rel="next" title="Java实践指南 注疏">
-                  Java实践指南 注疏 <i class="fa fa-chevron-right"></i>
+                <a href="/2020/03/15/java-for-the-real-word-notes/" rel="next" title="《Java实践指南》读书笔记">
+                  《Java实践指南》读书笔记 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
